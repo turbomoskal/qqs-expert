@@ -1,0 +1,2115 @@
+   1              		.file	"ch32v30x_pwr.c"
+   2              		.option nopic
+   3              		.attribute arch, "rv32i2p0_m2p0_a2p0_f2p0_c2p0_xw"
+   4              		.attribute unaligned_access, 0
+   5              		.attribute stack_align, 16
+   6              		.text
+   7              	.Ltext0:
+   8              		.cfi_sections	.debug_frame
+   9              		.file 0 "C:\\Users\\localhost\\Documents\\turbomoskal-repo\\qqexpert\\firmware\\MasterController\\
+  10              		.section	.text.PWR_DeInit,"ax",@progbits
+  11              		.align	1
+  12              		.globl	PWR_DeInit
+  14              	PWR_DeInit:
+  15              	.LFB29:
+  16              		.file 1 "../Peripheral/src/ch32v30x_pwr.c"
+   1:../Peripheral/src/ch32v30x_pwr.c **** /********************************** (C) COPYRIGHT *******************************
+   2:../Peripheral/src/ch32v30x_pwr.c **** * File Name          : ch32v30x_pwr.c
+   3:../Peripheral/src/ch32v30x_pwr.c **** * Author             : WCH
+   4:../Peripheral/src/ch32v30x_pwr.c **** * Version            : V1.0.0
+   5:../Peripheral/src/ch32v30x_pwr.c **** * Date               : 2021/06/06
+   6:../Peripheral/src/ch32v30x_pwr.c **** * Description        : This file provides all the PWR firmware functions.
+   7:../Peripheral/src/ch32v30x_pwr.c **** *********************************************************************************
+   8:../Peripheral/src/ch32v30x_pwr.c **** * Copyright (c) 2021 Nanjing Qinheng Microelectronics Co., Ltd.
+   9:../Peripheral/src/ch32v30x_pwr.c **** * Attention: This software (modified or not) and binary are used for 
+  10:../Peripheral/src/ch32v30x_pwr.c **** * microcontroller manufactured by Nanjing Qinheng Microelectronics.
+  11:../Peripheral/src/ch32v30x_pwr.c **** *******************************************************************************/
+  12:../Peripheral/src/ch32v30x_pwr.c **** #include "ch32v30x_pwr.h"
+  13:../Peripheral/src/ch32v30x_pwr.c **** #include "ch32v30x_rcc.h"
+  14:../Peripheral/src/ch32v30x_pwr.c **** 
+  15:../Peripheral/src/ch32v30x_pwr.c **** /* PWR registers bit mask */
+  16:../Peripheral/src/ch32v30x_pwr.c **** /* CTLR register bit mask */
+  17:../Peripheral/src/ch32v30x_pwr.c **** #define CTLR_DS_MASK     ((uint32_t)0xFFFFFFFC)
+  18:../Peripheral/src/ch32v30x_pwr.c **** #define CTLR_PLS_MASK    ((uint32_t)0xFFFFFF1F)
+  19:../Peripheral/src/ch32v30x_pwr.c **** 
+  20:../Peripheral/src/ch32v30x_pwr.c **** /*********************************************************************
+  21:../Peripheral/src/ch32v30x_pwr.c ****  * @fn      PWR_DeInit
+  22:../Peripheral/src/ch32v30x_pwr.c ****  *
+  23:../Peripheral/src/ch32v30x_pwr.c ****  * @brief   Deinitializes the PWR peripheral registers to their default
+  24:../Peripheral/src/ch32v30x_pwr.c ****  *        reset values.
+  25:../Peripheral/src/ch32v30x_pwr.c ****  *
+  26:../Peripheral/src/ch32v30x_pwr.c ****  * @return  none
+  27:../Peripheral/src/ch32v30x_pwr.c ****  */
+  28:../Peripheral/src/ch32v30x_pwr.c **** void PWR_DeInit(void)
+  29:../Peripheral/src/ch32v30x_pwr.c **** {
+  17              		.loc 1 29 1
+  18              		.cfi_startproc
+  19 0000 17030000 		call	t0,__riscv_save_0
+  19      E7020300 
+  20              		.cfi_offset 1, -4
+  21              		.cfi_def_cfa_offset 16
+  30:../Peripheral/src/ch32v30x_pwr.c ****     RCC_APB1PeriphResetCmd(RCC_APB1Periph_PWR, ENABLE);
+  22              		.loc 1 30 5
+  23 0008 8545     		li	a1,1
+  24 000a 37050010 		li	a0,268435456
+  25 000e 97000000 		call	RCC_APB1PeriphResetCmd
+  25      E7800000 
+  26              	.LVL0:
+  31:../Peripheral/src/ch32v30x_pwr.c ****     RCC_APB1PeriphResetCmd(RCC_APB1Periph_PWR, DISABLE);
+  27              		.loc 1 31 5
+  28 0016 8145     		li	a1,0
+  29 0018 37050010 		li	a0,268435456
+  30 001c 97000000 		call	RCC_APB1PeriphResetCmd
+  30      E7800000 
+  31              	.LVL1:
+  32:../Peripheral/src/ch32v30x_pwr.c **** }
+  32              		.loc 1 32 1 is_stmt 0
+  33 0024 17030000 		tail	__riscv_restore_0
+  33      67000300 
+  34              		.cfi_restore 1
+  35              		.cfi_def_cfa_offset 0
+  36              		.cfi_endproc
+  37              	.LFE29:
+  39              		.section	.text.PWR_BackupAccessCmd,"ax",@progbits
+  40              		.align	1
+  41              		.globl	PWR_BackupAccessCmd
+  43              	PWR_BackupAccessCmd:
+  44              	.LFB30:
+  33:../Peripheral/src/ch32v30x_pwr.c **** 
+  34:../Peripheral/src/ch32v30x_pwr.c **** /*********************************************************************
+  35:../Peripheral/src/ch32v30x_pwr.c ****  * @fn      PWR_BackupAccessCmd
+  36:../Peripheral/src/ch32v30x_pwr.c ****  *
+  37:../Peripheral/src/ch32v30x_pwr.c ****  * @brief   Enables or disables access to the RTC and backup registers.
+  38:../Peripheral/src/ch32v30x_pwr.c ****  *
+  39:../Peripheral/src/ch32v30x_pwr.c ****  * @param   NewState - new state of the access to the RTC and backup registers,
+  40:../Peripheral/src/ch32v30x_pwr.c ****  *            This parameter can be: ENABLE or DISABLE.
+  41:../Peripheral/src/ch32v30x_pwr.c ****  *
+  42:../Peripheral/src/ch32v30x_pwr.c ****  * @return  none
+  43:../Peripheral/src/ch32v30x_pwr.c ****  */
+  44:../Peripheral/src/ch32v30x_pwr.c **** void PWR_BackupAccessCmd(FunctionalState NewState)
+  45:../Peripheral/src/ch32v30x_pwr.c **** {
+  45              		.loc 1 45 1 is_stmt 1
+  46              		.cfi_startproc
+  47              	.LVL2:
+  46:../Peripheral/src/ch32v30x_pwr.c ****     if(NewState)
+  48              		.loc 1 46 5
+  47:../Peripheral/src/ch32v30x_pwr.c ****     {
+  48:../Peripheral/src/ch32v30x_pwr.c ****         PWR->CTLR |= (1 << 8);
+  49              		.loc 1 48 12 is_stmt 0
+  50 0000 37770040 		li	a4,1073770496
+  51 0004 1C43     		lw	a5,0(a4)
+  46:../Peripheral/src/ch32v30x_pwr.c ****     if(NewState)
+  52              		.loc 1 46 7
+  53 0006 09C5     		beq	a0,zero,.L4
+  54              		.loc 1 48 9 is_stmt 1
+  55              		.loc 1 48 19 is_stmt 0
+  56 0008 93E70710 		ori	a5,a5,256
+  57              	.L6:
+  49:../Peripheral/src/ch32v30x_pwr.c ****     }
+  50:../Peripheral/src/ch32v30x_pwr.c ****     else
+  51:../Peripheral/src/ch32v30x_pwr.c ****     {
+  52:../Peripheral/src/ch32v30x_pwr.c ****         PWR->CTLR &= ~(1 << 8);
+  58              		.loc 1 52 19
+  59 000c 1CC3     		sw	a5,0(a4)
+  53:../Peripheral/src/ch32v30x_pwr.c ****     }
+  54:../Peripheral/src/ch32v30x_pwr.c **** }
+  60              		.loc 1 54 1
+  61 000e 8280     		ret
+  62              	.L4:
+  52:../Peripheral/src/ch32v30x_pwr.c ****     }
+  63              		.loc 1 52 9 is_stmt 1
+  52:../Peripheral/src/ch32v30x_pwr.c ****     }
+  64              		.loc 1 52 19 is_stmt 0
+  65 0010 93F7F7EF 		andi	a5,a5,-257
+  66 0014 E5BF     		j	.L6
+  67              		.cfi_endproc
+  68              	.LFE30:
+  70              		.section	.text.PWR_PVDCmd,"ax",@progbits
+  71              		.align	1
+  72              		.globl	PWR_PVDCmd
+  74              	PWR_PVDCmd:
+  75              	.LFB31:
+  55:../Peripheral/src/ch32v30x_pwr.c **** 
+  56:../Peripheral/src/ch32v30x_pwr.c **** /*********************************************************************
+  57:../Peripheral/src/ch32v30x_pwr.c ****  * @fn      PWR_PVDCmd
+  58:../Peripheral/src/ch32v30x_pwr.c ****  *
+  59:../Peripheral/src/ch32v30x_pwr.c ****  * @brief   Enables or disables the Power Voltage Detector(PVD).
+  60:../Peripheral/src/ch32v30x_pwr.c ****  *
+  61:../Peripheral/src/ch32v30x_pwr.c ****  * @param   NewState - new state of the PVD(ENABLE or DISABLE).
+  62:../Peripheral/src/ch32v30x_pwr.c ****  *
+  63:../Peripheral/src/ch32v30x_pwr.c ****  * @return  none
+  64:../Peripheral/src/ch32v30x_pwr.c ****  */
+  65:../Peripheral/src/ch32v30x_pwr.c **** void PWR_PVDCmd(FunctionalState NewState)
+  66:../Peripheral/src/ch32v30x_pwr.c **** {
+  76              		.loc 1 66 1 is_stmt 1
+  77              		.cfi_startproc
+  78              	.LVL3:
+  67:../Peripheral/src/ch32v30x_pwr.c ****     if(NewState)
+  79              		.loc 1 67 5
+  68:../Peripheral/src/ch32v30x_pwr.c ****     {
+  69:../Peripheral/src/ch32v30x_pwr.c ****         PWR->CTLR |= (1 << 4);
+  80              		.loc 1 69 12 is_stmt 0
+  81 0000 37770040 		li	a4,1073770496
+  82 0004 1C43     		lw	a5,0(a4)
+  67:../Peripheral/src/ch32v30x_pwr.c ****     if(NewState)
+  83              		.loc 1 67 7
+  84 0006 09C5     		beq	a0,zero,.L8
+  85              		.loc 1 69 9 is_stmt 1
+  86              		.loc 1 69 19 is_stmt 0
+  87 0008 93E70701 		ori	a5,a5,16
+  88              	.L10:
+  70:../Peripheral/src/ch32v30x_pwr.c ****     }
+  71:../Peripheral/src/ch32v30x_pwr.c ****     else
+  72:../Peripheral/src/ch32v30x_pwr.c ****     {
+  73:../Peripheral/src/ch32v30x_pwr.c ****         PWR->CTLR &= ~(1 << 4);
+  89              		.loc 1 73 19
+  90 000c 1CC3     		sw	a5,0(a4)
+  74:../Peripheral/src/ch32v30x_pwr.c ****     }
+  75:../Peripheral/src/ch32v30x_pwr.c **** }
+  91              		.loc 1 75 1
+  92 000e 8280     		ret
+  93              	.L8:
+  73:../Peripheral/src/ch32v30x_pwr.c ****     }
+  94              		.loc 1 73 9 is_stmt 1
+  73:../Peripheral/src/ch32v30x_pwr.c ****     }
+  95              		.loc 1 73 19 is_stmt 0
+  96 0010 BD9B     		andi	a5,a5,-17
+  97 0012 EDBF     		j	.L10
+  98              		.cfi_endproc
+  99              	.LFE31:
+ 101              		.section	.text.PWR_PVDLevelConfig,"ax",@progbits
+ 102              		.align	1
+ 103              		.globl	PWR_PVDLevelConfig
+ 105              	PWR_PVDLevelConfig:
+ 106              	.LFB32:
+  76:../Peripheral/src/ch32v30x_pwr.c **** 
+  77:../Peripheral/src/ch32v30x_pwr.c **** /*********************************************************************
+  78:../Peripheral/src/ch32v30x_pwr.c ****  * @fn      PWR_PVDLevelConfig
+  79:../Peripheral/src/ch32v30x_pwr.c ****  *
+  80:../Peripheral/src/ch32v30x_pwr.c ****  * @brief   Configures the voltage threshold detected by the Power Voltage
+  81:../Peripheral/src/ch32v30x_pwr.c ****  *        Detector(PVD).
+  82:../Peripheral/src/ch32v30x_pwr.c ****  *
+  83:../Peripheral/src/ch32v30x_pwr.c ****  * @param   PWR_PVDLevel - specifies the PVD detection level
+  84:../Peripheral/src/ch32v30x_pwr.c ****  *            PWR_PVDLevel_MODE0 - PVD detection level set to mode 0.
+  85:../Peripheral/src/ch32v30x_pwr.c ****  *            PWR_PVDLevel_MODE1 - PVD detection level set to mode 1.
+  86:../Peripheral/src/ch32v30x_pwr.c ****  *            PWR_PVDLevel_MODE2 - PVD detection level set to mode 2.
+  87:../Peripheral/src/ch32v30x_pwr.c ****  *            PWR_PVDLevel_MODE3 - PVD detection level set to mode 3.
+  88:../Peripheral/src/ch32v30x_pwr.c ****  *            PWR_PVDLevel_MODE4 - PVD detection level set to mode 4.
+  89:../Peripheral/src/ch32v30x_pwr.c ****  *            PWR_PVDLevel_MODE5 - PVD detection level set to mode 5.
+  90:../Peripheral/src/ch32v30x_pwr.c ****  *            PWR_PVDLevel_MODE6 - PVD detection level set to mode 6.
+  91:../Peripheral/src/ch32v30x_pwr.c ****  *            PWR_PVDLevel_MODE7 - PVD detection level set to mode 7.
+  92:../Peripheral/src/ch32v30x_pwr.c ****  *
+  93:../Peripheral/src/ch32v30x_pwr.c ****  * @return  none
+  94:../Peripheral/src/ch32v30x_pwr.c ****  */
+  95:../Peripheral/src/ch32v30x_pwr.c **** void PWR_PVDLevelConfig(uint32_t PWR_PVDLevel)
+  96:../Peripheral/src/ch32v30x_pwr.c **** {
+ 107              		.loc 1 96 1 is_stmt 1
+ 108              		.cfi_startproc
+ 109              	.LVL4:
+  97:../Peripheral/src/ch32v30x_pwr.c ****     uint32_t tmpreg = 0;
+ 110              		.loc 1 97 5
+  98:../Peripheral/src/ch32v30x_pwr.c ****     tmpreg = PWR->CTLR;
+ 111              		.loc 1 98 5
+ 112              		.loc 1 98 12 is_stmt 0
+ 113 0000 37770040 		li	a4,1073770496
+ 114 0004 1C43     		lw	a5,0(a4)
+ 115              	.LVL5:
+  99:../Peripheral/src/ch32v30x_pwr.c ****     tmpreg &= CTLR_PLS_MASK;
+ 116              		.loc 1 99 5 is_stmt 1
+ 117              		.loc 1 99 12 is_stmt 0
+ 118 0006 93F7F7F1 		andi	a5,a5,-225
+ 119              	.LVL6:
+ 100:../Peripheral/src/ch32v30x_pwr.c ****     tmpreg |= PWR_PVDLevel;
+ 120              		.loc 1 100 5 is_stmt 1
+ 121              		.loc 1 100 12 is_stmt 0
+ 122 000a C98F     		or	a5,a5,a0
+ 123              	.LVL7:
+ 101:../Peripheral/src/ch32v30x_pwr.c ****     PWR->CTLR = tmpreg;
+ 124              		.loc 1 101 5 is_stmt 1
+ 125              		.loc 1 101 15 is_stmt 0
+ 126 000c 1CC3     		sw	a5,0(a4)
+ 102:../Peripheral/src/ch32v30x_pwr.c **** }
+ 127              		.loc 1 102 1
+ 128 000e 8280     		ret
+ 129              		.cfi_endproc
+ 130              	.LFE32:
+ 132              		.section	.text.PWR_WakeUpPinCmd,"ax",@progbits
+ 133              		.align	1
+ 134              		.globl	PWR_WakeUpPinCmd
+ 136              	PWR_WakeUpPinCmd:
+ 137              	.LFB33:
+ 103:../Peripheral/src/ch32v30x_pwr.c **** 
+ 104:../Peripheral/src/ch32v30x_pwr.c **** /*********************************************************************
+ 105:../Peripheral/src/ch32v30x_pwr.c ****  * @fn      PWR_WakeUpPinCmd
+ 106:../Peripheral/src/ch32v30x_pwr.c ****  *
+ 107:../Peripheral/src/ch32v30x_pwr.c ****  * @brief   Enables or disables the WakeUp Pin functionality.
+ 108:../Peripheral/src/ch32v30x_pwr.c ****  *
+ 109:../Peripheral/src/ch32v30x_pwr.c ****  * @param   NewState - new state of the WakeUp Pin functionality
+ 110:../Peripheral/src/ch32v30x_pwr.c ****  *        (ENABLE or DISABLE).
+ 111:../Peripheral/src/ch32v30x_pwr.c ****  *
+ 112:../Peripheral/src/ch32v30x_pwr.c ****  * @return  none
+ 113:../Peripheral/src/ch32v30x_pwr.c ****  */
+ 114:../Peripheral/src/ch32v30x_pwr.c **** void PWR_WakeUpPinCmd(FunctionalState NewState)
+ 115:../Peripheral/src/ch32v30x_pwr.c **** {
+ 138              		.loc 1 115 1 is_stmt 1
+ 139              		.cfi_startproc
+ 140              	.LVL8:
+ 116:../Peripheral/src/ch32v30x_pwr.c ****     if(NewState)
+ 141              		.loc 1 116 5
+ 117:../Peripheral/src/ch32v30x_pwr.c ****     {
+ 118:../Peripheral/src/ch32v30x_pwr.c ****         PWR->CSR |= (1 << 8);
+ 142              		.loc 1 118 12 is_stmt 0
+ 143 0000 37770040 		li	a4,1073770496
+ 144 0004 5C43     		lw	a5,4(a4)
+ 116:../Peripheral/src/ch32v30x_pwr.c ****     if(NewState)
+ 145              		.loc 1 116 7
+ 146 0006 09C5     		beq	a0,zero,.L13
+ 147              		.loc 1 118 9 is_stmt 1
+ 148              		.loc 1 118 18 is_stmt 0
+ 149 0008 93E70710 		ori	a5,a5,256
+ 150              	.L15:
+ 119:../Peripheral/src/ch32v30x_pwr.c ****     }
+ 120:../Peripheral/src/ch32v30x_pwr.c ****     else
+ 121:../Peripheral/src/ch32v30x_pwr.c ****     {
+ 122:../Peripheral/src/ch32v30x_pwr.c ****         PWR->CSR &= ~(1 << 8);
+ 151              		.loc 1 122 18
+ 152 000c 5CC3     		sw	a5,4(a4)
+ 123:../Peripheral/src/ch32v30x_pwr.c ****     }
+ 124:../Peripheral/src/ch32v30x_pwr.c **** }
+ 153              		.loc 1 124 1
+ 154 000e 8280     		ret
+ 155              	.L13:
+ 122:../Peripheral/src/ch32v30x_pwr.c ****     }
+ 156              		.loc 1 122 9 is_stmt 1
+ 122:../Peripheral/src/ch32v30x_pwr.c ****     }
+ 157              		.loc 1 122 18 is_stmt 0
+ 158 0010 93F7F7EF 		andi	a5,a5,-257
+ 159 0014 E5BF     		j	.L15
+ 160              		.cfi_endproc
+ 161              	.LFE33:
+ 163              		.section	.text.PWR_EnterSTOPMode,"ax",@progbits
+ 164              		.align	1
+ 165              		.globl	PWR_EnterSTOPMode
+ 167              	PWR_EnterSTOPMode:
+ 168              	.LFB34:
+ 125:../Peripheral/src/ch32v30x_pwr.c **** 
+ 126:../Peripheral/src/ch32v30x_pwr.c **** /*********************************************************************
+ 127:../Peripheral/src/ch32v30x_pwr.c ****  * @fn      PWR_EnterSTOPMode
+ 128:../Peripheral/src/ch32v30x_pwr.c ****  *
+ 129:../Peripheral/src/ch32v30x_pwr.c ****  * @brief   Enters STOP mode.
+ 130:../Peripheral/src/ch32v30x_pwr.c ****  *
+ 131:../Peripheral/src/ch32v30x_pwr.c ****  * @param   PWR_Regulator - specifies the regulator state in STOP mode.
+ 132:../Peripheral/src/ch32v30x_pwr.c ****  *            PWR_Regulator_ON - STOP mode with regulator ON
+ 133:../Peripheral/src/ch32v30x_pwr.c ****  *            PWR_Regulator_LowPower - STOP mode with regulator in low power mode
+ 134:../Peripheral/src/ch32v30x_pwr.c ****  *          PWR_STOPEntry - specifies if STOP mode in entered with WFI or WFE instruction.
+ 135:../Peripheral/src/ch32v30x_pwr.c ****  *            PWR_STOPEntry_WFI - enter STOP mode with WFI instruction
+ 136:../Peripheral/src/ch32v30x_pwr.c ****  *            PWR_STOPEntry_WFE - enter STOP mode with WFE instruction
+ 137:../Peripheral/src/ch32v30x_pwr.c ****  *
+ 138:../Peripheral/src/ch32v30x_pwr.c ****  * @return  none
+ 139:../Peripheral/src/ch32v30x_pwr.c ****  */
+ 140:../Peripheral/src/ch32v30x_pwr.c **** void PWR_EnterSTOPMode(uint32_t PWR_Regulator, uint8_t PWR_STOPEntry)
+ 141:../Peripheral/src/ch32v30x_pwr.c **** {
+ 169              		.loc 1 141 1 is_stmt 1
+ 170              		.cfi_startproc
+ 171              	.LVL9:
+ 142:../Peripheral/src/ch32v30x_pwr.c ****     uint32_t tmpreg = 0;
+ 172              		.loc 1 142 5
+ 143:../Peripheral/src/ch32v30x_pwr.c ****     tmpreg = PWR->CTLR;
+ 173              		.loc 1 143 5
+ 174              		.loc 1 143 12 is_stmt 0
+ 175 0000 37770040 		li	a4,1073770496
+ 176 0004 1C43     		lw	a5,0(a4)
+ 177              	.LVL10:
+ 144:../Peripheral/src/ch32v30x_pwr.c ****     tmpreg &= CTLR_DS_MASK;
+ 178              		.loc 1 144 5 is_stmt 1
+ 179              		.loc 1 144 12 is_stmt 0
+ 180 0006 F19B     		andi	a5,a5,-4
+ 181              	.LVL11:
+ 145:../Peripheral/src/ch32v30x_pwr.c ****     tmpreg |= PWR_Regulator;
+ 182              		.loc 1 145 5 is_stmt 1
+ 183              		.loc 1 145 12 is_stmt 0
+ 184 0008 C98F     		or	a5,a5,a0
+ 185              	.LVL12:
+ 146:../Peripheral/src/ch32v30x_pwr.c ****     PWR->CTLR = tmpreg;
+ 186              		.loc 1 146 5 is_stmt 1
+ 187              		.loc 1 146 15 is_stmt 0
+ 188 000a 1CC3     		sw	a5,0(a4)
+ 147:../Peripheral/src/ch32v30x_pwr.c **** 
+ 148:../Peripheral/src/ch32v30x_pwr.c ****     NVIC->SCTLR |= (1 << 2);
+ 189              		.loc 1 148 5 is_stmt 1
+ 190              		.loc 1 148 9 is_stmt 0
+ 191 000c B7F700E0 		li	a5,-536809472
+ 192              	.LVL13:
+ 193 0010 03A707D1 		lw	a4,-752(a5)
+ 194              	.LVL14:
+ 195              		.loc 1 148 17
+ 196 0014 13674700 		ori	a4,a4,4
+ 197 0018 23A8E7D0 		sw	a4,-752(a5)
+ 198              	.LVL15:
+ 149:../Peripheral/src/ch32v30x_pwr.c **** 
+ 150:../Peripheral/src/ch32v30x_pwr.c ****     if(PWR_STOPEntry == PWR_STOPEntry_WFI)
+ 199              		.loc 1 150 5 is_stmt 1
+ 200              		.loc 1 150 7 is_stmt 0
+ 201 001c 0547     		li	a4,1
+ 202 001e 6391E502 		bne	a1,a4,.L17
+ 151:../Peripheral/src/ch32v30x_pwr.c ****     {
+ 152:../Peripheral/src/ch32v30x_pwr.c ****         __WFI();
+ 203              		.loc 1 152 9 is_stmt 1
+ 204              	.LBB38:
+ 205              	.LBB39:
+ 206              		.file 2 "C:\\Users\\localhost\\Documents\\turbomoskal-repo\\qqexpert\\firmware\\MasterController\\
+   1:C:\Users\localhost\Documents\turbomoskal-repo\qqexpert\firmware\MasterController\Core\core_riscv.h **** /********************************** (C) COPYRIGHT  *******************************
+   2:C:\Users\localhost\Documents\turbomoskal-repo\qqexpert\firmware\MasterController\Core\core_riscv.h **** * File Name          : core_riscv.h
+   3:C:\Users\localhost\Documents\turbomoskal-repo\qqexpert\firmware\MasterController\Core\core_riscv.h **** * Author             : WCH
+   4:C:\Users\localhost\Documents\turbomoskal-repo\qqexpert\firmware\MasterController\Core\core_riscv.h **** * Version            : V1.0.1
+   5:C:\Users\localhost\Documents\turbomoskal-repo\qqexpert\firmware\MasterController\Core\core_riscv.h **** * Date               : 2024/03/06
+   6:C:\Users\localhost\Documents\turbomoskal-repo\qqexpert\firmware\MasterController\Core\core_riscv.h **** * Description        : RISC-V V4 Core Peripheral Access Layer Header File for CH32V30x
+   7:C:\Users\localhost\Documents\turbomoskal-repo\qqexpert\firmware\MasterController\Core\core_riscv.h **** *********************************************************************************
+   8:C:\Users\localhost\Documents\turbomoskal-repo\qqexpert\firmware\MasterController\Core\core_riscv.h **** * Copyright (c) 2021 Nanjing Qinheng Microelectronics Co., Ltd.
+   9:C:\Users\localhost\Documents\turbomoskal-repo\qqexpert\firmware\MasterController\Core\core_riscv.h **** * Attention: This software (modified or not) and binary are used for 
+  10:C:\Users\localhost\Documents\turbomoskal-repo\qqexpert\firmware\MasterController\Core\core_riscv.h **** * microcontroller manufactured by Nanjing Qinheng Microelectronics.
+  11:C:\Users\localhost\Documents\turbomoskal-repo\qqexpert\firmware\MasterController\Core\core_riscv.h **** *******************************************************************************/
+  12:C:\Users\localhost\Documents\turbomoskal-repo\qqexpert\firmware\MasterController\Core\core_riscv.h **** #ifndef __CORE_RISCV_H__
+  13:C:\Users\localhost\Documents\turbomoskal-repo\qqexpert\firmware\MasterController\Core\core_riscv.h **** #define __CORE_RISCV_H__
+  14:C:\Users\localhost\Documents\turbomoskal-repo\qqexpert\firmware\MasterController\Core\core_riscv.h **** 
+  15:C:\Users\localhost\Documents\turbomoskal-repo\qqexpert\firmware\MasterController\Core\core_riscv.h **** #ifdef __cplusplus
+  16:C:\Users\localhost\Documents\turbomoskal-repo\qqexpert\firmware\MasterController\Core\core_riscv.h ****  extern "C" {
+  17:C:\Users\localhost\Documents\turbomoskal-repo\qqexpert\firmware\MasterController\Core\core_riscv.h **** #endif
+  18:C:\Users\localhost\Documents\turbomoskal-repo\qqexpert\firmware\MasterController\Core\core_riscv.h **** 
+  19:C:\Users\localhost\Documents\turbomoskal-repo\qqexpert\firmware\MasterController\Core\core_riscv.h **** /* IO definitions */
+  20:C:\Users\localhost\Documents\turbomoskal-repo\qqexpert\firmware\MasterController\Core\core_riscv.h **** #ifdef __cplusplus
+  21:C:\Users\localhost\Documents\turbomoskal-repo\qqexpert\firmware\MasterController\Core\core_riscv.h ****   #define     __I     volatile                /* defines 'read only' permissions    */
+  22:C:\Users\localhost\Documents\turbomoskal-repo\qqexpert\firmware\MasterController\Core\core_riscv.h **** #else
+  23:C:\Users\localhost\Documents\turbomoskal-repo\qqexpert\firmware\MasterController\Core\core_riscv.h ****   #define     __I     volatile const          /* defines 'read only' permissions    */
+  24:C:\Users\localhost\Documents\turbomoskal-repo\qqexpert\firmware\MasterController\Core\core_riscv.h **** #endif
+  25:C:\Users\localhost\Documents\turbomoskal-repo\qqexpert\firmware\MasterController\Core\core_riscv.h **** #define       __O     volatile                /* defines 'write only' permissions   */
+  26:C:\Users\localhost\Documents\turbomoskal-repo\qqexpert\firmware\MasterController\Core\core_riscv.h **** #define       __IO    volatile                /* defines 'read / write' permissions */
+  27:C:\Users\localhost\Documents\turbomoskal-repo\qqexpert\firmware\MasterController\Core\core_riscv.h **** 
+  28:C:\Users\localhost\Documents\turbomoskal-repo\qqexpert\firmware\MasterController\Core\core_riscv.h **** /* Standard Peripheral Library old types (maintained for legacy purpose) */
+  29:C:\Users\localhost\Documents\turbomoskal-repo\qqexpert\firmware\MasterController\Core\core_riscv.h **** typedef __I uint64_t vuc64;  /* Read Only */
+  30:C:\Users\localhost\Documents\turbomoskal-repo\qqexpert\firmware\MasterController\Core\core_riscv.h **** typedef __I uint32_t vuc32;  /* Read Only */
+  31:C:\Users\localhost\Documents\turbomoskal-repo\qqexpert\firmware\MasterController\Core\core_riscv.h **** typedef __I uint16_t vuc16;  /* Read Only */
+  32:C:\Users\localhost\Documents\turbomoskal-repo\qqexpert\firmware\MasterController\Core\core_riscv.h **** typedef __I uint8_t  vuc8;   /* Read Only */
+  33:C:\Users\localhost\Documents\turbomoskal-repo\qqexpert\firmware\MasterController\Core\core_riscv.h **** 
+  34:C:\Users\localhost\Documents\turbomoskal-repo\qqexpert\firmware\MasterController\Core\core_riscv.h **** typedef const uint64_t uc64;  /* Read Only */
+  35:C:\Users\localhost\Documents\turbomoskal-repo\qqexpert\firmware\MasterController\Core\core_riscv.h **** typedef const uint32_t uc32;  /* Read Only */
+  36:C:\Users\localhost\Documents\turbomoskal-repo\qqexpert\firmware\MasterController\Core\core_riscv.h **** typedef const uint16_t uc16;  /* Read Only */
+  37:C:\Users\localhost\Documents\turbomoskal-repo\qqexpert\firmware\MasterController\Core\core_riscv.h **** typedef const uint8_t  uc8;   /* Read Only */
+  38:C:\Users\localhost\Documents\turbomoskal-repo\qqexpert\firmware\MasterController\Core\core_riscv.h **** 
+  39:C:\Users\localhost\Documents\turbomoskal-repo\qqexpert\firmware\MasterController\Core\core_riscv.h **** typedef __I int64_t vsc64;  /* Read Only */
+  40:C:\Users\localhost\Documents\turbomoskal-repo\qqexpert\firmware\MasterController\Core\core_riscv.h **** typedef __I int32_t vsc32;  /* Read Only */
+  41:C:\Users\localhost\Documents\turbomoskal-repo\qqexpert\firmware\MasterController\Core\core_riscv.h **** typedef __I int16_t vsc16;  /* Read Only */
+  42:C:\Users\localhost\Documents\turbomoskal-repo\qqexpert\firmware\MasterController\Core\core_riscv.h **** typedef __I int8_t  vsc8;   /* Read Only */
+  43:C:\Users\localhost\Documents\turbomoskal-repo\qqexpert\firmware\MasterController\Core\core_riscv.h **** 
+  44:C:\Users\localhost\Documents\turbomoskal-repo\qqexpert\firmware\MasterController\Core\core_riscv.h **** typedef const int64_t sc64;  /* Read Only */
+  45:C:\Users\localhost\Documents\turbomoskal-repo\qqexpert\firmware\MasterController\Core\core_riscv.h **** typedef const int32_t sc32;  /* Read Only */
+  46:C:\Users\localhost\Documents\turbomoskal-repo\qqexpert\firmware\MasterController\Core\core_riscv.h **** typedef const int16_t sc16;  /* Read Only */
+  47:C:\Users\localhost\Documents\turbomoskal-repo\qqexpert\firmware\MasterController\Core\core_riscv.h **** typedef const int8_t  sc8;   /* Read Only */
+  48:C:\Users\localhost\Documents\turbomoskal-repo\qqexpert\firmware\MasterController\Core\core_riscv.h **** 
+  49:C:\Users\localhost\Documents\turbomoskal-repo\qqexpert\firmware\MasterController\Core\core_riscv.h **** typedef __IO uint64_t  vu64;
+  50:C:\Users\localhost\Documents\turbomoskal-repo\qqexpert\firmware\MasterController\Core\core_riscv.h **** typedef __IO uint32_t  vu32;
+  51:C:\Users\localhost\Documents\turbomoskal-repo\qqexpert\firmware\MasterController\Core\core_riscv.h **** typedef __IO uint16_t  vu16;
+  52:C:\Users\localhost\Documents\turbomoskal-repo\qqexpert\firmware\MasterController\Core\core_riscv.h **** typedef __IO uint8_t   vu8;
+  53:C:\Users\localhost\Documents\turbomoskal-repo\qqexpert\firmware\MasterController\Core\core_riscv.h **** 
+  54:C:\Users\localhost\Documents\turbomoskal-repo\qqexpert\firmware\MasterController\Core\core_riscv.h **** typedef uint64_t  u64;
+  55:C:\Users\localhost\Documents\turbomoskal-repo\qqexpert\firmware\MasterController\Core\core_riscv.h **** typedef uint32_t  u32;
+  56:C:\Users\localhost\Documents\turbomoskal-repo\qqexpert\firmware\MasterController\Core\core_riscv.h **** typedef uint16_t  u16;
+  57:C:\Users\localhost\Documents\turbomoskal-repo\qqexpert\firmware\MasterController\Core\core_riscv.h **** typedef uint8_t   u8;
+  58:C:\Users\localhost\Documents\turbomoskal-repo\qqexpert\firmware\MasterController\Core\core_riscv.h **** 
+  59:C:\Users\localhost\Documents\turbomoskal-repo\qqexpert\firmware\MasterController\Core\core_riscv.h **** typedef __IO int64_t  vs64;
+  60:C:\Users\localhost\Documents\turbomoskal-repo\qqexpert\firmware\MasterController\Core\core_riscv.h **** typedef __IO int32_t  vs32;
+  61:C:\Users\localhost\Documents\turbomoskal-repo\qqexpert\firmware\MasterController\Core\core_riscv.h **** typedef __IO int16_t  vs16;
+  62:C:\Users\localhost\Documents\turbomoskal-repo\qqexpert\firmware\MasterController\Core\core_riscv.h **** typedef __IO int8_t   vs8;
+  63:C:\Users\localhost\Documents\turbomoskal-repo\qqexpert\firmware\MasterController\Core\core_riscv.h **** 
+  64:C:\Users\localhost\Documents\turbomoskal-repo\qqexpert\firmware\MasterController\Core\core_riscv.h **** typedef int64_t  s64;
+  65:C:\Users\localhost\Documents\turbomoskal-repo\qqexpert\firmware\MasterController\Core\core_riscv.h **** typedef int32_t  s32;
+  66:C:\Users\localhost\Documents\turbomoskal-repo\qqexpert\firmware\MasterController\Core\core_riscv.h **** typedef int16_t  s16;
+  67:C:\Users\localhost\Documents\turbomoskal-repo\qqexpert\firmware\MasterController\Core\core_riscv.h **** typedef int8_t   s8;
+  68:C:\Users\localhost\Documents\turbomoskal-repo\qqexpert\firmware\MasterController\Core\core_riscv.h **** 
+  69:C:\Users\localhost\Documents\turbomoskal-repo\qqexpert\firmware\MasterController\Core\core_riscv.h **** typedef enum {NoREADY = 0, READY = !NoREADY} ErrorStatus;
+  70:C:\Users\localhost\Documents\turbomoskal-repo\qqexpert\firmware\MasterController\Core\core_riscv.h **** 
+  71:C:\Users\localhost\Documents\turbomoskal-repo\qqexpert\firmware\MasterController\Core\core_riscv.h **** typedef enum {DISABLE = 0, ENABLE = !DISABLE} FunctionalState;
+  72:C:\Users\localhost\Documents\turbomoskal-repo\qqexpert\firmware\MasterController\Core\core_riscv.h **** 
+  73:C:\Users\localhost\Documents\turbomoskal-repo\qqexpert\firmware\MasterController\Core\core_riscv.h **** typedef enum {RESET = 0, SET = !RESET} FlagStatus, ITStatus;
+  74:C:\Users\localhost\Documents\turbomoskal-repo\qqexpert\firmware\MasterController\Core\core_riscv.h **** 
+  75:C:\Users\localhost\Documents\turbomoskal-repo\qqexpert\firmware\MasterController\Core\core_riscv.h **** #define   RV_STATIC_INLINE  static  inline
+  76:C:\Users\localhost\Documents\turbomoskal-repo\qqexpert\firmware\MasterController\Core\core_riscv.h **** 
+  77:C:\Users\localhost\Documents\turbomoskal-repo\qqexpert\firmware\MasterController\Core\core_riscv.h **** /* memory mapped structure for Program Fast Interrupt Controller (PFIC) */
+  78:C:\Users\localhost\Documents\turbomoskal-repo\qqexpert\firmware\MasterController\Core\core_riscv.h **** typedef struct{
+  79:C:\Users\localhost\Documents\turbomoskal-repo\qqexpert\firmware\MasterController\Core\core_riscv.h ****   __I  uint32_t ISR[8];
+  80:C:\Users\localhost\Documents\turbomoskal-repo\qqexpert\firmware\MasterController\Core\core_riscv.h ****   __I  uint32_t IPR[8];
+  81:C:\Users\localhost\Documents\turbomoskal-repo\qqexpert\firmware\MasterController\Core\core_riscv.h ****   __IO uint32_t ITHRESDR;
+  82:C:\Users\localhost\Documents\turbomoskal-repo\qqexpert\firmware\MasterController\Core\core_riscv.h ****   __IO uint32_t RESERVED;
+  83:C:\Users\localhost\Documents\turbomoskal-repo\qqexpert\firmware\MasterController\Core\core_riscv.h ****   __IO uint32_t CFGR;
+  84:C:\Users\localhost\Documents\turbomoskal-repo\qqexpert\firmware\MasterController\Core\core_riscv.h ****   __I  uint32_t GISR;
+  85:C:\Users\localhost\Documents\turbomoskal-repo\qqexpert\firmware\MasterController\Core\core_riscv.h ****   __IO uint8_t VTFIDR[4];
+  86:C:\Users\localhost\Documents\turbomoskal-repo\qqexpert\firmware\MasterController\Core\core_riscv.h ****   uint8_t RESERVED0[12];
+  87:C:\Users\localhost\Documents\turbomoskal-repo\qqexpert\firmware\MasterController\Core\core_riscv.h ****   __IO uint32_t VTFADDR[4];
+  88:C:\Users\localhost\Documents\turbomoskal-repo\qqexpert\firmware\MasterController\Core\core_riscv.h ****   uint8_t RESERVED1[0x90];
+  89:C:\Users\localhost\Documents\turbomoskal-repo\qqexpert\firmware\MasterController\Core\core_riscv.h ****   __O  uint32_t IENR[8];
+  90:C:\Users\localhost\Documents\turbomoskal-repo\qqexpert\firmware\MasterController\Core\core_riscv.h ****   uint8_t RESERVED2[0x60];
+  91:C:\Users\localhost\Documents\turbomoskal-repo\qqexpert\firmware\MasterController\Core\core_riscv.h ****   __O  uint32_t IRER[8];
+  92:C:\Users\localhost\Documents\turbomoskal-repo\qqexpert\firmware\MasterController\Core\core_riscv.h ****   uint8_t RESERVED3[0x60];
+  93:C:\Users\localhost\Documents\turbomoskal-repo\qqexpert\firmware\MasterController\Core\core_riscv.h ****   __O  uint32_t IPSR[8];
+  94:C:\Users\localhost\Documents\turbomoskal-repo\qqexpert\firmware\MasterController\Core\core_riscv.h ****   uint8_t RESERVED4[0x60];
+  95:C:\Users\localhost\Documents\turbomoskal-repo\qqexpert\firmware\MasterController\Core\core_riscv.h ****   __O  uint32_t IPRR[8];
+  96:C:\Users\localhost\Documents\turbomoskal-repo\qqexpert\firmware\MasterController\Core\core_riscv.h ****   uint8_t RESERVED5[0x60];
+  97:C:\Users\localhost\Documents\turbomoskal-repo\qqexpert\firmware\MasterController\Core\core_riscv.h ****   __IO uint32_t IACTR[8];
+  98:C:\Users\localhost\Documents\turbomoskal-repo\qqexpert\firmware\MasterController\Core\core_riscv.h ****   uint8_t RESERVED6[0xE0];
+  99:C:\Users\localhost\Documents\turbomoskal-repo\qqexpert\firmware\MasterController\Core\core_riscv.h ****   __IO uint8_t IPRIOR[256];
+ 100:C:\Users\localhost\Documents\turbomoskal-repo\qqexpert\firmware\MasterController\Core\core_riscv.h ****   uint8_t RESERVED7[0x810];
+ 101:C:\Users\localhost\Documents\turbomoskal-repo\qqexpert\firmware\MasterController\Core\core_riscv.h ****   __IO uint32_t SCTLR;
+ 102:C:\Users\localhost\Documents\turbomoskal-repo\qqexpert\firmware\MasterController\Core\core_riscv.h **** }PFIC_Type;
+ 103:C:\Users\localhost\Documents\turbomoskal-repo\qqexpert\firmware\MasterController\Core\core_riscv.h **** 
+ 104:C:\Users\localhost\Documents\turbomoskal-repo\qqexpert\firmware\MasterController\Core\core_riscv.h **** /* memory mapped structure for SysTick */
+ 105:C:\Users\localhost\Documents\turbomoskal-repo\qqexpert\firmware\MasterController\Core\core_riscv.h **** typedef struct
+ 106:C:\Users\localhost\Documents\turbomoskal-repo\qqexpert\firmware\MasterController\Core\core_riscv.h **** {
+ 107:C:\Users\localhost\Documents\turbomoskal-repo\qqexpert\firmware\MasterController\Core\core_riscv.h ****     __IO uint32_t CTLR;
+ 108:C:\Users\localhost\Documents\turbomoskal-repo\qqexpert\firmware\MasterController\Core\core_riscv.h ****     __IO uint32_t SR;
+ 109:C:\Users\localhost\Documents\turbomoskal-repo\qqexpert\firmware\MasterController\Core\core_riscv.h ****     __IO uint64_t CNT;
+ 110:C:\Users\localhost\Documents\turbomoskal-repo\qqexpert\firmware\MasterController\Core\core_riscv.h ****     __IO uint64_t CMP;
+ 111:C:\Users\localhost\Documents\turbomoskal-repo\qqexpert\firmware\MasterController\Core\core_riscv.h **** }SysTick_Type;
+ 112:C:\Users\localhost\Documents\turbomoskal-repo\qqexpert\firmware\MasterController\Core\core_riscv.h **** 
+ 113:C:\Users\localhost\Documents\turbomoskal-repo\qqexpert\firmware\MasterController\Core\core_riscv.h **** 
+ 114:C:\Users\localhost\Documents\turbomoskal-repo\qqexpert\firmware\MasterController\Core\core_riscv.h **** #define PFIC            ((PFIC_Type *) 0xE000E000 )
+ 115:C:\Users\localhost\Documents\turbomoskal-repo\qqexpert\firmware\MasterController\Core\core_riscv.h **** #define NVIC            PFIC
+ 116:C:\Users\localhost\Documents\turbomoskal-repo\qqexpert\firmware\MasterController\Core\core_riscv.h **** #define NVIC_KEY1       ((uint32_t)0xFA050000)
+ 117:C:\Users\localhost\Documents\turbomoskal-repo\qqexpert\firmware\MasterController\Core\core_riscv.h **** #define	NVIC_KEY2		((uint32_t)0xBCAF0000)
+ 118:C:\Users\localhost\Documents\turbomoskal-repo\qqexpert\firmware\MasterController\Core\core_riscv.h **** #define	NVIC_KEY3		((uint32_t)0xBEEF0000)
+ 119:C:\Users\localhost\Documents\turbomoskal-repo\qqexpert\firmware\MasterController\Core\core_riscv.h **** 
+ 120:C:\Users\localhost\Documents\turbomoskal-repo\qqexpert\firmware\MasterController\Core\core_riscv.h **** #define SysTick         ((SysTick_Type *) 0xE000F000)
+ 121:C:\Users\localhost\Documents\turbomoskal-repo\qqexpert\firmware\MasterController\Core\core_riscv.h **** 
+ 122:C:\Users\localhost\Documents\turbomoskal-repo\qqexpert\firmware\MasterController\Core\core_riscv.h **** /*********************************************************************
+ 123:C:\Users\localhost\Documents\turbomoskal-repo\qqexpert\firmware\MasterController\Core\core_riscv.h ****  * @fn      __enable_irq
+ 124:C:\Users\localhost\Documents\turbomoskal-repo\qqexpert\firmware\MasterController\Core\core_riscv.h ****  *
+ 125:C:\Users\localhost\Documents\turbomoskal-repo\qqexpert\firmware\MasterController\Core\core_riscv.h ****  * @brief   Enable Global Interrupt
+ 126:C:\Users\localhost\Documents\turbomoskal-repo\qqexpert\firmware\MasterController\Core\core_riscv.h ****  *
+ 127:C:\Users\localhost\Documents\turbomoskal-repo\qqexpert\firmware\MasterController\Core\core_riscv.h ****  * @return  none
+ 128:C:\Users\localhost\Documents\turbomoskal-repo\qqexpert\firmware\MasterController\Core\core_riscv.h ****  */
+ 129:C:\Users\localhost\Documents\turbomoskal-repo\qqexpert\firmware\MasterController\Core\core_riscv.h **** __attribute__( ( always_inline ) ) RV_STATIC_INLINE void __enable_irq()
+ 130:C:\Users\localhost\Documents\turbomoskal-repo\qqexpert\firmware\MasterController\Core\core_riscv.h **** {
+ 131:C:\Users\localhost\Documents\turbomoskal-repo\qqexpert\firmware\MasterController\Core\core_riscv.h ****   __asm volatile ("csrs 0x800, %0" : : "r" (0x88) );
+ 132:C:\Users\localhost\Documents\turbomoskal-repo\qqexpert\firmware\MasterController\Core\core_riscv.h **** }
+ 133:C:\Users\localhost\Documents\turbomoskal-repo\qqexpert\firmware\MasterController\Core\core_riscv.h **** 
+ 134:C:\Users\localhost\Documents\turbomoskal-repo\qqexpert\firmware\MasterController\Core\core_riscv.h **** /*********************************************************************
+ 135:C:\Users\localhost\Documents\turbomoskal-repo\qqexpert\firmware\MasterController\Core\core_riscv.h ****  * @fn      __disable_irq
+ 136:C:\Users\localhost\Documents\turbomoskal-repo\qqexpert\firmware\MasterController\Core\core_riscv.h ****  *
+ 137:C:\Users\localhost\Documents\turbomoskal-repo\qqexpert\firmware\MasterController\Core\core_riscv.h ****  * @brief   Disable Global Interrupt
+ 138:C:\Users\localhost\Documents\turbomoskal-repo\qqexpert\firmware\MasterController\Core\core_riscv.h ****  *
+ 139:C:\Users\localhost\Documents\turbomoskal-repo\qqexpert\firmware\MasterController\Core\core_riscv.h ****  * @return  none
+ 140:C:\Users\localhost\Documents\turbomoskal-repo\qqexpert\firmware\MasterController\Core\core_riscv.h ****  */
+ 141:C:\Users\localhost\Documents\turbomoskal-repo\qqexpert\firmware\MasterController\Core\core_riscv.h **** __attribute__( ( always_inline ) ) RV_STATIC_INLINE void __disable_irq()
+ 142:C:\Users\localhost\Documents\turbomoskal-repo\qqexpert\firmware\MasterController\Core\core_riscv.h **** {
+ 143:C:\Users\localhost\Documents\turbomoskal-repo\qqexpert\firmware\MasterController\Core\core_riscv.h ****   __asm volatile ("csrc 0x800, %0" : : "r" (0x88) );
+ 144:C:\Users\localhost\Documents\turbomoskal-repo\qqexpert\firmware\MasterController\Core\core_riscv.h **** }
+ 145:C:\Users\localhost\Documents\turbomoskal-repo\qqexpert\firmware\MasterController\Core\core_riscv.h **** 
+ 146:C:\Users\localhost\Documents\turbomoskal-repo\qqexpert\firmware\MasterController\Core\core_riscv.h **** /*********************************************************************
+ 147:C:\Users\localhost\Documents\turbomoskal-repo\qqexpert\firmware\MasterController\Core\core_riscv.h ****  * @fn      __NOP
+ 148:C:\Users\localhost\Documents\turbomoskal-repo\qqexpert\firmware\MasterController\Core\core_riscv.h ****  *
+ 149:C:\Users\localhost\Documents\turbomoskal-repo\qqexpert\firmware\MasterController\Core\core_riscv.h ****  * @brief   nop
+ 150:C:\Users\localhost\Documents\turbomoskal-repo\qqexpert\firmware\MasterController\Core\core_riscv.h ****  *
+ 151:C:\Users\localhost\Documents\turbomoskal-repo\qqexpert\firmware\MasterController\Core\core_riscv.h ****  * @return  none
+ 152:C:\Users\localhost\Documents\turbomoskal-repo\qqexpert\firmware\MasterController\Core\core_riscv.h ****  */
+ 153:C:\Users\localhost\Documents\turbomoskal-repo\qqexpert\firmware\MasterController\Core\core_riscv.h **** __attribute__( ( always_inline ) ) RV_STATIC_INLINE void __NOP()
+ 154:C:\Users\localhost\Documents\turbomoskal-repo\qqexpert\firmware\MasterController\Core\core_riscv.h **** {
+ 155:C:\Users\localhost\Documents\turbomoskal-repo\qqexpert\firmware\MasterController\Core\core_riscv.h ****   __asm volatile ("nop");
+ 156:C:\Users\localhost\Documents\turbomoskal-repo\qqexpert\firmware\MasterController\Core\core_riscv.h **** }
+ 157:C:\Users\localhost\Documents\turbomoskal-repo\qqexpert\firmware\MasterController\Core\core_riscv.h **** 
+ 158:C:\Users\localhost\Documents\turbomoskal-repo\qqexpert\firmware\MasterController\Core\core_riscv.h **** /*********************************************************************
+ 159:C:\Users\localhost\Documents\turbomoskal-repo\qqexpert\firmware\MasterController\Core\core_riscv.h ****  * @fn      NVIC_EnableIRQ
+ 160:C:\Users\localhost\Documents\turbomoskal-repo\qqexpert\firmware\MasterController\Core\core_riscv.h ****  *
+ 161:C:\Users\localhost\Documents\turbomoskal-repo\qqexpert\firmware\MasterController\Core\core_riscv.h ****  * @brief   Enable Interrupt
+ 162:C:\Users\localhost\Documents\turbomoskal-repo\qqexpert\firmware\MasterController\Core\core_riscv.h ****  *
+ 163:C:\Users\localhost\Documents\turbomoskal-repo\qqexpert\firmware\MasterController\Core\core_riscv.h ****  * @param   IRQn - Interrupt Numbers
+ 164:C:\Users\localhost\Documents\turbomoskal-repo\qqexpert\firmware\MasterController\Core\core_riscv.h ****  *
+ 165:C:\Users\localhost\Documents\turbomoskal-repo\qqexpert\firmware\MasterController\Core\core_riscv.h ****  * @return  none
+ 166:C:\Users\localhost\Documents\turbomoskal-repo\qqexpert\firmware\MasterController\Core\core_riscv.h ****  */
+ 167:C:\Users\localhost\Documents\turbomoskal-repo\qqexpert\firmware\MasterController\Core\core_riscv.h **** __attribute__( ( always_inline ) ) RV_STATIC_INLINE void NVIC_EnableIRQ(IRQn_Type IRQn)
+ 168:C:\Users\localhost\Documents\turbomoskal-repo\qqexpert\firmware\MasterController\Core\core_riscv.h **** {
+ 169:C:\Users\localhost\Documents\turbomoskal-repo\qqexpert\firmware\MasterController\Core\core_riscv.h ****   NVIC->IENR[((uint32_t)(IRQn) >> 5)] = (1 << ((uint32_t)(IRQn) & 0x1F));
+ 170:C:\Users\localhost\Documents\turbomoskal-repo\qqexpert\firmware\MasterController\Core\core_riscv.h **** }
+ 171:C:\Users\localhost\Documents\turbomoskal-repo\qqexpert\firmware\MasterController\Core\core_riscv.h **** 
+ 172:C:\Users\localhost\Documents\turbomoskal-repo\qqexpert\firmware\MasterController\Core\core_riscv.h **** /*********************************************************************
+ 173:C:\Users\localhost\Documents\turbomoskal-repo\qqexpert\firmware\MasterController\Core\core_riscv.h ****  * @fn      NVIC_DisableIRQ
+ 174:C:\Users\localhost\Documents\turbomoskal-repo\qqexpert\firmware\MasterController\Core\core_riscv.h ****  *
+ 175:C:\Users\localhost\Documents\turbomoskal-repo\qqexpert\firmware\MasterController\Core\core_riscv.h ****  * @brief   Disable Interrupt
+ 176:C:\Users\localhost\Documents\turbomoskal-repo\qqexpert\firmware\MasterController\Core\core_riscv.h ****  *
+ 177:C:\Users\localhost\Documents\turbomoskal-repo\qqexpert\firmware\MasterController\Core\core_riscv.h ****  * @param   IRQn - Interrupt Numbers
+ 178:C:\Users\localhost\Documents\turbomoskal-repo\qqexpert\firmware\MasterController\Core\core_riscv.h ****  *
+ 179:C:\Users\localhost\Documents\turbomoskal-repo\qqexpert\firmware\MasterController\Core\core_riscv.h ****  * @return  none
+ 180:C:\Users\localhost\Documents\turbomoskal-repo\qqexpert\firmware\MasterController\Core\core_riscv.h ****  */
+ 181:C:\Users\localhost\Documents\turbomoskal-repo\qqexpert\firmware\MasterController\Core\core_riscv.h **** __attribute__( ( always_inline ) ) RV_STATIC_INLINE void NVIC_DisableIRQ(IRQn_Type IRQn)
+ 182:C:\Users\localhost\Documents\turbomoskal-repo\qqexpert\firmware\MasterController\Core\core_riscv.h **** {
+ 183:C:\Users\localhost\Documents\turbomoskal-repo\qqexpert\firmware\MasterController\Core\core_riscv.h ****   NVIC->IRER[((uint32_t)(IRQn) >> 5)] = (1 << ((uint32_t)(IRQn) & 0x1F));
+ 184:C:\Users\localhost\Documents\turbomoskal-repo\qqexpert\firmware\MasterController\Core\core_riscv.h **** }
+ 185:C:\Users\localhost\Documents\turbomoskal-repo\qqexpert\firmware\MasterController\Core\core_riscv.h **** 
+ 186:C:\Users\localhost\Documents\turbomoskal-repo\qqexpert\firmware\MasterController\Core\core_riscv.h **** /*********************************************************************
+ 187:C:\Users\localhost\Documents\turbomoskal-repo\qqexpert\firmware\MasterController\Core\core_riscv.h ****  * @fn      NVIC_GetStatusIRQ
+ 188:C:\Users\localhost\Documents\turbomoskal-repo\qqexpert\firmware\MasterController\Core\core_riscv.h ****  *
+ 189:C:\Users\localhost\Documents\turbomoskal-repo\qqexpert\firmware\MasterController\Core\core_riscv.h ****  * @brief   Get Interrupt Enable State
+ 190:C:\Users\localhost\Documents\turbomoskal-repo\qqexpert\firmware\MasterController\Core\core_riscv.h ****  *
+ 191:C:\Users\localhost\Documents\turbomoskal-repo\qqexpert\firmware\MasterController\Core\core_riscv.h ****  * @param   IRQn - Interrupt Numbers
+ 192:C:\Users\localhost\Documents\turbomoskal-repo\qqexpert\firmware\MasterController\Core\core_riscv.h ****  *
+ 193:C:\Users\localhost\Documents\turbomoskal-repo\qqexpert\firmware\MasterController\Core\core_riscv.h ****  * @return  1 - Interrupt Enable
+ 194:C:\Users\localhost\Documents\turbomoskal-repo\qqexpert\firmware\MasterController\Core\core_riscv.h ****  *          0 - Interrupt Disable
+ 195:C:\Users\localhost\Documents\turbomoskal-repo\qqexpert\firmware\MasterController\Core\core_riscv.h ****  */
+ 196:C:\Users\localhost\Documents\turbomoskal-repo\qqexpert\firmware\MasterController\Core\core_riscv.h **** __attribute__( ( always_inline ) ) RV_STATIC_INLINE uint32_t NVIC_GetStatusIRQ(IRQn_Type IRQn)
+ 197:C:\Users\localhost\Documents\turbomoskal-repo\qqexpert\firmware\MasterController\Core\core_riscv.h **** {
+ 198:C:\Users\localhost\Documents\turbomoskal-repo\qqexpert\firmware\MasterController\Core\core_riscv.h ****   return((uint32_t) ((NVIC->ISR[(uint32_t)(IRQn) >> 5] & (1 << ((uint32_t)(IRQn) & 0x1F)))?1:0));
+ 199:C:\Users\localhost\Documents\turbomoskal-repo\qqexpert\firmware\MasterController\Core\core_riscv.h **** }
+ 200:C:\Users\localhost\Documents\turbomoskal-repo\qqexpert\firmware\MasterController\Core\core_riscv.h **** 
+ 201:C:\Users\localhost\Documents\turbomoskal-repo\qqexpert\firmware\MasterController\Core\core_riscv.h **** /*********************************************************************
+ 202:C:\Users\localhost\Documents\turbomoskal-repo\qqexpert\firmware\MasterController\Core\core_riscv.h ****  * @fn      NVIC_GetPendingIRQ
+ 203:C:\Users\localhost\Documents\turbomoskal-repo\qqexpert\firmware\MasterController\Core\core_riscv.h ****  *
+ 204:C:\Users\localhost\Documents\turbomoskal-repo\qqexpert\firmware\MasterController\Core\core_riscv.h ****  * @brief   Get Interrupt Pending State
+ 205:C:\Users\localhost\Documents\turbomoskal-repo\qqexpert\firmware\MasterController\Core\core_riscv.h ****  *
+ 206:C:\Users\localhost\Documents\turbomoskal-repo\qqexpert\firmware\MasterController\Core\core_riscv.h ****  * @param   IRQn - Interrupt Numbers
+ 207:C:\Users\localhost\Documents\turbomoskal-repo\qqexpert\firmware\MasterController\Core\core_riscv.h ****  *
+ 208:C:\Users\localhost\Documents\turbomoskal-repo\qqexpert\firmware\MasterController\Core\core_riscv.h ****  * @return  1 - Interrupt Pending Enable
+ 209:C:\Users\localhost\Documents\turbomoskal-repo\qqexpert\firmware\MasterController\Core\core_riscv.h ****  *          0 - Interrupt Pending Disable
+ 210:C:\Users\localhost\Documents\turbomoskal-repo\qqexpert\firmware\MasterController\Core\core_riscv.h ****  */
+ 211:C:\Users\localhost\Documents\turbomoskal-repo\qqexpert\firmware\MasterController\Core\core_riscv.h **** __attribute__( ( always_inline ) ) RV_STATIC_INLINE uint32_t NVIC_GetPendingIRQ(IRQn_Type IRQn)
+ 212:C:\Users\localhost\Documents\turbomoskal-repo\qqexpert\firmware\MasterController\Core\core_riscv.h **** {
+ 213:C:\Users\localhost\Documents\turbomoskal-repo\qqexpert\firmware\MasterController\Core\core_riscv.h ****   return((uint32_t) ((NVIC->IPR[(uint32_t)(IRQn) >> 5] & (1 << ((uint32_t)(IRQn) & 0x1F)))?1:0));
+ 214:C:\Users\localhost\Documents\turbomoskal-repo\qqexpert\firmware\MasterController\Core\core_riscv.h **** }
+ 215:C:\Users\localhost\Documents\turbomoskal-repo\qqexpert\firmware\MasterController\Core\core_riscv.h **** 
+ 216:C:\Users\localhost\Documents\turbomoskal-repo\qqexpert\firmware\MasterController\Core\core_riscv.h **** /*********************************************************************
+ 217:C:\Users\localhost\Documents\turbomoskal-repo\qqexpert\firmware\MasterController\Core\core_riscv.h ****  * @fn      NVIC_SetPendingIRQ
+ 218:C:\Users\localhost\Documents\turbomoskal-repo\qqexpert\firmware\MasterController\Core\core_riscv.h ****  *
+ 219:C:\Users\localhost\Documents\turbomoskal-repo\qqexpert\firmware\MasterController\Core\core_riscv.h ****  * @brief   Set Interrupt Pending
+ 220:C:\Users\localhost\Documents\turbomoskal-repo\qqexpert\firmware\MasterController\Core\core_riscv.h ****  *
+ 221:C:\Users\localhost\Documents\turbomoskal-repo\qqexpert\firmware\MasterController\Core\core_riscv.h ****  * @param   IRQn - Interrupt Numbers
+ 222:C:\Users\localhost\Documents\turbomoskal-repo\qqexpert\firmware\MasterController\Core\core_riscv.h ****  *
+ 223:C:\Users\localhost\Documents\turbomoskal-repo\qqexpert\firmware\MasterController\Core\core_riscv.h ****  * @return  none
+ 224:C:\Users\localhost\Documents\turbomoskal-repo\qqexpert\firmware\MasterController\Core\core_riscv.h ****  */
+ 225:C:\Users\localhost\Documents\turbomoskal-repo\qqexpert\firmware\MasterController\Core\core_riscv.h **** __attribute__( ( always_inline ) ) RV_STATIC_INLINE void NVIC_SetPendingIRQ(IRQn_Type IRQn)
+ 226:C:\Users\localhost\Documents\turbomoskal-repo\qqexpert\firmware\MasterController\Core\core_riscv.h **** {
+ 227:C:\Users\localhost\Documents\turbomoskal-repo\qqexpert\firmware\MasterController\Core\core_riscv.h ****   NVIC->IPSR[((uint32_t)(IRQn) >> 5)] = (1 << ((uint32_t)(IRQn) & 0x1F));
+ 228:C:\Users\localhost\Documents\turbomoskal-repo\qqexpert\firmware\MasterController\Core\core_riscv.h **** }
+ 229:C:\Users\localhost\Documents\turbomoskal-repo\qqexpert\firmware\MasterController\Core\core_riscv.h **** 
+ 230:C:\Users\localhost\Documents\turbomoskal-repo\qqexpert\firmware\MasterController\Core\core_riscv.h **** /*********************************************************************
+ 231:C:\Users\localhost\Documents\turbomoskal-repo\qqexpert\firmware\MasterController\Core\core_riscv.h ****  * @fn      NVIC_ClearPendingIRQ
+ 232:C:\Users\localhost\Documents\turbomoskal-repo\qqexpert\firmware\MasterController\Core\core_riscv.h ****  *
+ 233:C:\Users\localhost\Documents\turbomoskal-repo\qqexpert\firmware\MasterController\Core\core_riscv.h ****  * @brief   Clear Interrupt Pending
+ 234:C:\Users\localhost\Documents\turbomoskal-repo\qqexpert\firmware\MasterController\Core\core_riscv.h ****  *
+ 235:C:\Users\localhost\Documents\turbomoskal-repo\qqexpert\firmware\MasterController\Core\core_riscv.h ****  * @param   IRQn - Interrupt Numbers
+ 236:C:\Users\localhost\Documents\turbomoskal-repo\qqexpert\firmware\MasterController\Core\core_riscv.h ****  *
+ 237:C:\Users\localhost\Documents\turbomoskal-repo\qqexpert\firmware\MasterController\Core\core_riscv.h ****  * @return  none
+ 238:C:\Users\localhost\Documents\turbomoskal-repo\qqexpert\firmware\MasterController\Core\core_riscv.h ****  */
+ 239:C:\Users\localhost\Documents\turbomoskal-repo\qqexpert\firmware\MasterController\Core\core_riscv.h **** __attribute__( ( always_inline ) ) RV_STATIC_INLINE void NVIC_ClearPendingIRQ(IRQn_Type IRQn)
+ 240:C:\Users\localhost\Documents\turbomoskal-repo\qqexpert\firmware\MasterController\Core\core_riscv.h **** {
+ 241:C:\Users\localhost\Documents\turbomoskal-repo\qqexpert\firmware\MasterController\Core\core_riscv.h ****   NVIC->IPRR[((uint32_t)(IRQn) >> 5)] = (1 << ((uint32_t)(IRQn) & 0x1F));
+ 242:C:\Users\localhost\Documents\turbomoskal-repo\qqexpert\firmware\MasterController\Core\core_riscv.h **** }
+ 243:C:\Users\localhost\Documents\turbomoskal-repo\qqexpert\firmware\MasterController\Core\core_riscv.h **** 
+ 244:C:\Users\localhost\Documents\turbomoskal-repo\qqexpert\firmware\MasterController\Core\core_riscv.h **** /*********************************************************************
+ 245:C:\Users\localhost\Documents\turbomoskal-repo\qqexpert\firmware\MasterController\Core\core_riscv.h ****  * @fn      NVIC_GetActive
+ 246:C:\Users\localhost\Documents\turbomoskal-repo\qqexpert\firmware\MasterController\Core\core_riscv.h ****  *
+ 247:C:\Users\localhost\Documents\turbomoskal-repo\qqexpert\firmware\MasterController\Core\core_riscv.h ****  * @brief   Get Interrupt Active State
+ 248:C:\Users\localhost\Documents\turbomoskal-repo\qqexpert\firmware\MasterController\Core\core_riscv.h ****  *
+ 249:C:\Users\localhost\Documents\turbomoskal-repo\qqexpert\firmware\MasterController\Core\core_riscv.h ****  * @param   IRQn - Interrupt Numbers
+ 250:C:\Users\localhost\Documents\turbomoskal-repo\qqexpert\firmware\MasterController\Core\core_riscv.h ****  *
+ 251:C:\Users\localhost\Documents\turbomoskal-repo\qqexpert\firmware\MasterController\Core\core_riscv.h ****  * @return  1 - Interrupt Active
+ 252:C:\Users\localhost\Documents\turbomoskal-repo\qqexpert\firmware\MasterController\Core\core_riscv.h ****  *          0 - Interrupt No Active
+ 253:C:\Users\localhost\Documents\turbomoskal-repo\qqexpert\firmware\MasterController\Core\core_riscv.h ****  */
+ 254:C:\Users\localhost\Documents\turbomoskal-repo\qqexpert\firmware\MasterController\Core\core_riscv.h **** __attribute__( ( always_inline ) ) RV_STATIC_INLINE uint32_t NVIC_GetActive(IRQn_Type IRQn)
+ 255:C:\Users\localhost\Documents\turbomoskal-repo\qqexpert\firmware\MasterController\Core\core_riscv.h **** {
+ 256:C:\Users\localhost\Documents\turbomoskal-repo\qqexpert\firmware\MasterController\Core\core_riscv.h ****   return((uint32_t)((NVIC->IACTR[(uint32_t)(IRQn) >> 5] & (1 << ((uint32_t)(IRQn) & 0x1F)))?1:0));
+ 257:C:\Users\localhost\Documents\turbomoskal-repo\qqexpert\firmware\MasterController\Core\core_riscv.h **** }
+ 258:C:\Users\localhost\Documents\turbomoskal-repo\qqexpert\firmware\MasterController\Core\core_riscv.h **** 
+ 259:C:\Users\localhost\Documents\turbomoskal-repo\qqexpert\firmware\MasterController\Core\core_riscv.h **** /*********************************************************************
+ 260:C:\Users\localhost\Documents\turbomoskal-repo\qqexpert\firmware\MasterController\Core\core_riscv.h ****  * @fn      NVIC_SetPriority
+ 261:C:\Users\localhost\Documents\turbomoskal-repo\qqexpert\firmware\MasterController\Core\core_riscv.h ****  *
+ 262:C:\Users\localhost\Documents\turbomoskal-repo\qqexpert\firmware\MasterController\Core\core_riscv.h ****  * @brief   Set Interrupt Priority
+ 263:C:\Users\localhost\Documents\turbomoskal-repo\qqexpert\firmware\MasterController\Core\core_riscv.h ****  *
+ 264:C:\Users\localhost\Documents\turbomoskal-repo\qqexpert\firmware\MasterController\Core\core_riscv.h ****  * @param   IRQn - Interrupt Numbers
+ 265:C:\Users\localhost\Documents\turbomoskal-repo\qqexpert\firmware\MasterController\Core\core_riscv.h ****  *          interrupt nesting enable-8 Level(CSR-0x804 bit1 = 1 bit[3:2] = 3)
+ 266:C:\Users\localhost\Documents\turbomoskal-repo\qqexpert\firmware\MasterController\Core\core_riscv.h ****  *            priority - bit[7:5] - Preemption Priority
+ 267:C:\Users\localhost\Documents\turbomoskal-repo\qqexpert\firmware\MasterController\Core\core_riscv.h ****  *                       bit[4:0] - Reserve
+ 268:C:\Users\localhost\Documents\turbomoskal-repo\qqexpert\firmware\MasterController\Core\core_riscv.h ****  *          interrupt nesting enable-4 Level(CSR-0x804 bit1 = 1 bit[3:2] = 2)
+ 269:C:\Users\localhost\Documents\turbomoskal-repo\qqexpert\firmware\MasterController\Core\core_riscv.h ****  *            priority - bit[7:6] - Preemption Priority
+ 270:C:\Users\localhost\Documents\turbomoskal-repo\qqexpert\firmware\MasterController\Core\core_riscv.h ****  *                       bit[5] - Sub priority
+ 271:C:\Users\localhost\Documents\turbomoskal-repo\qqexpert\firmware\MasterController\Core\core_riscv.h ****  *                       bit[4:0] - Reserve
+ 272:C:\Users\localhost\Documents\turbomoskal-repo\qqexpert\firmware\MasterController\Core\core_riscv.h ****  *          interrupt nesting enable-2 Level(CSR-0x804 bit1 = 1 bit[3:2] = 1)
+ 273:C:\Users\localhost\Documents\turbomoskal-repo\qqexpert\firmware\MasterController\Core\core_riscv.h ****  *            priority - bit[7] - Preemption Priority
+ 274:C:\Users\localhost\Documents\turbomoskal-repo\qqexpert\firmware\MasterController\Core\core_riscv.h ****  *                       bit[6:5] - Sub priority
+ 275:C:\Users\localhost\Documents\turbomoskal-repo\qqexpert\firmware\MasterController\Core\core_riscv.h ****  *                       bit[4:0] - Reserve
+ 276:C:\Users\localhost\Documents\turbomoskal-repo\qqexpert\firmware\MasterController\Core\core_riscv.h ****  *          interrupt nesting disable(CSR-0x804 bit1 = 0)
+ 277:C:\Users\localhost\Documents\turbomoskal-repo\qqexpert\firmware\MasterController\Core\core_riscv.h ****  *            priority - bit[7:5] - Sub priority
+ 278:C:\Users\localhost\Documents\turbomoskal-repo\qqexpert\firmware\MasterController\Core\core_riscv.h ****  *                       bit[4:0] - Reserve
+ 279:C:\Users\localhost\Documents\turbomoskal-repo\qqexpert\firmware\MasterController\Core\core_riscv.h ****  *
+ 280:C:\Users\localhost\Documents\turbomoskal-repo\qqexpert\firmware\MasterController\Core\core_riscv.h ****  * @return  none
+ 281:C:\Users\localhost\Documents\turbomoskal-repo\qqexpert\firmware\MasterController\Core\core_riscv.h ****  */
+ 282:C:\Users\localhost\Documents\turbomoskal-repo\qqexpert\firmware\MasterController\Core\core_riscv.h **** __attribute__( ( always_inline ) ) RV_STATIC_INLINE void NVIC_SetPriority(IRQn_Type IRQn, uint8_t p
+ 283:C:\Users\localhost\Documents\turbomoskal-repo\qqexpert\firmware\MasterController\Core\core_riscv.h **** {
+ 284:C:\Users\localhost\Documents\turbomoskal-repo\qqexpert\firmware\MasterController\Core\core_riscv.h ****   NVIC->IPRIOR[(uint32_t)(IRQn)] = priority;
+ 285:C:\Users\localhost\Documents\turbomoskal-repo\qqexpert\firmware\MasterController\Core\core_riscv.h **** }
+ 286:C:\Users\localhost\Documents\turbomoskal-repo\qqexpert\firmware\MasterController\Core\core_riscv.h **** 
+ 287:C:\Users\localhost\Documents\turbomoskal-repo\qqexpert\firmware\MasterController\Core\core_riscv.h **** /*********************************************************************
+ 288:C:\Users\localhost\Documents\turbomoskal-repo\qqexpert\firmware\MasterController\Core\core_riscv.h ****  * @fn      __WFI
+ 289:C:\Users\localhost\Documents\turbomoskal-repo\qqexpert\firmware\MasterController\Core\core_riscv.h ****  *
+ 290:C:\Users\localhost\Documents\turbomoskal-repo\qqexpert\firmware\MasterController\Core\core_riscv.h ****  * @brief   Wait for Interrupt
+ 291:C:\Users\localhost\Documents\turbomoskal-repo\qqexpert\firmware\MasterController\Core\core_riscv.h ****  *
+ 292:C:\Users\localhost\Documents\turbomoskal-repo\qqexpert\firmware\MasterController\Core\core_riscv.h ****  * @return  none
+ 293:C:\Users\localhost\Documents\turbomoskal-repo\qqexpert\firmware\MasterController\Core\core_riscv.h ****  */
+ 294:C:\Users\localhost\Documents\turbomoskal-repo\qqexpert\firmware\MasterController\Core\core_riscv.h **** __attribute__( ( always_inline ) ) RV_STATIC_INLINE void __WFI(void)
+ 295:C:\Users\localhost\Documents\turbomoskal-repo\qqexpert\firmware\MasterController\Core\core_riscv.h **** {
+ 296:C:\Users\localhost\Documents\turbomoskal-repo\qqexpert\firmware\MasterController\Core\core_riscv.h ****   NVIC->SCTLR &= ~(1<<3);	// wfi
+ 207              		.loc 2 296 3
+ 208              		.loc 2 296 7 is_stmt 0
+ 209 0022 03A707D1 		lw	a4,-752(a5)
+ 210              		.loc 2 296 15
+ 211 0026 5D9B     		andi	a4,a4,-9
+ 212 0028 23A8E7D0 		sw	a4,-752(a5)
+ 297:C:\Users\localhost\Documents\turbomoskal-repo\qqexpert\firmware\MasterController\Core\core_riscv.h ****   asm volatile ("wfi");
+ 213              		.loc 2 297 3 is_stmt 1
+ 214              	.L19:
+ 215              	.LBE39:
+ 216              	.LBE38:
+ 217              	.LBB40:
+ 218              	.LBB41:
+ 219              	.LBB42:
+ 220              	.LBB43:
+ 298:C:\Users\localhost\Documents\turbomoskal-repo\qqexpert\firmware\MasterController\Core\core_riscv.h **** }
+ 299:C:\Users\localhost\Documents\turbomoskal-repo\qqexpert\firmware\MasterController\Core\core_riscv.h **** 
+ 300:C:\Users\localhost\Documents\turbomoskal-repo\qqexpert\firmware\MasterController\Core\core_riscv.h **** /*********************************************************************
+ 301:C:\Users\localhost\Documents\turbomoskal-repo\qqexpert\firmware\MasterController\Core\core_riscv.h ****  * @fn      _SEV
+ 302:C:\Users\localhost\Documents\turbomoskal-repo\qqexpert\firmware\MasterController\Core\core_riscv.h ****  *
+ 303:C:\Users\localhost\Documents\turbomoskal-repo\qqexpert\firmware\MasterController\Core\core_riscv.h ****  * @brief   Set Event
+ 304:C:\Users\localhost\Documents\turbomoskal-repo\qqexpert\firmware\MasterController\Core\core_riscv.h ****  *
+ 305:C:\Users\localhost\Documents\turbomoskal-repo\qqexpert\firmware\MasterController\Core\core_riscv.h ****  * @return  none
+ 306:C:\Users\localhost\Documents\turbomoskal-repo\qqexpert\firmware\MasterController\Core\core_riscv.h ****  */
+ 307:C:\Users\localhost\Documents\turbomoskal-repo\qqexpert\firmware\MasterController\Core\core_riscv.h **** __attribute__( ( always_inline ) ) RV_STATIC_INLINE void _SEV(void)
+ 308:C:\Users\localhost\Documents\turbomoskal-repo\qqexpert\firmware\MasterController\Core\core_riscv.h **** {
+ 309:C:\Users\localhost\Documents\turbomoskal-repo\qqexpert\firmware\MasterController\Core\core_riscv.h ****   uint32_t t;
+ 310:C:\Users\localhost\Documents\turbomoskal-repo\qqexpert\firmware\MasterController\Core\core_riscv.h **** 
+ 311:C:\Users\localhost\Documents\turbomoskal-repo\qqexpert\firmware\MasterController\Core\core_riscv.h ****   t = NVIC->SCTLR;
+ 312:C:\Users\localhost\Documents\turbomoskal-repo\qqexpert\firmware\MasterController\Core\core_riscv.h ****   NVIC->SCTLR |= (1<<3)|(1<<5);
+ 313:C:\Users\localhost\Documents\turbomoskal-repo\qqexpert\firmware\MasterController\Core\core_riscv.h ****   NVIC->SCTLR = (NVIC->SCTLR & ~(1<<5)) | ( t & (1<<5));
+ 314:C:\Users\localhost\Documents\turbomoskal-repo\qqexpert\firmware\MasterController\Core\core_riscv.h **** }
+ 315:C:\Users\localhost\Documents\turbomoskal-repo\qqexpert\firmware\MasterController\Core\core_riscv.h **** 
+ 316:C:\Users\localhost\Documents\turbomoskal-repo\qqexpert\firmware\MasterController\Core\core_riscv.h **** /*********************************************************************
+ 317:C:\Users\localhost\Documents\turbomoskal-repo\qqexpert\firmware\MasterController\Core\core_riscv.h ****  * @fn      _WFE
+ 318:C:\Users\localhost\Documents\turbomoskal-repo\qqexpert\firmware\MasterController\Core\core_riscv.h ****  *
+ 319:C:\Users\localhost\Documents\turbomoskal-repo\qqexpert\firmware\MasterController\Core\core_riscv.h ****  * @brief   Wait for Events
+ 320:C:\Users\localhost\Documents\turbomoskal-repo\qqexpert\firmware\MasterController\Core\core_riscv.h ****  *
+ 321:C:\Users\localhost\Documents\turbomoskal-repo\qqexpert\firmware\MasterController\Core\core_riscv.h ****  * @return  none
+ 322:C:\Users\localhost\Documents\turbomoskal-repo\qqexpert\firmware\MasterController\Core\core_riscv.h ****  */
+ 323:C:\Users\localhost\Documents\turbomoskal-repo\qqexpert\firmware\MasterController\Core\core_riscv.h **** __attribute__( ( always_inline ) ) RV_STATIC_INLINE void _WFE(void)
+ 324:C:\Users\localhost\Documents\turbomoskal-repo\qqexpert\firmware\MasterController\Core\core_riscv.h **** {
+ 325:C:\Users\localhost\Documents\turbomoskal-repo\qqexpert\firmware\MasterController\Core\core_riscv.h ****   NVIC->SCTLR |= (1<<3);
+ 326:C:\Users\localhost\Documents\turbomoskal-repo\qqexpert\firmware\MasterController\Core\core_riscv.h ****   asm volatile ("wfi");
+ 221              		.loc 2 326 3
+ 222              	 #APP
+ 223              	# 326 "C:\Users\localhost\Documents\turbomoskal-repo\qqexpert\firmware\MasterController\Core/core_r
+   0              	
+ 224              		wfi
+ 225              	# 0 "" 2
+ 226              	 #NO_APP
+ 227              	.LBE43:
+ 228              	.LBE42:
+ 229              	.LBE41:
+ 230              	.LBE40:
+ 153:../Peripheral/src/ch32v30x_pwr.c ****     }
+ 154:../Peripheral/src/ch32v30x_pwr.c ****     else
+ 155:../Peripheral/src/ch32v30x_pwr.c ****     {
+ 156:../Peripheral/src/ch32v30x_pwr.c ****         __WFE();
+ 157:../Peripheral/src/ch32v30x_pwr.c ****     }
+ 158:../Peripheral/src/ch32v30x_pwr.c **** 
+ 159:../Peripheral/src/ch32v30x_pwr.c ****     NVIC->SCTLR &= ~(1 << 2);
+ 231              		.loc 1 159 5
+ 232              		.loc 1 159 9 is_stmt 0
+ 233 0030 37F700E0 		li	a4,-536809472
+ 234 0034 832707D1 		lw	a5,-752(a4)
+ 235              		.loc 1 159 17
+ 236 0038 ED9B     		andi	a5,a5,-5
+ 237 003a 2328F7D0 		sw	a5,-752(a4)
+ 160:../Peripheral/src/ch32v30x_pwr.c **** }
+ 238              		.loc 1 160 1
+ 239 003e 8280     		ret
+ 240              	.L17:
+ 156:../Peripheral/src/ch32v30x_pwr.c ****     }
+ 241              		.loc 1 156 9 is_stmt 1
+ 242              	.LBB51:
+ 243              	.LBB50:
+ 327:C:\Users\localhost\Documents\turbomoskal-repo\qqexpert\firmware\MasterController\Core\core_riscv.h **** }
+ 328:C:\Users\localhost\Documents\turbomoskal-repo\qqexpert\firmware\MasterController\Core\core_riscv.h **** 
+ 329:C:\Users\localhost\Documents\turbomoskal-repo\qqexpert\firmware\MasterController\Core\core_riscv.h **** /*********************************************************************
+ 330:C:\Users\localhost\Documents\turbomoskal-repo\qqexpert\firmware\MasterController\Core\core_riscv.h ****  * @fn      __WFE
+ 331:C:\Users\localhost\Documents\turbomoskal-repo\qqexpert\firmware\MasterController\Core\core_riscv.h ****  *
+ 332:C:\Users\localhost\Documents\turbomoskal-repo\qqexpert\firmware\MasterController\Core\core_riscv.h ****  * @brief   Wait for Events
+ 333:C:\Users\localhost\Documents\turbomoskal-repo\qqexpert\firmware\MasterController\Core\core_riscv.h ****  *
+ 334:C:\Users\localhost\Documents\turbomoskal-repo\qqexpert\firmware\MasterController\Core\core_riscv.h ****  * @return  none
+ 335:C:\Users\localhost\Documents\turbomoskal-repo\qqexpert\firmware\MasterController\Core\core_riscv.h ****  */
+ 336:C:\Users\localhost\Documents\turbomoskal-repo\qqexpert\firmware\MasterController\Core\core_riscv.h **** __attribute__( ( always_inline ) ) RV_STATIC_INLINE void __WFE(void)
+ 337:C:\Users\localhost\Documents\turbomoskal-repo\qqexpert\firmware\MasterController\Core\core_riscv.h **** {
+ 338:C:\Users\localhost\Documents\turbomoskal-repo\qqexpert\firmware\MasterController\Core\core_riscv.h ****   _SEV();
+ 244              		.loc 2 338 3
+ 245              	.LBB45:
+ 246              	.LBB46:
+ 309:C:\Users\localhost\Documents\turbomoskal-repo\qqexpert\firmware\MasterController\Core\core_riscv.h **** 
+ 247              		.loc 2 309 3
+ 311:C:\Users\localhost\Documents\turbomoskal-repo\qqexpert\firmware\MasterController\Core\core_riscv.h ****   NVIC->SCTLR |= (1<<3)|(1<<5);
+ 248              		.loc 2 311 3
+ 311:C:\Users\localhost\Documents\turbomoskal-repo\qqexpert\firmware\MasterController\Core\core_riscv.h ****   NVIC->SCTLR |= (1<<3)|(1<<5);
+ 249              		.loc 2 311 5 is_stmt 0
+ 250 0040 938707D0 		addi	a5,a5,-768
+ 251 0044 944B     		lw	a3,16(a5)
+ 252              	.LVL16:
+ 312:C:\Users\localhost\Documents\turbomoskal-repo\qqexpert\firmware\MasterController\Core\core_riscv.h ****   NVIC->SCTLR = (NVIC->SCTLR & ~(1<<5)) | ( t & (1<<5));
+ 253              		.loc 2 312 3 is_stmt 1
+ 312:C:\Users\localhost\Documents\turbomoskal-repo\qqexpert\firmware\MasterController\Core\core_riscv.h ****   NVIC->SCTLR = (NVIC->SCTLR & ~(1<<5)) | ( t & (1<<5));
+ 254              		.loc 2 312 7 is_stmt 0
+ 255 0046 984B     		lw	a4,16(a5)
+ 313:C:\Users\localhost\Documents\turbomoskal-repo\qqexpert\firmware\MasterController\Core\core_riscv.h **** }
+ 256              		.loc 2 313 47
+ 257 0048 93F60602 		andi	a3,a3,32
+ 258              	.LVL17:
+ 312:C:\Users\localhost\Documents\turbomoskal-repo\qqexpert\firmware\MasterController\Core\core_riscv.h ****   NVIC->SCTLR = (NVIC->SCTLR & ~(1<<5)) | ( t & (1<<5));
+ 259              		.loc 2 312 15
+ 260 004c 13678702 		ori	a4,a4,40
+ 261 0050 98CB     		sw	a4,16(a5)
+ 313:C:\Users\localhost\Documents\turbomoskal-repo\qqexpert\firmware\MasterController\Core\core_riscv.h **** }
+ 262              		.loc 2 313 3 is_stmt 1
+ 313:C:\Users\localhost\Documents\turbomoskal-repo\qqexpert\firmware\MasterController\Core\core_riscv.h **** }
+ 263              		.loc 2 313 22 is_stmt 0
+ 264 0052 984B     		lw	a4,16(a5)
+ 313:C:\Users\localhost\Documents\turbomoskal-repo\qqexpert\firmware\MasterController\Core\core_riscv.h **** }
+ 265              		.loc 2 313 30
+ 266 0054 1377F7FD 		andi	a4,a4,-33
+ 313:C:\Users\localhost\Documents\turbomoskal-repo\qqexpert\firmware\MasterController\Core\core_riscv.h **** }
+ 267              		.loc 2 313 41
+ 268 0058 558F     		or	a4,a4,a3
+ 313:C:\Users\localhost\Documents\turbomoskal-repo\qqexpert\firmware\MasterController\Core\core_riscv.h **** }
+ 269              		.loc 2 313 15
+ 270 005a 98CB     		sw	a4,16(a5)
+ 271              	.LVL18:
+ 272              	.LBE46:
+ 273              	.LBE45:
+ 339:C:\Users\localhost\Documents\turbomoskal-repo\qqexpert\firmware\MasterController\Core\core_riscv.h ****   _WFE();
+ 274              		.loc 2 339 3 is_stmt 1
+ 275              	.LBB47:
+ 276              	.LBB48:
+ 325:C:\Users\localhost\Documents\turbomoskal-repo\qqexpert\firmware\MasterController\Core\core_riscv.h ****   asm volatile ("wfi");
+ 277              		.loc 2 325 3
+ 325:C:\Users\localhost\Documents\turbomoskal-repo\qqexpert\firmware\MasterController\Core\core_riscv.h ****   asm volatile ("wfi");
+ 278              		.loc 2 325 7 is_stmt 0
+ 279 005c 984B     		lw	a4,16(a5)
+ 325:C:\Users\localhost\Documents\turbomoskal-repo\qqexpert\firmware\MasterController\Core\core_riscv.h ****   asm volatile ("wfi");
+ 280              		.loc 2 325 15
+ 281 005e 13678700 		ori	a4,a4,8
+ 282 0062 98CB     		sw	a4,16(a5)
+ 326:C:\Users\localhost\Documents\turbomoskal-repo\qqexpert\firmware\MasterController\Core\core_riscv.h **** }
+ 283              		.loc 2 326 3 is_stmt 1
+ 284              	 #APP
+ 285              	# 326 "C:\Users\localhost\Documents\turbomoskal-repo\qqexpert\firmware\MasterController\Core/core_r
+ 286              		wfi
+ 287              	# 0 "" 2
+ 288              	 #NO_APP
+ 289              	.LBE48:
+ 290              	.LBE47:
+ 340:C:\Users\localhost\Documents\turbomoskal-repo\qqexpert\firmware\MasterController\Core\core_riscv.h ****   _WFE();
+ 291              		.loc 2 340 3
+ 292              	.LBB49:
+ 293              	.LBB44:
+ 325:C:\Users\localhost\Documents\turbomoskal-repo\qqexpert\firmware\MasterController\Core\core_riscv.h ****   asm volatile ("wfi");
+ 294              		.loc 2 325 3
+ 325:C:\Users\localhost\Documents\turbomoskal-repo\qqexpert\firmware\MasterController\Core\core_riscv.h ****   asm volatile ("wfi");
+ 295              		.loc 2 325 7 is_stmt 0
+ 296 0068 984B     		lw	a4,16(a5)
+ 325:C:\Users\localhost\Documents\turbomoskal-repo\qqexpert\firmware\MasterController\Core\core_riscv.h ****   asm volatile ("wfi");
+ 297              		.loc 2 325 15
+ 298 006a 13678700 		ori	a4,a4,8
+ 299 006e 98CB     		sw	a4,16(a5)
+ 300 0070 75BF     		j	.L19
+ 301              	.LBE44:
+ 302              	.LBE49:
+ 303              	.LBE50:
+ 304              	.LBE51:
+ 305              		.cfi_endproc
+ 306              	.LFE34:
+ 308              		.section	.text.PWR_EnterSTANDBYMode,"ax",@progbits
+ 309              		.align	1
+ 310              		.globl	PWR_EnterSTANDBYMode
+ 312              	PWR_EnterSTANDBYMode:
+ 313              	.LFB35:
+ 161:../Peripheral/src/ch32v30x_pwr.c **** 
+ 162:../Peripheral/src/ch32v30x_pwr.c **** /*********************************************************************
+ 163:../Peripheral/src/ch32v30x_pwr.c ****  * @fn      PWR_EnterSTANDBYMode
+ 164:../Peripheral/src/ch32v30x_pwr.c ****  *
+ 165:../Peripheral/src/ch32v30x_pwr.c ****  * @brief   Enters STANDBY mode.
+ 166:../Peripheral/src/ch32v30x_pwr.c ****  *
+ 167:../Peripheral/src/ch32v30x_pwr.c ****  * @return  none
+ 168:../Peripheral/src/ch32v30x_pwr.c ****  */
+ 169:../Peripheral/src/ch32v30x_pwr.c **** void PWR_EnterSTANDBYMode(void)
+ 170:../Peripheral/src/ch32v30x_pwr.c **** {
+ 314              		.loc 1 170 1 is_stmt 1
+ 315              		.cfi_startproc
+ 171:../Peripheral/src/ch32v30x_pwr.c ****     PWR->CTLR |= PWR_CTLR_CWUF;
+ 316              		.loc 1 171 5
+ 317              		.loc 1 171 8 is_stmt 0
+ 318 0000 B7770040 		li	a5,1073770496
+ 319 0004 9843     		lw	a4,0(a5)
+ 320              		.loc 1 171 15
+ 321 0006 13674700 		ori	a4,a4,4
+ 322 000a 98C3     		sw	a4,0(a5)
+ 172:../Peripheral/src/ch32v30x_pwr.c ****     PWR->CTLR |= PWR_CTLR_PDDS;
+ 323              		.loc 1 172 5 is_stmt 1
+ 324              		.loc 1 172 8 is_stmt 0
+ 325 000c 9843     		lw	a4,0(a5)
+ 326              		.loc 1 172 15
+ 327 000e 13672700 		ori	a4,a4,2
+ 328 0012 98C3     		sw	a4,0(a5)
+ 173:../Peripheral/src/ch32v30x_pwr.c ****     NVIC->SCTLR |= (1 << 2);
+ 329              		.loc 1 173 5 is_stmt 1
+ 330              		.loc 1 173 9 is_stmt 0
+ 331 0014 B7F700E0 		li	a5,-536809472
+ 332 0018 938707D0 		addi	a5,a5,-768
+ 333 001c 984B     		lw	a4,16(a5)
+ 334              		.loc 1 173 17
+ 335 001e 13674700 		ori	a4,a4,4
+ 336 0022 98CB     		sw	a4,16(a5)
+ 174:../Peripheral/src/ch32v30x_pwr.c **** 
+ 175:../Peripheral/src/ch32v30x_pwr.c ****     __WFI();
+ 337              		.loc 1 175 5 is_stmt 1
+ 338              	.LBB52:
+ 339              	.LBB53:
+ 296:C:\Users\localhost\Documents\turbomoskal-repo\qqexpert\firmware\MasterController\Core\core_riscv.h ****   asm volatile ("wfi");
+ 340              		.loc 2 296 3
+ 296:C:\Users\localhost\Documents\turbomoskal-repo\qqexpert\firmware\MasterController\Core\core_riscv.h ****   asm volatile ("wfi");
+ 341              		.loc 2 296 7 is_stmt 0
+ 342 0024 984B     		lw	a4,16(a5)
+ 296:C:\Users\localhost\Documents\turbomoskal-repo\qqexpert\firmware\MasterController\Core\core_riscv.h ****   asm volatile ("wfi");
+ 343              		.loc 2 296 15
+ 344 0026 5D9B     		andi	a4,a4,-9
+ 345 0028 98CB     		sw	a4,16(a5)
+ 297:C:\Users\localhost\Documents\turbomoskal-repo\qqexpert\firmware\MasterController\Core\core_riscv.h **** }
+ 346              		.loc 2 297 3 is_stmt 1
+ 347              	 #APP
+ 348              	# 297 "C:\Users\localhost\Documents\turbomoskal-repo\qqexpert\firmware\MasterController\Core/core_r
+ 349              		wfi
+ 350              	# 0 "" 2
+ 351              	 #NO_APP
+ 352              	.LBE53:
+ 353              	.LBE52:
+ 176:../Peripheral/src/ch32v30x_pwr.c **** }
+ 354              		.loc 1 176 1 is_stmt 0
+ 355 002e 8280     		ret
+ 356              		.cfi_endproc
+ 357              	.LFE35:
+ 359              		.section	.text.PWR_GetFlagStatus,"ax",@progbits
+ 360              		.align	1
+ 361              		.globl	PWR_GetFlagStatus
+ 363              	PWR_GetFlagStatus:
+ 364              	.LFB36:
+ 177:../Peripheral/src/ch32v30x_pwr.c **** 
+ 178:../Peripheral/src/ch32v30x_pwr.c **** /*********************************************************************
+ 179:../Peripheral/src/ch32v30x_pwr.c ****  * @fn      PWR_GetFlagStatus
+ 180:../Peripheral/src/ch32v30x_pwr.c ****  *
+ 181:../Peripheral/src/ch32v30x_pwr.c ****  * @brief   Checks whether the specified PWR flag is set or not.
+ 182:../Peripheral/src/ch32v30x_pwr.c ****  *
+ 183:../Peripheral/src/ch32v30x_pwr.c ****  * @param   PWR_FLAG - specifies the flag to check.
+ 184:../Peripheral/src/ch32v30x_pwr.c ****  *            PWR_FLAG_WU - Wake Up flag
+ 185:../Peripheral/src/ch32v30x_pwr.c ****  *            PWR_FLAG_SB - StandBy flag
+ 186:../Peripheral/src/ch32v30x_pwr.c ****  *            PWR_FLAG_PVDO - PVD Output
+ 187:../Peripheral/src/ch32v30x_pwr.c ****  *
+ 188:../Peripheral/src/ch32v30x_pwr.c ****  * @return  The new state of PWR_FLAG (SET or RESET).
+ 189:../Peripheral/src/ch32v30x_pwr.c ****  */
+ 190:../Peripheral/src/ch32v30x_pwr.c **** FlagStatus PWR_GetFlagStatus(uint32_t PWR_FLAG)
+ 191:../Peripheral/src/ch32v30x_pwr.c **** {
+ 365              		.loc 1 191 1 is_stmt 1
+ 366              		.cfi_startproc
+ 367              	.LVL19:
+ 192:../Peripheral/src/ch32v30x_pwr.c ****     FlagStatus bitstatus = RESET;
+ 368              		.loc 1 192 5
+ 193:../Peripheral/src/ch32v30x_pwr.c **** 
+ 194:../Peripheral/src/ch32v30x_pwr.c ****     if((PWR->CSR & PWR_FLAG) != (uint32_t)RESET)
+ 369              		.loc 1 194 5
+ 370              		.loc 1 194 12 is_stmt 0
+ 371 0000 B7770040 		li	a5,1073770496
+ 372 0004 DC43     		lw	a5,4(a5)
+ 373              	.LVL20:
+ 195:../Peripheral/src/ch32v30x_pwr.c ****     {
+ 196:../Peripheral/src/ch32v30x_pwr.c ****         bitstatus = SET;
+ 197:../Peripheral/src/ch32v30x_pwr.c ****     }
+ 198:../Peripheral/src/ch32v30x_pwr.c ****     else
+ 199:../Peripheral/src/ch32v30x_pwr.c ****     {
+ 200:../Peripheral/src/ch32v30x_pwr.c ****         bitstatus = RESET;
+ 201:../Peripheral/src/ch32v30x_pwr.c ****     }
+ 202:../Peripheral/src/ch32v30x_pwr.c ****     return bitstatus;
+ 374              		.loc 1 202 5 is_stmt 1
+ 194:../Peripheral/src/ch32v30x_pwr.c ****     {
+ 375              		.loc 1 194 18 is_stmt 0
+ 376 0006 7D8D     		and	a0,a5,a0
+ 377              	.LVL21:
+ 203:../Peripheral/src/ch32v30x_pwr.c **** }
+ 378              		.loc 1 203 1
+ 379 0008 3335A000 		snez	a0,a0
+ 380 000c 8280     		ret
+ 381              		.cfi_endproc
+ 382              	.LFE36:
+ 384              		.section	.text.PWR_ClearFlag,"ax",@progbits
+ 385              		.align	1
+ 386              		.globl	PWR_ClearFlag
+ 388              	PWR_ClearFlag:
+ 389              	.LFB37:
+ 204:../Peripheral/src/ch32v30x_pwr.c **** 
+ 205:../Peripheral/src/ch32v30x_pwr.c **** /*********************************************************************
+ 206:../Peripheral/src/ch32v30x_pwr.c ****  * @fn      PWR_ClearFlag
+ 207:../Peripheral/src/ch32v30x_pwr.c ****  *
+ 208:../Peripheral/src/ch32v30x_pwr.c ****  * @brief   Clears the PWR's pending flags.
+ 209:../Peripheral/src/ch32v30x_pwr.c ****  *
+ 210:../Peripheral/src/ch32v30x_pwr.c ****  * @param   PWR_FLAG - specifies the flag to clear.
+ 211:../Peripheral/src/ch32v30x_pwr.c ****  *            PWR_FLAG_WU - Wake Up flag
+ 212:../Peripheral/src/ch32v30x_pwr.c ****  *            PWR_FLAG_SB - StandBy flag
+ 213:../Peripheral/src/ch32v30x_pwr.c ****  *
+ 214:../Peripheral/src/ch32v30x_pwr.c ****  * @return  none
+ 215:../Peripheral/src/ch32v30x_pwr.c ****  */
+ 216:../Peripheral/src/ch32v30x_pwr.c **** void PWR_ClearFlag(uint32_t PWR_FLAG)
+ 217:../Peripheral/src/ch32v30x_pwr.c **** {
+ 390              		.loc 1 217 1 is_stmt 1
+ 391              		.cfi_startproc
+ 392              	.LVL22:
+ 218:../Peripheral/src/ch32v30x_pwr.c ****     PWR->CTLR |= PWR_FLAG << 2;
+ 393              		.loc 1 218 5
+ 394              		.loc 1 218 8 is_stmt 0
+ 395 0000 B7770040 		li	a5,1073770496
+ 396 0004 9843     		lw	a4,0(a5)
+ 397              		.loc 1 218 27
+ 398 0006 0A05     		slli	a0,a0,2
+ 399              	.LVL23:
+ 400              		.loc 1 218 15
+ 401 0008 598D     		or	a0,a0,a4
+ 402 000a 88C3     		sw	a0,0(a5)
+ 219:../Peripheral/src/ch32v30x_pwr.c **** }
+ 403              		.loc 1 219 1
+ 404 000c 8280     		ret
+ 405              		.cfi_endproc
+ 406              	.LFE37:
+ 408              		.section	.text.PWR_EnterSTANDBYMode_RAM,"ax",@progbits
+ 409              		.align	1
+ 410              		.globl	PWR_EnterSTANDBYMode_RAM
+ 412              	PWR_EnterSTANDBYMode_RAM:
+ 413              	.LFB38:
+ 220:../Peripheral/src/ch32v30x_pwr.c **** 
+ 221:../Peripheral/src/ch32v30x_pwr.c **** /*********************************************************************
+ 222:../Peripheral/src/ch32v30x_pwr.c ****  * @fn      PWR_EnterSTANDBYMode_RAM
+ 223:../Peripheral/src/ch32v30x_pwr.c ****  *
+ 224:../Peripheral/src/ch32v30x_pwr.c ****  * @brief   Enters STANDBY mode with RAM data retention function on.
+ 225:../Peripheral/src/ch32v30x_pwr.c ****  *
+ 226:../Peripheral/src/ch32v30x_pwr.c ****  * @return  none
+ 227:../Peripheral/src/ch32v30x_pwr.c ****  */
+ 228:../Peripheral/src/ch32v30x_pwr.c **** void PWR_EnterSTANDBYMode_RAM(void)
+ 229:../Peripheral/src/ch32v30x_pwr.c **** {
+ 414              		.loc 1 229 1 is_stmt 1
+ 415              		.cfi_startproc
+ 230:../Peripheral/src/ch32v30x_pwr.c ****     uint32_t tmpreg = 0;
+ 416              		.loc 1 230 5
+ 417              	.LVL24:
+ 231:../Peripheral/src/ch32v30x_pwr.c ****     tmpreg = PWR->CTLR;
+ 418              		.loc 1 231 5
+ 419              		.loc 1 231 12 is_stmt 0
+ 420 0000 B7760040 		li	a3,1073770496
+ 421 0004 9C42     		lw	a5,0(a3)
+ 422              	.LVL25:
+ 232:../Peripheral/src/ch32v30x_pwr.c **** 
+ 233:../Peripheral/src/ch32v30x_pwr.c ****     tmpreg |= PWR_CTLR_CWUF;
+ 423              		.loc 1 233 5 is_stmt 1
+ 234:../Peripheral/src/ch32v30x_pwr.c ****     tmpreg |= PWR_CTLR_PDDS;
+ 424              		.loc 1 234 5
+ 235:../Peripheral/src/ch32v30x_pwr.c **** 
+ 236:../Peripheral/src/ch32v30x_pwr.c ****     //2K+30K in standby w power.
+ 237:../Peripheral/src/ch32v30x_pwr.c ****     tmpreg |= (0x1 << 16) | (0x1 << 17);
+ 425              		.loc 1 237 5
+ 426              		.loc 1 237 12 is_stmt 0
+ 427 0006 37070300 		li	a4,196608
+ 428 000a 1907     		addi	a4,a4,6
+ 429 000c D98F     		or	a5,a5,a4
+ 430              	.LVL26:
+ 238:../Peripheral/src/ch32v30x_pwr.c **** 
+ 239:../Peripheral/src/ch32v30x_pwr.c ****     PWR->CTLR = tmpreg;
+ 431              		.loc 1 239 5 is_stmt 1
+ 432              		.loc 1 239 15 is_stmt 0
+ 433 000e 9CC2     		sw	a5,0(a3)
+ 240:../Peripheral/src/ch32v30x_pwr.c **** 
+ 241:../Peripheral/src/ch32v30x_pwr.c ****     NVIC->SCTLR |= (1 << 2);
+ 434              		.loc 1 241 5 is_stmt 1
+ 435              		.loc 1 241 9 is_stmt 0
+ 436 0010 B7F700E0 		li	a5,-536809472
+ 437              	.LVL27:
+ 438 0014 938707D0 		addi	a5,a5,-768
+ 439 0018 984B     		lw	a4,16(a5)
+ 440              		.loc 1 241 17
+ 441 001a 13674700 		ori	a4,a4,4
+ 442 001e 98CB     		sw	a4,16(a5)
+ 443              	.LVL28:
+ 242:../Peripheral/src/ch32v30x_pwr.c **** 
+ 243:../Peripheral/src/ch32v30x_pwr.c ****     __WFI();
+ 444              		.loc 1 243 5 is_stmt 1
+ 445              	.LBB54:
+ 446              	.LBB55:
+ 296:C:\Users\localhost\Documents\turbomoskal-repo\qqexpert\firmware\MasterController\Core\core_riscv.h ****   asm volatile ("wfi");
+ 447              		.loc 2 296 3
+ 296:C:\Users\localhost\Documents\turbomoskal-repo\qqexpert\firmware\MasterController\Core\core_riscv.h ****   asm volatile ("wfi");
+ 448              		.loc 2 296 7 is_stmt 0
+ 449 0020 984B     		lw	a4,16(a5)
+ 296:C:\Users\localhost\Documents\turbomoskal-repo\qqexpert\firmware\MasterController\Core\core_riscv.h ****   asm volatile ("wfi");
+ 450              		.loc 2 296 15
+ 451 0022 5D9B     		andi	a4,a4,-9
+ 452 0024 98CB     		sw	a4,16(a5)
+ 297:C:\Users\localhost\Documents\turbomoskal-repo\qqexpert\firmware\MasterController\Core\core_riscv.h **** }
+ 453              		.loc 2 297 3 is_stmt 1
+ 454              	 #APP
+ 455              	# 297 "C:\Users\localhost\Documents\turbomoskal-repo\qqexpert\firmware\MasterController\Core/core_r
+ 456              		wfi
+ 457              	# 0 "" 2
+ 458              	 #NO_APP
+ 459              	.LBE55:
+ 460              	.LBE54:
+ 244:../Peripheral/src/ch32v30x_pwr.c **** }
+ 461              		.loc 1 244 1 is_stmt 0
+ 462 002a 8280     		ret
+ 463              		.cfi_endproc
+ 464              	.LFE38:
+ 466              		.section	.text.PWR_EnterSTANDBYMode_RAM_LV,"ax",@progbits
+ 467              		.align	1
+ 468              		.globl	PWR_EnterSTANDBYMode_RAM_LV
+ 470              	PWR_EnterSTANDBYMode_RAM_LV:
+ 471              	.LFB39:
+ 245:../Peripheral/src/ch32v30x_pwr.c **** 
+ 246:../Peripheral/src/ch32v30x_pwr.c **** /*********************************************************************
+ 247:../Peripheral/src/ch32v30x_pwr.c ****  * @fn      PWR_EnterSTANDBYMode_RAM_LV
+ 248:../Peripheral/src/ch32v30x_pwr.c ****  *
+ 249:../Peripheral/src/ch32v30x_pwr.c ****  * @brief   Enters STANDBY mode with RAM data retention function and LV mode on.
+ 250:../Peripheral/src/ch32v30x_pwr.c ****  *
+ 251:../Peripheral/src/ch32v30x_pwr.c ****  * @return  none
+ 252:../Peripheral/src/ch32v30x_pwr.c ****  */
+ 253:../Peripheral/src/ch32v30x_pwr.c **** void PWR_EnterSTANDBYMode_RAM_LV(void)
+ 254:../Peripheral/src/ch32v30x_pwr.c **** {
+ 472              		.loc 1 254 1 is_stmt 1
+ 473              		.cfi_startproc
+ 255:../Peripheral/src/ch32v30x_pwr.c ****     uint32_t tmpreg = 0;
+ 474              		.loc 1 255 5
+ 475              	.LVL29:
+ 256:../Peripheral/src/ch32v30x_pwr.c ****     tmpreg = PWR->CTLR;
+ 476              		.loc 1 256 5
+ 477              		.loc 1 256 12 is_stmt 0
+ 478 0000 B7760040 		li	a3,1073770496
+ 479 0004 9C42     		lw	a5,0(a3)
+ 480              	.LVL30:
+ 257:../Peripheral/src/ch32v30x_pwr.c **** 
+ 258:../Peripheral/src/ch32v30x_pwr.c ****     tmpreg |= PWR_CTLR_CWUF;
+ 481              		.loc 1 258 5 is_stmt 1
+ 259:../Peripheral/src/ch32v30x_pwr.c ****     tmpreg |= PWR_CTLR_PDDS;
+ 482              		.loc 1 259 5
+ 260:../Peripheral/src/ch32v30x_pwr.c **** 
+ 261:../Peripheral/src/ch32v30x_pwr.c ****     //2K+30K in standby power.
+ 262:../Peripheral/src/ch32v30x_pwr.c ****     tmpreg |= (0x1 << 16) | (0x1 << 17);
+ 483              		.loc 1 262 5
+ 263:../Peripheral/src/ch32v30x_pwr.c ****     //2K+30K in standby LV .
+ 264:../Peripheral/src/ch32v30x_pwr.c ****     tmpreg |= (0x1 << 20);
+ 484              		.loc 1 264 5
+ 485              		.loc 1 264 12 is_stmt 0
+ 486 0006 37071300 		li	a4,1245184
+ 487 000a 1907     		addi	a4,a4,6
+ 488 000c D98F     		or	a5,a5,a4
+ 489              	.LVL31:
+ 265:../Peripheral/src/ch32v30x_pwr.c **** 
+ 266:../Peripheral/src/ch32v30x_pwr.c ****     PWR->CTLR = tmpreg;
+ 490              		.loc 1 266 5 is_stmt 1
+ 491              		.loc 1 266 15 is_stmt 0
+ 492 000e 9CC2     		sw	a5,0(a3)
+ 267:../Peripheral/src/ch32v30x_pwr.c **** 
+ 268:../Peripheral/src/ch32v30x_pwr.c ****     NVIC->SCTLR |= (1 << 2);
+ 493              		.loc 1 268 5 is_stmt 1
+ 494              		.loc 1 268 9 is_stmt 0
+ 495 0010 B7F700E0 		li	a5,-536809472
+ 496              	.LVL32:
+ 497 0014 938707D0 		addi	a5,a5,-768
+ 498 0018 984B     		lw	a4,16(a5)
+ 499              		.loc 1 268 17
+ 500 001a 13674700 		ori	a4,a4,4
+ 501 001e 98CB     		sw	a4,16(a5)
+ 502              	.LVL33:
+ 269:../Peripheral/src/ch32v30x_pwr.c **** 
+ 270:../Peripheral/src/ch32v30x_pwr.c ****     __WFI();
+ 503              		.loc 1 270 5 is_stmt 1
+ 504              	.LBB56:
+ 505              	.LBB57:
+ 296:C:\Users\localhost\Documents\turbomoskal-repo\qqexpert\firmware\MasterController\Core\core_riscv.h ****   asm volatile ("wfi");
+ 506              		.loc 2 296 3
+ 296:C:\Users\localhost\Documents\turbomoskal-repo\qqexpert\firmware\MasterController\Core\core_riscv.h ****   asm volatile ("wfi");
+ 507              		.loc 2 296 7 is_stmt 0
+ 508 0020 984B     		lw	a4,16(a5)
+ 296:C:\Users\localhost\Documents\turbomoskal-repo\qqexpert\firmware\MasterController\Core\core_riscv.h ****   asm volatile ("wfi");
+ 509              		.loc 2 296 15
+ 510 0022 5D9B     		andi	a4,a4,-9
+ 511 0024 98CB     		sw	a4,16(a5)
+ 297:C:\Users\localhost\Documents\turbomoskal-repo\qqexpert\firmware\MasterController\Core\core_riscv.h **** }
+ 512              		.loc 2 297 3 is_stmt 1
+ 513              	 #APP
+ 514              	# 297 "C:\Users\localhost\Documents\turbomoskal-repo\qqexpert\firmware\MasterController\Core/core_r
+ 515              		wfi
+ 516              	# 0 "" 2
+ 517              	 #NO_APP
+ 518              	.LBE57:
+ 519              	.LBE56:
+ 271:../Peripheral/src/ch32v30x_pwr.c **** }
+ 520              		.loc 1 271 1 is_stmt 0
+ 521 002a 8280     		ret
+ 522              		.cfi_endproc
+ 523              	.LFE39:
+ 525              		.section	.text.PWR_EnterSTANDBYMode_RAM_VBAT_EN,"ax",@progbits
+ 526              		.align	1
+ 527              		.globl	PWR_EnterSTANDBYMode_RAM_VBAT_EN
+ 529              	PWR_EnterSTANDBYMode_RAM_VBAT_EN:
+ 530              	.LFB40:
+ 272:../Peripheral/src/ch32v30x_pwr.c **** 
+ 273:../Peripheral/src/ch32v30x_pwr.c **** /*********************************************************************
+ 274:../Peripheral/src/ch32v30x_pwr.c ****  * @fn      PWR_EnterSTANDBYMode_RAM_VBAT_EN
+ 275:../Peripheral/src/ch32v30x_pwr.c ****  *
+ 276:../Peripheral/src/ch32v30x_pwr.c ****  * @brief   Enters STANDBY mode with RAM data retention function on (VBAT Enable).
+ 277:../Peripheral/src/ch32v30x_pwr.c ****  *
+ 278:../Peripheral/src/ch32v30x_pwr.c ****  * @return  none
+ 279:../Peripheral/src/ch32v30x_pwr.c ****  */
+ 280:../Peripheral/src/ch32v30x_pwr.c **** void PWR_EnterSTANDBYMode_RAM_VBAT_EN(void)
+ 281:../Peripheral/src/ch32v30x_pwr.c **** {
+ 531              		.loc 1 281 1 is_stmt 1
+ 532              		.cfi_startproc
+ 282:../Peripheral/src/ch32v30x_pwr.c ****     uint32_t tmpreg = 0;
+ 533              		.loc 1 282 5
+ 534              	.LVL34:
+ 283:../Peripheral/src/ch32v30x_pwr.c ****     tmpreg = PWR->CTLR;
+ 535              		.loc 1 283 5
+ 536              		.loc 1 283 12 is_stmt 0
+ 537 0000 B7760040 		li	a3,1073770496
+ 538 0004 9C42     		lw	a5,0(a3)
+ 539              	.LVL35:
+ 284:../Peripheral/src/ch32v30x_pwr.c **** 
+ 285:../Peripheral/src/ch32v30x_pwr.c ****     tmpreg |= PWR_CTLR_CWUF;
+ 540              		.loc 1 285 5 is_stmt 1
+ 286:../Peripheral/src/ch32v30x_pwr.c ****     tmpreg |= PWR_CTLR_PDDS;
+ 541              		.loc 1 286 5
+ 287:../Peripheral/src/ch32v30x_pwr.c **** 
+ 288:../Peripheral/src/ch32v30x_pwr.c ****     //2K+30K in standby power (VBAT Enable).
+ 289:../Peripheral/src/ch32v30x_pwr.c ****     tmpreg |= (0x1 << 18) | (0x1 << 19);
+ 542              		.loc 1 289 5
+ 543              		.loc 1 289 12 is_stmt 0
+ 544 0006 37070C00 		li	a4,786432
+ 545 000a 1907     		addi	a4,a4,6
+ 546 000c D98F     		or	a5,a5,a4
+ 547              	.LVL36:
+ 290:../Peripheral/src/ch32v30x_pwr.c **** 
+ 291:../Peripheral/src/ch32v30x_pwr.c ****     PWR->CTLR = tmpreg;
+ 548              		.loc 1 291 5 is_stmt 1
+ 549              		.loc 1 291 15 is_stmt 0
+ 550 000e 9CC2     		sw	a5,0(a3)
+ 292:../Peripheral/src/ch32v30x_pwr.c **** 
+ 293:../Peripheral/src/ch32v30x_pwr.c ****     NVIC->SCTLR |= (1 << 2);
+ 551              		.loc 1 293 5 is_stmt 1
+ 552              		.loc 1 293 9 is_stmt 0
+ 553 0010 B7F700E0 		li	a5,-536809472
+ 554              	.LVL37:
+ 555 0014 938707D0 		addi	a5,a5,-768
+ 556 0018 984B     		lw	a4,16(a5)
+ 557              		.loc 1 293 17
+ 558 001a 13674700 		ori	a4,a4,4
+ 559 001e 98CB     		sw	a4,16(a5)
+ 560              	.LVL38:
+ 294:../Peripheral/src/ch32v30x_pwr.c **** 
+ 295:../Peripheral/src/ch32v30x_pwr.c ****     __WFI();
+ 561              		.loc 1 295 5 is_stmt 1
+ 562              	.LBB58:
+ 563              	.LBB59:
+ 296:C:\Users\localhost\Documents\turbomoskal-repo\qqexpert\firmware\MasterController\Core\core_riscv.h ****   asm volatile ("wfi");
+ 564              		.loc 2 296 3
+ 296:C:\Users\localhost\Documents\turbomoskal-repo\qqexpert\firmware\MasterController\Core\core_riscv.h ****   asm volatile ("wfi");
+ 565              		.loc 2 296 7 is_stmt 0
+ 566 0020 984B     		lw	a4,16(a5)
+ 296:C:\Users\localhost\Documents\turbomoskal-repo\qqexpert\firmware\MasterController\Core\core_riscv.h ****   asm volatile ("wfi");
+ 567              		.loc 2 296 15
+ 568 0022 5D9B     		andi	a4,a4,-9
+ 569 0024 98CB     		sw	a4,16(a5)
+ 297:C:\Users\localhost\Documents\turbomoskal-repo\qqexpert\firmware\MasterController\Core\core_riscv.h **** }
+ 570              		.loc 2 297 3 is_stmt 1
+ 571              	 #APP
+ 572              	# 297 "C:\Users\localhost\Documents\turbomoskal-repo\qqexpert\firmware\MasterController\Core/core_r
+ 573              		wfi
+ 574              	# 0 "" 2
+ 575              	 #NO_APP
+ 576              	.LBE59:
+ 577              	.LBE58:
+ 296:../Peripheral/src/ch32v30x_pwr.c **** }
+ 578              		.loc 1 296 1 is_stmt 0
+ 579 002a 8280     		ret
+ 580              		.cfi_endproc
+ 581              	.LFE40:
+ 583              		.section	.text.PWR_EnterSTANDBYMode_RAM_LV_VBAT_EN,"ax",@progbits
+ 584              		.align	1
+ 585              		.globl	PWR_EnterSTANDBYMode_RAM_LV_VBAT_EN
+ 587              	PWR_EnterSTANDBYMode_RAM_LV_VBAT_EN:
+ 588              	.LFB41:
+ 297:../Peripheral/src/ch32v30x_pwr.c **** 
+ 298:../Peripheral/src/ch32v30x_pwr.c **** /*********************************************************************
+ 299:../Peripheral/src/ch32v30x_pwr.c ****  * @fn      PWR_EnterSTANDBYMode_RAM_LV_VBAT_EN
+ 300:../Peripheral/src/ch32v30x_pwr.c ****  *
+ 301:../Peripheral/src/ch32v30x_pwr.c ****  * @brief   Enters STANDBY mode with RAM data retention function and LV mode on(VBAT Enable).
+ 302:../Peripheral/src/ch32v30x_pwr.c ****  *
+ 303:../Peripheral/src/ch32v30x_pwr.c ****  * @return  none
+ 304:../Peripheral/src/ch32v30x_pwr.c ****  */
+ 305:../Peripheral/src/ch32v30x_pwr.c **** void PWR_EnterSTANDBYMode_RAM_LV_VBAT_EN(void)
+ 306:../Peripheral/src/ch32v30x_pwr.c **** {
+ 589              		.loc 1 306 1 is_stmt 1
+ 590              		.cfi_startproc
+ 307:../Peripheral/src/ch32v30x_pwr.c ****     uint32_t tmpreg = 0;
+ 591              		.loc 1 307 5
+ 592              	.LVL39:
+ 308:../Peripheral/src/ch32v30x_pwr.c ****     tmpreg = PWR->CTLR;
+ 593              		.loc 1 308 5
+ 594              		.loc 1 308 12 is_stmt 0
+ 595 0000 B7760040 		li	a3,1073770496
+ 596 0004 9C42     		lw	a5,0(a3)
+ 597              	.LVL40:
+ 309:../Peripheral/src/ch32v30x_pwr.c **** 
+ 310:../Peripheral/src/ch32v30x_pwr.c ****     tmpreg |= PWR_CTLR_CWUF;
+ 598              		.loc 1 310 5 is_stmt 1
+ 311:../Peripheral/src/ch32v30x_pwr.c ****     tmpreg |= PWR_CTLR_PDDS;
+ 599              		.loc 1 311 5
+ 312:../Peripheral/src/ch32v30x_pwr.c **** 
+ 313:../Peripheral/src/ch32v30x_pwr.c ****     //2K+30K in standby power (VBAT Enable).
+ 314:../Peripheral/src/ch32v30x_pwr.c ****     tmpreg |= (0x1 << 18) | (0x1 << 19);
+ 600              		.loc 1 314 5
+ 315:../Peripheral/src/ch32v30x_pwr.c ****     //2K+30K in standby LV .
+ 316:../Peripheral/src/ch32v30x_pwr.c ****     tmpreg |= (0x1 << 20);
+ 601              		.loc 1 316 5
+ 602              		.loc 1 316 12 is_stmt 0
+ 603 0006 37071C00 		li	a4,1835008
+ 604 000a 1907     		addi	a4,a4,6
+ 605 000c D98F     		or	a5,a5,a4
+ 606              	.LVL41:
+ 317:../Peripheral/src/ch32v30x_pwr.c **** 
+ 318:../Peripheral/src/ch32v30x_pwr.c ****     PWR->CTLR = tmpreg;
+ 607              		.loc 1 318 5 is_stmt 1
+ 608              		.loc 1 318 15 is_stmt 0
+ 609 000e 9CC2     		sw	a5,0(a3)
+ 319:../Peripheral/src/ch32v30x_pwr.c **** 
+ 320:../Peripheral/src/ch32v30x_pwr.c ****     NVIC->SCTLR |= (1 << 2);
+ 610              		.loc 1 320 5 is_stmt 1
+ 611              		.loc 1 320 9 is_stmt 0
+ 612 0010 B7F700E0 		li	a5,-536809472
+ 613              	.LVL42:
+ 614 0014 938707D0 		addi	a5,a5,-768
+ 615 0018 984B     		lw	a4,16(a5)
+ 616              		.loc 1 320 17
+ 617 001a 13674700 		ori	a4,a4,4
+ 618 001e 98CB     		sw	a4,16(a5)
+ 619              	.LVL43:
+ 321:../Peripheral/src/ch32v30x_pwr.c **** 
+ 322:../Peripheral/src/ch32v30x_pwr.c ****     __WFI();
+ 620              		.loc 1 322 5 is_stmt 1
+ 621              	.LBB60:
+ 622              	.LBB61:
+ 296:C:\Users\localhost\Documents\turbomoskal-repo\qqexpert\firmware\MasterController\Core\core_riscv.h ****   asm volatile ("wfi");
+ 623              		.loc 2 296 3
+ 296:C:\Users\localhost\Documents\turbomoskal-repo\qqexpert\firmware\MasterController\Core\core_riscv.h ****   asm volatile ("wfi");
+ 624              		.loc 2 296 7 is_stmt 0
+ 625 0020 984B     		lw	a4,16(a5)
+ 296:C:\Users\localhost\Documents\turbomoskal-repo\qqexpert\firmware\MasterController\Core\core_riscv.h ****   asm volatile ("wfi");
+ 626              		.loc 2 296 15
+ 627 0022 5D9B     		andi	a4,a4,-9
+ 628 0024 98CB     		sw	a4,16(a5)
+ 297:C:\Users\localhost\Documents\turbomoskal-repo\qqexpert\firmware\MasterController\Core\core_riscv.h **** }
+ 629              		.loc 2 297 3 is_stmt 1
+ 630              	 #APP
+ 631              	# 297 "C:\Users\localhost\Documents\turbomoskal-repo\qqexpert\firmware\MasterController\Core/core_r
+ 632              		wfi
+ 633              	# 0 "" 2
+ 634              	 #NO_APP
+ 635              	.LBE61:
+ 636              	.LBE60:
+ 323:../Peripheral/src/ch32v30x_pwr.c **** }
+ 637              		.loc 1 323 1 is_stmt 0
+ 638 002a 8280     		ret
+ 639              		.cfi_endproc
+ 640              	.LFE41:
+ 642              		.section	.text.PWR_EnterSTOPMode_RAM_LV,"ax",@progbits
+ 643              		.align	1
+ 644              		.globl	PWR_EnterSTOPMode_RAM_LV
+ 646              	PWR_EnterSTOPMode_RAM_LV:
+ 647              	.LFB42:
+ 324:../Peripheral/src/ch32v30x_pwr.c **** 
+ 325:../Peripheral/src/ch32v30x_pwr.c **** 
+ 326:../Peripheral/src/ch32v30x_pwr.c **** /*********************************************************************
+ 327:../Peripheral/src/ch32v30x_pwr.c ****  * @fn      PWR_EnterSTOPMode_RAM_LV
+ 328:../Peripheral/src/ch32v30x_pwr.c ****  *
+ 329:../Peripheral/src/ch32v30x_pwr.c ****  * @brief   Enters STOP mode with RAM data retention function and LV mode on.
+ 330:../Peripheral/src/ch32v30x_pwr.c ****  *
+ 331:../Peripheral/src/ch32v30x_pwr.c ****  * @param   PWR_Regulator - specifies the regulator state in STOP mode.
+ 332:../Peripheral/src/ch32v30x_pwr.c ****  *            PWR_Regulator_LowPower - STOP mode with regulator in low power mode
+ 333:../Peripheral/src/ch32v30x_pwr.c ****  *          PWR_STOPEntry - specifies if STOP mode in entered with WFI or WFE instruction.
+ 334:../Peripheral/src/ch32v30x_pwr.c ****  *            PWR_STOPEntry_WFI - enter STOP mode with WFI instruction
+ 335:../Peripheral/src/ch32v30x_pwr.c ****  *            PWR_STOPEntry_WFE - enter STOP mode with WFE instruction
+ 336:../Peripheral/src/ch32v30x_pwr.c ****  *
+ 337:../Peripheral/src/ch32v30x_pwr.c ****  * @return  none
+ 338:../Peripheral/src/ch32v30x_pwr.c ****  */
+ 339:../Peripheral/src/ch32v30x_pwr.c **** void PWR_EnterSTOPMode_RAM_LV(uint32_t PWR_Regulator, uint8_t PWR_STOPEntry)
+ 340:../Peripheral/src/ch32v30x_pwr.c **** {
+ 648              		.loc 1 340 1 is_stmt 1
+ 649              		.cfi_startproc
+ 650              	.LVL44:
+ 341:../Peripheral/src/ch32v30x_pwr.c ****     uint32_t tmpreg = 0;
+ 651              		.loc 1 341 5
+ 342:../Peripheral/src/ch32v30x_pwr.c ****     tmpreg = PWR->CTLR;
+ 652              		.loc 1 342 5
+ 653              		.loc 1 342 12 is_stmt 0
+ 654 0000 37770040 		li	a4,1073770496
+ 655 0004 1C43     		lw	a5,0(a4)
+ 656              	.LVL45:
+ 343:../Peripheral/src/ch32v30x_pwr.c ****     tmpreg &= CTLR_DS_MASK;
+ 657              		.loc 1 343 5 is_stmt 1
+ 344:../Peripheral/src/ch32v30x_pwr.c ****     tmpreg |= PWR_Regulator;
+ 345:../Peripheral/src/ch32v30x_pwr.c **** 
+ 346:../Peripheral/src/ch32v30x_pwr.c ****     tmpreg |= (0x1 << 20);
+ 658              		.loc 1 346 12 is_stmt 0
+ 659 0006 B7061000 		li	a3,1048576
+ 343:../Peripheral/src/ch32v30x_pwr.c ****     tmpreg &= CTLR_DS_MASK;
+ 660              		.loc 1 343 12
+ 661 000a F19B     		andi	a5,a5,-4
+ 662              	.LVL46:
+ 344:../Peripheral/src/ch32v30x_pwr.c ****     tmpreg |= PWR_Regulator;
+ 663              		.loc 1 344 5 is_stmt 1
+ 344:../Peripheral/src/ch32v30x_pwr.c ****     tmpreg |= PWR_Regulator;
+ 664              		.loc 1 344 12 is_stmt 0
+ 665 000c C98F     		or	a5,a5,a0
+ 666              	.LVL47:
+ 667              		.loc 1 346 5 is_stmt 1
+ 668              		.loc 1 346 12 is_stmt 0
+ 669 000e D58F     		or	a5,a5,a3
+ 670              	.LVL48:
+ 347:../Peripheral/src/ch32v30x_pwr.c ****     PWR->CTLR = tmpreg;
+ 671              		.loc 1 347 5 is_stmt 1
+ 672              		.loc 1 347 15 is_stmt 0
+ 673 0010 1CC3     		sw	a5,0(a4)
+ 348:../Peripheral/src/ch32v30x_pwr.c **** 
+ 349:../Peripheral/src/ch32v30x_pwr.c ****     NVIC->SCTLR |= (1 << 2);
+ 674              		.loc 1 349 5 is_stmt 1
+ 675              		.loc 1 349 9 is_stmt 0
+ 676 0012 B7F700E0 		li	a5,-536809472
+ 677              	.LVL49:
+ 678 0016 03A707D1 		lw	a4,-752(a5)
+ 679              	.LVL50:
+ 680              		.loc 1 349 17
+ 681 001a 13674700 		ori	a4,a4,4
+ 682 001e 23A8E7D0 		sw	a4,-752(a5)
+ 683              	.LVL51:
+ 350:../Peripheral/src/ch32v30x_pwr.c **** 
+ 351:../Peripheral/src/ch32v30x_pwr.c ****     if(PWR_STOPEntry == PWR_STOPEntry_WFI)
+ 684              		.loc 1 351 5 is_stmt 1
+ 685              		.loc 1 351 7 is_stmt 0
+ 686 0022 0547     		li	a4,1
+ 687 0024 6391E502 		bne	a1,a4,.L28
+ 352:../Peripheral/src/ch32v30x_pwr.c ****     {
+ 353:../Peripheral/src/ch32v30x_pwr.c ****         __WFI();
+ 688              		.loc 1 353 9 is_stmt 1
+ 689              	.LBB62:
+ 690              	.LBB63:
+ 296:C:\Users\localhost\Documents\turbomoskal-repo\qqexpert\firmware\MasterController\Core\core_riscv.h ****   asm volatile ("wfi");
+ 691              		.loc 2 296 3
+ 296:C:\Users\localhost\Documents\turbomoskal-repo\qqexpert\firmware\MasterController\Core\core_riscv.h ****   asm volatile ("wfi");
+ 692              		.loc 2 296 7 is_stmt 0
+ 693 0028 03A707D1 		lw	a4,-752(a5)
+ 296:C:\Users\localhost\Documents\turbomoskal-repo\qqexpert\firmware\MasterController\Core\core_riscv.h ****   asm volatile ("wfi");
+ 694              		.loc 2 296 15
+ 695 002c 5D9B     		andi	a4,a4,-9
+ 696 002e 23A8E7D0 		sw	a4,-752(a5)
+ 297:C:\Users\localhost\Documents\turbomoskal-repo\qqexpert\firmware\MasterController\Core\core_riscv.h **** }
+ 697              		.loc 2 297 3 is_stmt 1
+ 698              	.L30:
+ 699              	.LBE63:
+ 700              	.LBE62:
+ 701              	.LBB64:
+ 702              	.LBB65:
+ 703              	.LBB66:
+ 704              	.LBB67:
+ 326:C:\Users\localhost\Documents\turbomoskal-repo\qqexpert\firmware\MasterController\Core\core_riscv.h **** }
+ 705              		.loc 2 326 3
+ 706              	 #APP
+ 707              	# 326 "C:\Users\localhost\Documents\turbomoskal-repo\qqexpert\firmware\MasterController\Core/core_r
+ 708              		wfi
+ 709              	# 0 "" 2
+ 710              	 #NO_APP
+ 711              	.LBE67:
+ 712              	.LBE66:
+ 713              	.LBE65:
+ 714              	.LBE64:
+ 354:../Peripheral/src/ch32v30x_pwr.c ****     }
+ 355:../Peripheral/src/ch32v30x_pwr.c ****     else
+ 356:../Peripheral/src/ch32v30x_pwr.c ****     {
+ 357:../Peripheral/src/ch32v30x_pwr.c ****         __WFE();
+ 358:../Peripheral/src/ch32v30x_pwr.c ****     }
+ 359:../Peripheral/src/ch32v30x_pwr.c **** 
+ 360:../Peripheral/src/ch32v30x_pwr.c ****     NVIC->SCTLR &= ~(1 << 2);
+ 715              		.loc 1 360 5
+ 716              		.loc 1 360 9 is_stmt 0
+ 717 0036 37F700E0 		li	a4,-536809472
+ 718 003a 832707D1 		lw	a5,-752(a4)
+ 719              		.loc 1 360 17
+ 720 003e ED9B     		andi	a5,a5,-5
+ 721 0040 2328F7D0 		sw	a5,-752(a4)
+ 361:../Peripheral/src/ch32v30x_pwr.c **** }
+ 722              		.loc 1 361 1
+ 723 0044 8280     		ret
+ 724              	.L28:
+ 357:../Peripheral/src/ch32v30x_pwr.c ****     }
+ 725              		.loc 1 357 9 is_stmt 1
+ 726              	.LBB75:
+ 727              	.LBB74:
+ 338:C:\Users\localhost\Documents\turbomoskal-repo\qqexpert\firmware\MasterController\Core\core_riscv.h ****   _WFE();
+ 728              		.loc 2 338 3
+ 729              	.LBB69:
+ 730              	.LBB70:
+ 309:C:\Users\localhost\Documents\turbomoskal-repo\qqexpert\firmware\MasterController\Core\core_riscv.h **** 
+ 731              		.loc 2 309 3
+ 311:C:\Users\localhost\Documents\turbomoskal-repo\qqexpert\firmware\MasterController\Core\core_riscv.h ****   NVIC->SCTLR |= (1<<3)|(1<<5);
+ 732              		.loc 2 311 3
+ 311:C:\Users\localhost\Documents\turbomoskal-repo\qqexpert\firmware\MasterController\Core\core_riscv.h ****   NVIC->SCTLR |= (1<<3)|(1<<5);
+ 733              		.loc 2 311 5 is_stmt 0
+ 734 0046 938707D0 		addi	a5,a5,-768
+ 735 004a 944B     		lw	a3,16(a5)
+ 736              	.LVL52:
+ 312:C:\Users\localhost\Documents\turbomoskal-repo\qqexpert\firmware\MasterController\Core\core_riscv.h ****   NVIC->SCTLR = (NVIC->SCTLR & ~(1<<5)) | ( t & (1<<5));
+ 737              		.loc 2 312 3 is_stmt 1
+ 312:C:\Users\localhost\Documents\turbomoskal-repo\qqexpert\firmware\MasterController\Core\core_riscv.h ****   NVIC->SCTLR = (NVIC->SCTLR & ~(1<<5)) | ( t & (1<<5));
+ 738              		.loc 2 312 7 is_stmt 0
+ 739 004c 984B     		lw	a4,16(a5)
+ 313:C:\Users\localhost\Documents\turbomoskal-repo\qqexpert\firmware\MasterController\Core\core_riscv.h **** }
+ 740              		.loc 2 313 47
+ 741 004e 93F60602 		andi	a3,a3,32
+ 742              	.LVL53:
+ 312:C:\Users\localhost\Documents\turbomoskal-repo\qqexpert\firmware\MasterController\Core\core_riscv.h ****   NVIC->SCTLR = (NVIC->SCTLR & ~(1<<5)) | ( t & (1<<5));
+ 743              		.loc 2 312 15
+ 744 0052 13678702 		ori	a4,a4,40
+ 745 0056 98CB     		sw	a4,16(a5)
+ 313:C:\Users\localhost\Documents\turbomoskal-repo\qqexpert\firmware\MasterController\Core\core_riscv.h **** }
+ 746              		.loc 2 313 3 is_stmt 1
+ 313:C:\Users\localhost\Documents\turbomoskal-repo\qqexpert\firmware\MasterController\Core\core_riscv.h **** }
+ 747              		.loc 2 313 22 is_stmt 0
+ 748 0058 984B     		lw	a4,16(a5)
+ 313:C:\Users\localhost\Documents\turbomoskal-repo\qqexpert\firmware\MasterController\Core\core_riscv.h **** }
+ 749              		.loc 2 313 30
+ 750 005a 1377F7FD 		andi	a4,a4,-33
+ 313:C:\Users\localhost\Documents\turbomoskal-repo\qqexpert\firmware\MasterController\Core\core_riscv.h **** }
+ 751              		.loc 2 313 41
+ 752 005e 558F     		or	a4,a4,a3
+ 313:C:\Users\localhost\Documents\turbomoskal-repo\qqexpert\firmware\MasterController\Core\core_riscv.h **** }
+ 753              		.loc 2 313 15
+ 754 0060 98CB     		sw	a4,16(a5)
+ 755              	.LVL54:
+ 756              	.LBE70:
+ 757              	.LBE69:
+ 339:C:\Users\localhost\Documents\turbomoskal-repo\qqexpert\firmware\MasterController\Core\core_riscv.h ****   _WFE();
+ 758              		.loc 2 339 3 is_stmt 1
+ 759              	.LBB71:
+ 760              	.LBB72:
+ 325:C:\Users\localhost\Documents\turbomoskal-repo\qqexpert\firmware\MasterController\Core\core_riscv.h ****   asm volatile ("wfi");
+ 761              		.loc 2 325 3
+ 325:C:\Users\localhost\Documents\turbomoskal-repo\qqexpert\firmware\MasterController\Core\core_riscv.h ****   asm volatile ("wfi");
+ 762              		.loc 2 325 7 is_stmt 0
+ 763 0062 984B     		lw	a4,16(a5)
+ 325:C:\Users\localhost\Documents\turbomoskal-repo\qqexpert\firmware\MasterController\Core\core_riscv.h ****   asm volatile ("wfi");
+ 764              		.loc 2 325 15
+ 765 0064 13678700 		ori	a4,a4,8
+ 766 0068 98CB     		sw	a4,16(a5)
+ 326:C:\Users\localhost\Documents\turbomoskal-repo\qqexpert\firmware\MasterController\Core\core_riscv.h **** }
+ 767              		.loc 2 326 3 is_stmt 1
+ 768              	 #APP
+ 769              	# 326 "C:\Users\localhost\Documents\turbomoskal-repo\qqexpert\firmware\MasterController\Core/core_r
+ 770              		wfi
+ 771              	# 0 "" 2
+ 772              	 #NO_APP
+ 773              	.LBE72:
+ 774              	.LBE71:
+ 775              		.loc 2 340 3
+ 776              	.LBB73:
+ 777              	.LBB68:
+ 325:C:\Users\localhost\Documents\turbomoskal-repo\qqexpert\firmware\MasterController\Core\core_riscv.h ****   asm volatile ("wfi");
+ 778              		.loc 2 325 3
+ 325:C:\Users\localhost\Documents\turbomoskal-repo\qqexpert\firmware\MasterController\Core\core_riscv.h ****   asm volatile ("wfi");
+ 779              		.loc 2 325 7 is_stmt 0
+ 780 006e 984B     		lw	a4,16(a5)
+ 325:C:\Users\localhost\Documents\turbomoskal-repo\qqexpert\firmware\MasterController\Core\core_riscv.h ****   asm volatile ("wfi");
+ 781              		.loc 2 325 15
+ 782 0070 13678700 		ori	a4,a4,8
+ 783 0074 98CB     		sw	a4,16(a5)
+ 784 0076 75BF     		j	.L30
+ 785              	.LBE68:
+ 786              	.LBE73:
+ 787              	.LBE74:
+ 788              	.LBE75:
+ 789              		.cfi_endproc
+ 790              	.LFE42:
+ 792              		.text
+ 793              	.Letext0:
+ 794              		.file 3 "d:\\software\\mounriver_studio\\toolchain\\risc-v embedded gcc12\\riscv-none-elf\\include
+ 795              		.file 4 "d:\\software\\mounriver_studio\\toolchain\\risc-v embedded gcc12\\riscv-none-elf\\include
+ 796              		.file 5 "C:\\Users\\localhost\\Documents\\turbomoskal-repo\\qqexpert\\firmware\\MasterController\\
+ 797              		.file 6 "C:\\Users\\localhost\\Documents\\turbomoskal-repo\\qqexpert\\firmware\\MasterController\\
+DEFINED SYMBOLS
+                            *ABS*:0000000000000000 ch32v30x_pwr.c
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:14     .text.PWR_DeInit:0000000000000000 PWR_DeInit
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:18     .text.PWR_DeInit:0000000000000000 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:19     .text.PWR_DeInit:0000000000000000 $x
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:19     .text.PWR_DeInit:0000000000000000 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:20     .text.PWR_DeInit:0000000000000008 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:21     .text.PWR_DeInit:0000000000000008 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:23     .text.PWR_DeInit:0000000000000008 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:28     .text.PWR_DeInit:0000000000000016 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:33     .text.PWR_DeInit:0000000000000024 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:34     .text.PWR_DeInit:000000000000002c .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:35     .text.PWR_DeInit:000000000000002c .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:36     .text.PWR_DeInit:000000000000002c .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:43     .text.PWR_BackupAccessCmd:0000000000000000 PWR_BackupAccessCmd
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:46     .text.PWR_BackupAccessCmd:0000000000000000 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:48     .text.PWR_BackupAccessCmd:0000000000000000 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:49     .text.PWR_BackupAccessCmd:0000000000000000 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:50     .text.PWR_BackupAccessCmd:0000000000000000 $x
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:50     .text.PWR_BackupAccessCmd:0000000000000000 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:53     .text.PWR_BackupAccessCmd:0000000000000006 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:55     .text.PWR_BackupAccessCmd:0000000000000008 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:56     .text.PWR_BackupAccessCmd:0000000000000008 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:59     .text.PWR_BackupAccessCmd:000000000000000c .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:61     .text.PWR_BackupAccessCmd:000000000000000e .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:64     .text.PWR_BackupAccessCmd:0000000000000010 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:65     .text.PWR_BackupAccessCmd:0000000000000010 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:67     .text.PWR_BackupAccessCmd:0000000000000016 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:74     .text.PWR_PVDCmd:0000000000000000 PWR_PVDCmd
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:77     .text.PWR_PVDCmd:0000000000000000 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:79     .text.PWR_PVDCmd:0000000000000000 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:80     .text.PWR_PVDCmd:0000000000000000 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:81     .text.PWR_PVDCmd:0000000000000000 $x
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:81     .text.PWR_PVDCmd:0000000000000000 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:84     .text.PWR_PVDCmd:0000000000000006 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:86     .text.PWR_PVDCmd:0000000000000008 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:87     .text.PWR_PVDCmd:0000000000000008 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:90     .text.PWR_PVDCmd:000000000000000c .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:92     .text.PWR_PVDCmd:000000000000000e .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:95     .text.PWR_PVDCmd:0000000000000010 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:96     .text.PWR_PVDCmd:0000000000000010 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:98     .text.PWR_PVDCmd:0000000000000014 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:105    .text.PWR_PVDLevelConfig:0000000000000000 PWR_PVDLevelConfig
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:108    .text.PWR_PVDLevelConfig:0000000000000000 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:110    .text.PWR_PVDLevelConfig:0000000000000000 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:111    .text.PWR_PVDLevelConfig:0000000000000000 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:112    .text.PWR_PVDLevelConfig:0000000000000000 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:113    .text.PWR_PVDLevelConfig:0000000000000000 $x
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:113    .text.PWR_PVDLevelConfig:0000000000000000 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:117    .text.PWR_PVDLevelConfig:0000000000000006 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:118    .text.PWR_PVDLevelConfig:0000000000000006 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:121    .text.PWR_PVDLevelConfig:000000000000000a .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:122    .text.PWR_PVDLevelConfig:000000000000000a .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:125    .text.PWR_PVDLevelConfig:000000000000000c .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:126    .text.PWR_PVDLevelConfig:000000000000000c .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:128    .text.PWR_PVDLevelConfig:000000000000000e .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:129    .text.PWR_PVDLevelConfig:0000000000000010 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:136    .text.PWR_WakeUpPinCmd:0000000000000000 PWR_WakeUpPinCmd
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:139    .text.PWR_WakeUpPinCmd:0000000000000000 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:141    .text.PWR_WakeUpPinCmd:0000000000000000 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:142    .text.PWR_WakeUpPinCmd:0000000000000000 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:143    .text.PWR_WakeUpPinCmd:0000000000000000 $x
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:143    .text.PWR_WakeUpPinCmd:0000000000000000 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:146    .text.PWR_WakeUpPinCmd:0000000000000006 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:148    .text.PWR_WakeUpPinCmd:0000000000000008 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:149    .text.PWR_WakeUpPinCmd:0000000000000008 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:152    .text.PWR_WakeUpPinCmd:000000000000000c .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:154    .text.PWR_WakeUpPinCmd:000000000000000e .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:157    .text.PWR_WakeUpPinCmd:0000000000000010 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:158    .text.PWR_WakeUpPinCmd:0000000000000010 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:160    .text.PWR_WakeUpPinCmd:0000000000000016 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:167    .text.PWR_EnterSTOPMode:0000000000000000 PWR_EnterSTOPMode
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:170    .text.PWR_EnterSTOPMode:0000000000000000 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:172    .text.PWR_EnterSTOPMode:0000000000000000 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:173    .text.PWR_EnterSTOPMode:0000000000000000 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:174    .text.PWR_EnterSTOPMode:0000000000000000 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:175    .text.PWR_EnterSTOPMode:0000000000000000 $x
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:175    .text.PWR_EnterSTOPMode:0000000000000000 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:179    .text.PWR_EnterSTOPMode:0000000000000006 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:180    .text.PWR_EnterSTOPMode:0000000000000006 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:183    .text.PWR_EnterSTOPMode:0000000000000008 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:184    .text.PWR_EnterSTOPMode:0000000000000008 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:187    .text.PWR_EnterSTOPMode:000000000000000a .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:188    .text.PWR_EnterSTOPMode:000000000000000a .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:190    .text.PWR_EnterSTOPMode:000000000000000c .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:191    .text.PWR_EnterSTOPMode:000000000000000c .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:196    .text.PWR_EnterSTOPMode:0000000000000014 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:200    .text.PWR_EnterSTOPMode:000000000000001c .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:201    .text.PWR_EnterSTOPMode:000000000000001c .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:207    .text.PWR_EnterSTOPMode:0000000000000022 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:208    .text.PWR_EnterSTOPMode:0000000000000022 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:209    .text.PWR_EnterSTOPMode:0000000000000022 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:211    .text.PWR_EnterSTOPMode:0000000000000026 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:221    .text.PWR_EnterSTOPMode:000000000000002c .L0 
+C:UserslocalhostDocuments	urbomoskal-repoqqexpertirmwareMasterControllerCore/core_riscv.h:326    .text.PWR_EnterSTOPMode:000000000000002c .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:232    .text.PWR_EnterSTOPMode:0000000000000030 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:233    .text.PWR_EnterSTOPMode:0000000000000030 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:236    .text.PWR_EnterSTOPMode:0000000000000038 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:239    .text.PWR_EnterSTOPMode:000000000000003e .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:244    .text.PWR_EnterSTOPMode:0000000000000040 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:247    .text.PWR_EnterSTOPMode:0000000000000040 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:248    .text.PWR_EnterSTOPMode:0000000000000040 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:249    .text.PWR_EnterSTOPMode:0000000000000040 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:250    .text.PWR_EnterSTOPMode:0000000000000040 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:254    .text.PWR_EnterSTOPMode:0000000000000046 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:255    .text.PWR_EnterSTOPMode:0000000000000046 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:257    .text.PWR_EnterSTOPMode:0000000000000048 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:260    .text.PWR_EnterSTOPMode:000000000000004c .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:263    .text.PWR_EnterSTOPMode:0000000000000052 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:264    .text.PWR_EnterSTOPMode:0000000000000052 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:266    .text.PWR_EnterSTOPMode:0000000000000054 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:268    .text.PWR_EnterSTOPMode:0000000000000058 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:270    .text.PWR_EnterSTOPMode:000000000000005a .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:277    .text.PWR_EnterSTOPMode:000000000000005c .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:278    .text.PWR_EnterSTOPMode:000000000000005c .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:279    .text.PWR_EnterSTOPMode:000000000000005c .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:281    .text.PWR_EnterSTOPMode:000000000000005e .L0 
+C:UserslocalhostDocuments	urbomoskal-repoqqexpertirmwareMasterControllerCore/core_riscv.h:326    .text.PWR_EnterSTOPMode:0000000000000064 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:294    .text.PWR_EnterSTOPMode:0000000000000068 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:295    .text.PWR_EnterSTOPMode:0000000000000068 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:296    .text.PWR_EnterSTOPMode:0000000000000068 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:298    .text.PWR_EnterSTOPMode:000000000000006a .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:305    .text.PWR_EnterSTOPMode:0000000000000072 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:312    .text.PWR_EnterSTANDBYMode:0000000000000000 PWR_EnterSTANDBYMode
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:315    .text.PWR_EnterSTANDBYMode:0000000000000000 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:316    .text.PWR_EnterSTANDBYMode:0000000000000000 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:317    .text.PWR_EnterSTANDBYMode:0000000000000000 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:318    .text.PWR_EnterSTANDBYMode:0000000000000000 $x
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:318    .text.PWR_EnterSTANDBYMode:0000000000000000 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:321    .text.PWR_EnterSTANDBYMode:0000000000000006 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:324    .text.PWR_EnterSTANDBYMode:000000000000000c .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:325    .text.PWR_EnterSTANDBYMode:000000000000000c .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:327    .text.PWR_EnterSTANDBYMode:000000000000000e .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:330    .text.PWR_EnterSTANDBYMode:0000000000000014 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:331    .text.PWR_EnterSTANDBYMode:0000000000000014 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:335    .text.PWR_EnterSTANDBYMode:000000000000001e .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:340    .text.PWR_EnterSTANDBYMode:0000000000000024 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:341    .text.PWR_EnterSTANDBYMode:0000000000000024 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:342    .text.PWR_EnterSTANDBYMode:0000000000000024 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:344    .text.PWR_EnterSTANDBYMode:0000000000000026 .L0 
+C:UserslocalhostDocuments	urbomoskal-repoqqexpertirmwareMasterControllerCore/core_riscv.h:297    .text.PWR_EnterSTANDBYMode:000000000000002a .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:355    .text.PWR_EnterSTANDBYMode:000000000000002e .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:356    .text.PWR_EnterSTANDBYMode:0000000000000030 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:363    .text.PWR_GetFlagStatus:0000000000000000 PWR_GetFlagStatus
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:366    .text.PWR_GetFlagStatus:0000000000000000 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:368    .text.PWR_GetFlagStatus:0000000000000000 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:369    .text.PWR_GetFlagStatus:0000000000000000 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:370    .text.PWR_GetFlagStatus:0000000000000000 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:371    .text.PWR_GetFlagStatus:0000000000000000 $x
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:371    .text.PWR_GetFlagStatus:0000000000000000 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:375    .text.PWR_GetFlagStatus:0000000000000006 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:376    .text.PWR_GetFlagStatus:0000000000000006 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:379    .text.PWR_GetFlagStatus:0000000000000008 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:381    .text.PWR_GetFlagStatus:000000000000000e .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:388    .text.PWR_ClearFlag:0000000000000000 PWR_ClearFlag
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:391    .text.PWR_ClearFlag:0000000000000000 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:393    .text.PWR_ClearFlag:0000000000000000 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:394    .text.PWR_ClearFlag:0000000000000000 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:395    .text.PWR_ClearFlag:0000000000000000 $x
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:395    .text.PWR_ClearFlag:0000000000000000 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:398    .text.PWR_ClearFlag:0000000000000006 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:401    .text.PWR_ClearFlag:0000000000000008 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:404    .text.PWR_ClearFlag:000000000000000c .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:405    .text.PWR_ClearFlag:000000000000000e .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:412    .text.PWR_EnterSTANDBYMode_RAM:0000000000000000 PWR_EnterSTANDBYMode_RAM
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:415    .text.PWR_EnterSTANDBYMode_RAM:0000000000000000 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:416    .text.PWR_EnterSTANDBYMode_RAM:0000000000000000 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:418    .text.PWR_EnterSTANDBYMode_RAM:0000000000000000 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:419    .text.PWR_EnterSTANDBYMode_RAM:0000000000000000 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:420    .text.PWR_EnterSTANDBYMode_RAM:0000000000000000 $x
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:420    .text.PWR_EnterSTANDBYMode_RAM:0000000000000000 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:424    .text.PWR_EnterSTANDBYMode_RAM:0000000000000006 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:425    .text.PWR_EnterSTANDBYMode_RAM:0000000000000006 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:426    .text.PWR_EnterSTANDBYMode_RAM:0000000000000006 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:427    .text.PWR_EnterSTANDBYMode_RAM:0000000000000006 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:432    .text.PWR_EnterSTANDBYMode_RAM:000000000000000e .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:433    .text.PWR_EnterSTANDBYMode_RAM:000000000000000e .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:435    .text.PWR_EnterSTANDBYMode_RAM:0000000000000010 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:436    .text.PWR_EnterSTANDBYMode_RAM:0000000000000010 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:441    .text.PWR_EnterSTANDBYMode_RAM:000000000000001a .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:447    .text.PWR_EnterSTANDBYMode_RAM:0000000000000020 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:448    .text.PWR_EnterSTANDBYMode_RAM:0000000000000020 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:449    .text.PWR_EnterSTANDBYMode_RAM:0000000000000020 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:451    .text.PWR_EnterSTANDBYMode_RAM:0000000000000022 .L0 
+C:UserslocalhostDocuments	urbomoskal-repoqqexpertirmwareMasterControllerCore/core_riscv.h:297    .text.PWR_EnterSTANDBYMode_RAM:0000000000000026 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:462    .text.PWR_EnterSTANDBYMode_RAM:000000000000002a .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:463    .text.PWR_EnterSTANDBYMode_RAM:000000000000002c .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:470    .text.PWR_EnterSTANDBYMode_RAM_LV:0000000000000000 PWR_EnterSTANDBYMode_RAM_LV
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:473    .text.PWR_EnterSTANDBYMode_RAM_LV:0000000000000000 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:474    .text.PWR_EnterSTANDBYMode_RAM_LV:0000000000000000 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:476    .text.PWR_EnterSTANDBYMode_RAM_LV:0000000000000000 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:477    .text.PWR_EnterSTANDBYMode_RAM_LV:0000000000000000 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:478    .text.PWR_EnterSTANDBYMode_RAM_LV:0000000000000000 $x
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:478    .text.PWR_EnterSTANDBYMode_RAM_LV:0000000000000000 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:482    .text.PWR_EnterSTANDBYMode_RAM_LV:0000000000000006 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:483    .text.PWR_EnterSTANDBYMode_RAM_LV:0000000000000006 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:484    .text.PWR_EnterSTANDBYMode_RAM_LV:0000000000000006 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:485    .text.PWR_EnterSTANDBYMode_RAM_LV:0000000000000006 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:486    .text.PWR_EnterSTANDBYMode_RAM_LV:0000000000000006 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:491    .text.PWR_EnterSTANDBYMode_RAM_LV:000000000000000e .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:492    .text.PWR_EnterSTANDBYMode_RAM_LV:000000000000000e .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:494    .text.PWR_EnterSTANDBYMode_RAM_LV:0000000000000010 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:495    .text.PWR_EnterSTANDBYMode_RAM_LV:0000000000000010 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:500    .text.PWR_EnterSTANDBYMode_RAM_LV:000000000000001a .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:506    .text.PWR_EnterSTANDBYMode_RAM_LV:0000000000000020 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:507    .text.PWR_EnterSTANDBYMode_RAM_LV:0000000000000020 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:508    .text.PWR_EnterSTANDBYMode_RAM_LV:0000000000000020 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:510    .text.PWR_EnterSTANDBYMode_RAM_LV:0000000000000022 .L0 
+C:UserslocalhostDocuments	urbomoskal-repoqqexpertirmwareMasterControllerCore/core_riscv.h:297    .text.PWR_EnterSTANDBYMode_RAM_LV:0000000000000026 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:521    .text.PWR_EnterSTANDBYMode_RAM_LV:000000000000002a .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:522    .text.PWR_EnterSTANDBYMode_RAM_LV:000000000000002c .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:529    .text.PWR_EnterSTANDBYMode_RAM_VBAT_EN:0000000000000000 PWR_EnterSTANDBYMode_RAM_VBAT_EN
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:532    .text.PWR_EnterSTANDBYMode_RAM_VBAT_EN:0000000000000000 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:533    .text.PWR_EnterSTANDBYMode_RAM_VBAT_EN:0000000000000000 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:535    .text.PWR_EnterSTANDBYMode_RAM_VBAT_EN:0000000000000000 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:536    .text.PWR_EnterSTANDBYMode_RAM_VBAT_EN:0000000000000000 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:537    .text.PWR_EnterSTANDBYMode_RAM_VBAT_EN:0000000000000000 $x
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:537    .text.PWR_EnterSTANDBYMode_RAM_VBAT_EN:0000000000000000 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:541    .text.PWR_EnterSTANDBYMode_RAM_VBAT_EN:0000000000000006 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:542    .text.PWR_EnterSTANDBYMode_RAM_VBAT_EN:0000000000000006 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:543    .text.PWR_EnterSTANDBYMode_RAM_VBAT_EN:0000000000000006 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:544    .text.PWR_EnterSTANDBYMode_RAM_VBAT_EN:0000000000000006 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:549    .text.PWR_EnterSTANDBYMode_RAM_VBAT_EN:000000000000000e .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:550    .text.PWR_EnterSTANDBYMode_RAM_VBAT_EN:000000000000000e .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:552    .text.PWR_EnterSTANDBYMode_RAM_VBAT_EN:0000000000000010 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:553    .text.PWR_EnterSTANDBYMode_RAM_VBAT_EN:0000000000000010 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:558    .text.PWR_EnterSTANDBYMode_RAM_VBAT_EN:000000000000001a .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:564    .text.PWR_EnterSTANDBYMode_RAM_VBAT_EN:0000000000000020 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:565    .text.PWR_EnterSTANDBYMode_RAM_VBAT_EN:0000000000000020 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:566    .text.PWR_EnterSTANDBYMode_RAM_VBAT_EN:0000000000000020 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:568    .text.PWR_EnterSTANDBYMode_RAM_VBAT_EN:0000000000000022 .L0 
+C:UserslocalhostDocuments	urbomoskal-repoqqexpertirmwareMasterControllerCore/core_riscv.h:297    .text.PWR_EnterSTANDBYMode_RAM_VBAT_EN:0000000000000026 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:579    .text.PWR_EnterSTANDBYMode_RAM_VBAT_EN:000000000000002a .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:580    .text.PWR_EnterSTANDBYMode_RAM_VBAT_EN:000000000000002c .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:587    .text.PWR_EnterSTANDBYMode_RAM_LV_VBAT_EN:0000000000000000 PWR_EnterSTANDBYMode_RAM_LV_VBAT_EN
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:590    .text.PWR_EnterSTANDBYMode_RAM_LV_VBAT_EN:0000000000000000 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:591    .text.PWR_EnterSTANDBYMode_RAM_LV_VBAT_EN:0000000000000000 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:593    .text.PWR_EnterSTANDBYMode_RAM_LV_VBAT_EN:0000000000000000 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:594    .text.PWR_EnterSTANDBYMode_RAM_LV_VBAT_EN:0000000000000000 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:595    .text.PWR_EnterSTANDBYMode_RAM_LV_VBAT_EN:0000000000000000 $x
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:595    .text.PWR_EnterSTANDBYMode_RAM_LV_VBAT_EN:0000000000000000 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:599    .text.PWR_EnterSTANDBYMode_RAM_LV_VBAT_EN:0000000000000006 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:600    .text.PWR_EnterSTANDBYMode_RAM_LV_VBAT_EN:0000000000000006 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:601    .text.PWR_EnterSTANDBYMode_RAM_LV_VBAT_EN:0000000000000006 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:602    .text.PWR_EnterSTANDBYMode_RAM_LV_VBAT_EN:0000000000000006 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:603    .text.PWR_EnterSTANDBYMode_RAM_LV_VBAT_EN:0000000000000006 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:608    .text.PWR_EnterSTANDBYMode_RAM_LV_VBAT_EN:000000000000000e .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:609    .text.PWR_EnterSTANDBYMode_RAM_LV_VBAT_EN:000000000000000e .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:611    .text.PWR_EnterSTANDBYMode_RAM_LV_VBAT_EN:0000000000000010 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:612    .text.PWR_EnterSTANDBYMode_RAM_LV_VBAT_EN:0000000000000010 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:617    .text.PWR_EnterSTANDBYMode_RAM_LV_VBAT_EN:000000000000001a .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:623    .text.PWR_EnterSTANDBYMode_RAM_LV_VBAT_EN:0000000000000020 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:624    .text.PWR_EnterSTANDBYMode_RAM_LV_VBAT_EN:0000000000000020 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:625    .text.PWR_EnterSTANDBYMode_RAM_LV_VBAT_EN:0000000000000020 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:627    .text.PWR_EnterSTANDBYMode_RAM_LV_VBAT_EN:0000000000000022 .L0 
+C:UserslocalhostDocuments	urbomoskal-repoqqexpertirmwareMasterControllerCore/core_riscv.h:297    .text.PWR_EnterSTANDBYMode_RAM_LV_VBAT_EN:0000000000000026 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:638    .text.PWR_EnterSTANDBYMode_RAM_LV_VBAT_EN:000000000000002a .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:639    .text.PWR_EnterSTANDBYMode_RAM_LV_VBAT_EN:000000000000002c .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:646    .text.PWR_EnterSTOPMode_RAM_LV:0000000000000000 PWR_EnterSTOPMode_RAM_LV
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:649    .text.PWR_EnterSTOPMode_RAM_LV:0000000000000000 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:651    .text.PWR_EnterSTOPMode_RAM_LV:0000000000000000 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:652    .text.PWR_EnterSTOPMode_RAM_LV:0000000000000000 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:653    .text.PWR_EnterSTOPMode_RAM_LV:0000000000000000 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:654    .text.PWR_EnterSTOPMode_RAM_LV:0000000000000000 $x
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:654    .text.PWR_EnterSTOPMode_RAM_LV:0000000000000000 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:658    .text.PWR_EnterSTOPMode_RAM_LV:0000000000000006 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:659    .text.PWR_EnterSTOPMode_RAM_LV:0000000000000006 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:661    .text.PWR_EnterSTOPMode_RAM_LV:000000000000000a .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:664    .text.PWR_EnterSTOPMode_RAM_LV:000000000000000c .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:665    .text.PWR_EnterSTOPMode_RAM_LV:000000000000000c .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:668    .text.PWR_EnterSTOPMode_RAM_LV:000000000000000e .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:669    .text.PWR_EnterSTOPMode_RAM_LV:000000000000000e .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:672    .text.PWR_EnterSTOPMode_RAM_LV:0000000000000010 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:673    .text.PWR_EnterSTOPMode_RAM_LV:0000000000000010 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:675    .text.PWR_EnterSTOPMode_RAM_LV:0000000000000012 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:676    .text.PWR_EnterSTOPMode_RAM_LV:0000000000000012 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:681    .text.PWR_EnterSTOPMode_RAM_LV:000000000000001a .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:685    .text.PWR_EnterSTOPMode_RAM_LV:0000000000000022 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:686    .text.PWR_EnterSTOPMode_RAM_LV:0000000000000022 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:691    .text.PWR_EnterSTOPMode_RAM_LV:0000000000000028 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:692    .text.PWR_EnterSTOPMode_RAM_LV:0000000000000028 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:693    .text.PWR_EnterSTOPMode_RAM_LV:0000000000000028 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:695    .text.PWR_EnterSTOPMode_RAM_LV:000000000000002c .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:705    .text.PWR_EnterSTOPMode_RAM_LV:0000000000000032 .L0 
+C:UserslocalhostDocuments	urbomoskal-repoqqexpertirmwareMasterControllerCore/core_riscv.h:326    .text.PWR_EnterSTOPMode_RAM_LV:0000000000000032 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:716    .text.PWR_EnterSTOPMode_RAM_LV:0000000000000036 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:717    .text.PWR_EnterSTOPMode_RAM_LV:0000000000000036 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:720    .text.PWR_EnterSTOPMode_RAM_LV:000000000000003e .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:723    .text.PWR_EnterSTOPMode_RAM_LV:0000000000000044 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:728    .text.PWR_EnterSTOPMode_RAM_LV:0000000000000046 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:731    .text.PWR_EnterSTOPMode_RAM_LV:0000000000000046 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:732    .text.PWR_EnterSTOPMode_RAM_LV:0000000000000046 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:733    .text.PWR_EnterSTOPMode_RAM_LV:0000000000000046 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:734    .text.PWR_EnterSTOPMode_RAM_LV:0000000000000046 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:738    .text.PWR_EnterSTOPMode_RAM_LV:000000000000004c .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:739    .text.PWR_EnterSTOPMode_RAM_LV:000000000000004c .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:741    .text.PWR_EnterSTOPMode_RAM_LV:000000000000004e .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:744    .text.PWR_EnterSTOPMode_RAM_LV:0000000000000052 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:747    .text.PWR_EnterSTOPMode_RAM_LV:0000000000000058 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:748    .text.PWR_EnterSTOPMode_RAM_LV:0000000000000058 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:750    .text.PWR_EnterSTOPMode_RAM_LV:000000000000005a .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:752    .text.PWR_EnterSTOPMode_RAM_LV:000000000000005e .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:754    .text.PWR_EnterSTOPMode_RAM_LV:0000000000000060 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:761    .text.PWR_EnterSTOPMode_RAM_LV:0000000000000062 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:762    .text.PWR_EnterSTOPMode_RAM_LV:0000000000000062 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:763    .text.PWR_EnterSTOPMode_RAM_LV:0000000000000062 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:765    .text.PWR_EnterSTOPMode_RAM_LV:0000000000000064 .L0 
+C:UserslocalhostDocuments	urbomoskal-repoqqexpertirmwareMasterControllerCore/core_riscv.h:326    .text.PWR_EnterSTOPMode_RAM_LV:000000000000006a .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:778    .text.PWR_EnterSTOPMode_RAM_LV:000000000000006e .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:779    .text.PWR_EnterSTOPMode_RAM_LV:000000000000006e .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:780    .text.PWR_EnterSTOPMode_RAM_LV:000000000000006e .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:782    .text.PWR_EnterSTOPMode_RAM_LV:0000000000000070 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:789    .text.PWR_EnterSTOPMode_RAM_LV:0000000000000078 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:2840   .debug_line_str:0000000000000076 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:2840   .debug_line_str:00000000000000cb .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:2840   .debug_line_str:00000000000000dd .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:2840   .debug_line_str:0000000000000133 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:2840   .debug_line_str:000000000000018f .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:2840   .debug_line_str:00000000000001e7 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:2840   .debug_line_str:0000000000000247 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:2840   .debug_line_str:0000000000000256 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:2840   .debug_line_str:0000000000000265 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:2840   .debug_line_str:0000000000000272 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:2840   .debug_line_str:0000000000000283 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:2840   .debug_line_str:000000000000028d .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:2840   .debug_line_str:0000000000000298 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:39     .text.PWR_DeInit:000000000000002c .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:70     .text.PWR_BackupAccessCmd:0000000000000016 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:101    .text.PWR_PVDCmd:0000000000000014 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:132    .text.PWR_PVDLevelConfig:0000000000000010 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:163    .text.PWR_WakeUpPinCmd:0000000000000016 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:308    .text.PWR_EnterSTOPMode:0000000000000072 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:359    .text.PWR_EnterSTANDBYMode:0000000000000030 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:384    .text.PWR_GetFlagStatus:000000000000000e .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:408    .text.PWR_ClearFlag:000000000000000e .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:466    .text.PWR_EnterSTANDBYMode_RAM:000000000000002c .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:525    .text.PWR_EnterSTANDBYMode_RAM_LV:000000000000002c .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:583    .text.PWR_EnterSTANDBYMode_RAM_VBAT_EN:000000000000002c .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:642    .text.PWR_EnterSTANDBYMode_RAM_LV_VBAT_EN:000000000000002c .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:792    .text.PWR_EnterSTOPMode_RAM_LV:0000000000000078 .L0 
+                     .debug_frame:0000000000000000 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:62     .text.PWR_BackupAccessCmd:0000000000000010 .L4
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:57     .text.PWR_BackupAccessCmd:000000000000000c .L6
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:93     .text.PWR_PVDCmd:0000000000000010 .L8
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:88     .text.PWR_PVDCmd:000000000000000c .L10
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:155    .text.PWR_WakeUpPinCmd:0000000000000010 .L13
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:150    .text.PWR_WakeUpPinCmd:000000000000000c .L15
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:240    .text.PWR_EnterSTOPMode:0000000000000040 .L17
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:214    .text.PWR_EnterSTOPMode:000000000000002c .L19
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:724    .text.PWR_EnterSTOPMode_RAM_LV:0000000000000046 .L28
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:698    .text.PWR_EnterSTOPMode_RAM_LV:0000000000000032 .L30
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:1610   .debug_abbrev:0000000000000000 .Ldebug_abbrev0
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:2809   .debug_str:00000000000002e1 .LASF71
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:2838   .debug_line_str:0000000000000055 .LASF0
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:2836   .debug_line_str:0000000000000000 .LASF1
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:2641   .debug_rnglists:0000000000000058 .LLRL16
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:2687   .debug_line:0000000000000000 .Ldebug_line0
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:2761   .debug_str:000000000000018b .LASF2
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:2753   .debug_str:000000000000015a .LASF3
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:2735   .debug_str:00000000000000f9 .LASF6
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:2749   .debug_str:000000000000013e .LASF4
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:2705   .debug_str:0000000000000060 .LASF5
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:2703   .debug_str:0000000000000055 .LASF7
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:2773   .debug_str:00000000000001ef .LASF8
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:2731   .debug_str:00000000000000e4 .LASF9
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:2699   .debug_str:000000000000003d .LASF10
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:2767   .debug_str:00000000000001c5 .LASF11
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:2719   .debug_str:000000000000009b .LASF12
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:2755   .debug_str:0000000000000166 .LASF13
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:2709   .debug_str:000000000000006f .LASF14
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:2763   .debug_str:0000000000000198 .LASF15
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:2757   .debug_str:000000000000017d .LASF16
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:2715   .debug_str:0000000000000085 .LASF17
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:2831   .debug_str:0000000000000445 .LASF18
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:2807   .debug_str:00000000000002d1 .LASF19
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:2813   .debug_str:00000000000003e7 .LASF20
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:2829   .debug_str:000000000000043a .LASF21
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:2727   .debug_str:00000000000000d4 .LASF22
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:2821   .debug_str:00000000000003fe .LASF23
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:2707   .debug_str:000000000000006a .LASF24
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:2693   .debug_str:000000000000001c .LASF25
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:2729   .debug_str:00000000000000dd .LASF26
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:2791   .debug_str:0000000000000281 .LASF27
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:2695   .debug_str:0000000000000021 .LASF28
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:2793   .debug_str:000000000000028b .LASF29
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:2713   .debug_str:0000000000000080 .LASF30
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:2795   .debug_str:0000000000000295 .LASF31
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:2815   .debug_str:00000000000003ed .LASF32
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:2797   .debug_str:000000000000029f .LASF33
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:2811   .debug_str:00000000000003e2 .LASF34
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:2799   .debug_str:00000000000002a9 .LASF35
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:2759   .debug_str:0000000000000186 .LASF36
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:2801   .debug_str:00000000000002b3 .LASF37
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:2777   .debug_str:0000000000000210 .LASF38
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:2803   .debug_str:00000000000002bd .LASF39
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:2771   .debug_str:00000000000001e8 .LASF40
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:2805   .debug_str:00000000000002c7 .LASF41
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:2737   .debug_str:0000000000000103 .LASF42
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:2691   .debug_str:0000000000000012 .LASF43
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:2825   .debug_str:000000000000041c .LASF44
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:2733   .debug_str:00000000000000ed .LASF45
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:2747   .debug_str:0000000000000132 .LASF46
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:2779   .debug_str:0000000000000216 .LASF47
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:2721   .debug_str:00000000000000a9 .LASF72
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:2789   .debug_str:0000000000000268 .LASF50
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:647    .text.PWR_EnterSTOPMode_RAM_LV:0000000000000000 .LFB42
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:790    .text.PWR_EnterSTOPMode_RAM_LV:0000000000000078 .LFE42
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:2775   .debug_str:0000000000000202 .LASF48
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:2751   .debug_str:000000000000014c .LASF49
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:2743   .debug_str:0000000000000121 .LASF52
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:2302   .debug_loclists:000000000000000c .LLST12
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:689    .text.PWR_EnterSTOPMode_RAM_LV:0000000000000028 .LBB62
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:700    .text.PWR_EnterSTOPMode_RAM_LV:0000000000000032 .LBE62
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:701    .text.PWR_EnterSTOPMode_RAM_LV:0000000000000032 .LBB64
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:2625   .debug_rnglists:0000000000000032 .LLRL13
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:703    .text.PWR_EnterSTOPMode_RAM_LV:0000000000000032 .LBB66
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:2633   .debug_rnglists:0000000000000045 .LLRL14
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:729    .text.PWR_EnterSTOPMode_RAM_LV:0000000000000046 .LBB69
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:757    .text.PWR_EnterSTOPMode_RAM_LV:0000000000000062 .LBE69
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:2327   .debug_loclists:000000000000003f .LLST15
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:759    .text.PWR_EnterSTOPMode_RAM_LV:0000000000000062 .LBB71
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:774    .text.PWR_EnterSTOPMode_RAM_LV:000000000000006e .LBE71
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:2765   .debug_str:00000000000001a1 .LASF51
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:588    .text.PWR_EnterSTANDBYMode_RAM_LV_VBAT_EN:0000000000000000 .LFB41
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:640    .text.PWR_EnterSTANDBYMode_RAM_LV_VBAT_EN:000000000000002c .LFE41
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:2334   .debug_loclists:000000000000004b .LLST11
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:621    .text.PWR_EnterSTANDBYMode_RAM_LV_VBAT_EN:0000000000000020 .LBB60
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:636    .text.PWR_EnterSTANDBYMode_RAM_LV_VBAT_EN:000000000000002a .LBE60
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:2781   .debug_str:000000000000021b .LASF53
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:530    .text.PWR_EnterSTANDBYMode_RAM_VBAT_EN:0000000000000000 .LFB40
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:581    .text.PWR_EnterSTANDBYMode_RAM_VBAT_EN:000000000000002c .LFE40
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:2363   .debug_loclists:0000000000000082 .LLST10
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:562    .text.PWR_EnterSTANDBYMode_RAM_VBAT_EN:0000000000000020 .LBB58
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:577    .text.PWR_EnterSTANDBYMode_RAM_VBAT_EN:000000000000002a .LBE58
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:2785   .debug_str:0000000000000247 .LASF54
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:471    .text.PWR_EnterSTANDBYMode_RAM_LV:0000000000000000 .LFB39
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:523    .text.PWR_EnterSTANDBYMode_RAM_LV:000000000000002c .LFE39
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:2391   .debug_loclists:00000000000000b5 .LLST9
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:504    .text.PWR_EnterSTANDBYMode_RAM_LV:0000000000000020 .LBB56
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:519    .text.PWR_EnterSTANDBYMode_RAM_LV:000000000000002a .LBE56
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:2827   .debug_str:0000000000000421 .LASF55
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:413    .text.PWR_EnterSTANDBYMode_RAM:0000000000000000 .LFB38
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:464    .text.PWR_EnterSTANDBYMode_RAM:000000000000002c .LFE38
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:2420   .debug_loclists:00000000000000ec .LLST8
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:445    .text.PWR_EnterSTANDBYMode_RAM:0000000000000020 .LBB54
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:460    .text.PWR_EnterSTANDBYMode_RAM:000000000000002a .LBE54
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:2717   .debug_str:000000000000008d .LASF56
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:389    .text.PWR_ClearFlag:0000000000000000 .LFB37
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:406    .text.PWR_ClearFlag:000000000000000e .LFE37
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:2725   .debug_str:00000000000000cb .LASF57
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:2448   .debug_loclists:000000000000011f .LLST7
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:2833   .debug_str:000000000000044c .LASF73
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:364    .text.PWR_GetFlagStatus:0000000000000000 .LFB36
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:382    .text.PWR_GetFlagStatus:000000000000000e .LFE36
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:2463   .debug_loclists:0000000000000139 .LLST5
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:2745   .debug_str:0000000000000128 .LASF58
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:2478   .debug_loclists:0000000000000153 .LLST6
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:2823   .debug_str:0000000000000407 .LASF59
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:313    .text.PWR_EnterSTANDBYMode:0000000000000000 .LFB35
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:357    .text.PWR_EnterSTANDBYMode:0000000000000030 .LFE35
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:338    .text.PWR_EnterSTANDBYMode:0000000000000024 .LBB52
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:353    .text.PWR_EnterSTANDBYMode:000000000000002e .LBE52
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:2689   .debug_str:0000000000000000 .LASF60
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:168    .text.PWR_EnterSTOPMode:0000000000000000 .LFB34
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:306    .text.PWR_EnterSTOPMode:0000000000000072 .LFE34
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:2517   .debug_loclists:000000000000018b .LLST1
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:204    .text.PWR_EnterSTOPMode:0000000000000022 .LBB38
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:216    .text.PWR_EnterSTOPMode:000000000000002c .LBE38
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:217    .text.PWR_EnterSTOPMode:000000000000002c .LBB40
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:2609   .debug_rnglists:000000000000000c .LLRL2
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:219    .text.PWR_EnterSTOPMode:000000000000002c .LBB42
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:2617   .debug_rnglists:000000000000001f .LLRL3
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:245    .text.PWR_EnterSTOPMode:0000000000000040 .LBB45
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:273    .text.PWR_EnterSTOPMode:000000000000005c .LBE45
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:2542   .debug_loclists:00000000000001be .LLST4
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:275    .text.PWR_EnterSTOPMode:000000000000005c .LBB47
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:290    .text.PWR_EnterSTOPMode:0000000000000068 .LBE47
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:2769   .debug_str:00000000000001d7 .LASF61
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:137    .text.PWR_WakeUpPinCmd:0000000000000000 .LFB33
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:161    .text.PWR_WakeUpPinCmd:0000000000000016 .LFE33
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:2711   .debug_str:0000000000000077 .LASF62
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:2739   .debug_str:0000000000000109 .LASF63
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:106    .text.PWR_PVDLevelConfig:0000000000000000 .LFB32
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:130    .text.PWR_PVDLevelConfig:0000000000000010 .LFE32
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:2701   .debug_str:0000000000000048 .LASF64
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:2549   .debug_loclists:00000000000001ca .LLST0
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:2783   .debug_str:000000000000023c .LASF65
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:75     .text.PWR_PVDCmd:0000000000000000 .LFB31
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:99     .text.PWR_PVDCmd:0000000000000014 .LFE31
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:2697   .debug_str:0000000000000029 .LASF66
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:44     .text.PWR_BackupAccessCmd:0000000000000000 .LFB30
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:68     .text.PWR_BackupAccessCmd:0000000000000016 .LFE30
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:2723   .debug_str:00000000000000c0 .LASF67
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:15     .text.PWR_DeInit:0000000000000000 .LFB29
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:37     .text.PWR_DeInit:000000000000002c .LFE29
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:26     .text.PWR_DeInit:0000000000000016 .LVL0
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:31     .text.PWR_DeInit:0000000000000024 .LVL1
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:2817   .debug_str:00000000000003f2 .LASF68
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:2787   .debug_str:0000000000000263 .LASF69
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:2741   .debug_str:000000000000011c .LASF74
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:2819   .debug_str:00000000000003f8 .LASF70
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:650    .text.PWR_EnterSTOPMode_RAM_LV:0000000000000000 .LVL44
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:656    .text.PWR_EnterSTOPMode_RAM_LV:0000000000000006 .LVL45
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:677    .text.PWR_EnterSTOPMode_RAM_LV:0000000000000016 .LVL49
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:679    .text.PWR_EnterSTOPMode_RAM_LV:000000000000001a .LVL50
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:683    .text.PWR_EnterSTOPMode_RAM_LV:0000000000000022 .LVL51
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:736    .text.PWR_EnterSTOPMode_RAM_LV:000000000000004c .LVL52
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:742    .text.PWR_EnterSTOPMode_RAM_LV:0000000000000052 .LVL53
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:592    .text.PWR_EnterSTANDBYMode_RAM_LV_VBAT_EN:0000000000000000 .LVL39
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:597    .text.PWR_EnterSTANDBYMode_RAM_LV_VBAT_EN:0000000000000006 .LVL40
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:606    .text.PWR_EnterSTANDBYMode_RAM_LV_VBAT_EN:000000000000000e .LVL41
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:613    .text.PWR_EnterSTANDBYMode_RAM_LV_VBAT_EN:0000000000000014 .LVL42
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:619    .text.PWR_EnterSTANDBYMode_RAM_LV_VBAT_EN:0000000000000020 .LVL43
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:534    .text.PWR_EnterSTANDBYMode_RAM_VBAT_EN:0000000000000000 .LVL34
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:539    .text.PWR_EnterSTANDBYMode_RAM_VBAT_EN:0000000000000006 .LVL35
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:547    .text.PWR_EnterSTANDBYMode_RAM_VBAT_EN:000000000000000e .LVL36
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:554    .text.PWR_EnterSTANDBYMode_RAM_VBAT_EN:0000000000000014 .LVL37
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:560    .text.PWR_EnterSTANDBYMode_RAM_VBAT_EN:0000000000000020 .LVL38
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:475    .text.PWR_EnterSTANDBYMode_RAM_LV:0000000000000000 .LVL29
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:480    .text.PWR_EnterSTANDBYMode_RAM_LV:0000000000000006 .LVL30
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:489    .text.PWR_EnterSTANDBYMode_RAM_LV:000000000000000e .LVL31
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:496    .text.PWR_EnterSTANDBYMode_RAM_LV:0000000000000014 .LVL32
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:502    .text.PWR_EnterSTANDBYMode_RAM_LV:0000000000000020 .LVL33
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:417    .text.PWR_EnterSTANDBYMode_RAM:0000000000000000 .LVL24
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:422    .text.PWR_EnterSTANDBYMode_RAM:0000000000000006 .LVL25
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:430    .text.PWR_EnterSTANDBYMode_RAM:000000000000000e .LVL26
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:437    .text.PWR_EnterSTANDBYMode_RAM:0000000000000014 .LVL27
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:443    .text.PWR_EnterSTANDBYMode_RAM:0000000000000020 .LVL28
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:392    .text.PWR_ClearFlag:0000000000000000 .LVL22
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:399    .text.PWR_ClearFlag:0000000000000008 .LVL23
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:367    .text.PWR_GetFlagStatus:0000000000000000 .LVL19
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:377    .text.PWR_GetFlagStatus:0000000000000008 .LVL21
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:373    .text.PWR_GetFlagStatus:0000000000000006 .LVL20
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:171    .text.PWR_EnterSTOPMode:0000000000000000 .LVL9
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:177    .text.PWR_EnterSTOPMode:0000000000000006 .LVL10
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:192    .text.PWR_EnterSTOPMode:0000000000000010 .LVL13
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:194    .text.PWR_EnterSTOPMode:0000000000000014 .LVL14
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:198    .text.PWR_EnterSTOPMode:000000000000001c .LVL15
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:252    .text.PWR_EnterSTOPMode:0000000000000046 .LVL16
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:258    .text.PWR_EnterSTOPMode:000000000000004c .LVL17
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:109    .text.PWR_PVDLevelConfig:0000000000000000 .LVL4
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:115    .text.PWR_PVDLevelConfig:0000000000000006 .LVL5
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:799    .debug_info:0000000000000000 .Ldebug_info0
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:230    .text.PWR_EnterSTOPMode:0000000000000030 .LBE40
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:242    .text.PWR_EnterSTOPMode:0000000000000040 .LBB51
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:304    .text.PWR_EnterSTOPMode:0000000000000072 .LBE51
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:228    .text.PWR_EnterSTOPMode:0000000000000030 .LBE42
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:292    .text.PWR_EnterSTOPMode:0000000000000068 .LBB49
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:302    .text.PWR_EnterSTOPMode:0000000000000072 .LBE49
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:714    .text.PWR_EnterSTOPMode_RAM_LV:0000000000000036 .LBE64
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:726    .text.PWR_EnterSTOPMode_RAM_LV:0000000000000046 .LBB75
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:788    .text.PWR_EnterSTOPMode_RAM_LV:0000000000000078 .LBE75
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:712    .text.PWR_EnterSTOPMode_RAM_LV:0000000000000036 .LBE66
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:776    .text.PWR_EnterSTOPMode_RAM_LV:000000000000006e .LBB73
+C:\Users\LOCALH~1\AppData\Local\Temp\cczv6kSl.s:786    .text.PWR_EnterSTOPMode_RAM_LV:0000000000000078 .LBE73
+
+UNDEFINED SYMBOLS
+__riscv_save_0
+RCC_APB1PeriphResetCmd
+__riscv_restore_0

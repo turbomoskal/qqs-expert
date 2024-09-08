@@ -1,0 +1,1675 @@
+   1              		.file	"ch32v30x_fsmc.c"
+   2              		.option nopic
+   3              		.attribute arch, "rv32i2p0_m2p0_a2p0_f2p0_c2p0_xw"
+   4              		.attribute unaligned_access, 0
+   5              		.attribute stack_align, 16
+   6              		.text
+   7              	.Ltext0:
+   8              		.cfi_sections	.debug_frame
+   9              		.file 0 "C:\\Users\\localhost\\Documents\\turbomoskal-repo\\qqexpert\\firmware\\MasterController\\
+  10              		.section	.text.FSMC_NORSRAMDeInit,"ax",@progbits
+  11              		.align	1
+  12              		.globl	FSMC_NORSRAMDeInit
+  14              	FSMC_NORSRAMDeInit:
+  15              	.LFB29:
+  16              		.file 1 "../Peripheral/src/ch32v30x_fsmc.c"
+   1:../Peripheral/src/ch32v30x_fsmc.c **** /********************************** (C) COPYRIGHT  *******************************
+   2:../Peripheral/src/ch32v30x_fsmc.c **** * File Name          : ch32v30x_fsmc.c
+   3:../Peripheral/src/ch32v30x_fsmc.c **** * Author             : WCH
+   4:../Peripheral/src/ch32v30x_fsmc.c **** * Version            : V1.0.0
+   5:../Peripheral/src/ch32v30x_fsmc.c **** * Date               : 2024/03/06
+   6:../Peripheral/src/ch32v30x_fsmc.c **** * Description        : This file provides all the FSMC firmware functions.
+   7:../Peripheral/src/ch32v30x_fsmc.c **** *********************************************************************************
+   8:../Peripheral/src/ch32v30x_fsmc.c **** * Copyright (c) 2021 Nanjing Qinheng Microelectronics Co., Ltd.
+   9:../Peripheral/src/ch32v30x_fsmc.c **** * Attention: This software (modified or not) and binary are used for 
+  10:../Peripheral/src/ch32v30x_fsmc.c **** * microcontroller manufactured by Nanjing Qinheng Microelectronics.
+  11:../Peripheral/src/ch32v30x_fsmc.c **** *******************************************************************************/
+  12:../Peripheral/src/ch32v30x_fsmc.c **** #include "ch32v30x_fsmc.h"
+  13:../Peripheral/src/ch32v30x_fsmc.c **** #include "ch32v30x_rcc.h"
+  14:../Peripheral/src/ch32v30x_fsmc.c **** 
+  15:../Peripheral/src/ch32v30x_fsmc.c **** /* FSMC BCRx Mask */
+  16:../Peripheral/src/ch32v30x_fsmc.c **** #define BCR_MBKEN_Set          ((uint32_t)0x00000001)
+  17:../Peripheral/src/ch32v30x_fsmc.c **** #define BCR_MBKEN_Reset        ((uint32_t)0x000FFFFE)
+  18:../Peripheral/src/ch32v30x_fsmc.c **** #define BCR_FACCEN_Set         ((uint32_t)0x00000040)
+  19:../Peripheral/src/ch32v30x_fsmc.c **** 
+  20:../Peripheral/src/ch32v30x_fsmc.c **** /* FSMC PCRx Mask */
+  21:../Peripheral/src/ch32v30x_fsmc.c **** #define PCR_PBKEN_Set          ((uint32_t)0x00000004)
+  22:../Peripheral/src/ch32v30x_fsmc.c **** #define PCR_PBKEN_Reset        ((uint32_t)0x000FFFFB)
+  23:../Peripheral/src/ch32v30x_fsmc.c **** #define PCR_ECCEN_Set          ((uint32_t)0x00000040)
+  24:../Peripheral/src/ch32v30x_fsmc.c **** #define PCR_ECCEN_Reset        ((uint32_t)0x000FFFBF)
+  25:../Peripheral/src/ch32v30x_fsmc.c **** #define PCR_MemoryType_NAND    ((uint32_t)0x00000008)
+  26:../Peripheral/src/ch32v30x_fsmc.c **** 
+  27:../Peripheral/src/ch32v30x_fsmc.c **** /*********************************************************************
+  28:../Peripheral/src/ch32v30x_fsmc.c ****  * @fn      FSMC_NORSRAMDeInit
+  29:../Peripheral/src/ch32v30x_fsmc.c ****  *
+  30:../Peripheral/src/ch32v30x_fsmc.c ****  * @brief   Deinitializes the FSMC NOR/SRAM Banks registers to their default
+  31:../Peripheral/src/ch32v30x_fsmc.c ****  *        reset values.
+  32:../Peripheral/src/ch32v30x_fsmc.c ****  *
+  33:../Peripheral/src/ch32v30x_fsmc.c ****  * @param   FSMC_Bank-
+  34:../Peripheral/src/ch32v30x_fsmc.c ****  *            FSMC_Bank1_NORSRAM1 - FSMC Bank1 NOR/SRAM1.
+  35:../Peripheral/src/ch32v30x_fsmc.c ****  *
+  36:../Peripheral/src/ch32v30x_fsmc.c ****  * @return  none
+  37:../Peripheral/src/ch32v30x_fsmc.c ****  */
+  38:../Peripheral/src/ch32v30x_fsmc.c **** void FSMC_NORSRAMDeInit(uint32_t FSMC_Bank)
+  39:../Peripheral/src/ch32v30x_fsmc.c **** {
+  17              		.loc 1 39 1
+  18              		.cfi_startproc
+  19              	.LVL0:
+  40:../Peripheral/src/ch32v30x_fsmc.c ****     if(FSMC_Bank == FSMC_Bank1_NORSRAM1)
+  20              		.loc 1 40 5
+  21 0000 93172500 		slli	a5,a0,2
+  22              		.loc 1 40 7 is_stmt 0
+  23 0004 05E5     		bne	a0,zero,.L2
+  41:../Peripheral/src/ch32v30x_fsmc.c ****     {
+  42:../Peripheral/src/ch32v30x_fsmc.c ****         FSMC_Bank1->BTCR[FSMC_Bank] = 0x000030DB;
+  24              		.loc 1 42 9 is_stmt 1
+  25              		.loc 1 42 37 is_stmt 0
+  26 0006 0D67     		li	a4,12288
+  27 0008 B70600A0 		li	a3,-1610612736
+  28 000c 1307B70D 		addi	a4,a4,219
+  29 0010 98C2     		sw	a4,0(a3)
+  30              	.L3:
+  43:../Peripheral/src/ch32v30x_fsmc.c ****     }
+  44:../Peripheral/src/ch32v30x_fsmc.c ****     else
+  45:../Peripheral/src/ch32v30x_fsmc.c ****     {
+  46:../Peripheral/src/ch32v30x_fsmc.c ****         FSMC_Bank1->BTCR[FSMC_Bank] = 0x000030D2;
+  47:../Peripheral/src/ch32v30x_fsmc.c ****     }
+  48:../Peripheral/src/ch32v30x_fsmc.c ****     FSMC_Bank1->BTCR[FSMC_Bank + 1] = 0x0FFFFFFF;
+  31              		.loc 1 48 5 is_stmt 1
+  32 0012 B70600A0 		li	a3,-1610612736
+  33              		.loc 1 48 37 is_stmt 0
+  34 0016 37070010 		li	a4,268435456
+  35 001a 3386F600 		add	a2,a3,a5
+  36 001e 7D17     		addi	a4,a4,-1
+  37 0020 93864610 		addi	a3,a3,260
+  38 0024 58C2     		sw	a4,4(a2)
+  49:../Peripheral/src/ch32v30x_fsmc.c ****     FSMC_Bank1E->BWTR[FSMC_Bank] = 0x0FFFFFFF;
+  39              		.loc 1 49 5 is_stmt 1
+  40 0026 B697     		add	a5,a5,a3
+  41              		.loc 1 49 34 is_stmt 0
+  42 0028 98C3     		sw	a4,0(a5)
+  50:../Peripheral/src/ch32v30x_fsmc.c **** }
+  43              		.loc 1 50 1
+  44 002a 8280     		ret
+  45              	.L2:
+  46:../Peripheral/src/ch32v30x_fsmc.c ****     }
+  46              		.loc 1 46 9 is_stmt 1
+  46:../Peripheral/src/ch32v30x_fsmc.c ****     }
+  47              		.loc 1 46 37 is_stmt 0
+  48 002c 370700A0 		li	a4,-1610612736
+  49 0030 8D66     		li	a3,12288
+  50 0032 3E97     		add	a4,a4,a5
+  51 0034 9386260D 		addi	a3,a3,210
+  52 0038 14C3     		sw	a3,0(a4)
+  53 003a E1BF     		j	.L3
+  54              		.cfi_endproc
+  55              	.LFE29:
+  57              		.section	.text.FSMC_NANDDeInit,"ax",@progbits
+  58              		.align	1
+  59              		.globl	FSMC_NANDDeInit
+  61              	FSMC_NANDDeInit:
+  62              	.LFB30:
+  51:../Peripheral/src/ch32v30x_fsmc.c **** 
+  52:../Peripheral/src/ch32v30x_fsmc.c **** /*********************************************************************
+  53:../Peripheral/src/ch32v30x_fsmc.c ****  * @fn      FSMC_NANDDeInit
+  54:../Peripheral/src/ch32v30x_fsmc.c ****  *
+  55:../Peripheral/src/ch32v30x_fsmc.c ****  * @brief   Deinitializes the FSMC NAND Banks registers to their default
+  56:../Peripheral/src/ch32v30x_fsmc.c ****  *        reset values.
+  57:../Peripheral/src/ch32v30x_fsmc.c ****  *
+  58:../Peripheral/src/ch32v30x_fsmc.c ****  * @param   FSMC_Bank -
+  59:../Peripheral/src/ch32v30x_fsmc.c ****  *            FSMC_Bank2_NAND - FSMC Bank2 NAND.
+  60:../Peripheral/src/ch32v30x_fsmc.c ****  *
+  61:../Peripheral/src/ch32v30x_fsmc.c ****  * @return  none
+  62:../Peripheral/src/ch32v30x_fsmc.c ****  */
+  63:../Peripheral/src/ch32v30x_fsmc.c **** void FSMC_NANDDeInit(uint32_t FSMC_Bank)
+  64:../Peripheral/src/ch32v30x_fsmc.c **** {
+  63              		.loc 1 64 1 is_stmt 1
+  64              		.cfi_startproc
+  65              	.LVL1:
+  65:../Peripheral/src/ch32v30x_fsmc.c ****     if(FSMC_Bank == FSMC_Bank2_NAND)
+  66              		.loc 1 65 5
+  67              		.loc 1 65 7 is_stmt 0
+  68 0000 C147     		li	a5,16
+  69 0002 6311F502 		bne	a0,a5,.L4
+  66:../Peripheral/src/ch32v30x_fsmc.c ****     {
+  67:../Peripheral/src/ch32v30x_fsmc.c ****         FSMC_Bank2->PCR2 = 0x00000018;
+  70              		.loc 1 67 9 is_stmt 1
+  71              		.loc 1 67 26 is_stmt 0
+  72 0006 B70700A0 		li	a5,-1610612736
+  73 000a E146     		li	a3,24
+  74 000c 13870706 		addi	a4,a5,96
+  75 0010 B4D3     		sw	a3,96(a5)
+  68:../Peripheral/src/ch32v30x_fsmc.c ****         FSMC_Bank2->SR2 = 0x00000040;
+  76              		.loc 1 68 9 is_stmt 1
+  77              		.loc 1 68 25 is_stmt 0
+  78 0012 93070004 		li	a5,64
+  79 0016 5CC3     		sw	a5,4(a4)
+  69:../Peripheral/src/ch32v30x_fsmc.c ****         FSMC_Bank2->PMEM2 = 0xFCFCFCFC;
+  80              		.loc 1 69 9 is_stmt 1
+  81              		.loc 1 69 27 is_stmt 0
+  82 0018 B707FDFC 		li	a5,-50528256
+  83 001c 9387C7CF 		addi	a5,a5,-772
+  84 0020 1CC7     		sw	a5,8(a4)
+  70:../Peripheral/src/ch32v30x_fsmc.c ****         FSMC_Bank2->PATT2 = 0xFCFCFCFC;
+  85              		.loc 1 70 9 is_stmt 1
+  86              		.loc 1 70 27 is_stmt 0
+  87 0022 5CC7     		sw	a5,12(a4)
+  88              	.L4:
+  71:../Peripheral/src/ch32v30x_fsmc.c ****     }
+  72:../Peripheral/src/ch32v30x_fsmc.c **** }
+  89              		.loc 1 72 1
+  90 0024 8280     		ret
+  91              		.cfi_endproc
+  92              	.LFE30:
+  94              		.section	.text.FSMC_NORSRAMInit,"ax",@progbits
+  95              		.align	1
+  96              		.globl	FSMC_NORSRAMInit
+  98              	FSMC_NORSRAMInit:
+  99              	.LFB31:
+  73:../Peripheral/src/ch32v30x_fsmc.c **** 
+  74:../Peripheral/src/ch32v30x_fsmc.c **** /*********************************************************************
+  75:../Peripheral/src/ch32v30x_fsmc.c ****  * @fn      FSMC_NORSRAMInit
+  76:../Peripheral/src/ch32v30x_fsmc.c ****  *
+  77:../Peripheral/src/ch32v30x_fsmc.c ****  * @brief   Initializes the FSMC NOR/SRAM Banks according to the specified
+  78:../Peripheral/src/ch32v30x_fsmc.c ****  *        parameters in the FSMC_NORSRAMInitStruct.
+  79:../Peripheral/src/ch32v30x_fsmc.c ****  *
+  80:../Peripheral/src/ch32v30x_fsmc.c ****  * @param   SMC_NORSRAMInitStruct:pointer to a FSMC_NORSRAMInitTypeDef
+  81:../Peripheral/src/ch32v30x_fsmc.c ****  *        structure that contains the configuration information for the FSMC NOR/SRAM
+  82:../Peripheral/src/ch32v30x_fsmc.c ****  *        specified Banks.
+  83:../Peripheral/src/ch32v30x_fsmc.c ****  *
+  84:../Peripheral/src/ch32v30x_fsmc.c ****  * @return  none
+  85:../Peripheral/src/ch32v30x_fsmc.c ****  */
+  86:../Peripheral/src/ch32v30x_fsmc.c **** void FSMC_NORSRAMInit(FSMC_NORSRAMInitTypeDef *FSMC_NORSRAMInitStruct)
+  87:../Peripheral/src/ch32v30x_fsmc.c **** {
+ 100              		.loc 1 87 1 is_stmt 1
+ 101              		.cfi_startproc
+ 102              	.LVL2:
+  88:../Peripheral/src/ch32v30x_fsmc.c ****     FSMC_Bank1->BTCR[FSMC_NORSRAMInitStruct->FSMC_Bank] =
+ 103              		.loc 1 88 5
+  89:../Peripheral/src/ch32v30x_fsmc.c ****         (uint32_t)FSMC_NORSRAMInitStruct->FSMC_DataAddressMux |
+  90:../Peripheral/src/ch32v30x_fsmc.c ****         FSMC_NORSRAMInitStruct->FSMC_MemoryType |
+ 104              		.loc 1 90 31 is_stmt 0
+ 105 0000 1445     		lw	a3,8(a0)
+  89:../Peripheral/src/ch32v30x_fsmc.c ****         (uint32_t)FSMC_NORSRAMInitStruct->FSMC_DataAddressMux |
+ 106              		.loc 1 89 63
+ 107 0002 5C41     		lw	a5,4(a0)
+ 108              		.loc 1 90 49
+ 109 0004 5845     		lw	a4,12(a0)
+  91:../Peripheral/src/ch32v30x_fsmc.c ****         FSMC_NORSRAMInitStruct->FSMC_MemoryDataWidth |
+  92:../Peripheral/src/ch32v30x_fsmc.c ****         FSMC_NORSRAMInitStruct->FSMC_BurstAccessMode |
+  93:../Peripheral/src/ch32v30x_fsmc.c ****         FSMC_NORSRAMInitStruct->FSMC_AsynchronousWait |
+  94:../Peripheral/src/ch32v30x_fsmc.c ****         FSMC_NORSRAMInitStruct->FSMC_WaitSignalPolarity |
+  95:../Peripheral/src/ch32v30x_fsmc.c ****         FSMC_NORSRAMInitStruct->FSMC_WrapMode |
+  96:../Peripheral/src/ch32v30x_fsmc.c ****         FSMC_NORSRAMInitStruct->FSMC_WaitSignalActive |
+  97:../Peripheral/src/ch32v30x_fsmc.c ****         FSMC_NORSRAMInitStruct->FSMC_WriteOperation |
+  98:../Peripheral/src/ch32v30x_fsmc.c ****         FSMC_NORSRAMInitStruct->FSMC_WaitSignal |
+  99:../Peripheral/src/ch32v30x_fsmc.c ****         FSMC_NORSRAMInitStruct->FSMC_ExtendedMode |
+ 110              		.loc 1 99 31
+ 111 0006 0328C502 		lw	a6,44(a0)
+  89:../Peripheral/src/ch32v30x_fsmc.c ****         (uint32_t)FSMC_NORSRAMInitStruct->FSMC_DataAddressMux |
+ 112              		.loc 1 89 63
+ 113 000a D58F     		or	a5,a3,a5
+  90:../Peripheral/src/ch32v30x_fsmc.c ****         FSMC_NORSRAMInitStruct->FSMC_MemoryDataWidth |
+ 114              		.loc 1 90 49
+ 115 000c D98F     		or	a5,a5,a4
+  91:../Peripheral/src/ch32v30x_fsmc.c ****         FSMC_NORSRAMInitStruct->FSMC_MemoryDataWidth |
+ 116              		.loc 1 91 54
+ 117 000e 1849     		lw	a4,16(a0)
+ 118 0010 370600A0 		li	a2,-1610612736
+ 119 0014 D98F     		or	a5,a5,a4
+  92:../Peripheral/src/ch32v30x_fsmc.c ****         FSMC_NORSRAMInitStruct->FSMC_AsynchronousWait |
+ 120              		.loc 1 92 54
+ 121 0016 5849     		lw	a4,20(a0)
+ 122 0018 D98F     		or	a5,a5,a4
+  93:../Peripheral/src/ch32v30x_fsmc.c ****         FSMC_NORSRAMInitStruct->FSMC_WaitSignalPolarity |
+ 123              		.loc 1 93 55
+ 124 001a 184D     		lw	a4,24(a0)
+ 125 001c D98F     		or	a5,a5,a4
+  94:../Peripheral/src/ch32v30x_fsmc.c ****         FSMC_NORSRAMInitStruct->FSMC_WrapMode |
+ 126              		.loc 1 94 57
+ 127 001e 584D     		lw	a4,28(a0)
+ 128 0020 D98F     		or	a5,a5,a4
+  95:../Peripheral/src/ch32v30x_fsmc.c ****         FSMC_NORSRAMInitStruct->FSMC_WaitSignalActive |
+ 129              		.loc 1 95 47
+ 130 0022 1851     		lw	a4,32(a0)
+ 131 0024 D98F     		or	a5,a5,a4
+  96:../Peripheral/src/ch32v30x_fsmc.c ****         FSMC_NORSRAMInitStruct->FSMC_WriteOperation |
+ 132              		.loc 1 96 55
+ 133 0026 5851     		lw	a4,36(a0)
+ 134 0028 D98F     		or	a5,a5,a4
+  97:../Peripheral/src/ch32v30x_fsmc.c ****         FSMC_NORSRAMInitStruct->FSMC_WaitSignal |
+ 135              		.loc 1 97 53
+ 136 002a 1855     		lw	a4,40(a0)
+ 137 002c D98F     		or	a5,a5,a4
+ 138              		.loc 1 99 51
+ 139 002e 1859     		lw	a4,48(a0)
+  98:../Peripheral/src/ch32v30x_fsmc.c ****         FSMC_NORSRAMInitStruct->FSMC_ExtendedMode |
+ 140              		.loc 1 98 49
+ 141 0030 B3E70701 		or	a5,a5,a6
+ 142              		.loc 1 99 51
+ 143 0034 D98F     		or	a5,a5,a4
+ 144 0036 1841     		lw	a4,0(a0)
+ 145 0038 0A07     		slli	a4,a4,2
+ 146 003a 3A96     		add	a2,a2,a4
+  88:../Peripheral/src/ch32v30x_fsmc.c ****         (uint32_t)FSMC_NORSRAMInitStruct->FSMC_DataAddressMux |
+ 147              		.loc 1 88 57
+ 148 003c 1CC2     		sw	a5,0(a2)
+ 100:../Peripheral/src/ch32v30x_fsmc.c ****         FSMC_NORSRAMInitStruct->FSMC_WriteBurst;
+ 101:../Peripheral/src/ch32v30x_fsmc.c **** 
+ 102:../Peripheral/src/ch32v30x_fsmc.c ****     if(FSMC_NORSRAMInitStruct->FSMC_MemoryType == FSMC_MemoryType_NOR)
+ 149              		.loc 1 102 5 is_stmt 1
+ 150              		.loc 1 102 7 is_stmt 0
+ 151 003e A147     		li	a5,8
+ 152 0040 6396F600 		bne	a3,a5,.L7
+ 103:../Peripheral/src/ch32v30x_fsmc.c ****     {
+ 104:../Peripheral/src/ch32v30x_fsmc.c ****         FSMC_Bank1->BTCR[FSMC_NORSRAMInitStruct->FSMC_Bank] |= (uint32_t)BCR_FACCEN_Set;
+ 153              		.loc 1 104 9 is_stmt 1
+ 154              		.loc 1 104 25 is_stmt 0
+ 155 0044 1C42     		lw	a5,0(a2)
+ 156              		.loc 1 104 61
+ 157 0046 93E70704 		ori	a5,a5,64
+ 158 004a 1CC2     		sw	a5,0(a2)
+ 159              	.L7:
+ 105:../Peripheral/src/ch32v30x_fsmc.c ****     }
+ 106:../Peripheral/src/ch32v30x_fsmc.c **** 
+ 107:../Peripheral/src/ch32v30x_fsmc.c ****     FSMC_Bank1->BTCR[FSMC_NORSRAMInitStruct->FSMC_Bank + 1] =
+ 160              		.loc 1 107 5 is_stmt 1
+ 108:../Peripheral/src/ch32v30x_fsmc.c ****         (uint32_t)FSMC_NORSRAMInitStruct->FSMC_ReadWriteTimingStruct->FSMC_AddressSetupTime |
+ 161              		.loc 1 108 41 is_stmt 0
+ 162 004c 5459     		lw	a3,52(a0)
+ 109:../Peripheral/src/ch32v30x_fsmc.c ****         (FSMC_NORSRAMInitStruct->FSMC_ReadWriteTimingStruct->FSMC_AddressHoldTime << 4) |
+ 110:../Peripheral/src/ch32v30x_fsmc.c ****         (FSMC_NORSRAMInitStruct->FSMC_ReadWriteTimingStruct->FSMC_DataSetupTime << 8) |
+ 111:../Peripheral/src/ch32v30x_fsmc.c ****         (FSMC_NORSRAMInitStruct->FSMC_ReadWriteTimingStruct->FSMC_BusTurnAroundDuration << 16) |
+ 112:../Peripheral/src/ch32v30x_fsmc.c ****         (FSMC_NORSRAMInitStruct->FSMC_ReadWriteTimingStruct->FSMC_CLKDivision << 20) |
+ 113:../Peripheral/src/ch32v30x_fsmc.c ****         (FSMC_NORSRAMInitStruct->FSMC_ReadWriteTimingStruct->FSMC_DataLatency << 24) |
+ 163              		.loc 1 113 86
+ 164 004e 8C4E     		lw	a1,24(a3)
+ 165 0050 9C42     		lw	a5,0(a3)
+ 166 0052 CD8F     		or	a5,a5,a1
+ 109:../Peripheral/src/ch32v30x_fsmc.c ****         (FSMC_NORSRAMInitStruct->FSMC_ReadWriteTimingStruct->FSMC_AddressHoldTime << 4) |
+ 167              		.loc 1 109 83
+ 168 0054 CC42     		lw	a1,4(a3)
+ 169 0056 9205     		slli	a1,a1,4
+ 170              		.loc 1 113 86
+ 171 0058 CD8F     		or	a5,a5,a1
+ 110:../Peripheral/src/ch32v30x_fsmc.c ****         (FSMC_NORSRAMInitStruct->FSMC_ReadWriteTimingStruct->FSMC_BusTurnAroundDuration << 16) |
+ 172              		.loc 1 110 81
+ 173 005a 8C46     		lw	a1,8(a3)
+ 174 005c A205     		slli	a1,a1,8
+ 175              		.loc 1 113 86
+ 176 005e CD8F     		or	a5,a5,a1
+ 111:../Peripheral/src/ch32v30x_fsmc.c ****         (FSMC_NORSRAMInitStruct->FSMC_ReadWriteTimingStruct->FSMC_CLKDivision << 20) |
+ 177              		.loc 1 111 89
+ 178 0060 CC46     		lw	a1,12(a3)
+ 179 0062 C205     		slli	a1,a1,16
+ 180              		.loc 1 113 86
+ 181 0064 CD8F     		or	a5,a5,a1
+ 112:../Peripheral/src/ch32v30x_fsmc.c ****         (FSMC_NORSRAMInitStruct->FSMC_ReadWriteTimingStruct->FSMC_DataLatency << 24) |
+ 182              		.loc 1 112 79
+ 183 0066 8C4A     		lw	a1,16(a3)
+ 184              		.loc 1 113 79
+ 185 0068 D44A     		lw	a3,20(a3)
+ 112:../Peripheral/src/ch32v30x_fsmc.c ****         (FSMC_NORSRAMInitStruct->FSMC_ReadWriteTimingStruct->FSMC_DataLatency << 24) |
+ 186              		.loc 1 112 79
+ 187 006a D205     		slli	a1,a1,20
+ 188              		.loc 1 113 86
+ 189 006c CD8F     		or	a5,a5,a1
+ 190              		.loc 1 113 79
+ 191 006e E206     		slli	a3,a3,24
+ 192              		.loc 1 113 86
+ 193 0070 D58F     		or	a5,a5,a3
+ 107:../Peripheral/src/ch32v30x_fsmc.c ****         (uint32_t)FSMC_NORSRAMInitStruct->FSMC_ReadWriteTimingStruct->FSMC_AddressSetupTime |
+ 194              		.loc 1 107 61
+ 195 0072 5CC2     		sw	a5,4(a2)
+ 114:../Peripheral/src/ch32v30x_fsmc.c ****         FSMC_NORSRAMInitStruct->FSMC_ReadWriteTimingStruct->FSMC_AccessMode;
+ 115:../Peripheral/src/ch32v30x_fsmc.c **** 
+ 116:../Peripheral/src/ch32v30x_fsmc.c ****     if(FSMC_NORSRAMInitStruct->FSMC_ExtendedMode == FSMC_ExtendedMode_Enable)
+ 196              		.loc 1 116 5 is_stmt 1
+ 197              		.loc 1 116 7 is_stmt 0
+ 198 0074 9167     		li	a5,16384
+ 199 0076 6313F802 		bne	a6,a5,.L8
+ 117:../Peripheral/src/ch32v30x_fsmc.c ****     {
+ 118:../Peripheral/src/ch32v30x_fsmc.c ****         FSMC_Bank1E->BWTR[FSMC_NORSRAMInitStruct->FSMC_Bank] =
+ 200              		.loc 1 118 9 is_stmt 1
+ 119:../Peripheral/src/ch32v30x_fsmc.c ****             (uint32_t)FSMC_NORSRAMInitStruct->FSMC_WriteTimingStruct->FSMC_AddressSetupTime |
+ 201              		.loc 1 119 45 is_stmt 0
+ 202 007a 145D     		lw	a3,56(a0)
+ 120:../Peripheral/src/ch32v30x_fsmc.c ****             (FSMC_NORSRAMInitStruct->FSMC_WriteTimingStruct->FSMC_AddressHoldTime << 4) |
+ 121:../Peripheral/src/ch32v30x_fsmc.c ****             (FSMC_NORSRAMInitStruct->FSMC_WriteTimingStruct->FSMC_DataSetupTime << 8) |
+ 203              		.loc 1 121 87
+ 204 007c 904E     		lw	a2,24(a3)
+ 205 007e 9C42     		lw	a5,0(a3)
+ 206 0080 D18F     		or	a5,a5,a2
+ 120:../Peripheral/src/ch32v30x_fsmc.c ****             (FSMC_NORSRAMInitStruct->FSMC_WriteTimingStruct->FSMC_AddressHoldTime << 4) |
+ 207              		.loc 1 120 83
+ 208 0082 D042     		lw	a2,4(a3)
+ 209              		.loc 1 121 81
+ 210 0084 9446     		lw	a3,8(a3)
+ 120:../Peripheral/src/ch32v30x_fsmc.c ****             (FSMC_NORSRAMInitStruct->FSMC_WriteTimingStruct->FSMC_AddressHoldTime << 4) |
+ 211              		.loc 1 120 83
+ 212 0086 1206     		slli	a2,a2,4
+ 213              		.loc 1 121 81
+ 214 0088 A206     		slli	a3,a3,8
+ 215              		.loc 1 121 87
+ 216 008a D18F     		or	a5,a5,a2
+ 217 008c D58F     		or	a5,a5,a3
+ 218 008e B70600A0 		li	a3,-1610612736
+ 219 0092 93864610 		addi	a3,a3,260
+ 220 0096 3697     		add	a4,a4,a3
+ 221              	.L10:
+ 122:../Peripheral/src/ch32v30x_fsmc.c ****             FSMC_NORSRAMInitStruct->FSMC_WriteTimingStruct->FSMC_AccessMode;
+ 123:../Peripheral/src/ch32v30x_fsmc.c ****     }
+ 124:../Peripheral/src/ch32v30x_fsmc.c ****     else
+ 125:../Peripheral/src/ch32v30x_fsmc.c ****     {
+ 126:../Peripheral/src/ch32v30x_fsmc.c ****         FSMC_Bank1E->BWTR[FSMC_NORSRAMInitStruct->FSMC_Bank] = 0x0FFFFFFF;
+ 222              		.loc 1 126 62
+ 223 0098 1CC3     		sw	a5,0(a4)
+ 127:../Peripheral/src/ch32v30x_fsmc.c ****     }
+ 128:../Peripheral/src/ch32v30x_fsmc.c **** }
+ 224              		.loc 1 128 1
+ 225 009a 8280     		ret
+ 226              	.L8:
+ 126:../Peripheral/src/ch32v30x_fsmc.c ****     }
+ 227              		.loc 1 126 9 is_stmt 1
+ 228 009c B70700A0 		li	a5,-1610612736
+ 229 00a0 93874710 		addi	a5,a5,260
+ 230 00a4 3E97     		add	a4,a4,a5
+ 126:../Peripheral/src/ch32v30x_fsmc.c ****     }
+ 231              		.loc 1 126 62 is_stmt 0
+ 232 00a6 B7070010 		li	a5,268435456
+ 233 00aa FD17     		addi	a5,a5,-1
+ 234 00ac F5B7     		j	.L10
+ 235              		.cfi_endproc
+ 236              	.LFE31:
+ 238              		.section	.text.FSMC_NANDInit,"ax",@progbits
+ 239              		.align	1
+ 240              		.globl	FSMC_NANDInit
+ 242              	FSMC_NANDInit:
+ 243              	.LFB32:
+ 129:../Peripheral/src/ch32v30x_fsmc.c **** 
+ 130:../Peripheral/src/ch32v30x_fsmc.c **** /*********************************************************************
+ 131:../Peripheral/src/ch32v30x_fsmc.c ****  * @fn      FSMC_NANDInit
+ 132:../Peripheral/src/ch32v30x_fsmc.c ****  *
+ 133:../Peripheral/src/ch32v30x_fsmc.c ****  * @brief   Initializes the FSMC NAND Banks according to the specified
+ 134:../Peripheral/src/ch32v30x_fsmc.c ****  *        parameters in the FSMC_NANDInitStruct.
+ 135:../Peripheral/src/ch32v30x_fsmc.c ****  *
+ 136:../Peripheral/src/ch32v30x_fsmc.c ****  * @param   FSMC_NANDInitStruct - pointer to a FSMC_NANDInitTypeDef
+ 137:../Peripheral/src/ch32v30x_fsmc.c ****  *        structure that contains the configuration information for the FSMC
+ 138:../Peripheral/src/ch32v30x_fsmc.c ****  *        NAND specified Banks.
+ 139:../Peripheral/src/ch32v30x_fsmc.c ****  *
+ 140:../Peripheral/src/ch32v30x_fsmc.c ****  * @return  none
+ 141:../Peripheral/src/ch32v30x_fsmc.c ****  */
+ 142:../Peripheral/src/ch32v30x_fsmc.c **** void FSMC_NANDInit(FSMC_NANDInitTypeDef *FSMC_NANDInitStruct)
+ 143:../Peripheral/src/ch32v30x_fsmc.c **** {
+ 244              		.loc 1 143 1 is_stmt 1
+ 245              		.cfi_startproc
+ 246              	.LVL3:
+ 144:../Peripheral/src/ch32v30x_fsmc.c ****     uint32_t tmppcr = 0x00000000, tmppmem = 0x00000000, tmppatt = 0x00000000;
+ 247              		.loc 1 144 5
+ 145:../Peripheral/src/ch32v30x_fsmc.c **** 
+ 146:../Peripheral/src/ch32v30x_fsmc.c ****     tmppcr = (uint32_t)FSMC_NANDInitStruct->FSMC_Waitfeature |
+ 248              		.loc 1 146 5
+ 147:../Peripheral/src/ch32v30x_fsmc.c ****              PCR_MemoryType_NAND |
+ 148:../Peripheral/src/ch32v30x_fsmc.c ****              FSMC_NANDInitStruct->FSMC_MemoryDataWidth |
+ 149:../Peripheral/src/ch32v30x_fsmc.c ****              FSMC_NANDInitStruct->FSMC_ECC |
+ 150:../Peripheral/src/ch32v30x_fsmc.c ****              FSMC_NANDInitStruct->FSMC_ECCPageSize |
+ 151:../Peripheral/src/ch32v30x_fsmc.c ****              (FSMC_NANDInitStruct->FSMC_TCLRSetupTime << 9) |
+ 152:../Peripheral/src/ch32v30x_fsmc.c ****              (FSMC_NANDInitStruct->FSMC_TARSetupTime << 13);
+ 153:../Peripheral/src/ch32v30x_fsmc.c **** 
+ 154:../Peripheral/src/ch32v30x_fsmc.c ****     tmppmem = (uint32_t)FSMC_NANDInitStruct->FSMC_CommonSpaceTimingStruct->FSMC_SetupTime |
+ 249              		.loc 1 154 5
+ 155:../Peripheral/src/ch32v30x_fsmc.c ****               (FSMC_NANDInitStruct->FSMC_CommonSpaceTimingStruct->FSMC_WaitSetupTime << 8) |
+ 156:../Peripheral/src/ch32v30x_fsmc.c ****               (FSMC_NANDInitStruct->FSMC_CommonSpaceTimingStruct->FSMC_HoldSetupTime << 16) |
+ 157:../Peripheral/src/ch32v30x_fsmc.c ****               (FSMC_NANDInitStruct->FSMC_CommonSpaceTimingStruct->FSMC_HiZSetupTime << 24);
+ 158:../Peripheral/src/ch32v30x_fsmc.c **** 
+ 159:../Peripheral/src/ch32v30x_fsmc.c ****     tmppatt = (uint32_t)FSMC_NANDInitStruct->FSMC_AttributeSpaceTimingStruct->FSMC_SetupTime |
+ 250              		.loc 1 159 5
+ 160:../Peripheral/src/ch32v30x_fsmc.c ****               (FSMC_NANDInitStruct->FSMC_AttributeSpaceTimingStruct->FSMC_WaitSetupTime << 8) |
+ 161:../Peripheral/src/ch32v30x_fsmc.c ****               (FSMC_NANDInitStruct->FSMC_AttributeSpaceTimingStruct->FSMC_HoldSetupTime << 16) |
+ 162:../Peripheral/src/ch32v30x_fsmc.c ****               (FSMC_NANDInitStruct->FSMC_AttributeSpaceTimingStruct->FSMC_HiZSetupTime << 24);
+ 163:../Peripheral/src/ch32v30x_fsmc.c **** 
+ 164:../Peripheral/src/ch32v30x_fsmc.c ****     if(FSMC_NANDInitStruct->FSMC_Bank == FSMC_Bank2_NAND)
+ 251              		.loc 1 164 5
+ 252              		.loc 1 164 7 is_stmt 0
+ 253 0000 1841     		lw	a4,0(a0)
+ 254 0002 C147     		li	a5,16
+ 255 0004 6313F708 		bne	a4,a5,.L11
+ 154:../Peripheral/src/ch32v30x_fsmc.c ****               (FSMC_NANDInitStruct->FSMC_CommonSpaceTimingStruct->FSMC_WaitSetupTime << 8) |
+ 256              		.loc 1 154 44
+ 257 0008 5C4D     		lw	a5,28(a0)
+ 147:../Peripheral/src/ch32v30x_fsmc.c ****              FSMC_NANDInitStruct->FSMC_MemoryDataWidth |
+ 258              		.loc 1 147 34
+ 259 000a 032E8500 		lw	t3,8(a0)
+ 156:../Peripheral/src/ch32v30x_fsmc.c ****               (FSMC_NANDInitStruct->FSMC_CommonSpaceTimingStruct->FSMC_HiZSetupTime << 24);
+ 260              		.loc 1 156 65
+ 261 000e 9447     		lw	a3,8(a5)
+ 154:../Peripheral/src/ch32v30x_fsmc.c ****               (FSMC_NANDInitStruct->FSMC_CommonSpaceTimingStruct->FSMC_WaitSetupTime << 8) |
+ 262              		.loc 1 154 74
+ 263 0010 83AE0700 		lw	t4,0(a5)
+ 155:../Peripheral/src/ch32v30x_fsmc.c ****               (FSMC_NANDInitStruct->FSMC_CommonSpaceTimingStruct->FSMC_HoldSetupTime << 16) |
+ 264              		.loc 1 155 65
+ 265 0014 03A84700 		lw	a6,4(a5)
+ 157:../Peripheral/src/ch32v30x_fsmc.c **** 
+ 266              		.loc 1 157 65
+ 267 0018 83A8C700 		lw	a7,12(a5)
+ 159:../Peripheral/src/ch32v30x_fsmc.c ****               (FSMC_NANDInitStruct->FSMC_AttributeSpaceTimingStruct->FSMC_WaitSetupTime << 8) |
+ 268              		.loc 1 159 44
+ 269 001c 1C51     		lw	a5,32(a0)
+ 161:../Peripheral/src/ch32v30x_fsmc.c ****               (FSMC_NANDInitStruct->FSMC_AttributeSpaceTimingStruct->FSMC_HiZSetupTime << 24);
+ 270              		.loc 1 161 68
+ 271 001e 9847     		lw	a4,8(a5)
+ 159:../Peripheral/src/ch32v30x_fsmc.c ****               (FSMC_NANDInitStruct->FSMC_AttributeSpaceTimingStruct->FSMC_WaitSetupTime << 8) |
+ 272              		.loc 1 159 77
+ 273 0020 03A30700 		lw	t1,0(a5)
+ 160:../Peripheral/src/ch32v30x_fsmc.c ****               (FSMC_NANDInitStruct->FSMC_AttributeSpaceTimingStruct->FSMC_HoldSetupTime << 16) |
+ 274              		.loc 1 160 68
+ 275 0024 D043     		lw	a2,4(a5)
+ 162:../Peripheral/src/ch32v30x_fsmc.c **** 
+ 276              		.loc 1 162 68
+ 277 0026 CC47     		lw	a1,12(a5)
+ 165:../Peripheral/src/ch32v30x_fsmc.c ****     {
+ 166:../Peripheral/src/ch32v30x_fsmc.c ****         FSMC_Bank2->PCR2 = tmppcr;
+ 278              		.loc 1 166 9 is_stmt 1
+ 147:../Peripheral/src/ch32v30x_fsmc.c ****              FSMC_NANDInitStruct->FSMC_MemoryDataWidth |
+ 279              		.loc 1 147 34 is_stmt 0
+ 280 0028 5C41     		lw	a5,4(a0)
+ 281 002a B3E7C701 		or	a5,a5,t3
+ 151:../Peripheral/src/ch32v30x_fsmc.c ****              (FSMC_NANDInitStruct->FSMC_TARSetupTime << 13);
+ 282              		.loc 1 151 55
+ 283 002e 032E4501 		lw	t3,20(a0)
+ 284 0032 260E     		slli	t3,t3,9
+ 151:../Peripheral/src/ch32v30x_fsmc.c ****              (FSMC_NANDInitStruct->FSMC_TARSetupTime << 13);
+ 285              		.loc 1 151 61
+ 286 0034 B3E7C701 		or	a5,a5,t3
+ 287 0038 032EC500 		lw	t3,12(a0)
+ 288 003c B3E7C701 		or	a5,a5,t3
+ 289 0040 032E0501 		lw	t3,16(a0)
+ 152:../Peripheral/src/ch32v30x_fsmc.c **** 
+ 290              		.loc 1 152 54
+ 291 0044 084D     		lw	a0,24(a0)
+ 292              	.LVL4:
+ 151:../Peripheral/src/ch32v30x_fsmc.c ****              (FSMC_NANDInitStruct->FSMC_TARSetupTime << 13);
+ 293              		.loc 1 151 61
+ 294 0046 B3E7C701 		or	a5,a5,t3
+ 152:../Peripheral/src/ch32v30x_fsmc.c **** 
+ 295              		.loc 1 152 54
+ 296 004a 3605     		slli	a0,a0,13
+ 297              	.LVL5:
+ 151:../Peripheral/src/ch32v30x_fsmc.c ****              (FSMC_NANDInitStruct->FSMC_TARSetupTime << 13);
+ 298              		.loc 1 151 61
+ 299 004c C98F     		or	a5,a5,a0
+ 146:../Peripheral/src/ch32v30x_fsmc.c ****              PCR_MemoryType_NAND |
+ 300              		.loc 1 146 12
+ 301 004e 93E78700 		ori	a5,a5,8
+ 302              		.loc 1 166 26
+ 303 0052 370E00A0 		li	t3,-1610612736
+ 304              	.LVL6:
+ 305 0056 2320FE06 		sw	a5,96(t3)
+ 306              	.LVL7:
+ 167:../Peripheral/src/ch32v30x_fsmc.c ****         FSMC_Bank2->PMEM2 = tmppmem;
+ 307              		.loc 1 167 9 is_stmt 1
+ 156:../Peripheral/src/ch32v30x_fsmc.c ****               (FSMC_NANDInitStruct->FSMC_CommonSpaceTimingStruct->FSMC_HiZSetupTime << 24);
+ 308              		.loc 1 156 86 is_stmt 0
+ 309 005a 93970601 		slli	a5,a3,16
+ 157:../Peripheral/src/ch32v30x_fsmc.c **** 
+ 310              		.loc 1 157 85
+ 311 005e 93968801 		slli	a3,a7,24
+ 154:../Peripheral/src/ch32v30x_fsmc.c ****               (FSMC_NANDInitStruct->FSMC_CommonSpaceTimingStruct->FSMC_WaitSetupTime << 8) |
+ 312              		.loc 1 154 13
+ 313 0062 D58F     		or	a5,a5,a3
+ 314 0064 B3E7D701 		or	a5,a5,t4
+ 155:../Peripheral/src/ch32v30x_fsmc.c ****               (FSMC_NANDInitStruct->FSMC_CommonSpaceTimingStruct->FSMC_HoldSetupTime << 16) |
+ 315              		.loc 1 155 86
+ 316 0068 93168800 		slli	a3,a6,8
+ 166:../Peripheral/src/ch32v30x_fsmc.c ****         FSMC_Bank2->PMEM2 = tmppmem;
+ 317              		.loc 1 166 26
+ 318 006c 13050E06 		addi	a0,t3,96
+ 154:../Peripheral/src/ch32v30x_fsmc.c ****               (FSMC_NANDInitStruct->FSMC_CommonSpaceTimingStruct->FSMC_WaitSetupTime << 8) |
+ 319              		.loc 1 154 13
+ 320 0070 D58F     		or	a5,a5,a3
+ 321              		.loc 1 167 27
+ 322 0072 1CC5     		sw	a5,8(a0)
+ 168:../Peripheral/src/ch32v30x_fsmc.c ****         FSMC_Bank2->PATT2 = tmppatt;
+ 323              		.loc 1 168 9 is_stmt 1
+ 161:../Peripheral/src/ch32v30x_fsmc.c ****               (FSMC_NANDInitStruct->FSMC_AttributeSpaceTimingStruct->FSMC_HiZSetupTime << 24);
+ 324              		.loc 1 161 89 is_stmt 0
+ 325 0074 93170701 		slli	a5,a4,16
+ 162:../Peripheral/src/ch32v30x_fsmc.c **** 
+ 326              		.loc 1 162 88
+ 327 0078 13978501 		slli	a4,a1,24
+ 159:../Peripheral/src/ch32v30x_fsmc.c ****               (FSMC_NANDInitStruct->FSMC_AttributeSpaceTimingStruct->FSMC_WaitSetupTime << 8) |
+ 328              		.loc 1 159 13
+ 329 007c D98F     		or	a5,a5,a4
+ 330 007e B3E76700 		or	a5,a5,t1
+ 160:../Peripheral/src/ch32v30x_fsmc.c ****               (FSMC_NANDInitStruct->FSMC_AttributeSpaceTimingStruct->FSMC_HoldSetupTime << 16) |
+ 331              		.loc 1 160 89
+ 332 0082 13178600 		slli	a4,a2,8
+ 159:../Peripheral/src/ch32v30x_fsmc.c ****               (FSMC_NANDInitStruct->FSMC_AttributeSpaceTimingStruct->FSMC_WaitSetupTime << 8) |
+ 333              		.loc 1 159 13
+ 334 0086 D98F     		or	a5,a5,a4
+ 335              		.loc 1 168 27
+ 336 0088 5CC5     		sw	a5,12(a0)
+ 337              	.L11:
+ 169:../Peripheral/src/ch32v30x_fsmc.c ****     }
+ 170:../Peripheral/src/ch32v30x_fsmc.c **** }
+ 338              		.loc 1 170 1
+ 339 008a 8280     		ret
+ 340              		.cfi_endproc
+ 341              	.LFE32:
+ 343              		.section	.text.FSMC_NORSRAMStructInit,"ax",@progbits
+ 344              		.align	1
+ 345              		.globl	FSMC_NORSRAMStructInit
+ 347              	FSMC_NORSRAMStructInit:
+ 348              	.LFB33:
+ 171:../Peripheral/src/ch32v30x_fsmc.c **** 
+ 172:../Peripheral/src/ch32v30x_fsmc.c **** /*********************************************************************
+ 173:../Peripheral/src/ch32v30x_fsmc.c ****  * @fn      FSMC_NORSRAMStructInit
+ 174:../Peripheral/src/ch32v30x_fsmc.c ****  *
+ 175:../Peripheral/src/ch32v30x_fsmc.c ****  * @brief   Fills each FSMC_NORSRAMInitStruct member with its default value.
+ 176:../Peripheral/src/ch32v30x_fsmc.c ****  *
+ 177:../Peripheral/src/ch32v30x_fsmc.c ****  * @param   FSMC_NORSRAMInitStruct - pointer to a FSMC_NORSRAMInitTypeDef
+ 178:../Peripheral/src/ch32v30x_fsmc.c ****  *        structure which will be initialized.
+ 179:../Peripheral/src/ch32v30x_fsmc.c ****  *
+ 180:../Peripheral/src/ch32v30x_fsmc.c ****  * @return  none
+ 181:../Peripheral/src/ch32v30x_fsmc.c ****  */
+ 182:../Peripheral/src/ch32v30x_fsmc.c **** void FSMC_NORSRAMStructInit(FSMC_NORSRAMInitTypeDef *FSMC_NORSRAMInitStruct)
+ 183:../Peripheral/src/ch32v30x_fsmc.c **** {
+ 349              		.loc 1 183 1 is_stmt 1
+ 350              		.cfi_startproc
+ 351              	.LVL8:
+ 184:../Peripheral/src/ch32v30x_fsmc.c ****     FSMC_NORSRAMInitStruct->FSMC_Bank = FSMC_Bank1_NORSRAM1;
+ 352              		.loc 1 184 5
+ 185:../Peripheral/src/ch32v30x_fsmc.c ****     FSMC_NORSRAMInitStruct->FSMC_DataAddressMux = FSMC_DataAddressMux_Enable;
+ 353              		.loc 1 185 49 is_stmt 0
+ 354 0000 8947     		li	a5,2
+ 186:../Peripheral/src/ch32v30x_fsmc.c ****     FSMC_NORSRAMInitStruct->FSMC_MemoryType = FSMC_MemoryType_SRAM;
+ 187:../Peripheral/src/ch32v30x_fsmc.c ****     FSMC_NORSRAMInitStruct->FSMC_MemoryDataWidth = FSMC_MemoryDataWidth_8b;
+ 188:../Peripheral/src/ch32v30x_fsmc.c ****     FSMC_NORSRAMInitStruct->FSMC_BurstAccessMode = FSMC_BurstAccessMode_Disable;
+ 189:../Peripheral/src/ch32v30x_fsmc.c ****     FSMC_NORSRAMInitStruct->FSMC_AsynchronousWait = FSMC_AsynchronousWait_Disable;
+ 190:../Peripheral/src/ch32v30x_fsmc.c ****     FSMC_NORSRAMInitStruct->FSMC_WaitSignalPolarity = FSMC_WaitSignalPolarity_Low;
+ 191:../Peripheral/src/ch32v30x_fsmc.c ****     FSMC_NORSRAMInitStruct->FSMC_WrapMode = FSMC_WrapMode_Disable;
+ 192:../Peripheral/src/ch32v30x_fsmc.c ****     FSMC_NORSRAMInitStruct->FSMC_WaitSignalActive = FSMC_WaitSignalActive_BeforeWaitState;
+ 193:../Peripheral/src/ch32v30x_fsmc.c ****     FSMC_NORSRAMInitStruct->FSMC_WriteOperation = FSMC_WriteOperation_Enable;
+ 194:../Peripheral/src/ch32v30x_fsmc.c ****     FSMC_NORSRAMInitStruct->FSMC_WaitSignal = FSMC_WaitSignal_Enable;
+ 195:../Peripheral/src/ch32v30x_fsmc.c ****     FSMC_NORSRAMInitStruct->FSMC_ExtendedMode = FSMC_ExtendedMode_Disable;
+ 196:../Peripheral/src/ch32v30x_fsmc.c ****     FSMC_NORSRAMInitStruct->FSMC_WriteBurst = FSMC_WriteBurst_Disable;
+ 197:../Peripheral/src/ch32v30x_fsmc.c ****     FSMC_NORSRAMInitStruct->FSMC_ReadWriteTimingStruct->FSMC_AddressSetupTime = 0xF;
+ 355              		.loc 1 197 27
+ 356 0002 5859     		lw	a4,52(a0)
+ 185:../Peripheral/src/ch32v30x_fsmc.c ****     FSMC_NORSRAMInitStruct->FSMC_DataAddressMux = FSMC_DataAddressMux_Enable;
+ 357              		.loc 1 185 49
+ 358 0004 5CC1     		sw	a5,4(a0)
+ 193:../Peripheral/src/ch32v30x_fsmc.c ****     FSMC_NORSRAMInitStruct->FSMC_WaitSignal = FSMC_WaitSignal_Enable;
+ 359              		.loc 1 193 49
+ 360 0006 8567     		li	a5,4096
+ 361 0008 5CD1     		sw	a5,36(a0)
+ 194:../Peripheral/src/ch32v30x_fsmc.c ****     FSMC_NORSRAMInitStruct->FSMC_ExtendedMode = FSMC_ExtendedMode_Disable;
+ 362              		.loc 1 194 45
+ 363 000a 8967     		li	a5,8192
+ 364 000c 1CD5     		sw	a5,40(a0)
+ 184:../Peripheral/src/ch32v30x_fsmc.c ****     FSMC_NORSRAMInitStruct->FSMC_DataAddressMux = FSMC_DataAddressMux_Enable;
+ 365              		.loc 1 184 39
+ 366 000e 23200500 		sw	zero,0(a0)
+ 185:../Peripheral/src/ch32v30x_fsmc.c ****     FSMC_NORSRAMInitStruct->FSMC_MemoryType = FSMC_MemoryType_SRAM;
+ 367              		.loc 1 185 5 is_stmt 1
+ 186:../Peripheral/src/ch32v30x_fsmc.c ****     FSMC_NORSRAMInitStruct->FSMC_MemoryDataWidth = FSMC_MemoryDataWidth_8b;
+ 368              		.loc 1 186 5
+ 186:../Peripheral/src/ch32v30x_fsmc.c ****     FSMC_NORSRAMInitStruct->FSMC_MemoryDataWidth = FSMC_MemoryDataWidth_8b;
+ 369              		.loc 1 186 45 is_stmt 0
+ 370 0012 23240500 		sw	zero,8(a0)
+ 187:../Peripheral/src/ch32v30x_fsmc.c ****     FSMC_NORSRAMInitStruct->FSMC_BurstAccessMode = FSMC_BurstAccessMode_Disable;
+ 371              		.loc 1 187 5 is_stmt 1
+ 187:../Peripheral/src/ch32v30x_fsmc.c ****     FSMC_NORSRAMInitStruct->FSMC_BurstAccessMode = FSMC_BurstAccessMode_Disable;
+ 372              		.loc 1 187 50 is_stmt 0
+ 373 0016 23260500 		sw	zero,12(a0)
+ 188:../Peripheral/src/ch32v30x_fsmc.c ****     FSMC_NORSRAMInitStruct->FSMC_AsynchronousWait = FSMC_AsynchronousWait_Disable;
+ 374              		.loc 1 188 5 is_stmt 1
+ 188:../Peripheral/src/ch32v30x_fsmc.c ****     FSMC_NORSRAMInitStruct->FSMC_AsynchronousWait = FSMC_AsynchronousWait_Disable;
+ 375              		.loc 1 188 50 is_stmt 0
+ 376 001a 23280500 		sw	zero,16(a0)
+ 189:../Peripheral/src/ch32v30x_fsmc.c ****     FSMC_NORSRAMInitStruct->FSMC_WaitSignalPolarity = FSMC_WaitSignalPolarity_Low;
+ 377              		.loc 1 189 5 is_stmt 1
+ 189:../Peripheral/src/ch32v30x_fsmc.c ****     FSMC_NORSRAMInitStruct->FSMC_WaitSignalPolarity = FSMC_WaitSignalPolarity_Low;
+ 378              		.loc 1 189 51 is_stmt 0
+ 379 001e 232A0500 		sw	zero,20(a0)
+ 190:../Peripheral/src/ch32v30x_fsmc.c ****     FSMC_NORSRAMInitStruct->FSMC_WrapMode = FSMC_WrapMode_Disable;
+ 380              		.loc 1 190 5 is_stmt 1
+ 190:../Peripheral/src/ch32v30x_fsmc.c ****     FSMC_NORSRAMInitStruct->FSMC_WrapMode = FSMC_WrapMode_Disable;
+ 381              		.loc 1 190 53 is_stmt 0
+ 382 0022 232C0500 		sw	zero,24(a0)
+ 191:../Peripheral/src/ch32v30x_fsmc.c ****     FSMC_NORSRAMInitStruct->FSMC_WaitSignalActive = FSMC_WaitSignalActive_BeforeWaitState;
+ 383              		.loc 1 191 5 is_stmt 1
+ 191:../Peripheral/src/ch32v30x_fsmc.c ****     FSMC_NORSRAMInitStruct->FSMC_WaitSignalActive = FSMC_WaitSignalActive_BeforeWaitState;
+ 384              		.loc 1 191 43 is_stmt 0
+ 385 0026 232E0500 		sw	zero,28(a0)
+ 192:../Peripheral/src/ch32v30x_fsmc.c ****     FSMC_NORSRAMInitStruct->FSMC_WriteOperation = FSMC_WriteOperation_Enable;
+ 386              		.loc 1 192 5 is_stmt 1
+ 192:../Peripheral/src/ch32v30x_fsmc.c ****     FSMC_NORSRAMInitStruct->FSMC_WriteOperation = FSMC_WriteOperation_Enable;
+ 387              		.loc 1 192 51 is_stmt 0
+ 388 002a 23200502 		sw	zero,32(a0)
+ 193:../Peripheral/src/ch32v30x_fsmc.c ****     FSMC_NORSRAMInitStruct->FSMC_WaitSignal = FSMC_WaitSignal_Enable;
+ 389              		.loc 1 193 5 is_stmt 1
+ 194:../Peripheral/src/ch32v30x_fsmc.c ****     FSMC_NORSRAMInitStruct->FSMC_ExtendedMode = FSMC_ExtendedMode_Disable;
+ 390              		.loc 1 194 5
+ 195:../Peripheral/src/ch32v30x_fsmc.c ****     FSMC_NORSRAMInitStruct->FSMC_WriteBurst = FSMC_WriteBurst_Disable;
+ 391              		.loc 1 195 5
+ 195:../Peripheral/src/ch32v30x_fsmc.c ****     FSMC_NORSRAMInitStruct->FSMC_WriteBurst = FSMC_WriteBurst_Disable;
+ 392              		.loc 1 195 47 is_stmt 0
+ 393 002e 23260502 		sw	zero,44(a0)
+ 196:../Peripheral/src/ch32v30x_fsmc.c ****     FSMC_NORSRAMInitStruct->FSMC_ReadWriteTimingStruct->FSMC_AddressSetupTime = 0xF;
+ 394              		.loc 1 196 5 is_stmt 1
+ 196:../Peripheral/src/ch32v30x_fsmc.c ****     FSMC_NORSRAMInitStruct->FSMC_ReadWriteTimingStruct->FSMC_AddressSetupTime = 0xF;
+ 395              		.loc 1 196 45 is_stmt 0
+ 396 0032 23280502 		sw	zero,48(a0)
+ 397              		.loc 1 197 5 is_stmt 1
+ 398              		.loc 1 197 79 is_stmt 0
+ 399 0036 BD47     		li	a5,15
+ 198:../Peripheral/src/ch32v30x_fsmc.c ****     FSMC_NORSRAMInitStruct->FSMC_ReadWriteTimingStruct->FSMC_AddressHoldTime = 0xF;
+ 199:../Peripheral/src/ch32v30x_fsmc.c ****     FSMC_NORSRAMInitStruct->FSMC_ReadWriteTimingStruct->FSMC_DataSetupTime = 0xFF;
+ 400              		.loc 1 199 76
+ 401 0038 9306F00F 		li	a3,255
+ 197:../Peripheral/src/ch32v30x_fsmc.c ****     FSMC_NORSRAMInitStruct->FSMC_ReadWriteTimingStruct->FSMC_AddressHoldTime = 0xF;
+ 402              		.loc 1 197 79
+ 403 003c 1CC3     		sw	a5,0(a4)
+ 198:../Peripheral/src/ch32v30x_fsmc.c ****     FSMC_NORSRAMInitStruct->FSMC_ReadWriteTimingStruct->FSMC_AddressHoldTime = 0xF;
+ 404              		.loc 1 198 5 is_stmt 1
+ 198:../Peripheral/src/ch32v30x_fsmc.c ****     FSMC_NORSRAMInitStruct->FSMC_ReadWriteTimingStruct->FSMC_AddressHoldTime = 0xF;
+ 405              		.loc 1 198 78 is_stmt 0
+ 406 003e 5CC3     		sw	a5,4(a4)
+ 407              		.loc 1 199 5 is_stmt 1
+ 408              		.loc 1 199 76 is_stmt 0
+ 409 0040 14C7     		sw	a3,8(a4)
+ 200:../Peripheral/src/ch32v30x_fsmc.c ****     FSMC_NORSRAMInitStruct->FSMC_ReadWriteTimingStruct->FSMC_BusTurnAroundDuration = 0xF;
+ 410              		.loc 1 200 5 is_stmt 1
+ 411              		.loc 1 200 84 is_stmt 0
+ 412 0042 5CC7     		sw	a5,12(a4)
+ 201:../Peripheral/src/ch32v30x_fsmc.c ****     FSMC_NORSRAMInitStruct->FSMC_ReadWriteTimingStruct->FSMC_CLKDivision = 0xF;
+ 413              		.loc 1 201 5 is_stmt 1
+ 202:../Peripheral/src/ch32v30x_fsmc.c ****     FSMC_NORSRAMInitStruct->FSMC_ReadWriteTimingStruct->FSMC_DataLatency = 0xF;
+ 203:../Peripheral/src/ch32v30x_fsmc.c ****     FSMC_NORSRAMInitStruct->FSMC_ReadWriteTimingStruct->FSMC_AccessMode = FSMC_AccessMode_A;
+ 414              		.loc 1 203 73 is_stmt 0
+ 415 0044 232C0700 		sw	zero,24(a4)
+ 201:../Peripheral/src/ch32v30x_fsmc.c ****     FSMC_NORSRAMInitStruct->FSMC_ReadWriteTimingStruct->FSMC_CLKDivision = 0xF;
+ 416              		.loc 1 201 74
+ 417 0048 1CCB     		sw	a5,16(a4)
+ 202:../Peripheral/src/ch32v30x_fsmc.c ****     FSMC_NORSRAMInitStruct->FSMC_ReadWriteTimingStruct->FSMC_DataLatency = 0xF;
+ 418              		.loc 1 202 5 is_stmt 1
+ 202:../Peripheral/src/ch32v30x_fsmc.c ****     FSMC_NORSRAMInitStruct->FSMC_ReadWriteTimingStruct->FSMC_DataLatency = 0xF;
+ 419              		.loc 1 202 74 is_stmt 0
+ 420 004a 5CCB     		sw	a5,20(a4)
+ 421              		.loc 1 203 5 is_stmt 1
+ 204:../Peripheral/src/ch32v30x_fsmc.c ****     FSMC_NORSRAMInitStruct->FSMC_WriteTimingStruct->FSMC_AddressSetupTime = 0xF;
+ 422              		.loc 1 204 5
+ 423              		.loc 1 204 27 is_stmt 0
+ 424 004c 185D     		lw	a4,56(a0)
+ 425              		.loc 1 204 75
+ 426 004e 1CC3     		sw	a5,0(a4)
+ 205:../Peripheral/src/ch32v30x_fsmc.c ****     FSMC_NORSRAMInitStruct->FSMC_WriteTimingStruct->FSMC_AddressHoldTime = 0xF;
+ 427              		.loc 1 205 5 is_stmt 1
+ 428              		.loc 1 205 74 is_stmt 0
+ 429 0050 5CC3     		sw	a5,4(a4)
+ 206:../Peripheral/src/ch32v30x_fsmc.c ****     FSMC_NORSRAMInitStruct->FSMC_WriteTimingStruct->FSMC_DataSetupTime = 0xFF;
+ 430              		.loc 1 206 5 is_stmt 1
+ 431              		.loc 1 206 72 is_stmt 0
+ 432 0052 14C7     		sw	a3,8(a4)
+ 207:../Peripheral/src/ch32v30x_fsmc.c ****     FSMC_NORSRAMInitStruct->FSMC_WriteTimingStruct->FSMC_BusTurnAroundDuration = 0xF;
+ 433              		.loc 1 207 5 is_stmt 1
+ 434              		.loc 1 207 80 is_stmt 0
+ 435 0054 5CC7     		sw	a5,12(a4)
+ 208:../Peripheral/src/ch32v30x_fsmc.c ****     FSMC_NORSRAMInitStruct->FSMC_WriteTimingStruct->FSMC_AccessMode = FSMC_AccessMode_A;
+ 436              		.loc 1 208 5 is_stmt 1
+ 437              		.loc 1 208 69 is_stmt 0
+ 438 0056 232C0700 		sw	zero,24(a4)
+ 209:../Peripheral/src/ch32v30x_fsmc.c **** }
+ 439              		.loc 1 209 1
+ 440 005a 8280     		ret
+ 441              		.cfi_endproc
+ 442              	.LFE33:
+ 444              		.section	.text.FSMC_NANDStructInit,"ax",@progbits
+ 445              		.align	1
+ 446              		.globl	FSMC_NANDStructInit
+ 448              	FSMC_NANDStructInit:
+ 449              	.LFB34:
+ 210:../Peripheral/src/ch32v30x_fsmc.c **** 
+ 211:../Peripheral/src/ch32v30x_fsmc.c **** /*********************************************************************
+ 212:../Peripheral/src/ch32v30x_fsmc.c ****  * @fn      FSMC_NANDStructInit
+ 213:../Peripheral/src/ch32v30x_fsmc.c ****  *
+ 214:../Peripheral/src/ch32v30x_fsmc.c ****  * @brief   Fills each FSMC_NANDInitStruct member with its default value.
+ 215:../Peripheral/src/ch32v30x_fsmc.c ****  *
+ 216:../Peripheral/src/ch32v30x_fsmc.c ****  * @param   FSMC_NANDInitStruct - pointer to a FSMC_NANDInitTypeDef
+ 217:../Peripheral/src/ch32v30x_fsmc.c ****  *        structure which will be initialized.
+ 218:../Peripheral/src/ch32v30x_fsmc.c ****  *
+ 219:../Peripheral/src/ch32v30x_fsmc.c ****  * @return  none
+ 220:../Peripheral/src/ch32v30x_fsmc.c ****  */
+ 221:../Peripheral/src/ch32v30x_fsmc.c **** void FSMC_NANDStructInit(FSMC_NANDInitTypeDef *FSMC_NANDInitStruct)
+ 222:../Peripheral/src/ch32v30x_fsmc.c **** {
+ 450              		.loc 1 222 1 is_stmt 1
+ 451              		.cfi_startproc
+ 452              	.LVL9:
+ 223:../Peripheral/src/ch32v30x_fsmc.c ****     FSMC_NANDInitStruct->FSMC_Bank = FSMC_Bank2_NAND;
+ 453              		.loc 1 223 5
+ 224:../Peripheral/src/ch32v30x_fsmc.c ****     FSMC_NANDInitStruct->FSMC_Waitfeature = FSMC_Waitfeature_Disable;
+ 225:../Peripheral/src/ch32v30x_fsmc.c ****     FSMC_NANDInitStruct->FSMC_MemoryDataWidth = FSMC_MemoryDataWidth_8b;
+ 226:../Peripheral/src/ch32v30x_fsmc.c ****     FSMC_NANDInitStruct->FSMC_ECC = FSMC_ECC_Disable;
+ 227:../Peripheral/src/ch32v30x_fsmc.c ****     FSMC_NANDInitStruct->FSMC_ECCPageSize = FSMC_ECCPageSize_256Bytes;
+ 228:../Peripheral/src/ch32v30x_fsmc.c ****     FSMC_NANDInitStruct->FSMC_TCLRSetupTime = 0x0;
+ 229:../Peripheral/src/ch32v30x_fsmc.c ****     FSMC_NANDInitStruct->FSMC_TARSetupTime = 0x0;
+ 230:../Peripheral/src/ch32v30x_fsmc.c ****     FSMC_NANDInitStruct->FSMC_CommonSpaceTimingStruct->FSMC_SetupTime = 0xFC;
+ 454              		.loc 1 230 24 is_stmt 0
+ 455 0000 584D     		lw	a4,28(a0)
+ 223:../Peripheral/src/ch32v30x_fsmc.c ****     FSMC_NANDInitStruct->FSMC_Bank = FSMC_Bank2_NAND;
+ 456              		.loc 1 223 36
+ 457 0002 C147     		li	a5,16
+ 458 0004 1CC1     		sw	a5,0(a0)
+ 224:../Peripheral/src/ch32v30x_fsmc.c ****     FSMC_NANDInitStruct->FSMC_Waitfeature = FSMC_Waitfeature_Disable;
+ 459              		.loc 1 224 5 is_stmt 1
+ 224:../Peripheral/src/ch32v30x_fsmc.c ****     FSMC_NANDInitStruct->FSMC_Waitfeature = FSMC_Waitfeature_Disable;
+ 460              		.loc 1 224 43 is_stmt 0
+ 461 0006 23220500 		sw	zero,4(a0)
+ 225:../Peripheral/src/ch32v30x_fsmc.c ****     FSMC_NANDInitStruct->FSMC_ECC = FSMC_ECC_Disable;
+ 462              		.loc 1 225 5 is_stmt 1
+ 225:../Peripheral/src/ch32v30x_fsmc.c ****     FSMC_NANDInitStruct->FSMC_ECC = FSMC_ECC_Disable;
+ 463              		.loc 1 225 47 is_stmt 0
+ 464 000a 23240500 		sw	zero,8(a0)
+ 226:../Peripheral/src/ch32v30x_fsmc.c ****     FSMC_NANDInitStruct->FSMC_ECCPageSize = FSMC_ECCPageSize_256Bytes;
+ 465              		.loc 1 226 5 is_stmt 1
+ 226:../Peripheral/src/ch32v30x_fsmc.c ****     FSMC_NANDInitStruct->FSMC_ECCPageSize = FSMC_ECCPageSize_256Bytes;
+ 466              		.loc 1 226 35 is_stmt 0
+ 467 000e 23260500 		sw	zero,12(a0)
+ 227:../Peripheral/src/ch32v30x_fsmc.c ****     FSMC_NANDInitStruct->FSMC_TCLRSetupTime = 0x0;
+ 468              		.loc 1 227 5 is_stmt 1
+ 227:../Peripheral/src/ch32v30x_fsmc.c ****     FSMC_NANDInitStruct->FSMC_TCLRSetupTime = 0x0;
+ 469              		.loc 1 227 43 is_stmt 0
+ 470 0012 23280500 		sw	zero,16(a0)
+ 228:../Peripheral/src/ch32v30x_fsmc.c ****     FSMC_NANDInitStruct->FSMC_TARSetupTime = 0x0;
+ 471              		.loc 1 228 5 is_stmt 1
+ 228:../Peripheral/src/ch32v30x_fsmc.c ****     FSMC_NANDInitStruct->FSMC_TARSetupTime = 0x0;
+ 472              		.loc 1 228 45 is_stmt 0
+ 473 0016 232A0500 		sw	zero,20(a0)
+ 229:../Peripheral/src/ch32v30x_fsmc.c ****     FSMC_NANDInitStruct->FSMC_CommonSpaceTimingStruct->FSMC_SetupTime = 0xFC;
+ 474              		.loc 1 229 5 is_stmt 1
+ 229:../Peripheral/src/ch32v30x_fsmc.c ****     FSMC_NANDInitStruct->FSMC_CommonSpaceTimingStruct->FSMC_SetupTime = 0xFC;
+ 475              		.loc 1 229 44 is_stmt 0
+ 476 001a 232C0500 		sw	zero,24(a0)
+ 477              		.loc 1 230 5 is_stmt 1
+ 478              		.loc 1 230 71 is_stmt 0
+ 479 001e 9307C00F 		li	a5,252
+ 480 0022 1CC3     		sw	a5,0(a4)
+ 231:../Peripheral/src/ch32v30x_fsmc.c ****     FSMC_NANDInitStruct->FSMC_CommonSpaceTimingStruct->FSMC_WaitSetupTime = 0xFC;
+ 481              		.loc 1 231 5 is_stmt 1
+ 482              		.loc 1 231 75 is_stmt 0
+ 483 0024 5CC3     		sw	a5,4(a4)
+ 232:../Peripheral/src/ch32v30x_fsmc.c ****     FSMC_NANDInitStruct->FSMC_CommonSpaceTimingStruct->FSMC_HoldSetupTime = 0xFC;
+ 484              		.loc 1 232 5 is_stmt 1
+ 485              		.loc 1 232 75 is_stmt 0
+ 486 0026 1CC7     		sw	a5,8(a4)
+ 233:../Peripheral/src/ch32v30x_fsmc.c ****     FSMC_NANDInitStruct->FSMC_CommonSpaceTimingStruct->FSMC_HiZSetupTime = 0xFC;
+ 487              		.loc 1 233 5 is_stmt 1
+ 488              		.loc 1 233 74 is_stmt 0
+ 489 0028 5CC7     		sw	a5,12(a4)
+ 234:../Peripheral/src/ch32v30x_fsmc.c ****     FSMC_NANDInitStruct->FSMC_AttributeSpaceTimingStruct->FSMC_SetupTime = 0xFC;
+ 490              		.loc 1 234 5 is_stmt 1
+ 491              		.loc 1 234 24 is_stmt 0
+ 492 002a 1851     		lw	a4,32(a0)
+ 493              		.loc 1 234 74
+ 494 002c 1CC3     		sw	a5,0(a4)
+ 235:../Peripheral/src/ch32v30x_fsmc.c ****     FSMC_NANDInitStruct->FSMC_AttributeSpaceTimingStruct->FSMC_WaitSetupTime = 0xFC;
+ 495              		.loc 1 235 5 is_stmt 1
+ 496              		.loc 1 235 78 is_stmt 0
+ 497 002e 5CC3     		sw	a5,4(a4)
+ 236:../Peripheral/src/ch32v30x_fsmc.c ****     FSMC_NANDInitStruct->FSMC_AttributeSpaceTimingStruct->FSMC_HoldSetupTime = 0xFC;
+ 498              		.loc 1 236 5 is_stmt 1
+ 499              		.loc 1 236 78 is_stmt 0
+ 500 0030 1CC7     		sw	a5,8(a4)
+ 237:../Peripheral/src/ch32v30x_fsmc.c ****     FSMC_NANDInitStruct->FSMC_AttributeSpaceTimingStruct->FSMC_HiZSetupTime = 0xFC;
+ 501              		.loc 1 237 5 is_stmt 1
+ 502              		.loc 1 237 77 is_stmt 0
+ 503 0032 5CC7     		sw	a5,12(a4)
+ 238:../Peripheral/src/ch32v30x_fsmc.c **** }
+ 504              		.loc 1 238 1
+ 505 0034 8280     		ret
+ 506              		.cfi_endproc
+ 507              	.LFE34:
+ 509              		.section	.text.FSMC_NORSRAMCmd,"ax",@progbits
+ 510              		.align	1
+ 511              		.globl	FSMC_NORSRAMCmd
+ 513              	FSMC_NORSRAMCmd:
+ 514              	.LFB35:
+ 239:../Peripheral/src/ch32v30x_fsmc.c **** 
+ 240:../Peripheral/src/ch32v30x_fsmc.c **** /*********************************************************************
+ 241:../Peripheral/src/ch32v30x_fsmc.c ****  * @fn      FSMC_NORSRAMCmd
+ 242:../Peripheral/src/ch32v30x_fsmc.c ****  *
+ 243:../Peripheral/src/ch32v30x_fsmc.c ****  * @brief   Enables or disables the specified NOR/SRAM Memory Bank.
+ 244:../Peripheral/src/ch32v30x_fsmc.c ****  *
+ 245:../Peripheral/src/ch32v30x_fsmc.c ****  * @param   FSMC_Bank - specifies the FSMC Bank to be used
+ 246:../Peripheral/src/ch32v30x_fsmc.c ****  *            FSMC_Bank1_NORSRAM1 - FSMC Bank1 NOR/SRAM1
+ 247:../Peripheral/src/ch32v30x_fsmc.c ****  *            FSMC_Bank1_NORSRAM2 - FSMC Bank1 NOR/SRAM2
+ 248:../Peripheral/src/ch32v30x_fsmc.c ****  *            FSMC_Bank1_NORSRAM3 - FSMC Bank1 NOR/SRAM3
+ 249:../Peripheral/src/ch32v30x_fsmc.c ****  *            FSMC_Bank1_NORSRAM4 - FSMC Bank1 NOR/SRAM4
+ 250:../Peripheral/src/ch32v30x_fsmc.c ****  *          NewState:ENABLE or DISABLE.
+ 251:../Peripheral/src/ch32v30x_fsmc.c ****  *
+ 252:../Peripheral/src/ch32v30x_fsmc.c ****  * @return  none
+ 253:../Peripheral/src/ch32v30x_fsmc.c ****  */
+ 254:../Peripheral/src/ch32v30x_fsmc.c **** void FSMC_NORSRAMCmd(uint32_t FSMC_Bank, FunctionalState NewState)
+ 255:../Peripheral/src/ch32v30x_fsmc.c **** {
+ 515              		.loc 1 255 1 is_stmt 1
+ 516              		.cfi_startproc
+ 517              	.LVL10:
+ 256:../Peripheral/src/ch32v30x_fsmc.c ****     if(NewState != DISABLE)
+ 518              		.loc 1 256 5
+ 519 0000 0A05     		slli	a0,a0,2
+ 520              	.LVL11:
+ 521 0002 B70700A0 		li	a5,-1610612736
+ 522 0006 AA97     		add	a5,a5,a0
+ 257:../Peripheral/src/ch32v30x_fsmc.c ****     {
+ 258:../Peripheral/src/ch32v30x_fsmc.c ****         FSMC_Bank1->BTCR[FSMC_Bank] |= BCR_MBKEN_Set;
+ 523              		.loc 1 258 25 is_stmt 0
+ 524 0008 9843     		lw	a4,0(a5)
+ 256:../Peripheral/src/ch32v30x_fsmc.c ****     if(NewState != DISABLE)
+ 525              		.loc 1 256 7
+ 526 000a 89C5     		beq	a1,zero,.L16
+ 527              		.loc 1 258 9 is_stmt 1
+ 528              		.loc 1 258 37 is_stmt 0
+ 529 000c 13671700 		ori	a4,a4,1
+ 530              	.L18:
+ 259:../Peripheral/src/ch32v30x_fsmc.c ****     }
+ 260:../Peripheral/src/ch32v30x_fsmc.c ****     else
+ 261:../Peripheral/src/ch32v30x_fsmc.c ****     {
+ 262:../Peripheral/src/ch32v30x_fsmc.c ****         FSMC_Bank1->BTCR[FSMC_Bank] &= BCR_MBKEN_Reset;
+ 531              		.loc 1 262 37
+ 532 0010 98C3     		sw	a4,0(a5)
+ 263:../Peripheral/src/ch32v30x_fsmc.c ****     }
+ 264:../Peripheral/src/ch32v30x_fsmc.c **** }
+ 533              		.loc 1 264 1
+ 534 0012 8280     		ret
+ 535              	.L16:
+ 262:../Peripheral/src/ch32v30x_fsmc.c ****     }
+ 536              		.loc 1 262 9 is_stmt 1
+ 262:../Peripheral/src/ch32v30x_fsmc.c ****     }
+ 537              		.loc 1 262 37 is_stmt 0
+ 538 0014 B7061000 		li	a3,1048576
+ 539 0018 F916     		addi	a3,a3,-2
+ 540 001a 758F     		and	a4,a4,a3
+ 541 001c D5BF     		j	.L18
+ 542              		.cfi_endproc
+ 543              	.LFE35:
+ 545              		.section	.text.FSMC_NANDCmd,"ax",@progbits
+ 546              		.align	1
+ 547              		.globl	FSMC_NANDCmd
+ 549              	FSMC_NANDCmd:
+ 550              	.LFB36:
+ 265:../Peripheral/src/ch32v30x_fsmc.c **** 
+ 266:../Peripheral/src/ch32v30x_fsmc.c **** /*********************************************************************
+ 267:../Peripheral/src/ch32v30x_fsmc.c ****  * @fn      FSMC_NANDCmd
+ 268:../Peripheral/src/ch32v30x_fsmc.c ****  *
+ 269:../Peripheral/src/ch32v30x_fsmc.c ****  * @brief   Enables or disables the specified NAND Memory Bank.
+ 270:../Peripheral/src/ch32v30x_fsmc.c ****  *
+ 271:../Peripheral/src/ch32v30x_fsmc.c ****  * @param   FSMC_Bank - specifies the FSMC Bank to be used
+ 272:../Peripheral/src/ch32v30x_fsmc.c ****  *            FSMC_Bank2_NAND - FSMC Bank2 NAND
+ 273:../Peripheral/src/ch32v30x_fsmc.c ****  *          NewStat - ENABLE or DISABLE.
+ 274:../Peripheral/src/ch32v30x_fsmc.c ****  *
+ 275:../Peripheral/src/ch32v30x_fsmc.c ****  * @return  none
+ 276:../Peripheral/src/ch32v30x_fsmc.c ****  */
+ 277:../Peripheral/src/ch32v30x_fsmc.c **** void FSMC_NANDCmd(uint32_t FSMC_Bank, FunctionalState NewState)
+ 278:../Peripheral/src/ch32v30x_fsmc.c **** {
+ 551              		.loc 1 278 1 is_stmt 1
+ 552              		.cfi_startproc
+ 553              	.LVL12:
+ 279:../Peripheral/src/ch32v30x_fsmc.c ****     if(NewState != DISABLE)
+ 554              		.loc 1 279 5
+ 280:../Peripheral/src/ch32v30x_fsmc.c ****     {
+ 281:../Peripheral/src/ch32v30x_fsmc.c ****         if(FSMC_Bank == FSMC_Bank2_NAND)
+ 555              		.loc 1 281 11 is_stmt 0
+ 556 0000 C147     		li	a5,16
+ 279:../Peripheral/src/ch32v30x_fsmc.c ****     if(NewState != DISABLE)
+ 557              		.loc 1 279 7
+ 558 0002 91C9     		beq	a1,zero,.L20
+ 559              		.loc 1 281 9 is_stmt 1
+ 560              		.loc 1 281 11 is_stmt 0
+ 561 0004 6313F502 		bne	a0,a5,.L19
+ 282:../Peripheral/src/ch32v30x_fsmc.c ****         {
+ 283:../Peripheral/src/ch32v30x_fsmc.c ****             FSMC_Bank2->PCR2 |= PCR_PBKEN_Set;
+ 562              		.loc 1 283 13 is_stmt 1
+ 563              		.loc 1 283 23 is_stmt 0
+ 564 0008 370700A0 		li	a4,-1610612736
+ 565 000c 3C53     		lw	a5,96(a4)
+ 566              		.loc 1 283 30
+ 567 000e 93E74700 		ori	a5,a5,4
+ 568 0012 3CD3     		sw	a5,96(a4)
+ 569 0014 8280     		ret
+ 570              	.L20:
+ 284:../Peripheral/src/ch32v30x_fsmc.c ****         }
+ 285:../Peripheral/src/ch32v30x_fsmc.c ****     }
+ 286:../Peripheral/src/ch32v30x_fsmc.c ****     else
+ 287:../Peripheral/src/ch32v30x_fsmc.c ****     {
+ 288:../Peripheral/src/ch32v30x_fsmc.c ****         if(FSMC_Bank == FSMC_Bank2_NAND)
+ 571              		.loc 1 288 9 is_stmt 1
+ 572              		.loc 1 288 11 is_stmt 0
+ 573 0016 631AF500 		bne	a0,a5,.L19
+ 289:../Peripheral/src/ch32v30x_fsmc.c ****         {
+ 290:../Peripheral/src/ch32v30x_fsmc.c ****             FSMC_Bank2->PCR2 &= PCR_PBKEN_Reset;
+ 574              		.loc 1 290 13 is_stmt 1
+ 575              		.loc 1 290 23 is_stmt 0
+ 576 001a B70600A0 		li	a3,-1610612736
+ 577 001e BC52     		lw	a5,96(a3)
+ 578              		.loc 1 290 30
+ 579 0020 37071000 		li	a4,1048576
+ 580 0024 6D17     		addi	a4,a4,-5
+ 581 0026 F98F     		and	a5,a5,a4
+ 582 0028 BCD2     		sw	a5,96(a3)
+ 583              	.L19:
+ 291:../Peripheral/src/ch32v30x_fsmc.c ****         }
+ 292:../Peripheral/src/ch32v30x_fsmc.c ****     }
+ 293:../Peripheral/src/ch32v30x_fsmc.c **** }
+ 584              		.loc 1 293 1
+ 585 002a 8280     		ret
+ 586              		.cfi_endproc
+ 587              	.LFE36:
+ 589              		.section	.text.FSMC_NANDECCCmd,"ax",@progbits
+ 590              		.align	1
+ 591              		.globl	FSMC_NANDECCCmd
+ 593              	FSMC_NANDECCCmd:
+ 594              	.LFB37:
+ 294:../Peripheral/src/ch32v30x_fsmc.c **** 
+ 295:../Peripheral/src/ch32v30x_fsmc.c **** /*********************************************************************
+ 296:../Peripheral/src/ch32v30x_fsmc.c ****  * @fn      FSMC_NANDECCCmd
+ 297:../Peripheral/src/ch32v30x_fsmc.c ****  *
+ 298:../Peripheral/src/ch32v30x_fsmc.c ****  * @brief   Enables or disables the FSMC NAND ECC feature.
+ 299:../Peripheral/src/ch32v30x_fsmc.c ****  *
+ 300:../Peripheral/src/ch32v30x_fsmc.c ****  * @param   FSMC_Bank - specifies the FSMC Bank to be used
+ 301:../Peripheral/src/ch32v30x_fsmc.c ****  *            FSMC_Bank2_NAND - FSMC Bank2 NAND
+ 302:../Peripheral/src/ch32v30x_fsmc.c ****  *          NewState - ENABLE or DISABLE.
+ 303:../Peripheral/src/ch32v30x_fsmc.c ****  *
+ 304:../Peripheral/src/ch32v30x_fsmc.c ****  * @return  none
+ 305:../Peripheral/src/ch32v30x_fsmc.c ****  */
+ 306:../Peripheral/src/ch32v30x_fsmc.c **** void FSMC_NANDECCCmd(uint32_t FSMC_Bank, FunctionalState NewState)
+ 307:../Peripheral/src/ch32v30x_fsmc.c **** {
+ 595              		.loc 1 307 1 is_stmt 1
+ 596              		.cfi_startproc
+ 597              	.LVL13:
+ 308:../Peripheral/src/ch32v30x_fsmc.c ****     if(NewState != DISABLE)
+ 598              		.loc 1 308 5
+ 309:../Peripheral/src/ch32v30x_fsmc.c ****     {
+ 310:../Peripheral/src/ch32v30x_fsmc.c ****         if(FSMC_Bank == FSMC_Bank2_NAND)
+ 599              		.loc 1 310 11 is_stmt 0
+ 600 0000 C147     		li	a5,16
+ 308:../Peripheral/src/ch32v30x_fsmc.c ****     if(NewState != DISABLE)
+ 601              		.loc 1 308 7
+ 602 0002 91C9     		beq	a1,zero,.L23
+ 603              		.loc 1 310 9 is_stmt 1
+ 604              		.loc 1 310 11 is_stmt 0
+ 605 0004 6314F502 		bne	a0,a5,.L22
+ 311:../Peripheral/src/ch32v30x_fsmc.c ****         {
+ 312:../Peripheral/src/ch32v30x_fsmc.c ****             FSMC_Bank2->PCR2 |= PCR_ECCEN_Set;
+ 606              		.loc 1 312 13 is_stmt 1
+ 607              		.loc 1 312 23 is_stmt 0
+ 608 0008 370700A0 		li	a4,-1610612736
+ 609 000c 3C53     		lw	a5,96(a4)
+ 610              		.loc 1 312 30
+ 611 000e 93E70704 		ori	a5,a5,64
+ 612 0012 3CD3     		sw	a5,96(a4)
+ 613 0014 8280     		ret
+ 614              	.L23:
+ 313:../Peripheral/src/ch32v30x_fsmc.c ****         }
+ 314:../Peripheral/src/ch32v30x_fsmc.c ****     }
+ 315:../Peripheral/src/ch32v30x_fsmc.c ****     else
+ 316:../Peripheral/src/ch32v30x_fsmc.c ****     {
+ 317:../Peripheral/src/ch32v30x_fsmc.c ****         if(FSMC_Bank == FSMC_Bank2_NAND)
+ 615              		.loc 1 317 9 is_stmt 1
+ 616              		.loc 1 317 11 is_stmt 0
+ 617 0016 631BF500 		bne	a0,a5,.L22
+ 318:../Peripheral/src/ch32v30x_fsmc.c ****         {
+ 319:../Peripheral/src/ch32v30x_fsmc.c ****             FSMC_Bank2->PCR2 &= PCR_ECCEN_Reset;
+ 618              		.loc 1 319 13 is_stmt 1
+ 619              		.loc 1 319 23 is_stmt 0
+ 620 001a B70600A0 		li	a3,-1610612736
+ 621 001e BC52     		lw	a5,96(a3)
+ 622              		.loc 1 319 30
+ 623 0020 37071000 		li	a4,1048576
+ 624 0024 1307F7FB 		addi	a4,a4,-65
+ 625 0028 F98F     		and	a5,a5,a4
+ 626 002a BCD2     		sw	a5,96(a3)
+ 627              	.L22:
+ 320:../Peripheral/src/ch32v30x_fsmc.c ****         }
+ 321:../Peripheral/src/ch32v30x_fsmc.c ****     }
+ 322:../Peripheral/src/ch32v30x_fsmc.c **** }
+ 628              		.loc 1 322 1
+ 629 002c 8280     		ret
+ 630              		.cfi_endproc
+ 631              	.LFE37:
+ 633              		.section	.text.FSMC_GetECC,"ax",@progbits
+ 634              		.align	1
+ 635              		.globl	FSMC_GetECC
+ 637              	FSMC_GetECC:
+ 638              	.LFB38:
+ 323:../Peripheral/src/ch32v30x_fsmc.c **** 
+ 324:../Peripheral/src/ch32v30x_fsmc.c **** /*********************************************************************
+ 325:../Peripheral/src/ch32v30x_fsmc.c ****  * @fn      FSMC_GetECC
+ 326:../Peripheral/src/ch32v30x_fsmc.c ****  *
+ 327:../Peripheral/src/ch32v30x_fsmc.c ****  * @brief   Returns the error correction code register value.
+ 328:../Peripheral/src/ch32v30x_fsmc.c ****  *
+ 329:../Peripheral/src/ch32v30x_fsmc.c ****  * @param   FSMC_Bank - specifies the FSMC Bank to be used
+ 330:../Peripheral/src/ch32v30x_fsmc.c ****  *            FSMC_Bank2_NAND - FSMC Bank2 NAND
+ 331:../Peripheral/src/ch32v30x_fsmc.c ****  *          NewState - ENABLE or DISABLE.
+ 332:../Peripheral/src/ch32v30x_fsmc.c ****  *
+ 333:../Peripheral/src/ch32v30x_fsmc.c ****  * @return  eccval - The Error Correction Code (ECC) value.
+ 334:../Peripheral/src/ch32v30x_fsmc.c ****  */
+ 335:../Peripheral/src/ch32v30x_fsmc.c **** uint32_t FSMC_GetECC(uint32_t FSMC_Bank)
+ 336:../Peripheral/src/ch32v30x_fsmc.c **** {
+ 639              		.loc 1 336 1 is_stmt 1
+ 640              		.cfi_startproc
+ 641              	.LVL14:
+ 337:../Peripheral/src/ch32v30x_fsmc.c ****     uint32_t eccval = 0x00000000;
+ 642              		.loc 1 337 5
+ 338:../Peripheral/src/ch32v30x_fsmc.c **** 
+ 339:../Peripheral/src/ch32v30x_fsmc.c ****     if(FSMC_Bank == FSMC_Bank2_NAND)
+ 643              		.loc 1 339 5
+ 644              		.loc 1 339 7 is_stmt 0
+ 645 0000 C147     		li	a5,16
+ 646 0002 6316F500 		bne	a0,a5,.L27
+ 340:../Peripheral/src/ch32v30x_fsmc.c ****     {
+ 341:../Peripheral/src/ch32v30x_fsmc.c ****         eccval = FSMC_Bank2->ECCR2;
+ 647              		.loc 1 341 9 is_stmt 1
+ 648              		.loc 1 341 16 is_stmt 0
+ 649 0006 B70700A0 		li	a5,-1610612736
+ 650 000a E85B     		lw	a0,116(a5)
+ 651              	.LVL15:
+ 652 000c 8280     		ret
+ 653              	.LVL16:
+ 654              	.L27:
+ 337:../Peripheral/src/ch32v30x_fsmc.c **** 
+ 655              		.loc 1 337 14
+ 656 000e 0145     		li	a0,0
+ 657              	.LVL17:
+ 342:../Peripheral/src/ch32v30x_fsmc.c ****     }
+ 343:../Peripheral/src/ch32v30x_fsmc.c **** 
+ 344:../Peripheral/src/ch32v30x_fsmc.c ****     return (eccval);
+ 658              		.loc 1 344 5 is_stmt 1
+ 345:../Peripheral/src/ch32v30x_fsmc.c **** }
+ 659              		.loc 1 345 1 is_stmt 0
+ 660 0010 8280     		ret
+ 661              		.cfi_endproc
+ 662              	.LFE38:
+ 664              		.section	.text.FSMC_GetFlagStatus,"ax",@progbits
+ 665              		.align	1
+ 666              		.globl	FSMC_GetFlagStatus
+ 668              	FSMC_GetFlagStatus:
+ 669              	.LFB39:
+ 346:../Peripheral/src/ch32v30x_fsmc.c **** 
+ 347:../Peripheral/src/ch32v30x_fsmc.c **** /*********************************************************************
+ 348:../Peripheral/src/ch32v30x_fsmc.c ****  * @fn      FSMC_GetFlagStatus
+ 349:../Peripheral/src/ch32v30x_fsmc.c ****  *
+ 350:../Peripheral/src/ch32v30x_fsmc.c ****  * @brief   Checks whether the specified FSMC flag is set or not.
+ 351:../Peripheral/src/ch32v30x_fsmc.c ****  *
+ 352:../Peripheral/src/ch32v30x_fsmc.c ****  * @param   FSMC_Bank - specifies the FSMC Bank to be used
+ 353:../Peripheral/src/ch32v30x_fsmc.c ****  *            FSMC_Bank2_NAND - FSMC Bank2 NAND
+ 354:../Peripheral/src/ch32v30x_fsmc.c ****  *          FSMC_FLAG - specifies the flag to check.
+ 355:../Peripheral/src/ch32v30x_fsmc.c ****  *            FSMC_FLAG_FEMPT - Fifo empty Flag.
+ 356:../Peripheral/src/ch32v30x_fsmc.c ****  *          NewState - ENABLE or DISABLE.
+ 357:../Peripheral/src/ch32v30x_fsmc.c ****  *
+ 358:../Peripheral/src/ch32v30x_fsmc.c ****  * @return  FlagStatus - The new state of FSMC_FLAG (SET or RESET).
+ 359:../Peripheral/src/ch32v30x_fsmc.c ****  */
+ 360:../Peripheral/src/ch32v30x_fsmc.c **** FlagStatus FSMC_GetFlagStatus(uint32_t FSMC_Bank, uint32_t FSMC_FLAG)
+ 361:../Peripheral/src/ch32v30x_fsmc.c **** {
+ 670              		.loc 1 361 1 is_stmt 1
+ 671              		.cfi_startproc
+ 672              	.LVL18:
+ 362:../Peripheral/src/ch32v30x_fsmc.c ****     FlagStatus bitstatus = RESET;
+ 673              		.loc 1 362 5
+ 363:../Peripheral/src/ch32v30x_fsmc.c ****     uint32_t   tmpsr = 0x00000000;
+ 674              		.loc 1 363 5
+ 364:../Peripheral/src/ch32v30x_fsmc.c **** 
+ 365:../Peripheral/src/ch32v30x_fsmc.c ****     if(FSMC_Bank == FSMC_Bank2_NAND)
+ 675              		.loc 1 365 5
+ 676              		.loc 1 365 7 is_stmt 0
+ 677 0000 C147     		li	a5,16
+ 678 0002 6319F500 		bne	a0,a5,.L30
+ 366:../Peripheral/src/ch32v30x_fsmc.c ****     {
+ 367:../Peripheral/src/ch32v30x_fsmc.c ****         tmpsr = FSMC_Bank2->SR2;
+ 679              		.loc 1 367 9 is_stmt 1
+ 680              		.loc 1 367 15 is_stmt 0
+ 681 0006 B70700A0 		li	a5,-1610612736
+ 682 000a E853     		lw	a0,100(a5)
+ 683              	.LVL19:
+ 368:../Peripheral/src/ch32v30x_fsmc.c ****     }
+ 369:../Peripheral/src/ch32v30x_fsmc.c **** 
+ 370:../Peripheral/src/ch32v30x_fsmc.c ****     if((tmpsr & FSMC_FLAG) != (uint16_t)RESET)
+ 684              		.loc 1 370 5 is_stmt 1
+ 685              		.loc 1 370 15 is_stmt 0
+ 686 000c 6D8D     		and	a0,a0,a1
+ 687              	.LVL20:
+ 688              		.loc 1 370 7
+ 689 000e 3335A000 		snez	a0,a0
+ 690 0012 8280     		ret
+ 691              	.LVL21:
+ 692              	.L30:
+ 371:../Peripheral/src/ch32v30x_fsmc.c ****     {
+ 372:../Peripheral/src/ch32v30x_fsmc.c ****         bitstatus = SET;
+ 373:../Peripheral/src/ch32v30x_fsmc.c ****     }
+ 374:../Peripheral/src/ch32v30x_fsmc.c ****     else
+ 375:../Peripheral/src/ch32v30x_fsmc.c ****     {
+ 376:../Peripheral/src/ch32v30x_fsmc.c ****         bitstatus = RESET;
+ 693              		.loc 1 376 19
+ 694 0014 0145     		li	a0,0
+ 695              	.LVL22:
+ 377:../Peripheral/src/ch32v30x_fsmc.c ****     }
+ 378:../Peripheral/src/ch32v30x_fsmc.c **** 
+ 379:../Peripheral/src/ch32v30x_fsmc.c ****     return bitstatus;
+ 696              		.loc 1 379 5 is_stmt 1
+ 380:../Peripheral/src/ch32v30x_fsmc.c **** }
+ 697              		.loc 1 380 1 is_stmt 0
+ 698 0016 8280     		ret
+ 699              		.cfi_endproc
+ 700              	.LFE39:
+ 702              		.text
+ 703              	.Letext0:
+ 704              		.file 2 "d:\\software\\mounriver_studio\\toolchain\\risc-v embedded gcc12\\riscv-none-elf\\include
+ 705              		.file 3 "d:\\software\\mounriver_studio\\toolchain\\risc-v embedded gcc12\\riscv-none-elf\\include
+ 706              		.file 4 "C:\\Users\\localhost\\Documents\\turbomoskal-repo\\qqexpert\\firmware\\MasterController\\
+ 707              		.file 5 "C:\\Users\\localhost\\Documents\\turbomoskal-repo\\qqexpert\\firmware\\MasterController\\
+ 708              		.file 6 "C:\\Users\\localhost\\Documents\\turbomoskal-repo\\qqexpert\\firmware\\MasterController\\
+DEFINED SYMBOLS
+                            *ABS*:0000000000000000 ch32v30x_fsmc.c
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:14     .text.FSMC_NORSRAMDeInit:0000000000000000 FSMC_NORSRAMDeInit
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:18     .text.FSMC_NORSRAMDeInit:0000000000000000 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:20     .text.FSMC_NORSRAMDeInit:0000000000000000 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:21     .text.FSMC_NORSRAMDeInit:0000000000000000 $x
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:21     .text.FSMC_NORSRAMDeInit:0000000000000000 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:23     .text.FSMC_NORSRAMDeInit:0000000000000004 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:25     .text.FSMC_NORSRAMDeInit:0000000000000006 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:26     .text.FSMC_NORSRAMDeInit:0000000000000006 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:32     .text.FSMC_NORSRAMDeInit:0000000000000012 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:34     .text.FSMC_NORSRAMDeInit:0000000000000016 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:40     .text.FSMC_NORSRAMDeInit:0000000000000026 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:42     .text.FSMC_NORSRAMDeInit:0000000000000028 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:44     .text.FSMC_NORSRAMDeInit:000000000000002a .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:47     .text.FSMC_NORSRAMDeInit:000000000000002c .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:48     .text.FSMC_NORSRAMDeInit:000000000000002c .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:54     .text.FSMC_NORSRAMDeInit:000000000000003c .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:61     .text.FSMC_NANDDeInit:0000000000000000 FSMC_NANDDeInit
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:64     .text.FSMC_NANDDeInit:0000000000000000 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:66     .text.FSMC_NANDDeInit:0000000000000000 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:67     .text.FSMC_NANDDeInit:0000000000000000 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:68     .text.FSMC_NANDDeInit:0000000000000000 $x
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:68     .text.FSMC_NANDDeInit:0000000000000000 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:71     .text.FSMC_NANDDeInit:0000000000000006 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:72     .text.FSMC_NANDDeInit:0000000000000006 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:77     .text.FSMC_NANDDeInit:0000000000000012 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:78     .text.FSMC_NANDDeInit:0000000000000012 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:81     .text.FSMC_NANDDeInit:0000000000000018 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:82     .text.FSMC_NANDDeInit:0000000000000018 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:86     .text.FSMC_NANDDeInit:0000000000000022 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:87     .text.FSMC_NANDDeInit:0000000000000022 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:90     .text.FSMC_NANDDeInit:0000000000000024 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:91     .text.FSMC_NANDDeInit:0000000000000026 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:98     .text.FSMC_NORSRAMInit:0000000000000000 FSMC_NORSRAMInit
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:101    .text.FSMC_NORSRAMInit:0000000000000000 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:103    .text.FSMC_NORSRAMInit:0000000000000000 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:104    .text.FSMC_NORSRAMInit:0000000000000000 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:105    .text.FSMC_NORSRAMInit:0000000000000000 $x
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:105    .text.FSMC_NORSRAMInit:0000000000000000 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:107    .text.FSMC_NORSRAMInit:0000000000000002 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:109    .text.FSMC_NORSRAMInit:0000000000000004 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:111    .text.FSMC_NORSRAMInit:0000000000000006 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:113    .text.FSMC_NORSRAMInit:000000000000000a .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:115    .text.FSMC_NORSRAMInit:000000000000000c .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:117    .text.FSMC_NORSRAMInit:000000000000000e .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:121    .text.FSMC_NORSRAMInit:0000000000000016 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:124    .text.FSMC_NORSRAMInit:000000000000001a .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:127    .text.FSMC_NORSRAMInit:000000000000001e .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:130    .text.FSMC_NORSRAMInit:0000000000000022 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:133    .text.FSMC_NORSRAMInit:0000000000000026 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:136    .text.FSMC_NORSRAMInit:000000000000002a .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:139    .text.FSMC_NORSRAMInit:000000000000002e .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:141    .text.FSMC_NORSRAMInit:0000000000000030 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:143    .text.FSMC_NORSRAMInit:0000000000000034 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:148    .text.FSMC_NORSRAMInit:000000000000003c .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:150    .text.FSMC_NORSRAMInit:000000000000003e .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:151    .text.FSMC_NORSRAMInit:000000000000003e .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:154    .text.FSMC_NORSRAMInit:0000000000000044 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:155    .text.FSMC_NORSRAMInit:0000000000000044 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:157    .text.FSMC_NORSRAMInit:0000000000000046 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:161    .text.FSMC_NORSRAMInit:000000000000004c .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:162    .text.FSMC_NORSRAMInit:000000000000004c .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:164    .text.FSMC_NORSRAMInit:000000000000004e .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:168    .text.FSMC_NORSRAMInit:0000000000000054 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:171    .text.FSMC_NORSRAMInit:0000000000000058 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:173    .text.FSMC_NORSRAMInit:000000000000005a .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:176    .text.FSMC_NORSRAMInit:000000000000005e .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:178    .text.FSMC_NORSRAMInit:0000000000000060 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:181    .text.FSMC_NORSRAMInit:0000000000000064 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:183    .text.FSMC_NORSRAMInit:0000000000000066 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:185    .text.FSMC_NORSRAMInit:0000000000000068 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:187    .text.FSMC_NORSRAMInit:000000000000006a .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:189    .text.FSMC_NORSRAMInit:000000000000006c .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:191    .text.FSMC_NORSRAMInit:000000000000006e .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:193    .text.FSMC_NORSRAMInit:0000000000000070 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:195    .text.FSMC_NORSRAMInit:0000000000000072 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:197    .text.FSMC_NORSRAMInit:0000000000000074 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:198    .text.FSMC_NORSRAMInit:0000000000000074 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:201    .text.FSMC_NORSRAMInit:000000000000007a .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:202    .text.FSMC_NORSRAMInit:000000000000007a .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:204    .text.FSMC_NORSRAMInit:000000000000007c .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:208    .text.FSMC_NORSRAMInit:0000000000000082 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:210    .text.FSMC_NORSRAMInit:0000000000000084 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:212    .text.FSMC_NORSRAMInit:0000000000000086 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:214    .text.FSMC_NORSRAMInit:0000000000000088 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:216    .text.FSMC_NORSRAMInit:000000000000008a .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:223    .text.FSMC_NORSRAMInit:0000000000000098 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:225    .text.FSMC_NORSRAMInit:000000000000009a .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:228    .text.FSMC_NORSRAMInit:000000000000009c .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:232    .text.FSMC_NORSRAMInit:00000000000000a6 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:235    .text.FSMC_NORSRAMInit:00000000000000ae .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:242    .text.FSMC_NANDInit:0000000000000000 FSMC_NANDInit
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:245    .text.FSMC_NANDInit:0000000000000000 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:247    .text.FSMC_NANDInit:0000000000000000 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:248    .text.FSMC_NANDInit:0000000000000000 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:249    .text.FSMC_NANDInit:0000000000000000 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:250    .text.FSMC_NANDInit:0000000000000000 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:251    .text.FSMC_NANDInit:0000000000000000 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:252    .text.FSMC_NANDInit:0000000000000000 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:253    .text.FSMC_NANDInit:0000000000000000 $x
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:253    .text.FSMC_NANDInit:0000000000000000 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:257    .text.FSMC_NANDInit:0000000000000008 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:259    .text.FSMC_NANDInit:000000000000000a .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:261    .text.FSMC_NANDInit:000000000000000e .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:263    .text.FSMC_NANDInit:0000000000000010 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:265    .text.FSMC_NANDInit:0000000000000014 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:267    .text.FSMC_NANDInit:0000000000000018 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:269    .text.FSMC_NANDInit:000000000000001c .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:271    .text.FSMC_NANDInit:000000000000001e .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:273    .text.FSMC_NANDInit:0000000000000020 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:275    .text.FSMC_NANDInit:0000000000000024 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:277    .text.FSMC_NANDInit:0000000000000026 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:279    .text.FSMC_NANDInit:0000000000000028 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:280    .text.FSMC_NANDInit:0000000000000028 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:283    .text.FSMC_NANDInit:000000000000002e .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:286    .text.FSMC_NANDInit:0000000000000034 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:291    .text.FSMC_NANDInit:0000000000000044 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:294    .text.FSMC_NANDInit:0000000000000046 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:296    .text.FSMC_NANDInit:000000000000004a .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:299    .text.FSMC_NANDInit:000000000000004c .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:301    .text.FSMC_NANDInit:000000000000004e .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:303    .text.FSMC_NANDInit:0000000000000052 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:308    .text.FSMC_NANDInit:000000000000005a .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:309    .text.FSMC_NANDInit:000000000000005a .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:311    .text.FSMC_NANDInit:000000000000005e .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:313    .text.FSMC_NANDInit:0000000000000062 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:316    .text.FSMC_NANDInit:0000000000000068 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:318    .text.FSMC_NANDInit:000000000000006c .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:320    .text.FSMC_NANDInit:0000000000000070 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:322    .text.FSMC_NANDInit:0000000000000072 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:324    .text.FSMC_NANDInit:0000000000000074 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:325    .text.FSMC_NANDInit:0000000000000074 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:327    .text.FSMC_NANDInit:0000000000000078 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:329    .text.FSMC_NANDInit:000000000000007c .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:332    .text.FSMC_NANDInit:0000000000000082 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:334    .text.FSMC_NANDInit:0000000000000086 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:336    .text.FSMC_NANDInit:0000000000000088 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:339    .text.FSMC_NANDInit:000000000000008a .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:340    .text.FSMC_NANDInit:000000000000008c .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:347    .text.FSMC_NORSRAMStructInit:0000000000000000 FSMC_NORSRAMStructInit
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:350    .text.FSMC_NORSRAMStructInit:0000000000000000 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:352    .text.FSMC_NORSRAMStructInit:0000000000000000 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:353    .text.FSMC_NORSRAMStructInit:0000000000000000 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:354    .text.FSMC_NORSRAMStructInit:0000000000000000 $x
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:354    .text.FSMC_NORSRAMStructInit:0000000000000000 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:356    .text.FSMC_NORSRAMStructInit:0000000000000002 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:358    .text.FSMC_NORSRAMStructInit:0000000000000004 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:360    .text.FSMC_NORSRAMStructInit:0000000000000006 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:363    .text.FSMC_NORSRAMStructInit:000000000000000a .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:366    .text.FSMC_NORSRAMStructInit:000000000000000e .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:368    .text.FSMC_NORSRAMStructInit:0000000000000012 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:369    .text.FSMC_NORSRAMStructInit:0000000000000012 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:370    .text.FSMC_NORSRAMStructInit:0000000000000012 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:372    .text.FSMC_NORSRAMStructInit:0000000000000016 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:373    .text.FSMC_NORSRAMStructInit:0000000000000016 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:375    .text.FSMC_NORSRAMStructInit:000000000000001a .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:376    .text.FSMC_NORSRAMStructInit:000000000000001a .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:378    .text.FSMC_NORSRAMStructInit:000000000000001e .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:379    .text.FSMC_NORSRAMStructInit:000000000000001e .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:381    .text.FSMC_NORSRAMStructInit:0000000000000022 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:382    .text.FSMC_NORSRAMStructInit:0000000000000022 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:384    .text.FSMC_NORSRAMStructInit:0000000000000026 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:385    .text.FSMC_NORSRAMStructInit:0000000000000026 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:387    .text.FSMC_NORSRAMStructInit:000000000000002a .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:388    .text.FSMC_NORSRAMStructInit:000000000000002a .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:390    .text.FSMC_NORSRAMStructInit:000000000000002e .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:391    .text.FSMC_NORSRAMStructInit:000000000000002e .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:392    .text.FSMC_NORSRAMStructInit:000000000000002e .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:393    .text.FSMC_NORSRAMStructInit:000000000000002e .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:395    .text.FSMC_NORSRAMStructInit:0000000000000032 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:396    .text.FSMC_NORSRAMStructInit:0000000000000032 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:398    .text.FSMC_NORSRAMStructInit:0000000000000036 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:399    .text.FSMC_NORSRAMStructInit:0000000000000036 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:401    .text.FSMC_NORSRAMStructInit:0000000000000038 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:403    .text.FSMC_NORSRAMStructInit:000000000000003c .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:405    .text.FSMC_NORSRAMStructInit:000000000000003e .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:406    .text.FSMC_NORSRAMStructInit:000000000000003e .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:408    .text.FSMC_NORSRAMStructInit:0000000000000040 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:409    .text.FSMC_NORSRAMStructInit:0000000000000040 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:411    .text.FSMC_NORSRAMStructInit:0000000000000042 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:412    .text.FSMC_NORSRAMStructInit:0000000000000042 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:414    .text.FSMC_NORSRAMStructInit:0000000000000044 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:415    .text.FSMC_NORSRAMStructInit:0000000000000044 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:417    .text.FSMC_NORSRAMStructInit:0000000000000048 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:419    .text.FSMC_NORSRAMStructInit:000000000000004a .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:420    .text.FSMC_NORSRAMStructInit:000000000000004a .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:422    .text.FSMC_NORSRAMStructInit:000000000000004c .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:423    .text.FSMC_NORSRAMStructInit:000000000000004c .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:424    .text.FSMC_NORSRAMStructInit:000000000000004c .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:426    .text.FSMC_NORSRAMStructInit:000000000000004e .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:428    .text.FSMC_NORSRAMStructInit:0000000000000050 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:429    .text.FSMC_NORSRAMStructInit:0000000000000050 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:431    .text.FSMC_NORSRAMStructInit:0000000000000052 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:432    .text.FSMC_NORSRAMStructInit:0000000000000052 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:434    .text.FSMC_NORSRAMStructInit:0000000000000054 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:435    .text.FSMC_NORSRAMStructInit:0000000000000054 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:437    .text.FSMC_NORSRAMStructInit:0000000000000056 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:438    .text.FSMC_NORSRAMStructInit:0000000000000056 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:440    .text.FSMC_NORSRAMStructInit:000000000000005a .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:441    .text.FSMC_NORSRAMStructInit:000000000000005c .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:448    .text.FSMC_NANDStructInit:0000000000000000 FSMC_NANDStructInit
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:451    .text.FSMC_NANDStructInit:0000000000000000 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:453    .text.FSMC_NANDStructInit:0000000000000000 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:454    .text.FSMC_NANDStructInit:0000000000000000 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:455    .text.FSMC_NANDStructInit:0000000000000000 $x
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:455    .text.FSMC_NANDStructInit:0000000000000000 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:457    .text.FSMC_NANDStructInit:0000000000000002 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:460    .text.FSMC_NANDStructInit:0000000000000006 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:461    .text.FSMC_NANDStructInit:0000000000000006 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:463    .text.FSMC_NANDStructInit:000000000000000a .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:464    .text.FSMC_NANDStructInit:000000000000000a .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:466    .text.FSMC_NANDStructInit:000000000000000e .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:467    .text.FSMC_NANDStructInit:000000000000000e .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:469    .text.FSMC_NANDStructInit:0000000000000012 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:470    .text.FSMC_NANDStructInit:0000000000000012 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:472    .text.FSMC_NANDStructInit:0000000000000016 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:473    .text.FSMC_NANDStructInit:0000000000000016 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:475    .text.FSMC_NANDStructInit:000000000000001a .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:476    .text.FSMC_NANDStructInit:000000000000001a .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:478    .text.FSMC_NANDStructInit:000000000000001e .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:479    .text.FSMC_NANDStructInit:000000000000001e .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:482    .text.FSMC_NANDStructInit:0000000000000024 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:483    .text.FSMC_NANDStructInit:0000000000000024 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:485    .text.FSMC_NANDStructInit:0000000000000026 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:486    .text.FSMC_NANDStructInit:0000000000000026 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:488    .text.FSMC_NANDStructInit:0000000000000028 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:489    .text.FSMC_NANDStructInit:0000000000000028 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:491    .text.FSMC_NANDStructInit:000000000000002a .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:492    .text.FSMC_NANDStructInit:000000000000002a .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:494    .text.FSMC_NANDStructInit:000000000000002c .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:496    .text.FSMC_NANDStructInit:000000000000002e .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:497    .text.FSMC_NANDStructInit:000000000000002e .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:499    .text.FSMC_NANDStructInit:0000000000000030 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:500    .text.FSMC_NANDStructInit:0000000000000030 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:502    .text.FSMC_NANDStructInit:0000000000000032 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:503    .text.FSMC_NANDStructInit:0000000000000032 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:505    .text.FSMC_NANDStructInit:0000000000000034 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:506    .text.FSMC_NANDStructInit:0000000000000036 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:513    .text.FSMC_NORSRAMCmd:0000000000000000 FSMC_NORSRAMCmd
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:516    .text.FSMC_NORSRAMCmd:0000000000000000 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:518    .text.FSMC_NORSRAMCmd:0000000000000000 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:519    .text.FSMC_NORSRAMCmd:0000000000000000 $x
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:519    .text.FSMC_NORSRAMCmd:0000000000000000 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:524    .text.FSMC_NORSRAMCmd:0000000000000008 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:526    .text.FSMC_NORSRAMCmd:000000000000000a .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:528    .text.FSMC_NORSRAMCmd:000000000000000c .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:529    .text.FSMC_NORSRAMCmd:000000000000000c .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:532    .text.FSMC_NORSRAMCmd:0000000000000010 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:534    .text.FSMC_NORSRAMCmd:0000000000000012 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:537    .text.FSMC_NORSRAMCmd:0000000000000014 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:538    .text.FSMC_NORSRAMCmd:0000000000000014 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:542    .text.FSMC_NORSRAMCmd:000000000000001e .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:549    .text.FSMC_NANDCmd:0000000000000000 FSMC_NANDCmd
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:552    .text.FSMC_NANDCmd:0000000000000000 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:554    .text.FSMC_NANDCmd:0000000000000000 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:555    .text.FSMC_NANDCmd:0000000000000000 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:556    .text.FSMC_NANDCmd:0000000000000000 $x
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:556    .text.FSMC_NANDCmd:0000000000000000 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:558    .text.FSMC_NANDCmd:0000000000000002 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:560    .text.FSMC_NANDCmd:0000000000000004 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:561    .text.FSMC_NANDCmd:0000000000000004 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:563    .text.FSMC_NANDCmd:0000000000000008 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:564    .text.FSMC_NANDCmd:0000000000000008 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:567    .text.FSMC_NANDCmd:000000000000000e .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:572    .text.FSMC_NANDCmd:0000000000000016 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:573    .text.FSMC_NANDCmd:0000000000000016 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:575    .text.FSMC_NANDCmd:000000000000001a .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:576    .text.FSMC_NANDCmd:000000000000001a .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:579    .text.FSMC_NANDCmd:0000000000000020 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:585    .text.FSMC_NANDCmd:000000000000002a .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:586    .text.FSMC_NANDCmd:000000000000002c .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:593    .text.FSMC_NANDECCCmd:0000000000000000 FSMC_NANDECCCmd
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:596    .text.FSMC_NANDECCCmd:0000000000000000 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:598    .text.FSMC_NANDECCCmd:0000000000000000 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:599    .text.FSMC_NANDECCCmd:0000000000000000 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:600    .text.FSMC_NANDECCCmd:0000000000000000 $x
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:600    .text.FSMC_NANDECCCmd:0000000000000000 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:602    .text.FSMC_NANDECCCmd:0000000000000002 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:604    .text.FSMC_NANDECCCmd:0000000000000004 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:605    .text.FSMC_NANDECCCmd:0000000000000004 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:607    .text.FSMC_NANDECCCmd:0000000000000008 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:608    .text.FSMC_NANDECCCmd:0000000000000008 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:611    .text.FSMC_NANDECCCmd:000000000000000e .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:616    .text.FSMC_NANDECCCmd:0000000000000016 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:617    .text.FSMC_NANDECCCmd:0000000000000016 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:619    .text.FSMC_NANDECCCmd:000000000000001a .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:620    .text.FSMC_NANDECCCmd:000000000000001a .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:623    .text.FSMC_NANDECCCmd:0000000000000020 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:629    .text.FSMC_NANDECCCmd:000000000000002c .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:630    .text.FSMC_NANDECCCmd:000000000000002e .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:637    .text.FSMC_GetECC:0000000000000000 FSMC_GetECC
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:640    .text.FSMC_GetECC:0000000000000000 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:642    .text.FSMC_GetECC:0000000000000000 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:643    .text.FSMC_GetECC:0000000000000000 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:644    .text.FSMC_GetECC:0000000000000000 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:645    .text.FSMC_GetECC:0000000000000000 $x
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:645    .text.FSMC_GetECC:0000000000000000 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:648    .text.FSMC_GetECC:0000000000000006 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:649    .text.FSMC_GetECC:0000000000000006 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:656    .text.FSMC_GetECC:000000000000000e .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:659    .text.FSMC_GetECC:0000000000000010 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:660    .text.FSMC_GetECC:0000000000000010 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:661    .text.FSMC_GetECC:0000000000000012 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:668    .text.FSMC_GetFlagStatus:0000000000000000 FSMC_GetFlagStatus
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:671    .text.FSMC_GetFlagStatus:0000000000000000 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:673    .text.FSMC_GetFlagStatus:0000000000000000 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:674    .text.FSMC_GetFlagStatus:0000000000000000 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:675    .text.FSMC_GetFlagStatus:0000000000000000 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:676    .text.FSMC_GetFlagStatus:0000000000000000 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:677    .text.FSMC_GetFlagStatus:0000000000000000 $x
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:677    .text.FSMC_GetFlagStatus:0000000000000000 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:680    .text.FSMC_GetFlagStatus:0000000000000006 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:681    .text.FSMC_GetFlagStatus:0000000000000006 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:685    .text.FSMC_GetFlagStatus:000000000000000c .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:686    .text.FSMC_GetFlagStatus:000000000000000c .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:689    .text.FSMC_GetFlagStatus:000000000000000e .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:694    .text.FSMC_GetFlagStatus:0000000000000014 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:697    .text.FSMC_GetFlagStatus:0000000000000016 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:698    .text.FSMC_GetFlagStatus:0000000000000016 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:699    .text.FSMC_GetFlagStatus:0000000000000018 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:2653   .debug_line_str:0000000000000077 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:2653   .debug_line_str:00000000000000cc .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:2653   .debug_line_str:00000000000000de .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:2653   .debug_line_str:000000000000013a .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:2653   .debug_line_str:0000000000000192 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:2653   .debug_line_str:00000000000001e8 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:2653   .debug_line_str:0000000000000248 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:2653   .debug_line_str:0000000000000258 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:2653   .debug_line_str:0000000000000268 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:2653   .debug_line_str:0000000000000279 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:2653   .debug_line_str:0000000000000283 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:2653   .debug_line_str:0000000000000290 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:2653   .debug_line_str:000000000000029b .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:57     .text.FSMC_NORSRAMDeInit:000000000000003c .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:94     .text.FSMC_NANDDeInit:0000000000000026 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:238    .text.FSMC_NORSRAMInit:00000000000000ae .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:343    .text.FSMC_NANDInit:000000000000008c .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:444    .text.FSMC_NORSRAMStructInit:000000000000005c .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:509    .text.FSMC_NANDStructInit:0000000000000036 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:545    .text.FSMC_NORSRAMCmd:000000000000001e .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:589    .text.FSMC_NANDCmd:000000000000002c .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:633    .text.FSMC_NANDECCCmd:000000000000002e .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:664    .text.FSMC_GetECC:0000000000000012 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:702    .text.FSMC_GetFlagStatus:0000000000000018 .L0 
+                     .debug_frame:0000000000000000 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:45     .text.FSMC_NORSRAMDeInit:000000000000002c .L2
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:30     .text.FSMC_NORSRAMDeInit:0000000000000012 .L3
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:88     .text.FSMC_NANDDeInit:0000000000000024 .L4
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:159    .text.FSMC_NORSRAMInit:000000000000004c .L7
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:226    .text.FSMC_NORSRAMInit:000000000000009c .L8
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:221    .text.FSMC_NORSRAMInit:0000000000000098 .L10
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:337    .text.FSMC_NANDInit:000000000000008a .L11
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:535    .text.FSMC_NORSRAMCmd:0000000000000014 .L16
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:530    .text.FSMC_NORSRAMCmd:0000000000000010 .L18
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:570    .text.FSMC_NANDCmd:0000000000000016 .L20
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:583    .text.FSMC_NANDCmd:000000000000002a .L19
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:614    .text.FSMC_NANDECCCmd:0000000000000016 .L23
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:627    .text.FSMC_NANDECCCmd:000000000000002c .L22
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:654    .text.FSMC_GetECC:000000000000000e .L27
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:692    .text.FSMC_GetFlagStatus:0000000000000014 .L30
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:1429   .debug_abbrev:0000000000000000 .Ldebug_abbrev0
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:2620   .debug_str:00000000000004a9 .LASF89
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:2651   .debug_line_str:0000000000000055 .LASF0
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:2649   .debug_line_str:0000000000000000 .LASF1
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:2431   .debug_rnglists:000000000000000c .LLRL9
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:2468   .debug_line:0000000000000000 .Ldebug_line0
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:2564   .debug_str:00000000000002ef .LASF2
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:2556   .debug_str:00000000000002a5 .LASF3
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:2550   .debug_str:0000000000000270 .LASF4
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:2502   .debug_str:0000000000000102 .LASF5
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:2496   .debug_str:00000000000000e0 .LASF8
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:2580   .debug_str:0000000000000385 .LASF6
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:2532   .debug_str:00000000000001df .LASF7
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:2490   .debug_str:00000000000000b7 .LASF9
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:2610   .debug_str:000000000000044f .LASF10
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:2526   .debug_str:00000000000001ae .LASF11
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:2558   .debug_str:00000000000002b1 .LASF12
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:2586   .debug_str:00000000000003ad .LASF13
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:2470   .debug_str:0000000000000000 .LASF14
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:2520   .debug_str:0000000000000185 .LASF15
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:2646   .debug_str:000000000000065f .LASF16
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:2614   .debug_str:0000000000000471 .LASF17
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:2624   .debug_str:00000000000005b0 .LASF18
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:2494   .debug_str:00000000000000d5 .LASF19
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:2512   .debug_str:000000000000015b .LASF21
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:2636   .debug_str:000000000000061f .LASF20
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:2638   .debug_str:0000000000000632 .LASF22
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:2506   .debug_str:0000000000000118 .LASF23
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:2606   .debug_str:0000000000000436 .LASF24
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:2622   .debug_str:00000000000005aa .LASF25
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:2626   .debug_str:00000000000005b6 .LASF26
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:2604   .debug_str:000000000000042c .LASF27
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:2640   .debug_str:0000000000000637 .LASF28
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:2568   .debug_str:0000000000000310 .LASF29
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:2522   .debug_str:000000000000018d .LASF30
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:2584   .debug_str:00000000000003a8 .LASF31
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:2474   .debug_str:000000000000001f .LASF32
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:2536   .debug_str:00000000000001fc .LASF33
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:2572   .debug_str:0000000000000336 .LASF34
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:2486   .debug_str:0000000000000086 .LASF35
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:2618   .debug_str:0000000000000498 .LASF36
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:2548   .debug_str:000000000000025f .LASF37
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:2530   .debug_str:00000000000001cf .LASF38
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:2552   .debug_str:000000000000027e .LASF39
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:2642   .debug_str:000000000000063d .LASF40
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:2608   .debug_str:000000000000043b .LASF41
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:2498   .debug_str:00000000000000eb .LASF42
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:2524   .debug_str:0000000000000199 .LASF43
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:2560   .debug_str:00000000000002c8 .LASF44
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:2488   .debug_str:00000000000000a1 .LASF45
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:2644   .debug_str:0000000000000647 .LASF46
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:2482   .debug_str:000000000000006a .LASF47
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:2472   .debug_str:0000000000000009 .LASF48
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:2566   .debug_str:00000000000002fc .LASF49
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:2540   .debug_str:000000000000021b .LASF50
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:2562   .debug_str:00000000000002dd .LASF51
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:2612   .debug_str:0000000000000461 .LASF52
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:2574   .debug_str:0000000000000349 .LASF53
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:2616   .debug_str:0000000000000481 .LASF54
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:2588   .debug_str:00000000000003b6 .LASF55
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:2576   .debug_str:0000000000000364 .LASF56
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:2528   .debug_str:00000000000001bc .LASF57
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:2480   .debug_str:0000000000000057 .LASF58
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:2578   .debug_str:0000000000000373 .LASF59
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:2508   .debug_str:000000000000012c .LASF60
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:2476   .debug_str:0000000000000035 .LASF61
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:2554   .debug_str:000000000000029c .LASF62
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:2478   .debug_str:0000000000000046 .LASF63
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:2492   .debug_str:00000000000000c2 .LASF64
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:2590   .debug_str:00000000000003ce .LASF65
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:2628   .debug_str:00000000000005bc .LASF66
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:2634   .debug_str:00000000000005ff .LASF67
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:2632   .debug_str:00000000000005ea .LASF68
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:2570   .debug_str:0000000000000323 .LASF72
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:669    .text.FSMC_GetFlagStatus:0000000000000000 .LFB39
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:700    .text.FSMC_GetFlagStatus:0000000000000018 .LFE39
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:1914   .debug_loclists:000000000000000c .LLST7
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:2514   .debug_str:0000000000000160 .LASF69
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:2538   .debug_str:0000000000000211 .LASF70
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:2592   .debug_str:00000000000003e0 .LASF71
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:1942   .debug_loclists:000000000000003f .LLST8
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:2504   .debug_str:000000000000010c .LASF73
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:638    .text.FSMC_GetECC:0000000000000000 .LFB38
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:662    .text.FSMC_GetECC:0000000000000012 .LFE38
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:1961   .debug_loclists:0000000000000063 .LLST5
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:2594   .debug_str:00000000000003e6 .LASF74
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:1989   .debug_loclists:0000000000000096 .LLST6
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:2598   .debug_str:00000000000003f5 .LASF76
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:594    .text.FSMC_NANDECCCmd:0000000000000000 .LFB37
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:631    .text.FSMC_NANDECCCmd:000000000000002e .LFE37
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:2546   .debug_str:0000000000000256 .LASF75
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:2510   .debug_str:000000000000014e .LASF77
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:550    .text.FSMC_NANDCmd:0000000000000000 .LFB36
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:587    .text.FSMC_NANDCmd:000000000000002c .LFE36
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:2582   .debug_str:0000000000000398 .LASF78
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:514    .text.FSMC_NORSRAMCmd:0000000000000000 .LFB35
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:543    .text.FSMC_NORSRAMCmd:000000000000001e .LFE35
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:2008   .debug_loclists:00000000000000ba .LLST4
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:2544   .debug_str:0000000000000242 .LASF79
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:449    .text.FSMC_NANDStructInit:0000000000000000 .LFB34
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:507    .text.FSMC_NANDStructInit:0000000000000036 .LFE34
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:2534   .debug_str:00000000000001e8 .LASF80
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:2542   .debug_str:000000000000022b .LASF81
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:348    .text.FSMC_NORSRAMStructInit:0000000000000000 .LFB33
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:442    .text.FSMC_NORSRAMStructInit:000000000000005c .LFE33
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:2600   .debug_str:0000000000000405 .LASF82
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:2484   .debug_str:0000000000000078 .LASF83
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:243    .text.FSMC_NANDInit:0000000000000000 .LFB32
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:341    .text.FSMC_NANDInit:000000000000008c .LFE32
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:2023   .debug_loclists:00000000000000d4 .LLST0
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:2500   .debug_str:00000000000000fb .LASF84
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:2038   .debug_loclists:00000000000000ee .LLST1
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:2518   .debug_str:000000000000017d .LASF85
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:2218   .debug_loclists:00000000000001b9 .LLST2
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:2596   .debug_str:00000000000003ed .LASF86
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:2304   .debug_loclists:000000000000021a .LLST3
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:2630   .debug_str:00000000000005d9 .LASF87
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:99     .text.FSMC_NORSRAMInit:0000000000000000 .LFB31
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:236    .text.FSMC_NORSRAMInit:00000000000000ae .LFE31
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:2602   .debug_str:000000000000041c .LASF88
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:62     .text.FSMC_NANDDeInit:0000000000000000 .LFB30
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:92     .text.FSMC_NANDDeInit:0000000000000026 .LFE30
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:2516   .debug_str:000000000000016a .LASF90
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:15     .text.FSMC_NORSRAMDeInit:0000000000000000 .LFB29
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:55     .text.FSMC_NORSRAMDeInit:000000000000003c .LFE29
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:672    .text.FSMC_GetFlagStatus:0000000000000000 .LVL18
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:683    .text.FSMC_GetFlagStatus:000000000000000c .LVL19
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:691    .text.FSMC_GetFlagStatus:0000000000000014 .LVL21
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:695    .text.FSMC_GetFlagStatus:0000000000000016 .LVL22
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:687    .text.FSMC_GetFlagStatus:000000000000000e .LVL20
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:641    .text.FSMC_GetECC:0000000000000000 .LVL14
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:651    .text.FSMC_GetECC:000000000000000c .LVL15
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:653    .text.FSMC_GetECC:000000000000000e .LVL16
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:657    .text.FSMC_GetECC:0000000000000010 .LVL17
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:517    .text.FSMC_NORSRAMCmd:0000000000000000 .LVL10
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:520    .text.FSMC_NORSRAMCmd:0000000000000002 .LVL11
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:246    .text.FSMC_NANDInit:0000000000000000 .LVL3
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:292    .text.FSMC_NANDInit:0000000000000046 .LVL4
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:297    .text.FSMC_NANDInit:000000000000004c .LVL5
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:304    .text.FSMC_NANDInit:0000000000000056 .LVL6
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:306    .text.FSMC_NANDInit:000000000000005a .LVL7
+C:\Users\LOCALH~1\AppData\Local\Temp\cceTeMOC.s:710    .debug_info:0000000000000000 .Ldebug_info0
+
+NO UNDEFINED SYMBOLS

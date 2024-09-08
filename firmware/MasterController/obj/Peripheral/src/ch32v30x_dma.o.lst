@@ -1,0 +1,1762 @@
+   1              		.file	"ch32v30x_dma.c"
+   2              		.option nopic
+   3              		.attribute arch, "rv32i2p0_m2p0_a2p0_f2p0_c2p0_xw"
+   4              		.attribute unaligned_access, 0
+   5              		.attribute stack_align, 16
+   6              		.text
+   7              	.Ltext0:
+   8              		.cfi_sections	.debug_frame
+   9              		.file 0 "C:\\Users\\localhost\\Documents\\turbomoskal-repo\\qqexpert\\firmware\\MasterController\\
+  10              		.section	.text.DMA_DeInit,"ax",@progbits
+  11              		.align	1
+  12              		.globl	DMA_DeInit
+  14              	DMA_DeInit:
+  15              	.LFB29:
+  16              		.file 1 "../Peripheral/src/ch32v30x_dma.c"
+   1:../Peripheral/src/ch32v30x_dma.c **** /********************************** (C) COPYRIGHT  *******************************
+   2:../Peripheral/src/ch32v30x_dma.c **** * File Name          : ch32v30x_dma.c
+   3:../Peripheral/src/ch32v30x_dma.c **** * Author             : WCH
+   4:../Peripheral/src/ch32v30x_dma.c **** * Version            : V1.0.0
+   5:../Peripheral/src/ch32v30x_dma.c **** * Date               : 2021/06/06
+   6:../Peripheral/src/ch32v30x_dma.c **** * Description        : This file provides all the DMA firmware functions.
+   7:../Peripheral/src/ch32v30x_dma.c **** *********************************************************************************
+   8:../Peripheral/src/ch32v30x_dma.c **** * Copyright (c) 2021 Nanjing Qinheng Microelectronics Co., Ltd.
+   9:../Peripheral/src/ch32v30x_dma.c **** * Attention: This software (modified or not) and binary are used for 
+  10:../Peripheral/src/ch32v30x_dma.c **** * microcontroller manufactured by Nanjing Qinheng Microelectronics.
+  11:../Peripheral/src/ch32v30x_dma.c **** *******************************************************************************/
+  12:../Peripheral/src/ch32v30x_dma.c **** #include "ch32v30x_dma.h"
+  13:../Peripheral/src/ch32v30x_dma.c **** #include "ch32v30x_rcc.h"
+  14:../Peripheral/src/ch32v30x_dma.c **** 
+  15:../Peripheral/src/ch32v30x_dma.c **** /* DMA1 Channelx interrupt pending bit masks */
+  16:../Peripheral/src/ch32v30x_dma.c **** #define DMA1_Channel1_IT_Mask     ((uint32_t)(DMA_GIF1 | DMA_TCIF1 | DMA_HTIF1 | DMA_TEIF1))
+  17:../Peripheral/src/ch32v30x_dma.c **** #define DMA1_Channel2_IT_Mask     ((uint32_t)(DMA_GIF2 | DMA_TCIF2 | DMA_HTIF2 | DMA_TEIF2))
+  18:../Peripheral/src/ch32v30x_dma.c **** #define DMA1_Channel3_IT_Mask     ((uint32_t)(DMA_GIF3 | DMA_TCIF3 | DMA_HTIF3 | DMA_TEIF3))
+  19:../Peripheral/src/ch32v30x_dma.c **** #define DMA1_Channel4_IT_Mask     ((uint32_t)(DMA_GIF4 | DMA_TCIF4 | DMA_HTIF4 | DMA_TEIF4))
+  20:../Peripheral/src/ch32v30x_dma.c **** #define DMA1_Channel5_IT_Mask     ((uint32_t)(DMA_GIF5 | DMA_TCIF5 | DMA_HTIF5 | DMA_TEIF5))
+  21:../Peripheral/src/ch32v30x_dma.c **** #define DMA1_Channel6_IT_Mask     ((uint32_t)(DMA_GIF6 | DMA_TCIF6 | DMA_HTIF6 | DMA_TEIF6))
+  22:../Peripheral/src/ch32v30x_dma.c **** #define DMA1_Channel7_IT_Mask     ((uint32_t)(DMA_GIF7 | DMA_TCIF7 | DMA_HTIF7 | DMA_TEIF7))
+  23:../Peripheral/src/ch32v30x_dma.c **** 
+  24:../Peripheral/src/ch32v30x_dma.c **** /* DMA2 Channelx interrupt pending bit masks */
+  25:../Peripheral/src/ch32v30x_dma.c **** #define DMA2_Channel1_IT_Mask     ((uint32_t)(DMA_GIF1 | DMA_TCIF1 | DMA_HTIF1 | DMA_TEIF1))
+  26:../Peripheral/src/ch32v30x_dma.c **** #define DMA2_Channel2_IT_Mask     ((uint32_t)(DMA_GIF2 | DMA_TCIF2 | DMA_HTIF2 | DMA_TEIF2))
+  27:../Peripheral/src/ch32v30x_dma.c **** #define DMA2_Channel3_IT_Mask     ((uint32_t)(DMA_GIF3 | DMA_TCIF3 | DMA_HTIF3 | DMA_TEIF3))
+  28:../Peripheral/src/ch32v30x_dma.c **** #define DMA2_Channel4_IT_Mask     ((uint32_t)(DMA_GIF4 | DMA_TCIF4 | DMA_HTIF4 | DMA_TEIF4))
+  29:../Peripheral/src/ch32v30x_dma.c **** #define DMA2_Channel5_IT_Mask     ((uint32_t)(DMA_GIF5 | DMA_TCIF5 | DMA_HTIF5 | DMA_TEIF5))
+  30:../Peripheral/src/ch32v30x_dma.c **** #define DMA2_Channel6_IT_Mask     ((uint32_t)(DMA_GIF6 | DMA_TCIF6 | DMA_HTIF6 | DMA_TEIF6))
+  31:../Peripheral/src/ch32v30x_dma.c **** #define DMA2_Channel7_IT_Mask     ((uint32_t)(DMA_GIF7 | DMA_TCIF7 | DMA_HTIF7 | DMA_TEIF7))
+  32:../Peripheral/src/ch32v30x_dma.c **** #define DMA2_Channel8_IT_Mask     ((uint32_t)(DMA_GIF8 | DMA_TCIF8 | DMA_HTIF8 | DMA_TEIF8))
+  33:../Peripheral/src/ch32v30x_dma.c **** #define DMA2_Channel9_IT_Mask     ((uint32_t)(DMA_GIF9 | DMA_TCIF9 | DMA_HTIF9 | DMA_TEIF9))
+  34:../Peripheral/src/ch32v30x_dma.c **** #define DMA2_Channel10_IT_Mask    ((uint32_t)(DMA_GIF10 | DMA_TCIF10 | DMA_HTIF10 | DMA_TEIF10))
+  35:../Peripheral/src/ch32v30x_dma.c **** #define DMA2_Channel11_IT_Mask    ((uint32_t)(DMA_GIF11 | DMA_TCIF11 | DMA_HTIF11 | DMA_TEIF11))
+  36:../Peripheral/src/ch32v30x_dma.c **** 
+  37:../Peripheral/src/ch32v30x_dma.c **** /* DMA2 FLAG mask */
+  38:../Peripheral/src/ch32v30x_dma.c **** #define FLAG_Mask                 ((uint32_t)0x10000000)
+  39:../Peripheral/src/ch32v30x_dma.c **** #define DMA2_EXTEN_FLAG_Mask      ((uint32_t)0x20000000)
+  40:../Peripheral/src/ch32v30x_dma.c **** 
+  41:../Peripheral/src/ch32v30x_dma.c **** /* DMA registers Masks */
+  42:../Peripheral/src/ch32v30x_dma.c **** #define CFGR_CLEAR_Mask           ((uint32_t)0xFFFF800F)
+  43:../Peripheral/src/ch32v30x_dma.c **** 
+  44:../Peripheral/src/ch32v30x_dma.c **** /*********************************************************************
+  45:../Peripheral/src/ch32v30x_dma.c ****  * @fn      DMA_DeInit
+  46:../Peripheral/src/ch32v30x_dma.c ****  *
+  47:../Peripheral/src/ch32v30x_dma.c ****  * @brief   Deinitializes the DMAy Channelx registers to their default
+  48:../Peripheral/src/ch32v30x_dma.c ****  *        reset values.
+  49:../Peripheral/src/ch32v30x_dma.c ****  *
+  50:../Peripheral/src/ch32v30x_dma.c ****  * @param   DMAy_Channelx - here y can be 1 or 2 to select the DMA and x can be
+  51:../Peripheral/src/ch32v30x_dma.c ****  *        1 to 7 for DMA1 and 1 to 11 for DMA2 to select the DMA Channel.
+  52:../Peripheral/src/ch32v30x_dma.c ****  *
+  53:../Peripheral/src/ch32v30x_dma.c ****  * @return  none
+  54:../Peripheral/src/ch32v30x_dma.c ****  */
+  55:../Peripheral/src/ch32v30x_dma.c **** void DMA_DeInit(DMA_Channel_TypeDef *DMAy_Channelx)
+  56:../Peripheral/src/ch32v30x_dma.c **** {
+  17              		.loc 1 56 1
+  18              		.cfi_startproc
+  19              	.LVL0:
+  57:../Peripheral/src/ch32v30x_dma.c ****     DMAy_Channelx->CFGR &= (uint16_t)(~DMA_CFGR1_EN);
+  20              		.loc 1 57 5
+  21              		.loc 1 57 18 is_stmt 0
+  22 0000 1C41     		lw	a5,0(a0)
+  23              		.loc 1 57 25
+  24 0002 4167     		li	a4,65536
+  25 0004 7917     		addi	a4,a4,-2
+  26 0006 F98F     		and	a5,a5,a4
+  27 0008 1CC1     		sw	a5,0(a0)
+  58:../Peripheral/src/ch32v30x_dma.c ****     DMAy_Channelx->CFGR = 0;
+  28              		.loc 1 58 5 is_stmt 1
+  29              		.loc 1 58 25 is_stmt 0
+  30 000a 23200500 		sw	zero,0(a0)
+  59:../Peripheral/src/ch32v30x_dma.c ****     DMAy_Channelx->CNTR = 0;
+  31              		.loc 1 59 5 is_stmt 1
+  32              		.loc 1 59 25 is_stmt 0
+  33 000e 23220500 		sw	zero,4(a0)
+  60:../Peripheral/src/ch32v30x_dma.c ****     DMAy_Channelx->PADDR = 0;
+  34              		.loc 1 60 5 is_stmt 1
+  35              		.loc 1 60 26 is_stmt 0
+  36 0012 23240500 		sw	zero,8(a0)
+  61:../Peripheral/src/ch32v30x_dma.c ****     DMAy_Channelx->MADDR = 0;
+  37              		.loc 1 61 5 is_stmt 1
+  62:../Peripheral/src/ch32v30x_dma.c ****     if(DMAy_Channelx == DMA1_Channel1)
+  38              		.loc 1 62 7 is_stmt 0
+  39 0016 B7070240 		li	a5,1073872896
+  61:../Peripheral/src/ch32v30x_dma.c ****     DMAy_Channelx->MADDR = 0;
+  40              		.loc 1 61 26
+  41 001a 23260500 		sw	zero,12(a0)
+  42              		.loc 1 62 5 is_stmt 1
+  43              		.loc 1 62 7 is_stmt 0
+  44 001e 13878700 		addi	a4,a5,8
+  45 0022 6317E500 		bne	a0,a4,.L2
+  46              	.L27:
+  63:../Peripheral/src/ch32v30x_dma.c ****     {
+  64:../Peripheral/src/ch32v30x_dma.c ****         DMA1->INTFCR |= DMA1_Channel1_IT_Mask;
+  65:../Peripheral/src/ch32v30x_dma.c ****     }
+  66:../Peripheral/src/ch32v30x_dma.c ****     else if(DMAy_Channelx == DMA1_Channel2)
+  67:../Peripheral/src/ch32v30x_dma.c ****     {
+  68:../Peripheral/src/ch32v30x_dma.c ****         DMA1->INTFCR |= DMA1_Channel2_IT_Mask;
+  69:../Peripheral/src/ch32v30x_dma.c ****     }
+  70:../Peripheral/src/ch32v30x_dma.c ****     else if(DMAy_Channelx == DMA1_Channel3)
+  71:../Peripheral/src/ch32v30x_dma.c ****     {
+  72:../Peripheral/src/ch32v30x_dma.c ****         DMA1->INTFCR |= DMA1_Channel3_IT_Mask;
+  73:../Peripheral/src/ch32v30x_dma.c ****     }
+  74:../Peripheral/src/ch32v30x_dma.c ****     else if(DMAy_Channelx == DMA1_Channel4)
+  75:../Peripheral/src/ch32v30x_dma.c ****     {
+  76:../Peripheral/src/ch32v30x_dma.c ****         DMA1->INTFCR |= DMA1_Channel4_IT_Mask;
+  77:../Peripheral/src/ch32v30x_dma.c ****     }
+  78:../Peripheral/src/ch32v30x_dma.c ****     else if(DMAy_Channelx == DMA1_Channel5)
+  79:../Peripheral/src/ch32v30x_dma.c ****     {
+  80:../Peripheral/src/ch32v30x_dma.c ****         DMA1->INTFCR |= DMA1_Channel5_IT_Mask;
+  81:../Peripheral/src/ch32v30x_dma.c ****     }
+  82:../Peripheral/src/ch32v30x_dma.c ****     else if(DMAy_Channelx == DMA1_Channel6)
+  83:../Peripheral/src/ch32v30x_dma.c ****     {
+  84:../Peripheral/src/ch32v30x_dma.c ****         DMA1->INTFCR |= DMA1_Channel6_IT_Mask;
+  85:../Peripheral/src/ch32v30x_dma.c ****     }
+  86:../Peripheral/src/ch32v30x_dma.c ****     else if(DMAy_Channelx == DMA1_Channel7)
+  87:../Peripheral/src/ch32v30x_dma.c ****     {
+  88:../Peripheral/src/ch32v30x_dma.c ****         DMA1->INTFCR |= DMA1_Channel7_IT_Mask;
+  89:../Peripheral/src/ch32v30x_dma.c ****     }
+  90:../Peripheral/src/ch32v30x_dma.c ****     else if(DMAy_Channelx == DMA2_Channel1)
+  91:../Peripheral/src/ch32v30x_dma.c ****     {
+  92:../Peripheral/src/ch32v30x_dma.c ****         DMA2->INTFCR |= DMA2_Channel1_IT_Mask;
+  93:../Peripheral/src/ch32v30x_dma.c ****     }
+  94:../Peripheral/src/ch32v30x_dma.c ****     else if(DMAy_Channelx == DMA2_Channel2)
+  95:../Peripheral/src/ch32v30x_dma.c ****     {
+  96:../Peripheral/src/ch32v30x_dma.c ****         DMA2->INTFCR |= DMA2_Channel2_IT_Mask;
+  97:../Peripheral/src/ch32v30x_dma.c ****     }
+  98:../Peripheral/src/ch32v30x_dma.c ****     else if(DMAy_Channelx == DMA2_Channel3)
+  99:../Peripheral/src/ch32v30x_dma.c ****     {
+ 100:../Peripheral/src/ch32v30x_dma.c ****         DMA2->INTFCR |= DMA2_Channel3_IT_Mask;
+ 101:../Peripheral/src/ch32v30x_dma.c ****     }
+ 102:../Peripheral/src/ch32v30x_dma.c ****     else if(DMAy_Channelx == DMA2_Channel4)
+ 103:../Peripheral/src/ch32v30x_dma.c ****     {
+ 104:../Peripheral/src/ch32v30x_dma.c ****         DMA2->INTFCR |= DMA2_Channel4_IT_Mask;
+ 105:../Peripheral/src/ch32v30x_dma.c ****     }
+ 106:../Peripheral/src/ch32v30x_dma.c ****     else if(DMAy_Channelx == DMA2_Channel5)
+ 107:../Peripheral/src/ch32v30x_dma.c ****     {
+ 108:../Peripheral/src/ch32v30x_dma.c ****         DMA2->INTFCR |= DMA2_Channel5_IT_Mask;
+ 109:../Peripheral/src/ch32v30x_dma.c ****     }
+ 110:../Peripheral/src/ch32v30x_dma.c ****     else if(DMAy_Channelx == DMA2_Channel6)
+ 111:../Peripheral/src/ch32v30x_dma.c ****     {
+ 112:../Peripheral/src/ch32v30x_dma.c ****         DMA2->INTFCR |= DMA2_Channel6_IT_Mask;
+ 113:../Peripheral/src/ch32v30x_dma.c ****     }
+ 114:../Peripheral/src/ch32v30x_dma.c ****     else if(DMAy_Channelx == DMA2_Channel7)
+ 115:../Peripheral/src/ch32v30x_dma.c ****     {
+ 116:../Peripheral/src/ch32v30x_dma.c ****         DMA2->INTFCR |= DMA2_Channel7_IT_Mask;
+ 117:../Peripheral/src/ch32v30x_dma.c ****     }
+ 118:../Peripheral/src/ch32v30x_dma.c ****     else if(DMAy_Channelx == DMA2_Channel8)
+ 119:../Peripheral/src/ch32v30x_dma.c ****     {
+ 120:../Peripheral/src/ch32v30x_dma.c ****         DMA2_EXTEN->INTFCR |= DMA2_Channel8_IT_Mask;
+  47              		.loc 1 120 19
+  48 0026 D843     		lw	a4,4(a5)
+  49              		.loc 1 120 28
+  50 0028 1367F700 		ori	a4,a4,15
+  51              	.L20:
+ 121:../Peripheral/src/ch32v30x_dma.c ****     }
+ 122:../Peripheral/src/ch32v30x_dma.c ****     else if(DMAy_Channelx == DMA2_Channel9)
+ 123:../Peripheral/src/ch32v30x_dma.c ****     {
+ 124:../Peripheral/src/ch32v30x_dma.c ****         DMA2_EXTEN->INTFCR |= DMA2_Channel9_IT_Mask;
+ 125:../Peripheral/src/ch32v30x_dma.c ****     }
+ 126:../Peripheral/src/ch32v30x_dma.c ****     else if(DMAy_Channelx == DMA2_Channel10)
+ 127:../Peripheral/src/ch32v30x_dma.c ****     {
+ 128:../Peripheral/src/ch32v30x_dma.c ****         DMA2_EXTEN->INTFCR |= DMA2_Channel10_IT_Mask;
+ 129:../Peripheral/src/ch32v30x_dma.c ****     }
+ 130:../Peripheral/src/ch32v30x_dma.c ****     else if(DMAy_Channelx == DMA2_Channel11)
+ 131:../Peripheral/src/ch32v30x_dma.c ****     {
+ 132:../Peripheral/src/ch32v30x_dma.c ****         DMA2_EXTEN->INTFCR |= DMA2_Channel11_IT_Mask;
+  52              		.loc 1 132 28
+  53 002c D8C3     		sw	a4,4(a5)
+  54              	.L1:
+ 133:../Peripheral/src/ch32v30x_dma.c ****     }
+ 134:../Peripheral/src/ch32v30x_dma.c **** }
+  55              		.loc 1 134 1
+  56 002e 8280     		ret
+  57              	.L2:
+  66:../Peripheral/src/ch32v30x_dma.c ****     {
+  58              		.loc 1 66 10 is_stmt 1
+  66:../Peripheral/src/ch32v30x_dma.c ****     {
+  59              		.loc 1 66 12 is_stmt 0
+  60 0030 1387C701 		addi	a4,a5,28
+  61 0034 6316E500 		bne	a0,a4,.L4
+  62              	.L28:
+ 124:../Peripheral/src/ch32v30x_dma.c ****     }
+  63              		.loc 1 124 19
+  64 0038 D843     		lw	a4,4(a5)
+ 124:../Peripheral/src/ch32v30x_dma.c ****     }
+  65              		.loc 1 124 28
+  66 003a 1367070F 		ori	a4,a4,240
+  67 003e FDB7     		j	.L20
+  68              	.L4:
+  70:../Peripheral/src/ch32v30x_dma.c ****     {
+  69              		.loc 1 70 10 is_stmt 1
+  70:../Peripheral/src/ch32v30x_dma.c ****     {
+  70              		.loc 1 70 12 is_stmt 0
+  71 0040 13870703 		addi	a4,a5,48
+  72 0044 6317E500 		bne	a0,a4,.L5
+  73              	.L23:
+ 128:../Peripheral/src/ch32v30x_dma.c ****     }
+  74              		.loc 1 128 28
+  75 0048 8566     		li	a3,4096
+ 128:../Peripheral/src/ch32v30x_dma.c ****     }
+  76              		.loc 1 128 19
+  77 004a D843     		lw	a4,4(a5)
+ 128:../Peripheral/src/ch32v30x_dma.c ****     }
+  78              		.loc 1 128 28
+  79 004c 938606F0 		addi	a3,a3,-256
+  80 0050 39A8     		j	.L21
+  81              	.L5:
+  74:../Peripheral/src/ch32v30x_dma.c ****     {
+  82              		.loc 1 74 10 is_stmt 1
+  74:../Peripheral/src/ch32v30x_dma.c ****     {
+  83              		.loc 1 74 12 is_stmt 0
+  84 0052 13874704 		addi	a4,a5,68
+  85 0056 6315E500 		bne	a0,a4,.L6
+  86              	.L22:
+ 132:../Peripheral/src/ch32v30x_dma.c ****     }
+  87              		.loc 1 132 19
+  88 005a D843     		lw	a4,4(a5)
+ 132:../Peripheral/src/ch32v30x_dma.c ****     }
+  89              		.loc 1 132 28
+  90 005c BD66     		li	a3,61440
+  91 005e 01A8     		j	.L21
+  92              	.L6:
+  78:../Peripheral/src/ch32v30x_dma.c ****     {
+  93              		.loc 1 78 10 is_stmt 1
+  78:../Peripheral/src/ch32v30x_dma.c ****     {
+  94              		.loc 1 78 12 is_stmt 0
+  95 0060 13878705 		addi	a4,a5,88
+  96 0064 6317E500 		bne	a0,a4,.L7
+  97              	.L24:
+ 108:../Peripheral/src/ch32v30x_dma.c ****     }
+  98              		.loc 1 108 13
+  99 0068 D843     		lw	a4,4(a5)
+ 108:../Peripheral/src/ch32v30x_dma.c ****     }
+ 100              		.loc 1 108 22
+ 101 006a B7060F00 		li	a3,983040
+ 102              	.L21:
+ 132:../Peripheral/src/ch32v30x_dma.c ****     }
+ 103              		.loc 1 132 28
+ 104 006e 558F     		or	a4,a4,a3
+ 105 0070 75BF     		j	.L20
+ 106              	.L7:
+  82:../Peripheral/src/ch32v30x_dma.c ****     {
+ 107              		.loc 1 82 10 is_stmt 1
+  82:../Peripheral/src/ch32v30x_dma.c ****     {
+ 108              		.loc 1 82 12 is_stmt 0
+ 109 0072 1387C706 		addi	a4,a5,108
+ 110 0076 6316E500 		bne	a0,a4,.L8
+ 111              	.L25:
+ 112:../Peripheral/src/ch32v30x_dma.c ****     }
+ 112              		.loc 1 112 13
+ 113 007a D843     		lw	a4,4(a5)
+ 112:../Peripheral/src/ch32v30x_dma.c ****     }
+ 114              		.loc 1 112 22
+ 115 007c B706F000 		li	a3,15728640
+ 116 0080 FDB7     		j	.L21
+ 117              	.L8:
+  86:../Peripheral/src/ch32v30x_dma.c ****     {
+ 118              		.loc 1 86 10 is_stmt 1
+  86:../Peripheral/src/ch32v30x_dma.c ****     {
+ 119              		.loc 1 86 12 is_stmt 0
+ 120 0082 13870708 		addi	a4,a5,128
+ 121 0086 6316E500 		bne	a0,a4,.L9
+ 122              	.L26:
+ 116:../Peripheral/src/ch32v30x_dma.c ****     }
+ 123              		.loc 1 116 13
+ 124 008a D843     		lw	a4,4(a5)
+ 116:../Peripheral/src/ch32v30x_dma.c ****     }
+ 125              		.loc 1 116 22
+ 126 008c B706000F 		li	a3,251658240
+ 127 0090 F9BF     		j	.L21
+ 128              	.L9:
+  90:../Peripheral/src/ch32v30x_dma.c ****     {
+ 129              		.loc 1 90 10 is_stmt 1
+  90:../Peripheral/src/ch32v30x_dma.c ****     {
+ 130              		.loc 1 90 12 is_stmt 0
+ 131 0092 13878740 		addi	a4,a5,1032
+ 132 0096 6315E500 		bne	a0,a4,.L10
+  92:../Peripheral/src/ch32v30x_dma.c ****     }
+ 133              		.loc 1 92 9 is_stmt 1
+  92:../Peripheral/src/ch32v30x_dma.c ****     }
+ 134              		.loc 1 92 13 is_stmt 0
+ 135 009a 93870740 		addi	a5,a5,1024
+ 136 009e 61B7     		j	.L27
+ 137              	.L10:
+  94:../Peripheral/src/ch32v30x_dma.c ****     {
+ 138              		.loc 1 94 10 is_stmt 1
+  94:../Peripheral/src/ch32v30x_dma.c ****     {
+ 139              		.loc 1 94 12 is_stmt 0
+ 140 00a0 1387C741 		addi	a4,a5,1052
+ 141 00a4 6315E500 		bne	a0,a4,.L11
+  96:../Peripheral/src/ch32v30x_dma.c ****     }
+ 142              		.loc 1 96 9 is_stmt 1
+  96:../Peripheral/src/ch32v30x_dma.c ****     }
+ 143              		.loc 1 96 13 is_stmt 0
+ 144 00a8 93870740 		addi	a5,a5,1024
+ 145 00ac 71B7     		j	.L28
+ 146              	.L11:
+  98:../Peripheral/src/ch32v30x_dma.c ****     {
+ 147              		.loc 1 98 10 is_stmt 1
+  98:../Peripheral/src/ch32v30x_dma.c ****     {
+ 148              		.loc 1 98 12 is_stmt 0
+ 149 00ae 93870743 		addi	a5,a5,1072
+ 150 00b2 6317F500 		bne	a0,a5,.L12
+ 100:../Peripheral/src/ch32v30x_dma.c ****     }
+ 151              		.loc 1 100 9 is_stmt 1
+ 100:../Peripheral/src/ch32v30x_dma.c ****     }
+ 152              		.loc 1 100 13 is_stmt 0
+ 153 00b6 B7070240 		li	a5,1073872896
+ 154 00ba 93870740 		addi	a5,a5,1024
+ 155 00be 69B7     		j	.L23
+ 156              	.L12:
+ 102:../Peripheral/src/ch32v30x_dma.c ****     {
+ 157              		.loc 1 102 10 is_stmt 1
+ 102:../Peripheral/src/ch32v30x_dma.c ****     {
+ 158              		.loc 1 102 12 is_stmt 0
+ 159 00c0 B7070240 		li	a5,1073872896
+ 160 00c4 13874744 		addi	a4,a5,1092
+ 161 00c8 6315E500 		bne	a0,a4,.L13
+ 104:../Peripheral/src/ch32v30x_dma.c ****     }
+ 162              		.loc 1 104 9 is_stmt 1
+ 104:../Peripheral/src/ch32v30x_dma.c ****     }
+ 163              		.loc 1 104 13 is_stmt 0
+ 164 00cc 93870740 		addi	a5,a5,1024
+ 165 00d0 69B7     		j	.L22
+ 166              	.L13:
+ 106:../Peripheral/src/ch32v30x_dma.c ****     {
+ 167              		.loc 1 106 10 is_stmt 1
+ 106:../Peripheral/src/ch32v30x_dma.c ****     {
+ 168              		.loc 1 106 12 is_stmt 0
+ 169 00d2 13878745 		addi	a4,a5,1112
+ 170 00d6 6315E500 		bne	a0,a4,.L14
+ 108:../Peripheral/src/ch32v30x_dma.c ****     }
+ 171              		.loc 1 108 9 is_stmt 1
+ 108:../Peripheral/src/ch32v30x_dma.c ****     }
+ 172              		.loc 1 108 13 is_stmt 0
+ 173 00da 93870740 		addi	a5,a5,1024
+ 174 00de 69B7     		j	.L24
+ 175              	.L14:
+ 110:../Peripheral/src/ch32v30x_dma.c ****     {
+ 176              		.loc 1 110 10 is_stmt 1
+ 110:../Peripheral/src/ch32v30x_dma.c ****     {
+ 177              		.loc 1 110 12 is_stmt 0
+ 178 00e0 1387C746 		addi	a4,a5,1132
+ 179 00e4 6315E500 		bne	a0,a4,.L15
+ 112:../Peripheral/src/ch32v30x_dma.c ****     }
+ 180              		.loc 1 112 9 is_stmt 1
+ 112:../Peripheral/src/ch32v30x_dma.c ****     }
+ 181              		.loc 1 112 13 is_stmt 0
+ 182 00e8 93870740 		addi	a5,a5,1024
+ 183 00ec 79B7     		j	.L25
+ 184              	.L15:
+ 114:../Peripheral/src/ch32v30x_dma.c ****     {
+ 185              		.loc 1 114 10 is_stmt 1
+ 114:../Peripheral/src/ch32v30x_dma.c ****     {
+ 186              		.loc 1 114 12 is_stmt 0
+ 187 00ee 13870748 		addi	a4,a5,1152
+ 188 00f2 6315E500 		bne	a0,a4,.L16
+ 116:../Peripheral/src/ch32v30x_dma.c ****     }
+ 189              		.loc 1 116 9 is_stmt 1
+ 116:../Peripheral/src/ch32v30x_dma.c ****     }
+ 190              		.loc 1 116 13 is_stmt 0
+ 191 00f6 93870740 		addi	a5,a5,1024
+ 192 00fa 41BF     		j	.L26
+ 193              	.L16:
+ 118:../Peripheral/src/ch32v30x_dma.c ****     {
+ 194              		.loc 1 118 10 is_stmt 1
+ 118:../Peripheral/src/ch32v30x_dma.c ****     {
+ 195              		.loc 1 118 12 is_stmt 0
+ 196 00fc 13870749 		addi	a4,a5,1168
+ 197 0100 6315E500 		bne	a0,a4,.L17
+ 120:../Peripheral/src/ch32v30x_dma.c ****     }
+ 198              		.loc 1 120 9 is_stmt 1
+ 120:../Peripheral/src/ch32v30x_dma.c ****     }
+ 199              		.loc 1 120 19 is_stmt 0
+ 200 0104 9387074D 		addi	a5,a5,1232
+ 201 0108 39BF     		j	.L27
+ 202              	.L17:
+ 122:../Peripheral/src/ch32v30x_dma.c ****     {
+ 203              		.loc 1 122 10 is_stmt 1
+ 122:../Peripheral/src/ch32v30x_dma.c ****     {
+ 204              		.loc 1 122 12 is_stmt 0
+ 205 010a 1387074A 		addi	a4,a5,1184
+ 206 010e 6315E500 		bne	a0,a4,.L18
+ 124:../Peripheral/src/ch32v30x_dma.c ****     }
+ 207              		.loc 1 124 9 is_stmt 1
+ 124:../Peripheral/src/ch32v30x_dma.c ****     }
+ 208              		.loc 1 124 19 is_stmt 0
+ 209 0112 9387074D 		addi	a5,a5,1232
+ 210 0116 0DB7     		j	.L28
+ 211              	.L18:
+ 126:../Peripheral/src/ch32v30x_dma.c ****     {
+ 212              		.loc 1 126 10 is_stmt 1
+ 126:../Peripheral/src/ch32v30x_dma.c ****     {
+ 213              		.loc 1 126 12 is_stmt 0
+ 214 0118 1387074B 		addi	a4,a5,1200
+ 215 011c 6315E500 		bne	a0,a4,.L19
+ 128:../Peripheral/src/ch32v30x_dma.c ****     }
+ 216              		.loc 1 128 9 is_stmt 1
+ 128:../Peripheral/src/ch32v30x_dma.c ****     }
+ 217              		.loc 1 128 19 is_stmt 0
+ 218 0120 9387074D 		addi	a5,a5,1232
+ 219 0124 15B7     		j	.L23
+ 220              	.L19:
+ 130:../Peripheral/src/ch32v30x_dma.c ****     {
+ 221              		.loc 1 130 10 is_stmt 1
+ 130:../Peripheral/src/ch32v30x_dma.c ****     {
+ 222              		.loc 1 130 12 is_stmt 0
+ 223 0126 1387074C 		addi	a4,a5,1216
+ 224 012a E312E5F0 		bne	a0,a4,.L1
+ 132:../Peripheral/src/ch32v30x_dma.c ****     }
+ 225              		.loc 1 132 9 is_stmt 1
+ 132:../Peripheral/src/ch32v30x_dma.c ****     }
+ 226              		.loc 1 132 19 is_stmt 0
+ 227 012e 9387074D 		addi	a5,a5,1232
+ 228 0132 25B7     		j	.L22
+ 229              		.cfi_endproc
+ 230              	.LFE29:
+ 232              		.section	.text.DMA_Init,"ax",@progbits
+ 233              		.align	1
+ 234              		.globl	DMA_Init
+ 236              	DMA_Init:
+ 237              	.LFB30:
+ 135:../Peripheral/src/ch32v30x_dma.c **** 
+ 136:../Peripheral/src/ch32v30x_dma.c **** /*********************************************************************
+ 137:../Peripheral/src/ch32v30x_dma.c ****  * @fn      DMA_Init
+ 138:../Peripheral/src/ch32v30x_dma.c ****  *
+ 139:../Peripheral/src/ch32v30x_dma.c ****  * @brief   Initializes the DMAy Channelx according to the specified
+ 140:../Peripheral/src/ch32v30x_dma.c ****  *        parameters in the DMA_InitStruct.
+ 141:../Peripheral/src/ch32v30x_dma.c ****  *
+ 142:../Peripheral/src/ch32v30x_dma.c ****  * @param   DMAy_Channelx - here y can be 1 or 2 to select the DMA and x can be
+ 143:../Peripheral/src/ch32v30x_dma.c ****  *        1 to 7 for DMA1 and 1 to 11 for DMA2 to select the DMA Channel.
+ 144:../Peripheral/src/ch32v30x_dma.c ****  *          DMA_InitStruct - pointer to a DMA_InitTypeDef structure that contains
+ 145:../Peripheral/src/ch32v30x_dma.c ****  *        contains the configuration information for the specified DMA Channel.
+ 146:../Peripheral/src/ch32v30x_dma.c ****  *
+ 147:../Peripheral/src/ch32v30x_dma.c ****  * @return  none
+ 148:../Peripheral/src/ch32v30x_dma.c ****  */
+ 149:../Peripheral/src/ch32v30x_dma.c **** void DMA_Init(DMA_Channel_TypeDef *DMAy_Channelx, DMA_InitTypeDef *DMA_InitStruct)
+ 150:../Peripheral/src/ch32v30x_dma.c **** {
+ 238              		.loc 1 150 1 is_stmt 1
+ 239              		.cfi_startproc
+ 240              	.LVL1:
+ 151:../Peripheral/src/ch32v30x_dma.c ****     uint32_t tmpreg = 0;
+ 241              		.loc 1 151 5
+ 152:../Peripheral/src/ch32v30x_dma.c **** 
+ 153:../Peripheral/src/ch32v30x_dma.c ****     tmpreg = DMAy_Channelx->CFGR;
+ 242              		.loc 1 153 5
+ 243              		.loc 1 153 12 is_stmt 0
+ 244 0000 1841     		lw	a4,0(a0)
+ 245              	.LVL2:
+ 154:../Peripheral/src/ch32v30x_dma.c ****     tmpreg &= CFGR_CLEAR_Mask;
+ 246              		.loc 1 154 5 is_stmt 1
+ 247              		.loc 1 154 12 is_stmt 0
+ 248 0002 E177     		li	a5,-32768
+ 249 0004 BD07     		addi	a5,a5,15
+ 155:../Peripheral/src/ch32v30x_dma.c ****     tmpreg |= DMA_InitStruct->DMA_DIR | DMA_InitStruct->DMA_Mode |
+ 250              		.loc 1 155 39
+ 251 0006 9451     		lw	a3,32(a1)
+ 154:../Peripheral/src/ch32v30x_dma.c ****     tmpreg &= CFGR_CLEAR_Mask;
+ 252              		.loc 1 154 12
+ 253 0008 7D8F     		and	a4,a4,a5
+ 254              	.LVL3:
+ 255              		.loc 1 155 5 is_stmt 1
+ 256              		.loc 1 155 39 is_stmt 0
+ 257 000a 9C45     		lw	a5,8(a1)
+ 258 000c D58F     		or	a5,a5,a3
+ 259              		.loc 1 155 66
+ 260 000e 9449     		lw	a3,16(a1)
+ 261 0010 D58F     		or	a5,a5,a3
+ 156:../Peripheral/src/ch32v30x_dma.c ****               DMA_InitStruct->DMA_PeripheralInc | DMA_InitStruct->DMA_MemoryInc |
+ 262              		.loc 1 156 49
+ 263 0012 D449     		lw	a3,20(a1)
+ 264 0014 D58F     		or	a5,a5,a3
+ 265              		.loc 1 156 81
+ 266 0016 944D     		lw	a3,24(a1)
+ 267 0018 D58F     		or	a5,a5,a3
+ 157:../Peripheral/src/ch32v30x_dma.c ****               DMA_InitStruct->DMA_PeripheralDataSize | DMA_InitStruct->DMA_MemoryDataSize |
+ 268              		.loc 1 157 54
+ 269 001a D44D     		lw	a3,28(a1)
+ 270 001c D58F     		or	a5,a5,a3
+ 271              		.loc 1 157 91
+ 272 001e D451     		lw	a3,36(a1)
+ 273 0020 D58F     		or	a5,a5,a3
+ 158:../Peripheral/src/ch32v30x_dma.c ****               DMA_InitStruct->DMA_Priority | DMA_InitStruct->DMA_M2M;
+ 274              		.loc 1 158 44
+ 275 0022 9455     		lw	a3,40(a1)
+ 276 0024 D58F     		or	a5,a5,a3
+ 155:../Peripheral/src/ch32v30x_dma.c ****               DMA_InitStruct->DMA_PeripheralInc | DMA_InitStruct->DMA_MemoryInc |
+ 277              		.loc 1 155 12
+ 278 0026 D98F     		or	a5,a5,a4
+ 279              	.LVL4:
+ 159:../Peripheral/src/ch32v30x_dma.c **** 
+ 160:../Peripheral/src/ch32v30x_dma.c ****     DMAy_Channelx->CFGR = tmpreg;
+ 280              		.loc 1 160 5 is_stmt 1
+ 281              		.loc 1 160 25 is_stmt 0
+ 282 0028 1CC1     		sw	a5,0(a0)
+ 161:../Peripheral/src/ch32v30x_dma.c ****     DMAy_Channelx->CNTR = DMA_InitStruct->DMA_BufferSize;
+ 283              		.loc 1 161 5 is_stmt 1
+ 284              		.loc 1 161 41 is_stmt 0
+ 285 002a DC45     		lw	a5,12(a1)
+ 286              	.LVL5:
+ 287              		.loc 1 161 25
+ 288 002c 5CC1     		sw	a5,4(a0)
+ 289              	.LVL6:
+ 162:../Peripheral/src/ch32v30x_dma.c ****     DMAy_Channelx->PADDR = DMA_InitStruct->DMA_PeripheralBaseAddr;
+ 290              		.loc 1 162 5 is_stmt 1
+ 291              		.loc 1 162 42 is_stmt 0
+ 292 002e 9C41     		lw	a5,0(a1)
+ 293              		.loc 1 162 26
+ 294 0030 1CC5     		sw	a5,8(a0)
+ 163:../Peripheral/src/ch32v30x_dma.c ****     DMAy_Channelx->MADDR = DMA_InitStruct->DMA_MemoryBaseAddr;
+ 295              		.loc 1 163 5 is_stmt 1
+ 296              		.loc 1 163 42 is_stmt 0
+ 297 0032 DC41     		lw	a5,4(a1)
+ 298              		.loc 1 163 26
+ 299 0034 5CC5     		sw	a5,12(a0)
+ 164:../Peripheral/src/ch32v30x_dma.c **** }
+ 300              		.loc 1 164 1
+ 301 0036 8280     		ret
+ 302              		.cfi_endproc
+ 303              	.LFE30:
+ 305              		.section	.text.DMA_StructInit,"ax",@progbits
+ 306              		.align	1
+ 307              		.globl	DMA_StructInit
+ 309              	DMA_StructInit:
+ 310              	.LFB31:
+ 165:../Peripheral/src/ch32v30x_dma.c **** 
+ 166:../Peripheral/src/ch32v30x_dma.c **** /*********************************************************************
+ 167:../Peripheral/src/ch32v30x_dma.c ****  * @fn      DMA_StructInit
+ 168:../Peripheral/src/ch32v30x_dma.c ****  *
+ 169:../Peripheral/src/ch32v30x_dma.c ****  * @brief   Fills each DMA_InitStruct member with its default value.
+ 170:../Peripheral/src/ch32v30x_dma.c ****  *
+ 171:../Peripheral/src/ch32v30x_dma.c ****  * @param   DMAy_Channelx - here y can be 1 or 2 to select the DMA and x can be
+ 172:../Peripheral/src/ch32v30x_dma.c ****  *        1 to 7 for DMA1 and 1 to 11 for DMA2 to select the DMA Channel.
+ 173:../Peripheral/src/ch32v30x_dma.c ****  *          DMA_InitStruct - pointer to a DMA_InitTypeDef structure that contains
+ 174:../Peripheral/src/ch32v30x_dma.c ****  *        contains the configuration information for the specified DMA Channel.
+ 175:../Peripheral/src/ch32v30x_dma.c ****  *
+ 176:../Peripheral/src/ch32v30x_dma.c ****  * @return  none
+ 177:../Peripheral/src/ch32v30x_dma.c ****  */
+ 178:../Peripheral/src/ch32v30x_dma.c **** void DMA_StructInit(DMA_InitTypeDef *DMA_InitStruct)
+ 179:../Peripheral/src/ch32v30x_dma.c **** {
+ 311              		.loc 1 179 1 is_stmt 1
+ 312              		.cfi_startproc
+ 313              	.LVL7:
+ 180:../Peripheral/src/ch32v30x_dma.c ****     DMA_InitStruct->DMA_PeripheralBaseAddr = 0;
+ 314              		.loc 1 180 5
+ 315              		.loc 1 180 44 is_stmt 0
+ 316 0000 23200500 		sw	zero,0(a0)
+ 181:../Peripheral/src/ch32v30x_dma.c ****     DMA_InitStruct->DMA_MemoryBaseAddr = 0;
+ 317              		.loc 1 181 5 is_stmt 1
+ 318              		.loc 1 181 40 is_stmt 0
+ 319 0004 23220500 		sw	zero,4(a0)
+ 182:../Peripheral/src/ch32v30x_dma.c ****     DMA_InitStruct->DMA_DIR = DMA_DIR_PeripheralSRC;
+ 320              		.loc 1 182 5 is_stmt 1
+ 321              		.loc 1 182 29 is_stmt 0
+ 322 0008 23240500 		sw	zero,8(a0)
+ 183:../Peripheral/src/ch32v30x_dma.c ****     DMA_InitStruct->DMA_BufferSize = 0;
+ 323              		.loc 1 183 5 is_stmt 1
+ 324              		.loc 1 183 36 is_stmt 0
+ 325 000c 23260500 		sw	zero,12(a0)
+ 184:../Peripheral/src/ch32v30x_dma.c ****     DMA_InitStruct->DMA_PeripheralInc = DMA_PeripheralInc_Disable;
+ 326              		.loc 1 184 5 is_stmt 1
+ 327              		.loc 1 184 39 is_stmt 0
+ 328 0010 23280500 		sw	zero,16(a0)
+ 185:../Peripheral/src/ch32v30x_dma.c ****     DMA_InitStruct->DMA_MemoryInc = DMA_MemoryInc_Disable;
+ 329              		.loc 1 185 5 is_stmt 1
+ 330              		.loc 1 185 35 is_stmt 0
+ 331 0014 232A0500 		sw	zero,20(a0)
+ 186:../Peripheral/src/ch32v30x_dma.c ****     DMA_InitStruct->DMA_PeripheralDataSize = DMA_PeripheralDataSize_Byte;
+ 332              		.loc 1 186 5 is_stmt 1
+ 333              		.loc 1 186 44 is_stmt 0
+ 334 0018 232C0500 		sw	zero,24(a0)
+ 187:../Peripheral/src/ch32v30x_dma.c ****     DMA_InitStruct->DMA_MemoryDataSize = DMA_MemoryDataSize_Byte;
+ 335              		.loc 1 187 5 is_stmt 1
+ 336              		.loc 1 187 40 is_stmt 0
+ 337 001c 232E0500 		sw	zero,28(a0)
+ 188:../Peripheral/src/ch32v30x_dma.c ****     DMA_InitStruct->DMA_Mode = DMA_Mode_Normal;
+ 338              		.loc 1 188 5 is_stmt 1
+ 339              		.loc 1 188 30 is_stmt 0
+ 340 0020 23200502 		sw	zero,32(a0)
+ 189:../Peripheral/src/ch32v30x_dma.c ****     DMA_InitStruct->DMA_Priority = DMA_Priority_Low;
+ 341              		.loc 1 189 5 is_stmt 1
+ 342              		.loc 1 189 34 is_stmt 0
+ 343 0024 23220502 		sw	zero,36(a0)
+ 190:../Peripheral/src/ch32v30x_dma.c ****     DMA_InitStruct->DMA_M2M = DMA_M2M_Disable;
+ 344              		.loc 1 190 5 is_stmt 1
+ 345              		.loc 1 190 29 is_stmt 0
+ 346 0028 23240502 		sw	zero,40(a0)
+ 191:../Peripheral/src/ch32v30x_dma.c **** }
+ 347              		.loc 1 191 1
+ 348 002c 8280     		ret
+ 349              		.cfi_endproc
+ 350              	.LFE31:
+ 352              		.section	.text.DMA_Cmd,"ax",@progbits
+ 353              		.align	1
+ 354              		.globl	DMA_Cmd
+ 356              	DMA_Cmd:
+ 357              	.LFB32:
+ 192:../Peripheral/src/ch32v30x_dma.c **** 
+ 193:../Peripheral/src/ch32v30x_dma.c **** /*********************************************************************
+ 194:../Peripheral/src/ch32v30x_dma.c ****  * @fn      DMA_Cmd
+ 195:../Peripheral/src/ch32v30x_dma.c ****  *
+ 196:../Peripheral/src/ch32v30x_dma.c ****  * @brief   Enables or disables the specified DMAy Channelx.
+ 197:../Peripheral/src/ch32v30x_dma.c ****  *
+ 198:../Peripheral/src/ch32v30x_dma.c ****  * @param   DMAy_Channelx - here y can be 1 or 2 to select the DMA and x can be
+ 199:../Peripheral/src/ch32v30x_dma.c ****  *        1 to 7 for DMA1 and 1 to 11 for DMA2 to select the DMA Channel.
+ 200:../Peripheral/src/ch32v30x_dma.c ****  *          NewState - new state of the DMAy Channelx(ENABLE or DISABLE).
+ 201:../Peripheral/src/ch32v30x_dma.c ****  *
+ 202:../Peripheral/src/ch32v30x_dma.c ****  * @return  none
+ 203:../Peripheral/src/ch32v30x_dma.c ****  */
+ 204:../Peripheral/src/ch32v30x_dma.c **** void DMA_Cmd(DMA_Channel_TypeDef *DMAy_Channelx, FunctionalState NewState)
+ 205:../Peripheral/src/ch32v30x_dma.c **** {
+ 358              		.loc 1 205 1 is_stmt 1
+ 359              		.cfi_startproc
+ 360              	.LVL8:
+ 206:../Peripheral/src/ch32v30x_dma.c ****     if(NewState != DISABLE)
+ 361              		.loc 1 206 5
+ 207:../Peripheral/src/ch32v30x_dma.c ****     {
+ 208:../Peripheral/src/ch32v30x_dma.c ****         DMAy_Channelx->CFGR |= DMA_CFGR1_EN;
+ 362              		.loc 1 208 22 is_stmt 0
+ 363 0000 1C41     		lw	a5,0(a0)
+ 206:../Peripheral/src/ch32v30x_dma.c ****     if(NewState != DISABLE)
+ 364              		.loc 1 206 7
+ 365 0002 89C5     		beq	a1,zero,.L32
+ 366              		.loc 1 208 9 is_stmt 1
+ 367              		.loc 1 208 29 is_stmt 0
+ 368 0004 93E71700 		ori	a5,a5,1
+ 369              	.L34:
+ 209:../Peripheral/src/ch32v30x_dma.c ****     }
+ 210:../Peripheral/src/ch32v30x_dma.c ****     else
+ 211:../Peripheral/src/ch32v30x_dma.c ****     {
+ 212:../Peripheral/src/ch32v30x_dma.c ****         DMAy_Channelx->CFGR &= (uint16_t)(~DMA_CFGR1_EN);
+ 370              		.loc 1 212 29
+ 371 0008 1CC1     		sw	a5,0(a0)
+ 213:../Peripheral/src/ch32v30x_dma.c ****     }
+ 214:../Peripheral/src/ch32v30x_dma.c **** }
+ 372              		.loc 1 214 1
+ 373 000a 8280     		ret
+ 374              	.L32:
+ 212:../Peripheral/src/ch32v30x_dma.c ****     }
+ 375              		.loc 1 212 9 is_stmt 1
+ 212:../Peripheral/src/ch32v30x_dma.c ****     }
+ 376              		.loc 1 212 29 is_stmt 0
+ 377 000c 4167     		li	a4,65536
+ 378 000e 7917     		addi	a4,a4,-2
+ 379 0010 F98F     		and	a5,a5,a4
+ 380 0012 DDBF     		j	.L34
+ 381              		.cfi_endproc
+ 382              	.LFE32:
+ 384              		.section	.text.DMA_ITConfig,"ax",@progbits
+ 385              		.align	1
+ 386              		.globl	DMA_ITConfig
+ 388              	DMA_ITConfig:
+ 389              	.LFB33:
+ 215:../Peripheral/src/ch32v30x_dma.c **** 
+ 216:../Peripheral/src/ch32v30x_dma.c **** /*********************************************************************
+ 217:../Peripheral/src/ch32v30x_dma.c ****  * @fn      DMA_ITConfig
+ 218:../Peripheral/src/ch32v30x_dma.c ****  *
+ 219:../Peripheral/src/ch32v30x_dma.c ****  * @brief   Enables or disables the specified DMAy Channelx interrupts.
+ 220:../Peripheral/src/ch32v30x_dma.c ****  *
+ 221:../Peripheral/src/ch32v30x_dma.c ****  * @param   DMAy_Channelx - here y can be 1 or 2 to select the DMA and x can be
+ 222:../Peripheral/src/ch32v30x_dma.c ****  *        1 to 7 for DMA1 and 1 to 11 for DMA2 to select the DMA Channel.
+ 223:../Peripheral/src/ch32v30x_dma.c ****  *          DMA_IT - specifies the DMA interrupts sources to be enabled
+ 224:../Peripheral/src/ch32v30x_dma.c ****  *        or disabled.
+ 225:../Peripheral/src/ch32v30x_dma.c ****  *           DMA_IT_TC - Transfer complete interrupt mask
+ 226:../Peripheral/src/ch32v30x_dma.c ****  *           DMA_IT_HT - Half transfer interrupt mask
+ 227:../Peripheral/src/ch32v30x_dma.c ****  *           DMA_IT_TE -  Transfer error interrupt mask
+ 228:../Peripheral/src/ch32v30x_dma.c ****  *          NewState - new state of the DMAy Channelx(ENABLE or DISABLE).
+ 229:../Peripheral/src/ch32v30x_dma.c ****  *
+ 230:../Peripheral/src/ch32v30x_dma.c ****  * @return  none
+ 231:../Peripheral/src/ch32v30x_dma.c ****  */
+ 232:../Peripheral/src/ch32v30x_dma.c **** void DMA_ITConfig(DMA_Channel_TypeDef *DMAy_Channelx, uint32_t DMA_IT, FunctionalState NewState)
+ 233:../Peripheral/src/ch32v30x_dma.c **** {
+ 390              		.loc 1 233 1 is_stmt 1
+ 391              		.cfi_startproc
+ 392              	.LVL9:
+ 234:../Peripheral/src/ch32v30x_dma.c ****     if(NewState != DISABLE)
+ 393              		.loc 1 234 5
+ 235:../Peripheral/src/ch32v30x_dma.c ****     {
+ 236:../Peripheral/src/ch32v30x_dma.c ****         DMAy_Channelx->CFGR |= DMA_IT;
+ 394              		.loc 1 236 22 is_stmt 0
+ 395 0000 1C41     		lw	a5,0(a0)
+ 234:../Peripheral/src/ch32v30x_dma.c ****     if(NewState != DISABLE)
+ 396              		.loc 1 234 7
+ 397 0002 01C6     		beq	a2,zero,.L36
+ 398              		.loc 1 236 9 is_stmt 1
+ 399              		.loc 1 236 29 is_stmt 0
+ 400 0004 CD8F     		or	a5,a5,a1
+ 401 0006 1CC1     		sw	a5,0(a0)
+ 402 0008 8280     		ret
+ 403              	.L36:
+ 237:../Peripheral/src/ch32v30x_dma.c ****     }
+ 238:../Peripheral/src/ch32v30x_dma.c ****     else
+ 239:../Peripheral/src/ch32v30x_dma.c ****     {
+ 240:../Peripheral/src/ch32v30x_dma.c ****         DMAy_Channelx->CFGR &= ~DMA_IT;
+ 404              		.loc 1 240 9 is_stmt 1
+ 405              		.loc 1 240 32 is_stmt 0
+ 406 000a 93C5F5FF 		not	a1,a1
+ 407              	.LVL10:
+ 408              		.loc 1 240 29
+ 409 000e FD8D     		and	a1,a1,a5
+ 410              	.LVL11:
+ 411 0010 0CC1     		sw	a1,0(a0)
+ 241:../Peripheral/src/ch32v30x_dma.c ****     }
+ 242:../Peripheral/src/ch32v30x_dma.c **** }
+ 412              		.loc 1 242 1
+ 413 0012 8280     		ret
+ 414              		.cfi_endproc
+ 415              	.LFE33:
+ 417              		.section	.text.DMA_SetCurrDataCounter,"ax",@progbits
+ 418              		.align	1
+ 419              		.globl	DMA_SetCurrDataCounter
+ 421              	DMA_SetCurrDataCounter:
+ 422              	.LFB34:
+ 243:../Peripheral/src/ch32v30x_dma.c **** 
+ 244:../Peripheral/src/ch32v30x_dma.c **** /*********************************************************************
+ 245:../Peripheral/src/ch32v30x_dma.c ****  * @fn      DMA_SetCurrDataCounter
+ 246:../Peripheral/src/ch32v30x_dma.c ****  *
+ 247:../Peripheral/src/ch32v30x_dma.c ****  * @brief   Sets the number of data units in the current DMAy Channelx transfer.
+ 248:../Peripheral/src/ch32v30x_dma.c ****  *
+ 249:../Peripheral/src/ch32v30x_dma.c ****  * @param   DMAy_Channelx - here y can be 1 or 2 to select the DMA and x can be
+ 250:../Peripheral/src/ch32v30x_dma.c ****  *        1 to 7 for DMA1 and 1 to 11 for DMA2 to select the DMA Channel.
+ 251:../Peripheral/src/ch32v30x_dma.c ****  *          DataNumber - The number of data units in the current DMAy Channelx
+ 252:../Peripheral/src/ch32v30x_dma.c ****  *        transfer.
+ 253:../Peripheral/src/ch32v30x_dma.c ****  *
+ 254:../Peripheral/src/ch32v30x_dma.c ****  * @return  none
+ 255:../Peripheral/src/ch32v30x_dma.c ****  */
+ 256:../Peripheral/src/ch32v30x_dma.c **** void DMA_SetCurrDataCounter(DMA_Channel_TypeDef *DMAy_Channelx, uint16_t DataNumber)
+ 257:../Peripheral/src/ch32v30x_dma.c **** {
+ 423              		.loc 1 257 1 is_stmt 1
+ 424              		.cfi_startproc
+ 425              	.LVL12:
+ 258:../Peripheral/src/ch32v30x_dma.c ****     DMAy_Channelx->CNTR = DataNumber;
+ 426              		.loc 1 258 5
+ 427              		.loc 1 258 25 is_stmt 0
+ 428 0000 4CC1     		sw	a1,4(a0)
+ 259:../Peripheral/src/ch32v30x_dma.c **** }
+ 429              		.loc 1 259 1
+ 430 0002 8280     		ret
+ 431              		.cfi_endproc
+ 432              	.LFE34:
+ 434              		.section	.text.DMA_GetCurrDataCounter,"ax",@progbits
+ 435              		.align	1
+ 436              		.globl	DMA_GetCurrDataCounter
+ 438              	DMA_GetCurrDataCounter:
+ 439              	.LFB35:
+ 260:../Peripheral/src/ch32v30x_dma.c **** 
+ 261:../Peripheral/src/ch32v30x_dma.c **** /*********************************************************************
+ 262:../Peripheral/src/ch32v30x_dma.c ****  * @fn      DMA_GetCurrDataCounter
+ 263:../Peripheral/src/ch32v30x_dma.c ****  *
+ 264:../Peripheral/src/ch32v30x_dma.c ****  * @brief   Returns the number of remaining data units in the current
+ 265:../Peripheral/src/ch32v30x_dma.c ****  *        DMAy Channelx transfer.
+ 266:../Peripheral/src/ch32v30x_dma.c ****  *
+ 267:../Peripheral/src/ch32v30x_dma.c ****  * @param   DMAy_Channelx - here y can be 1 or 2 to select the DMA and x can be
+ 268:../Peripheral/src/ch32v30x_dma.c ****  *        1 to 7 for DMA1 and 1 to 11 for DMA2 to select the DMA Channel.
+ 269:../Peripheral/src/ch32v30x_dma.c ****  *
+ 270:../Peripheral/src/ch32v30x_dma.c ****  * @return  DataNumber - The number of remaining data units in the current
+ 271:../Peripheral/src/ch32v30x_dma.c ****  *        DMAy Channelx transfer.
+ 272:../Peripheral/src/ch32v30x_dma.c ****  */
+ 273:../Peripheral/src/ch32v30x_dma.c **** uint16_t DMA_GetCurrDataCounter(DMA_Channel_TypeDef *DMAy_Channelx)
+ 274:../Peripheral/src/ch32v30x_dma.c **** {
+ 440              		.loc 1 274 1 is_stmt 1
+ 441              		.cfi_startproc
+ 442              	.LVL13:
+ 275:../Peripheral/src/ch32v30x_dma.c ****     return ((uint16_t)(DMAy_Channelx->CNTR));
+ 443              		.loc 1 275 5
+ 444              		.loc 1 275 37 is_stmt 0
+ 445 0000 4841     		lw	a0,4(a0)
+ 446              	.LVL14:
+ 276:../Peripheral/src/ch32v30x_dma.c **** }
+ 447              		.loc 1 276 1
+ 448 0002 4205     		slli	a0,a0,16
+ 449 0004 4181     		srli	a0,a0,16
+ 450 0006 8280     		ret
+ 451              		.cfi_endproc
+ 452              	.LFE35:
+ 454              		.section	.text.DMA_GetFlagStatus,"ax",@progbits
+ 455              		.align	1
+ 456              		.globl	DMA_GetFlagStatus
+ 458              	DMA_GetFlagStatus:
+ 459              	.LFB36:
+ 277:../Peripheral/src/ch32v30x_dma.c **** 
+ 278:../Peripheral/src/ch32v30x_dma.c **** /*********************************************************************
+ 279:../Peripheral/src/ch32v30x_dma.c ****  * @fn      DMA_GetFlagStatus
+ 280:../Peripheral/src/ch32v30x_dma.c ****  *
+ 281:../Peripheral/src/ch32v30x_dma.c ****  * @brief   Checks whether the specified DMAy Channelx flag is set or not.
+ 282:../Peripheral/src/ch32v30x_dma.c ****  *
+ 283:../Peripheral/src/ch32v30x_dma.c ****  * @param   DMAy_FLAG - specifies the flag to check.
+ 284:../Peripheral/src/ch32v30x_dma.c ****  *            DMA1_FLAG_GL1 - DMA1 Channel1 global flag.
+ 285:../Peripheral/src/ch32v30x_dma.c ****  *            DMA1_FLAG_TC1 - DMA1 Channel1 transfer complete flag.
+ 286:../Peripheral/src/ch32v30x_dma.c ****  *            DMA1_FLAG_HT1 - DMA1 Channel1 half transfer flag.
+ 287:../Peripheral/src/ch32v30x_dma.c ****  *            DMA1_FLAG_TE1 - DMA1 Channel1 transfer error flag.
+ 288:../Peripheral/src/ch32v30x_dma.c ****  *            DMA1_FLAG_GL2 - DMA1 Channel2 global flag.
+ 289:../Peripheral/src/ch32v30x_dma.c ****  *            DMA1_FLAG_TC2 - DMA1 Channel2 transfer complete flag.
+ 290:../Peripheral/src/ch32v30x_dma.c ****  *            DMA1_FLAG_HT2 - DMA1 Channel2 half transfer flag.
+ 291:../Peripheral/src/ch32v30x_dma.c ****  *            DMA1_FLAG_TE2 - DMA1 Channel2 transfer error flag.
+ 292:../Peripheral/src/ch32v30x_dma.c ****  *            DMA1_FLAG_GL3 - DMA1 Channel3 global flag.
+ 293:../Peripheral/src/ch32v30x_dma.c ****  *            DMA1_FLAG_TC3 - DMA1 Channel3 transfer complete flag.
+ 294:../Peripheral/src/ch32v30x_dma.c ****  *            DMA1_FLAG_HT3 - DMA1 Channel3 half transfer flag.
+ 295:../Peripheral/src/ch32v30x_dma.c ****  *            DMA1_FLAG_TE3 - DMA1 Channel3 transfer error flag.
+ 296:../Peripheral/src/ch32v30x_dma.c ****  *            DMA1_FLAG_GL4 - DMA1 Channel4 global flag.
+ 297:../Peripheral/src/ch32v30x_dma.c ****  *            DMA1_FLAG_TC4 - DMA1 Channel4 transfer complete flag.
+ 298:../Peripheral/src/ch32v30x_dma.c ****  *            DMA1_FLAG_HT4 - DMA1 Channel4 half transfer flag.
+ 299:../Peripheral/src/ch32v30x_dma.c ****  *            DMA1_FLAG_TE4 - DMA1 Channel4 transfer error flag.
+ 300:../Peripheral/src/ch32v30x_dma.c ****  *            DMA1_FLAG_GL5 - DMA1 Channel5 global flag.
+ 301:../Peripheral/src/ch32v30x_dma.c ****  *            DMA1_FLAG_TC5 - DMA1 Channel5 transfer complete flag.
+ 302:../Peripheral/src/ch32v30x_dma.c ****  *            DMA1_FLAG_HT5 - DMA1 Channel5 half transfer flag.
+ 303:../Peripheral/src/ch32v30x_dma.c ****  *            DMA1_FLAG_TE5 - DMA1 Channel5 transfer error flag.
+ 304:../Peripheral/src/ch32v30x_dma.c ****  *            DMA1_FLAG_GL6 - DMA1 Channel6 global flag.
+ 305:../Peripheral/src/ch32v30x_dma.c ****  *            DMA1_FLAG_TC6 - DMA1 Channel6 transfer complete flag.
+ 306:../Peripheral/src/ch32v30x_dma.c ****  *            DMA1_FLAG_HT6 - DMA1 Channel6 half transfer flag.
+ 307:../Peripheral/src/ch32v30x_dma.c ****  *            DMA1_FLAG_TE6 - DMA1 Channel6 transfer error flag.
+ 308:../Peripheral/src/ch32v30x_dma.c ****  *            DMA1_FLAG_GL7 - DMA1 Channel7 global flag.
+ 309:../Peripheral/src/ch32v30x_dma.c ****  *            DMA1_FLAG_TC7 - DMA1 Channel7 transfer complete flag.
+ 310:../Peripheral/src/ch32v30x_dma.c ****  *            DMA1_FLAG_HT7 - DMA1 Channel7 half transfer flag.
+ 311:../Peripheral/src/ch32v30x_dma.c ****  *            DMA1_FLAG_TE7 - DMA1 Channel7 transfer error flag.
+ 312:../Peripheral/src/ch32v30x_dma.c ****  *            DMA2_FLAG_GL1 - DMA2 Channel1 global flag.
+ 313:../Peripheral/src/ch32v30x_dma.c ****  *            DMA2_FLAG_TC1 - DMA2 Channel1 transfer complete flag.
+ 314:../Peripheral/src/ch32v30x_dma.c ****  *            DMA2_FLAG_HT1 - DMA2 Channel1 half transfer flag.
+ 315:../Peripheral/src/ch32v30x_dma.c ****  *            DMA2_FLAG_TE1 - DMA2 Channel1 transfer error flag.
+ 316:../Peripheral/src/ch32v30x_dma.c ****  *            DMA2_FLAG_GL2 - DMA2 Channel2 global flag.
+ 317:../Peripheral/src/ch32v30x_dma.c ****  *            DMA2_FLAG_TC2 - DMA2 Channel2 transfer complete flag.
+ 318:../Peripheral/src/ch32v30x_dma.c ****  *            DMA2_FLAG_HT2 - DMA2 Channel2 half transfer flag.
+ 319:../Peripheral/src/ch32v30x_dma.c ****  *            DMA2_FLAG_TE2 - DMA2 Channel2 transfer error flag.
+ 320:../Peripheral/src/ch32v30x_dma.c ****  *            DMA2_FLAG_GL3 - DMA2 Channel3 global flag.
+ 321:../Peripheral/src/ch32v30x_dma.c ****  *            DMA2_FLAG_TC3 - DMA2 Channel3 transfer complete flag.
+ 322:../Peripheral/src/ch32v30x_dma.c ****  *            DMA2_FLAG_HT3 - DMA2 Channel3 half transfer flag.
+ 323:../Peripheral/src/ch32v30x_dma.c ****  *            DMA2_FLAG_TE3 - DMA2 Channel3 transfer error flag.
+ 324:../Peripheral/src/ch32v30x_dma.c ****  *            DMA2_FLAG_GL4 - DMA2 Channel4 global flag.
+ 325:../Peripheral/src/ch32v30x_dma.c ****  *            DMA2_FLAG_TC4 - DMA2 Channel4 transfer complete flag.
+ 326:../Peripheral/src/ch32v30x_dma.c ****  *            DMA2_FLAG_HT4 - DMA2 Channel4 half transfer flag.
+ 327:../Peripheral/src/ch32v30x_dma.c ****  *            DMA2_FLAG_TE4 - DMA2 Channel4 transfer error flag.
+ 328:../Peripheral/src/ch32v30x_dma.c ****  *            DMA2_FLAG_GL5 - DMA2 Channel5 global flag.
+ 329:../Peripheral/src/ch32v30x_dma.c ****  *            DMA2_FLAG_TC5 - DMA2 Channel5 transfer complete flag.
+ 330:../Peripheral/src/ch32v30x_dma.c ****  *            DMA2_FLAG_HT5 - DMA2 Channel5 half transfer flag.
+ 331:../Peripheral/src/ch32v30x_dma.c ****  *            DMA2_FLAG_TE5 - DMA2 Channel5 transfer error flag.
+ 332:../Peripheral/src/ch32v30x_dma.c ****  *            DMA2_FLAG_GL6 - DMA2 Channel6 global flag.
+ 333:../Peripheral/src/ch32v30x_dma.c ****  *            DMA2_FLAG_TC6 - DMA2 Channel6 transfer complete flag.
+ 334:../Peripheral/src/ch32v30x_dma.c ****  *            DMA2_FLAG_HT6 - DMA2 Channel6 half transfer flag.
+ 335:../Peripheral/src/ch32v30x_dma.c ****  *            DMA2_FLAG_TE6 - DMA2 Channel6 transfer error flag.
+ 336:../Peripheral/src/ch32v30x_dma.c ****  *            DMA2_FLAG_GL7 - DMA2 Channel7 global flag.
+ 337:../Peripheral/src/ch32v30x_dma.c ****  *            DMA2_FLAG_TC7 - DMA2 Channel7 transfer complete flag.
+ 338:../Peripheral/src/ch32v30x_dma.c ****  *            DMA2_FLAG_HT7 - DMA2 Channel7 half transfer flag.
+ 339:../Peripheral/src/ch32v30x_dma.c ****  *            DMA2_FLAG_TE7 - DMA2 Channel7 transfer error flag.
+ 340:../Peripheral/src/ch32v30x_dma.c ****  *            DMA2_FLAG_GL8 - DMA2 Channel8 global flag.
+ 341:../Peripheral/src/ch32v30x_dma.c ****  *            DMA2_FLAG_TC8 - DMA2 Channel8 transfer complete flag.
+ 342:../Peripheral/src/ch32v30x_dma.c ****  *            DMA2_FLAG_HT8 - DMA2 Channel8 half transfer flag.
+ 343:../Peripheral/src/ch32v30x_dma.c ****  *            DMA2_FLAG_TE8 - DMA2 Channel8 transfer error flag.
+ 344:../Peripheral/src/ch32v30x_dma.c ****  *            DMA2_FLAG_GL9 - DMA2 Channel9 global flag.
+ 345:../Peripheral/src/ch32v30x_dma.c ****  *            DMA2_FLAG_TC9 - DMA2 Channel9 transfer complete flag.
+ 346:../Peripheral/src/ch32v30x_dma.c ****  *            DMA2_FLAG_HT9 - DMA2 Channel9 half transfer flag.
+ 347:../Peripheral/src/ch32v30x_dma.c ****  *            DMA2_FLAG_TE9 - DMA2 Channel9 transfer error flag.
+ 348:../Peripheral/src/ch32v30x_dma.c ****  *            DMA2_FLAG_GL10 - DMA2 Channel10 global flag.
+ 349:../Peripheral/src/ch32v30x_dma.c ****  *            DMA2_FLAG_TC10 - DMA2 Channel10 transfer complete flag.
+ 350:../Peripheral/src/ch32v30x_dma.c ****  *            DMA2_FLAG_HT10 - DMA2 Channel10 half transfer flag.
+ 351:../Peripheral/src/ch32v30x_dma.c ****  *            DMA2_FLAG_TE10 - DMA2 Channel10 transfer error flag.
+ 352:../Peripheral/src/ch32v30x_dma.c ****  *            DMA2_FLAG_GL11 - DMA2 Channel11 global flag.
+ 353:../Peripheral/src/ch32v30x_dma.c ****  *            DMA2_FLAG_TC11 - DMA2 Channel11 transfer complete flag.
+ 354:../Peripheral/src/ch32v30x_dma.c ****  *            DMA2_FLAG_HT11 - DMA2 Channel11 half transfer flag.
+ 355:../Peripheral/src/ch32v30x_dma.c ****  *            DMA2_FLAG_TE11 - DMA2 Channel11 transfer error flag.
+ 356:../Peripheral/src/ch32v30x_dma.c ****  *
+ 357:../Peripheral/src/ch32v30x_dma.c ****  * @return  The new state of DMAy_FLAG (SET or RESET).
+ 358:../Peripheral/src/ch32v30x_dma.c ****  */
+ 359:../Peripheral/src/ch32v30x_dma.c **** FlagStatus DMA_GetFlagStatus(uint32_t DMAy_FLAG)
+ 360:../Peripheral/src/ch32v30x_dma.c **** {
+ 460              		.loc 1 360 1 is_stmt 1
+ 461              		.cfi_startproc
+ 462              	.LVL15:
+ 361:../Peripheral/src/ch32v30x_dma.c ****     FlagStatus bitstatus = RESET;
+ 463              		.loc 1 361 5
+ 362:../Peripheral/src/ch32v30x_dma.c ****     uint32_t   tmpreg = 0;
+ 464              		.loc 1 362 5
+ 363:../Peripheral/src/ch32v30x_dma.c **** 
+ 364:../Peripheral/src/ch32v30x_dma.c ****     if((DMAy_FLAG & FLAG_Mask) == FLAG_Mask)
+ 465              		.loc 1 364 5
+ 466              		.loc 1 364 19 is_stmt 0
+ 467 0000 B7070010 		li	a5,268435456
+ 468 0004 E98F     		and	a5,a0,a5
+ 469              		.loc 1 364 7
+ 470 0006 89CB     		beq	a5,zero,.L41
+ 365:../Peripheral/src/ch32v30x_dma.c ****     {
+ 366:../Peripheral/src/ch32v30x_dma.c ****         tmpreg = DMA2->INTFR;
+ 471              		.loc 1 366 9 is_stmt 1
+ 472              		.loc 1 366 16 is_stmt 0
+ 473 0008 B7070240 		li	a5,1073872896
+ 474 000c 83A70740 		lw	a5,1024(a5)
+ 475              	.LVL16:
+ 476              	.L42:
+ 367:../Peripheral/src/ch32v30x_dma.c ****     }
+ 368:../Peripheral/src/ch32v30x_dma.c ****     else if((DMAy_FLAG & DMA2_EXTEN_FLAG_Mask) == DMA2_EXTEN_FLAG_Mask)
+ 369:../Peripheral/src/ch32v30x_dma.c ****     {
+ 370:../Peripheral/src/ch32v30x_dma.c ****         tmpreg = DMA2_EXTEN->INTFR;
+ 371:../Peripheral/src/ch32v30x_dma.c ****     }
+ 372:../Peripheral/src/ch32v30x_dma.c ****     else
+ 373:../Peripheral/src/ch32v30x_dma.c ****     {
+ 374:../Peripheral/src/ch32v30x_dma.c ****         tmpreg = DMA1->INTFR;
+ 375:../Peripheral/src/ch32v30x_dma.c ****     }
+ 376:../Peripheral/src/ch32v30x_dma.c **** 
+ 377:../Peripheral/src/ch32v30x_dma.c ****     if((tmpreg & DMAy_FLAG) != (uint32_t)RESET)
+ 477              		.loc 1 377 5 is_stmt 1
+ 378:../Peripheral/src/ch32v30x_dma.c ****     {
+ 379:../Peripheral/src/ch32v30x_dma.c ****         bitstatus = SET;
+ 380:../Peripheral/src/ch32v30x_dma.c ****     }
+ 381:../Peripheral/src/ch32v30x_dma.c ****     else
+ 382:../Peripheral/src/ch32v30x_dma.c ****     {
+ 383:../Peripheral/src/ch32v30x_dma.c ****         bitstatus = RESET;
+ 384:../Peripheral/src/ch32v30x_dma.c ****     }
+ 385:../Peripheral/src/ch32v30x_dma.c **** 
+ 386:../Peripheral/src/ch32v30x_dma.c ****     return bitstatus;
+ 478              		.loc 1 386 5
+ 377:../Peripheral/src/ch32v30x_dma.c ****     {
+ 479              		.loc 1 377 16 is_stmt 0
+ 480 0010 7D8D     		and	a0,a5,a0
+ 481              	.LVL17:
+ 387:../Peripheral/src/ch32v30x_dma.c **** }
+ 482              		.loc 1 387 1
+ 483 0012 3335A000 		snez	a0,a0
+ 484 0016 8280     		ret
+ 485              	.LVL18:
+ 486              	.L41:
+ 368:../Peripheral/src/ch32v30x_dma.c ****     {
+ 487              		.loc 1 368 10 is_stmt 1
+ 368:../Peripheral/src/ch32v30x_dma.c ****     {
+ 488              		.loc 1 368 24 is_stmt 0
+ 489 0018 B7070020 		li	a5,536870912
+ 490 001c E98F     		and	a5,a0,a5
+ 368:../Peripheral/src/ch32v30x_dma.c ****     {
+ 491              		.loc 1 368 12
+ 492 001e 91C7     		beq	a5,zero,.L43
+ 370:../Peripheral/src/ch32v30x_dma.c ****     }
+ 493              		.loc 1 370 9 is_stmt 1
+ 370:../Peripheral/src/ch32v30x_dma.c ****     }
+ 494              		.loc 1 370 16 is_stmt 0
+ 495 0020 B7070240 		li	a5,1073872896
+ 496 0024 83A7074D 		lw	a5,1232(a5)
+ 497              	.LVL19:
+ 498 0028 E5B7     		j	.L42
+ 499              	.LVL20:
+ 500              	.L43:
+ 374:../Peripheral/src/ch32v30x_dma.c ****     }
+ 501              		.loc 1 374 9 is_stmt 1
+ 374:../Peripheral/src/ch32v30x_dma.c ****     }
+ 502              		.loc 1 374 16 is_stmt 0
+ 503 002a B7070240 		li	a5,1073872896
+ 504 002e 9C43     		lw	a5,0(a5)
+ 505              	.LVL21:
+ 506 0030 C5B7     		j	.L42
+ 507              		.cfi_endproc
+ 508              	.LFE36:
+ 510              		.section	.text.DMA_ClearFlag,"ax",@progbits
+ 511              		.align	1
+ 512              		.globl	DMA_ClearFlag
+ 514              	DMA_ClearFlag:
+ 515              	.LFB37:
+ 388:../Peripheral/src/ch32v30x_dma.c **** 
+ 389:../Peripheral/src/ch32v30x_dma.c **** /*********************************************************************
+ 390:../Peripheral/src/ch32v30x_dma.c ****  * @fn      DMA_ClearFlag
+ 391:../Peripheral/src/ch32v30x_dma.c ****  *
+ 392:../Peripheral/src/ch32v30x_dma.c ****  * @brief   Clears the DMAy Channelx's pending flags.
+ 393:../Peripheral/src/ch32v30x_dma.c ****  *
+ 394:../Peripheral/src/ch32v30x_dma.c ****  * @param   DMAy_FLAG - specifies the flag to check.
+ 395:../Peripheral/src/ch32v30x_dma.c ****  *            DMA1_FLAG_GL1 - DMA1 Channel1 global flag.
+ 396:../Peripheral/src/ch32v30x_dma.c ****  *            DMA1_FLAG_TC1 - DMA1 Channel1 transfer complete flag.
+ 397:../Peripheral/src/ch32v30x_dma.c ****  *            DMA1_FLAG_HT1 - DMA1 Channel1 half transfer flag.
+ 398:../Peripheral/src/ch32v30x_dma.c ****  *            DMA1_FLAG_TE1 - DMA1 Channel1 transfer error flag.
+ 399:../Peripheral/src/ch32v30x_dma.c ****  *            DMA1_FLAG_GL2 - DMA1 Channel2 global flag.
+ 400:../Peripheral/src/ch32v30x_dma.c ****  *            DMA1_FLAG_TC2 - DMA1 Channel2 transfer complete flag.
+ 401:../Peripheral/src/ch32v30x_dma.c ****  *            DMA1_FLAG_HT2 - DMA1 Channel2 half transfer flag.
+ 402:../Peripheral/src/ch32v30x_dma.c ****  *            DMA1_FLAG_TE2 - DMA1 Channel2 transfer error flag.
+ 403:../Peripheral/src/ch32v30x_dma.c ****  *            DMA1_FLAG_GL3 - DMA1 Channel3 global flag.
+ 404:../Peripheral/src/ch32v30x_dma.c ****  *            DMA1_FLAG_TC3 - DMA1 Channel3 transfer complete flag.
+ 405:../Peripheral/src/ch32v30x_dma.c ****  *            DMA1_FLAG_HT3 - DMA1 Channel3 half transfer flag.
+ 406:../Peripheral/src/ch32v30x_dma.c ****  *            DMA1_FLAG_TE3 - DMA1 Channel3 transfer error flag.
+ 407:../Peripheral/src/ch32v30x_dma.c ****  *            DMA1_FLAG_GL4 - DMA1 Channel4 global flag.
+ 408:../Peripheral/src/ch32v30x_dma.c ****  *            DMA1_FLAG_TC4 - DMA1 Channel4 transfer complete flag.
+ 409:../Peripheral/src/ch32v30x_dma.c ****  *            DMA1_FLAG_HT4 - DMA1 Channel4 half transfer flag.
+ 410:../Peripheral/src/ch32v30x_dma.c ****  *            DMA1_FLAG_TE4 - DMA1 Channel4 transfer error flag.
+ 411:../Peripheral/src/ch32v30x_dma.c ****  *            DMA1_FLAG_GL5 - DMA1 Channel5 global flag.
+ 412:../Peripheral/src/ch32v30x_dma.c ****  *            DMA1_FLAG_TC5 - DMA1 Channel5 transfer complete flag.
+ 413:../Peripheral/src/ch32v30x_dma.c ****  *            DMA1_FLAG_HT5 - DMA1 Channel5 half transfer flag.
+ 414:../Peripheral/src/ch32v30x_dma.c ****  *            DMA1_FLAG_TE5 - DMA1 Channel5 transfer error flag.
+ 415:../Peripheral/src/ch32v30x_dma.c ****  *            DMA1_FLAG_GL6 - DMA1 Channel6 global flag.
+ 416:../Peripheral/src/ch32v30x_dma.c ****  *            DMA1_FLAG_TC6 - DMA1 Channel6 transfer complete flag.
+ 417:../Peripheral/src/ch32v30x_dma.c ****  *            DMA1_FLAG_HT6 - DMA1 Channel6 half transfer flag.
+ 418:../Peripheral/src/ch32v30x_dma.c ****  *            DMA1_FLAG_TE6 - DMA1 Channel6 transfer error flag.
+ 419:../Peripheral/src/ch32v30x_dma.c ****  *            DMA1_FLAG_GL7 - DMA1 Channel7 global flag.
+ 420:../Peripheral/src/ch32v30x_dma.c ****  *            DMA1_FLAG_TC7 - DMA1 Channel7 transfer complete flag.
+ 421:../Peripheral/src/ch32v30x_dma.c ****  *            DMA1_FLAG_HT7 - DMA1 Channel7 half transfer flag.
+ 422:../Peripheral/src/ch32v30x_dma.c ****  *            DMA1_FLAG_TE7 - DMA1 Channel7 transfer error flag.
+ 423:../Peripheral/src/ch32v30x_dma.c ****  *            DMA2_FLAG_GL1 - DMA2 Channel1 global flag.
+ 424:../Peripheral/src/ch32v30x_dma.c ****  *            DMA2_FLAG_TC1 - DMA2 Channel1 transfer complete flag.
+ 425:../Peripheral/src/ch32v30x_dma.c ****  *            DMA2_FLAG_HT1 - DMA2 Channel1 half transfer flag.
+ 426:../Peripheral/src/ch32v30x_dma.c ****  *            DMA2_FLAG_TE1 - DMA2 Channel1 transfer error flag.
+ 427:../Peripheral/src/ch32v30x_dma.c ****  *            DMA2_FLAG_GL2 - DMA2 Channel2 global flag.
+ 428:../Peripheral/src/ch32v30x_dma.c ****  *            DMA2_FLAG_TC2 - DMA2 Channel2 transfer complete flag.
+ 429:../Peripheral/src/ch32v30x_dma.c ****  *            DMA2_FLAG_HT2 - DMA2 Channel2 half transfer flag.
+ 430:../Peripheral/src/ch32v30x_dma.c ****  *            DMA2_FLAG_TE2 - DMA2 Channel2 transfer error flag.
+ 431:../Peripheral/src/ch32v30x_dma.c ****  *            DMA2_FLAG_GL3 - DMA2 Channel3 global flag.
+ 432:../Peripheral/src/ch32v30x_dma.c ****  *            DMA2_FLAG_TC3 - DMA2 Channel3 transfer complete flag.
+ 433:../Peripheral/src/ch32v30x_dma.c ****  *            DMA2_FLAG_HT3 - DMA2 Channel3 half transfer flag.
+ 434:../Peripheral/src/ch32v30x_dma.c ****  *            DMA2_FLAG_TE3 - DMA2 Channel3 transfer error flag.
+ 435:../Peripheral/src/ch32v30x_dma.c ****  *            DMA2_FLAG_GL4 - DMA2 Channel4 global flag.
+ 436:../Peripheral/src/ch32v30x_dma.c ****  *            DMA2_FLAG_TC4 - DMA2 Channel4 transfer complete flag.
+ 437:../Peripheral/src/ch32v30x_dma.c ****  *            DMA2_FLAG_HT4 - DMA2 Channel4 half transfer flag.
+ 438:../Peripheral/src/ch32v30x_dma.c ****  *            DMA2_FLAG_TE4 - DMA2 Channel4 transfer error flag.
+ 439:../Peripheral/src/ch32v30x_dma.c ****  *            DMA2_FLAG_GL5 - DMA2 Channel5 global flag.
+ 440:../Peripheral/src/ch32v30x_dma.c ****  *            DMA2_FLAG_TC5 - DMA2 Channel5 transfer complete flag.
+ 441:../Peripheral/src/ch32v30x_dma.c ****  *            DMA2_FLAG_HT5 - DMA2 Channel5 half transfer flag.
+ 442:../Peripheral/src/ch32v30x_dma.c ****  *            DMA2_FLAG_TE5 - DMA2 Channel5 transfer error flag.
+ 443:../Peripheral/src/ch32v30x_dma.c ****  *            DMA2_FLAG_GL6 - DMA2 Channel6 global flag.
+ 444:../Peripheral/src/ch32v30x_dma.c ****  *            DMA2_FLAG_TC6 - DMA2 Channel6 transfer complete flag.
+ 445:../Peripheral/src/ch32v30x_dma.c ****  *            DMA2_FLAG_HT6 - DMA2 Channel6 half transfer flag.
+ 446:../Peripheral/src/ch32v30x_dma.c ****  *            DMA2_FLAG_TE6 - DMA2 Channel6 transfer error flag.
+ 447:../Peripheral/src/ch32v30x_dma.c ****  *            DMA2_FLAG_GL7 - DMA2 Channel7 global flag.
+ 448:../Peripheral/src/ch32v30x_dma.c ****  *            DMA2_FLAG_TC7 - DMA2 Channel7 transfer complete flag.
+ 449:../Peripheral/src/ch32v30x_dma.c ****  *            DMA2_FLAG_HT7 - DMA2 Channel7 half transfer flag.
+ 450:../Peripheral/src/ch32v30x_dma.c ****  *            DMA2_FLAG_TE7 - DMA2 Channel7 transfer error flag.
+ 451:../Peripheral/src/ch32v30x_dma.c ****  *            DMA2_FLAG_GL8 - DMA2 Channel8 global flag.
+ 452:../Peripheral/src/ch32v30x_dma.c ****  *            DMA2_FLAG_TC8 - DMA2 Channel8 transfer complete flag.
+ 453:../Peripheral/src/ch32v30x_dma.c ****  *            DMA2_FLAG_HT8 - DMA2 Channel8 half transfer flag.
+ 454:../Peripheral/src/ch32v30x_dma.c ****  *            DMA2_FLAG_TE8 - DMA2 Channel8 transfer error flag.
+ 455:../Peripheral/src/ch32v30x_dma.c ****  *            DMA2_FLAG_GL9 - DMA2 Channel9 global flag.
+ 456:../Peripheral/src/ch32v30x_dma.c ****  *            DMA2_FLAG_TC9 - DMA2 Channel9 transfer complete flag.
+ 457:../Peripheral/src/ch32v30x_dma.c ****  *            DMA2_FLAG_HT9 - DMA2 Channel9 half transfer flag.
+ 458:../Peripheral/src/ch32v30x_dma.c ****  *            DMA2_FLAG_TE9 - DMA2 Channel9 transfer error flag.
+ 459:../Peripheral/src/ch32v30x_dma.c ****  *            DMA2_FLAG_GL10 - DMA2 Channel10 global flag.
+ 460:../Peripheral/src/ch32v30x_dma.c ****  *            DMA2_FLAG_TC10 - DMA2 Channel10 transfer complete flag.
+ 461:../Peripheral/src/ch32v30x_dma.c ****  *            DMA2_FLAG_HT10 - DMA2 Channel10 half transfer flag.
+ 462:../Peripheral/src/ch32v30x_dma.c ****  *            DMA2_FLAG_TE10 - DMA2 Channel10 transfer error flag.
+ 463:../Peripheral/src/ch32v30x_dma.c ****  *            DMA2_FLAG_GL11 - DMA2 Channel11 global flag.
+ 464:../Peripheral/src/ch32v30x_dma.c ****  *            DMA2_FLAG_TC11 - DMA2 Channel11 transfer complete flag.
+ 465:../Peripheral/src/ch32v30x_dma.c ****  *            DMA2_FLAG_HT11 - DMA2 Channel11 half transfer flag.
+ 466:../Peripheral/src/ch32v30x_dma.c ****  *            DMA2_FLAG_TE11 - DMA2 Channel11 transfer error flag.
+ 467:../Peripheral/src/ch32v30x_dma.c ****  *
+ 468:../Peripheral/src/ch32v30x_dma.c ****  * @return  none
+ 469:../Peripheral/src/ch32v30x_dma.c ****  */
+ 470:../Peripheral/src/ch32v30x_dma.c **** void DMA_ClearFlag(uint32_t DMAy_FLAG)
+ 471:../Peripheral/src/ch32v30x_dma.c **** {
+ 516              		.loc 1 471 1 is_stmt 1
+ 517              		.cfi_startproc
+ 518              	.LVL22:
+ 472:../Peripheral/src/ch32v30x_dma.c ****     if((DMAy_FLAG & FLAG_Mask) == FLAG_Mask)
+ 519              		.loc 1 472 5
+ 520              		.loc 1 472 19 is_stmt 0
+ 521 0000 B7070010 		li	a5,268435456
+ 522 0004 E98F     		and	a5,a0,a5
+ 523              		.loc 1 472 7
+ 524 0006 99C7     		beq	a5,zero,.L45
+ 473:../Peripheral/src/ch32v30x_dma.c ****     {
+ 474:../Peripheral/src/ch32v30x_dma.c ****         DMA2->INTFCR = DMAy_FLAG;
+ 525              		.loc 1 474 9 is_stmt 1
+ 526              		.loc 1 474 22 is_stmt 0
+ 527 0008 B7070240 		li	a5,1073872896
+ 528 000c 93870740 		addi	a5,a5,1024
+ 529              	.L48:
+ 475:../Peripheral/src/ch32v30x_dma.c ****     }
+ 476:../Peripheral/src/ch32v30x_dma.c ****     else if((DMAy_FLAG & DMA2_EXTEN_FLAG_Mask) == DMA2_EXTEN_FLAG_Mask)
+ 477:../Peripheral/src/ch32v30x_dma.c ****     {
+ 478:../Peripheral/src/ch32v30x_dma.c ****         DMA2_EXTEN->INTFCR = DMAy_FLAG;
+ 479:../Peripheral/src/ch32v30x_dma.c ****     }
+ 480:../Peripheral/src/ch32v30x_dma.c ****     else
+ 481:../Peripheral/src/ch32v30x_dma.c ****     {
+ 482:../Peripheral/src/ch32v30x_dma.c ****         DMA1->INTFCR = DMAy_FLAG;
+ 530              		.loc 1 482 22
+ 531 0010 C8C3     		sw	a0,4(a5)
+ 483:../Peripheral/src/ch32v30x_dma.c ****     }
+ 484:../Peripheral/src/ch32v30x_dma.c **** }
+ 532              		.loc 1 484 1
+ 533 0012 8280     		ret
+ 534              	.L45:
+ 476:../Peripheral/src/ch32v30x_dma.c ****     {
+ 535              		.loc 1 476 10 is_stmt 1
+ 476:../Peripheral/src/ch32v30x_dma.c ****     {
+ 536              		.loc 1 476 24 is_stmt 0
+ 537 0014 B7070020 		li	a5,536870912
+ 538 0018 E98F     		and	a5,a0,a5
+ 476:../Peripheral/src/ch32v30x_dma.c ****     {
+ 539              		.loc 1 476 12
+ 540 001a 91C7     		beq	a5,zero,.L47
+ 478:../Peripheral/src/ch32v30x_dma.c ****     }
+ 541              		.loc 1 478 9 is_stmt 1
+ 478:../Peripheral/src/ch32v30x_dma.c ****     }
+ 542              		.loc 1 478 28 is_stmt 0
+ 543 001c B7070240 		li	a5,1073872896
+ 544 0020 9387074D 		addi	a5,a5,1232
+ 545 0024 F5B7     		j	.L48
+ 546              	.L47:
+ 482:../Peripheral/src/ch32v30x_dma.c ****     }
+ 547              		.loc 1 482 9 is_stmt 1
+ 482:../Peripheral/src/ch32v30x_dma.c ****     }
+ 548              		.loc 1 482 22 is_stmt 0
+ 549 0026 B7070240 		li	a5,1073872896
+ 550 002a DDB7     		j	.L48
+ 551              		.cfi_endproc
+ 552              	.LFE37:
+ 554              		.section	.text.DMA_GetITStatus,"ax",@progbits
+ 555              		.align	1
+ 556              		.globl	DMA_GetITStatus
+ 558              	DMA_GetITStatus:
+ 559              	.LFB41:
+ 560              		.cfi_startproc
+ 485:../Peripheral/src/ch32v30x_dma.c **** 
+ 486:../Peripheral/src/ch32v30x_dma.c **** /*********************************************************************
+ 487:../Peripheral/src/ch32v30x_dma.c ****  * @fn      DMA_GetITStatus
+ 488:../Peripheral/src/ch32v30x_dma.c ****  *
+ 489:../Peripheral/src/ch32v30x_dma.c ****  * @brief   Checks whether the specified DMAy Channelx interrupt has
+ 490:../Peripheral/src/ch32v30x_dma.c ****  *        occurred or not.
+ 491:../Peripheral/src/ch32v30x_dma.c ****  *
+ 492:../Peripheral/src/ch32v30x_dma.c ****  * @param   DMAy_IT - specifies the DMAy interrupt source to check.
+ 493:../Peripheral/src/ch32v30x_dma.c ****  *            DMA1_IT_GL1 - DMA1 Channel1 global flag.
+ 494:../Peripheral/src/ch32v30x_dma.c ****  *            DMA1_IT_TC1 - DMA1 Channel1 transfer complete flag.
+ 495:../Peripheral/src/ch32v30x_dma.c ****  *            DMA1_IT_HT1 - DMA1 Channel1 half transfer flag.
+ 496:../Peripheral/src/ch32v30x_dma.c ****  *            DMA1_IT_TE1 - DMA1 Channel1 transfer error flag.
+ 497:../Peripheral/src/ch32v30x_dma.c ****  *            DMA1_IT_GL2 - DMA1 Channel2 global flag.
+ 498:../Peripheral/src/ch32v30x_dma.c ****  *            DMA1_IT_TC2 - DMA1 Channel2 transfer complete flag.
+ 499:../Peripheral/src/ch32v30x_dma.c ****  *            DMA1_IT_HT2 - DMA1 Channel2 half transfer flag.
+ 500:../Peripheral/src/ch32v30x_dma.c ****  *            DMA1_IT_TE2 - DMA1 Channel2 transfer error flag.
+ 501:../Peripheral/src/ch32v30x_dma.c ****  *            DMA1_IT_GL3 - DMA1 Channel3 global flag.
+ 502:../Peripheral/src/ch32v30x_dma.c ****  *            DMA1_IT_TC3 - DMA1 Channel3 transfer complete flag.
+ 503:../Peripheral/src/ch32v30x_dma.c ****  *            DMA1_IT_HT3 - DMA1 Channel3 half transfer flag.
+ 504:../Peripheral/src/ch32v30x_dma.c ****  *            DMA1_IT_TE3 - DMA1 Channel3 transfer error flag.
+ 505:../Peripheral/src/ch32v30x_dma.c ****  *            DMA1_IT_GL4 - DMA1 Channel4 global flag.
+ 506:../Peripheral/src/ch32v30x_dma.c ****  *            DMA1_IT_TC4 - DMA1 Channel4 transfer complete flag.
+ 507:../Peripheral/src/ch32v30x_dma.c ****  *            DMA1_IT_HT4 - DMA1 Channel4 half transfer flag.
+ 508:../Peripheral/src/ch32v30x_dma.c ****  *            DMA1_IT_TE4 - DMA1 Channel4 transfer error flag.
+ 509:../Peripheral/src/ch32v30x_dma.c ****  *            DMA1_IT_GL5 - DMA1 Channel5 global flag.
+ 510:../Peripheral/src/ch32v30x_dma.c ****  *            DMA1_IT_TC5 - DMA1 Channel5 transfer complete flag.
+ 511:../Peripheral/src/ch32v30x_dma.c ****  *            DMA1_IT_HT5 - DMA1 Channel5 half transfer flag.
+ 512:../Peripheral/src/ch32v30x_dma.c ****  *            DMA1_IT_TE5 - DMA1 Channel5 transfer error flag.
+ 513:../Peripheral/src/ch32v30x_dma.c ****  *            DMA1_IT_GL6 - DMA1 Channel6 global flag.
+ 514:../Peripheral/src/ch32v30x_dma.c ****  *            DMA1_IT_TC6 - DMA1 Channel6 transfer complete flag.
+ 515:../Peripheral/src/ch32v30x_dma.c ****  *            DMA1_IT_HT6 - DMA1 Channel6 half transfer flag.
+ 516:../Peripheral/src/ch32v30x_dma.c ****  *            DMA1_IT_TE6 - DMA1 Channel6 transfer error flag.
+ 517:../Peripheral/src/ch32v30x_dma.c ****  *            DMA1_IT_GL7 - DMA1 Channel7 global flag.
+ 518:../Peripheral/src/ch32v30x_dma.c ****  *            DMA1_IT_TC7 - DMA1 Channel7 transfer complete flag.
+ 519:../Peripheral/src/ch32v30x_dma.c ****  *            DMA1_IT_HT7 - DMA1 Channel7 half transfer flag.
+ 520:../Peripheral/src/ch32v30x_dma.c ****  *            DMA1_IT_TE7 - DMA1 Channel7 transfer error flag.
+ 521:../Peripheral/src/ch32v30x_dma.c ****  *            DMA2_IT_GL1 - DMA2 Channel1 global flag.
+ 522:../Peripheral/src/ch32v30x_dma.c ****  *            DMA2_IT_TC1 - DMA2 Channel1 transfer complete flag.
+ 523:../Peripheral/src/ch32v30x_dma.c ****  *            DMA2_IT_HT1 - DMA2 Channel1 half transfer flag.
+ 524:../Peripheral/src/ch32v30x_dma.c ****  *            DMA2_IT_TE1 - DMA2 Channel1 transfer error flag.
+ 525:../Peripheral/src/ch32v30x_dma.c ****  *            DMA2_IT_GL2 - DMA2 Channel2 global flag.
+ 526:../Peripheral/src/ch32v30x_dma.c ****  *            DMA2_IT_TC2 - DMA2 Channel2 transfer complete flag.
+ 527:../Peripheral/src/ch32v30x_dma.c ****  *            DMA2_IT_HT2 - DMA2 Channel2 half transfer flag.
+ 528:../Peripheral/src/ch32v30x_dma.c ****  *            DMA2_IT_TE2 - DMA2 Channel2 transfer error flag.
+ 529:../Peripheral/src/ch32v30x_dma.c ****  *            DMA2_IT_GL3 - DMA2 Channel3 global flag.
+ 530:../Peripheral/src/ch32v30x_dma.c ****  *            DMA2_IT_TC3 - DMA2 Channel3 transfer complete flag.
+ 531:../Peripheral/src/ch32v30x_dma.c ****  *            DMA2_IT_HT3 - DMA2 Channel3 half transfer flag.
+ 532:../Peripheral/src/ch32v30x_dma.c ****  *            DMA2_IT_TE3 - DMA2 Channel3 transfer error flag.
+ 533:../Peripheral/src/ch32v30x_dma.c ****  *            DMA2_IT_GL4 - DMA2 Channel4 global flag.
+ 534:../Peripheral/src/ch32v30x_dma.c ****  *            DMA2_IT_TC4 - DMA2 Channel4 transfer complete flag.
+ 535:../Peripheral/src/ch32v30x_dma.c ****  *            DMA2_IT_HT4 - DMA2 Channel4 half transfer flag.
+ 536:../Peripheral/src/ch32v30x_dma.c ****  *            DMA2_IT_TE4 - DMA2 Channel4 transfer error flag.
+ 537:../Peripheral/src/ch32v30x_dma.c ****  *            DMA2_IT_GL5 - DMA2 Channel5 global flag.
+ 538:../Peripheral/src/ch32v30x_dma.c ****  *            DMA2_IT_TC5 - DMA2 Channel5 transfer complete flag.
+ 539:../Peripheral/src/ch32v30x_dma.c ****  *            DMA2_IT_HT5 - DMA2 Channel5 half transfer flag.
+ 540:../Peripheral/src/ch32v30x_dma.c ****  *            DMA2_IT_TE5 - DMA2 Channel5 transfer error flag.
+ 541:../Peripheral/src/ch32v30x_dma.c ****  *            DMA2_IT_GL6 - DMA2 Channel6 global flag.
+ 542:../Peripheral/src/ch32v30x_dma.c ****  *            DMA2_IT_TC6 - DMA2 Channel6 transfer complete flag.
+ 543:../Peripheral/src/ch32v30x_dma.c ****  *            DMA2_IT_HT6 - DMA2 Channel6 half transfer flag.
+ 544:../Peripheral/src/ch32v30x_dma.c ****  *            DMA2_IT_TE6 - DMA2 Channel6 transfer error flag.
+ 545:../Peripheral/src/ch32v30x_dma.c ****  *            DMA2_IT_GL7 - DMA2 Channel7 global flag.
+ 546:../Peripheral/src/ch32v30x_dma.c ****  *            DMA2_IT_TC7 - DMA2 Channel7 transfer complete flag.
+ 547:../Peripheral/src/ch32v30x_dma.c ****  *            DMA2_IT_HT7 - DMA2 Channel7 half transfer flag.
+ 548:../Peripheral/src/ch32v30x_dma.c ****  *            DMA2_IT_TE7 - DMA2 Channel7 transfer error flag.
+ 549:../Peripheral/src/ch32v30x_dma.c ****  *            DMA2_IT_GL8 - DMA2 Channel8 global flag.
+ 550:../Peripheral/src/ch32v30x_dma.c ****  *            DMA2_IT_TC8 - DMA2 Channel8 transfer complete flag.
+ 551:../Peripheral/src/ch32v30x_dma.c ****  *            DMA2_IT_HT8 - DMA2 Channel8 half transfer flag.
+ 552:../Peripheral/src/ch32v30x_dma.c ****  *            DMA2_IT_TE8 - DMA2 Channel8 transfer error flag.
+ 553:../Peripheral/src/ch32v30x_dma.c ****  *            DMA2_IT_GL9 - DMA2 Channel9 global flag.
+ 554:../Peripheral/src/ch32v30x_dma.c ****  *            DMA2_IT_TC9 - DMA2 Channel9 transfer complete flag.
+ 555:../Peripheral/src/ch32v30x_dma.c ****  *            DMA2_IT_HT9 - DMA2 Channel9 half transfer flag.
+ 556:../Peripheral/src/ch32v30x_dma.c ****  *            DMA2_IT_TE9 - DMA2 Channel9 transfer error flag.
+ 557:../Peripheral/src/ch32v30x_dma.c ****  *            DMA2_IT_GL10 - DMA2 Channel10 global flag.
+ 558:../Peripheral/src/ch32v30x_dma.c ****  *            DMA2_IT_TC10 - DMA2 Channel10 transfer complete flag.
+ 559:../Peripheral/src/ch32v30x_dma.c ****  *            DMA2_IT_HT10 - DMA2 Channel10 half transfer flag.
+ 560:../Peripheral/src/ch32v30x_dma.c ****  *            DMA2_IT_TE10 - DMA2 Channel10 transfer error flag.
+ 561:../Peripheral/src/ch32v30x_dma.c ****  *            DMA2_IT_GL11 - DMA2 Channel11 global flag.
+ 562:../Peripheral/src/ch32v30x_dma.c ****  *            DMA2_IT_TC11 - DMA2 Channel11 transfer complete flag.
+ 563:../Peripheral/src/ch32v30x_dma.c ****  *            DMA2_IT_HT11 - DMA2 Channel11 half transfer flag.
+ 564:../Peripheral/src/ch32v30x_dma.c ****  *            DMA2_IT_TE11 - DMA2 Channel11 transfer error flag.
+ 565:../Peripheral/src/ch32v30x_dma.c ****  *
+ 566:../Peripheral/src/ch32v30x_dma.c ****  * @return  The new state of DMAy_IT (SET or RESET).
+ 567:../Peripheral/src/ch32v30x_dma.c ****  */
+ 568:../Peripheral/src/ch32v30x_dma.c **** ITStatus DMA_GetITStatus(uint32_t DMAy_IT)
+ 561              		.loc 1 568 10 is_stmt 1
+ 562 0000 17030000 		tail	DMA_GetFlagStatus
+ 562      67000300 
+ 563              		.cfi_endproc
+ 564              	.LFE41:
+ 566              		.section	.text.DMA_ClearITPendingBit,"ax",@progbits
+ 567              		.align	1
+ 568              		.globl	DMA_ClearITPendingBit
+ 570              	DMA_ClearITPendingBit:
+ 571              	.LFB43:
+ 572              		.cfi_startproc
+ 569:../Peripheral/src/ch32v30x_dma.c **** {
+ 570:../Peripheral/src/ch32v30x_dma.c ****     ITStatus bitstatus = RESET;
+ 571:../Peripheral/src/ch32v30x_dma.c ****     uint32_t tmpreg = 0;
+ 572:../Peripheral/src/ch32v30x_dma.c **** 
+ 573:../Peripheral/src/ch32v30x_dma.c ****     if((DMAy_IT & FLAG_Mask) == FLAG_Mask)
+ 574:../Peripheral/src/ch32v30x_dma.c ****     {
+ 575:../Peripheral/src/ch32v30x_dma.c ****         tmpreg = DMA2->INTFR;
+ 576:../Peripheral/src/ch32v30x_dma.c ****     }
+ 577:../Peripheral/src/ch32v30x_dma.c ****     else if((DMAy_IT & DMA2_EXTEN_FLAG_Mask) == DMA2_EXTEN_FLAG_Mask)
+ 578:../Peripheral/src/ch32v30x_dma.c ****     {
+ 579:../Peripheral/src/ch32v30x_dma.c ****         tmpreg = DMA2_EXTEN->INTFR;
+ 580:../Peripheral/src/ch32v30x_dma.c ****     }
+ 581:../Peripheral/src/ch32v30x_dma.c ****     else
+ 582:../Peripheral/src/ch32v30x_dma.c ****     {
+ 583:../Peripheral/src/ch32v30x_dma.c ****         tmpreg = DMA1->INTFR;
+ 584:../Peripheral/src/ch32v30x_dma.c ****     }
+ 585:../Peripheral/src/ch32v30x_dma.c **** 
+ 586:../Peripheral/src/ch32v30x_dma.c ****     if((tmpreg & DMAy_IT) != (uint32_t)RESET)
+ 587:../Peripheral/src/ch32v30x_dma.c ****     {
+ 588:../Peripheral/src/ch32v30x_dma.c ****         bitstatus = SET;
+ 589:../Peripheral/src/ch32v30x_dma.c ****     }
+ 590:../Peripheral/src/ch32v30x_dma.c ****     else
+ 591:../Peripheral/src/ch32v30x_dma.c ****     {
+ 592:../Peripheral/src/ch32v30x_dma.c ****         bitstatus = RESET;
+ 593:../Peripheral/src/ch32v30x_dma.c ****     }
+ 594:../Peripheral/src/ch32v30x_dma.c ****     return bitstatus;
+ 595:../Peripheral/src/ch32v30x_dma.c **** }
+ 596:../Peripheral/src/ch32v30x_dma.c **** 
+ 597:../Peripheral/src/ch32v30x_dma.c **** /*********************************************************************
+ 598:../Peripheral/src/ch32v30x_dma.c ****  * @fn      DMA_ClearITPendingBit
+ 599:../Peripheral/src/ch32v30x_dma.c ****  *
+ 600:../Peripheral/src/ch32v30x_dma.c ****  * @brief   Clears the DMAy Channelx's interrupt pending bits.
+ 601:../Peripheral/src/ch32v30x_dma.c ****  *
+ 602:../Peripheral/src/ch32v30x_dma.c ****  * @param   DMAy_IT - specifies the DMAy interrupt source to check.
+ 603:../Peripheral/src/ch32v30x_dma.c ****  *            DMA1_IT_GL1 - DMA1 Channel1 global flag.
+ 604:../Peripheral/src/ch32v30x_dma.c ****  *            DMA1_IT_TC1 - DMA1 Channel1 transfer complete flag.
+ 605:../Peripheral/src/ch32v30x_dma.c ****  *            DMA1_IT_HT1 - DMA1 Channel1 half transfer flag.
+ 606:../Peripheral/src/ch32v30x_dma.c ****  *            DMA1_IT_TE1 - DMA1 Channel1 transfer error flag.
+ 607:../Peripheral/src/ch32v30x_dma.c ****  *            DMA1_IT_GL2 - DMA1 Channel2 global flag.
+ 608:../Peripheral/src/ch32v30x_dma.c ****  *            DMA1_IT_TC2 - DMA1 Channel2 transfer complete flag.
+ 609:../Peripheral/src/ch32v30x_dma.c ****  *            DMA1_IT_HT2 - DMA1 Channel2 half transfer flag.
+ 610:../Peripheral/src/ch32v30x_dma.c ****  *            DMA1_IT_TE2 - DMA1 Channel2 transfer error flag.
+ 611:../Peripheral/src/ch32v30x_dma.c ****  *            DMA1_IT_GL3 - DMA1 Channel3 global flag.
+ 612:../Peripheral/src/ch32v30x_dma.c ****  *            DMA1_IT_TC3 - DMA1 Channel3 transfer complete flag.
+ 613:../Peripheral/src/ch32v30x_dma.c ****  *            DMA1_IT_HT3 - DMA1 Channel3 half transfer flag.
+ 614:../Peripheral/src/ch32v30x_dma.c ****  *            DMA1_IT_TE3 - DMA1 Channel3 transfer error flag.
+ 615:../Peripheral/src/ch32v30x_dma.c ****  *            DMA1_IT_GL4 - DMA1 Channel4 global flag.
+ 616:../Peripheral/src/ch32v30x_dma.c ****  *            DMA1_IT_TC4 - DMA1 Channel4 transfer complete flag.
+ 617:../Peripheral/src/ch32v30x_dma.c ****  *            DMA1_IT_HT4 - DMA1 Channel4 half transfer flag.
+ 618:../Peripheral/src/ch32v30x_dma.c ****  *            DMA1_IT_TE4 - DMA1 Channel4 transfer error flag.
+ 619:../Peripheral/src/ch32v30x_dma.c ****  *            DMA1_IT_GL5 - DMA1 Channel5 global flag.
+ 620:../Peripheral/src/ch32v30x_dma.c ****  *            DMA1_IT_TC5 - DMA1 Channel5 transfer complete flag.
+ 621:../Peripheral/src/ch32v30x_dma.c ****  *            DMA1_IT_HT5 - DMA1 Channel5 half transfer flag.
+ 622:../Peripheral/src/ch32v30x_dma.c ****  *            DMA1_IT_TE5 - DMA1 Channel5 transfer error flag.
+ 623:../Peripheral/src/ch32v30x_dma.c ****  *            DMA1_IT_GL6 - DMA1 Channel6 global flag.
+ 624:../Peripheral/src/ch32v30x_dma.c ****  *            DMA1_IT_TC6 - DMA1 Channel6 transfer complete flag.
+ 625:../Peripheral/src/ch32v30x_dma.c ****  *            DMA1_IT_HT6 - DMA1 Channel6 half transfer flag.
+ 626:../Peripheral/src/ch32v30x_dma.c ****  *            DMA1_IT_TE6 - DMA1 Channel6 transfer error flag.
+ 627:../Peripheral/src/ch32v30x_dma.c ****  *            DMA1_IT_GL7 - DMA1 Channel7 global flag.
+ 628:../Peripheral/src/ch32v30x_dma.c ****  *            DMA1_IT_TC7 - DMA1 Channel7 transfer complete flag.
+ 629:../Peripheral/src/ch32v30x_dma.c ****  *            DMA1_IT_HT7 - DMA1 Channel7 half transfer flag.
+ 630:../Peripheral/src/ch32v30x_dma.c ****  *            DMA1_IT_TE7 - DMA1 Channel7 transfer error flag.
+ 631:../Peripheral/src/ch32v30x_dma.c ****  *            DMA2_IT_GL1 - DMA2 Channel1 global flag.
+ 632:../Peripheral/src/ch32v30x_dma.c ****  *            DMA2_IT_TC1 - DMA2 Channel1 transfer complete flag.
+ 633:../Peripheral/src/ch32v30x_dma.c ****  *            DMA2_IT_HT1 - DMA2 Channel1 half transfer flag.
+ 634:../Peripheral/src/ch32v30x_dma.c ****  *            DMA2_IT_TE1 - DMA2 Channel1 transfer error flag.
+ 635:../Peripheral/src/ch32v30x_dma.c ****  *            DMA2_IT_GL2 - DMA2 Channel2 global flag.
+ 636:../Peripheral/src/ch32v30x_dma.c ****  *            DMA2_IT_TC2 - DMA2 Channel2 transfer complete flag.
+ 637:../Peripheral/src/ch32v30x_dma.c ****  *            DMA2_IT_HT2 - DMA2 Channel2 half transfer flag.
+ 638:../Peripheral/src/ch32v30x_dma.c ****  *            DMA2_IT_TE2 - DMA2 Channel2 transfer error flag.
+ 639:../Peripheral/src/ch32v30x_dma.c ****  *            DMA2_IT_GL3 - DMA2 Channel3 global flag.
+ 640:../Peripheral/src/ch32v30x_dma.c ****  *            DMA2_IT_TC3 - DMA2 Channel3 transfer complete flag.
+ 641:../Peripheral/src/ch32v30x_dma.c ****  *            DMA2_IT_HT3 - DMA2 Channel3 half transfer flag.
+ 642:../Peripheral/src/ch32v30x_dma.c ****  *            DMA2_IT_TE3 - DMA2 Channel3 transfer error flag.
+ 643:../Peripheral/src/ch32v30x_dma.c ****  *            DMA2_IT_GL4 - DMA2 Channel4 global flag.
+ 644:../Peripheral/src/ch32v30x_dma.c ****  *            DMA2_IT_TC4 - DMA2 Channel4 transfer complete flag.
+ 645:../Peripheral/src/ch32v30x_dma.c ****  *            DMA2_IT_HT4 - DMA2 Channel4 half transfer flag.
+ 646:../Peripheral/src/ch32v30x_dma.c ****  *            DMA2_IT_TE4 - DMA2 Channel4 transfer error flag.
+ 647:../Peripheral/src/ch32v30x_dma.c ****  *            DMA2_IT_GL5 - DMA2 Channel5 global flag.
+ 648:../Peripheral/src/ch32v30x_dma.c ****  *            DMA2_IT_TC5 - DMA2 Channel5 transfer complete flag.
+ 649:../Peripheral/src/ch32v30x_dma.c ****  *            DMA2_IT_HT5 - DMA2 Channel5 half transfer flag.
+ 650:../Peripheral/src/ch32v30x_dma.c ****  *            DMA2_IT_TE5 - DMA2 Channel5 transfer error flag.
+ 651:../Peripheral/src/ch32v30x_dma.c ****  *            DMA2_IT_GL6 - DMA2 Channel6 global flag.
+ 652:../Peripheral/src/ch32v30x_dma.c ****  *            DMA2_IT_TC6 - DMA2 Channel6 transfer complete flag.
+ 653:../Peripheral/src/ch32v30x_dma.c ****  *            DMA2_IT_HT6 - DMA2 Channel6 half transfer flag.
+ 654:../Peripheral/src/ch32v30x_dma.c ****  *            DMA2_IT_TE6 - DMA2 Channel6 transfer error flag.
+ 655:../Peripheral/src/ch32v30x_dma.c ****  *            DMA2_IT_GL7 - DMA2 Channel7 global flag.
+ 656:../Peripheral/src/ch32v30x_dma.c ****  *            DMA2_IT_TC7 - DMA2 Channel7 transfer complete flag.
+ 657:../Peripheral/src/ch32v30x_dma.c ****  *            DMA2_IT_HT7 - DMA2 Channel7 half transfer flag.
+ 658:../Peripheral/src/ch32v30x_dma.c ****  *            DMA2_IT_TE7 - DMA2 Channel7 transfer error flag.
+ 659:../Peripheral/src/ch32v30x_dma.c ****  *            DMA2_IT_GL8 - DMA2 Channel8 global flag.
+ 660:../Peripheral/src/ch32v30x_dma.c ****  *            DMA2_IT_TC8 - DMA2 Channel8 transfer complete flag.
+ 661:../Peripheral/src/ch32v30x_dma.c ****  *            DMA2_IT_HT8 - DMA2 Channel8 half transfer flag.
+ 662:../Peripheral/src/ch32v30x_dma.c ****  *            DMA2_IT_TE8 - DMA2 Channel8 transfer error flag.
+ 663:../Peripheral/src/ch32v30x_dma.c ****  *            DMA2_IT_GL9 - DMA2 Channel9 global flag.
+ 664:../Peripheral/src/ch32v30x_dma.c ****  *            DMA2_IT_TC9 - DMA2 Channel9 transfer complete flag.
+ 665:../Peripheral/src/ch32v30x_dma.c ****  *            DMA2_IT_HT9 - DMA2 Channel9 half transfer flag.
+ 666:../Peripheral/src/ch32v30x_dma.c ****  *            DMA2_IT_TE9 - DMA2 Channel9 transfer error flag.
+ 667:../Peripheral/src/ch32v30x_dma.c ****  *            DMA2_IT_GL10 - DMA2 Channel10 global flag.
+ 668:../Peripheral/src/ch32v30x_dma.c ****  *            DMA2_IT_TC10 - DMA2 Channel10 transfer complete flag.
+ 669:../Peripheral/src/ch32v30x_dma.c ****  *            DMA2_IT_HT10 - DMA2 Channel10 half transfer flag.
+ 670:../Peripheral/src/ch32v30x_dma.c ****  *            DMA2_IT_TE10 - DMA2 Channel10 transfer error flag.
+ 671:../Peripheral/src/ch32v30x_dma.c ****  *            DMA2_IT_GL11 - DMA2 Channel11 global flag.
+ 672:../Peripheral/src/ch32v30x_dma.c ****  *            DMA2_IT_TC11 - DMA2 Channel11 transfer complete flag.
+ 673:../Peripheral/src/ch32v30x_dma.c ****  *            DMA2_IT_HT11 - DMA2 Channel11 half transfer flag.
+ 674:../Peripheral/src/ch32v30x_dma.c ****  *            DMA2_IT_TE11 - DMA2 Channel11 transfer error flag.
+ 675:../Peripheral/src/ch32v30x_dma.c ****  *
+ 676:../Peripheral/src/ch32v30x_dma.c ****  * @return  none
+ 677:../Peripheral/src/ch32v30x_dma.c ****  */
+ 678:../Peripheral/src/ch32v30x_dma.c **** void DMA_ClearITPendingBit(uint32_t DMAy_IT)
+ 573              		.loc 1 678 6
+ 574 0000 17030000 		tail	DMA_ClearFlag
+ 574      67000300 
+ 575              		.cfi_endproc
+ 576              	.LFE43:
+ 578              		.text
+ 579              	.Letext0:
+ 580              		.file 2 "d:\\software\\mounriver_studio\\toolchain\\risc-v embedded gcc12\\riscv-none-elf\\include
+ 581              		.file 3 "d:\\software\\mounriver_studio\\toolchain\\risc-v embedded gcc12\\riscv-none-elf\\include
+ 582              		.file 4 "C:\\Users\\localhost\\Documents\\turbomoskal-repo\\qqexpert\\firmware\\MasterController\\
+ 583              		.file 5 "C:\\Users\\localhost\\Documents\\turbomoskal-repo\\qqexpert\\firmware\\MasterController\\
+ 584              		.file 6 "C:\\Users\\localhost\\Documents\\turbomoskal-repo\\qqexpert\\firmware\\MasterController\\
+DEFINED SYMBOLS
+                            *ABS*:0000000000000000 ch32v30x_dma.c
+C:\Users\LOCALH~1\AppData\Local\Temp\ccS978ue.s:14     .text.DMA_DeInit:0000000000000000 DMA_DeInit
+C:\Users\LOCALH~1\AppData\Local\Temp\ccS978ue.s:18     .text.DMA_DeInit:0000000000000000 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\ccS978ue.s:20     .text.DMA_DeInit:0000000000000000 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\ccS978ue.s:21     .text.DMA_DeInit:0000000000000000 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\ccS978ue.s:22     .text.DMA_DeInit:0000000000000000 $x
+C:\Users\LOCALH~1\AppData\Local\Temp\ccS978ue.s:22     .text.DMA_DeInit:0000000000000000 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\ccS978ue.s:24     .text.DMA_DeInit:0000000000000002 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\ccS978ue.s:29     .text.DMA_DeInit:000000000000000a .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\ccS978ue.s:30     .text.DMA_DeInit:000000000000000a .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\ccS978ue.s:32     .text.DMA_DeInit:000000000000000e .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\ccS978ue.s:33     .text.DMA_DeInit:000000000000000e .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\ccS978ue.s:35     .text.DMA_DeInit:0000000000000012 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\ccS978ue.s:36     .text.DMA_DeInit:0000000000000012 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\ccS978ue.s:38     .text.DMA_DeInit:0000000000000016 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\ccS978ue.s:39     .text.DMA_DeInit:0000000000000016 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\ccS978ue.s:41     .text.DMA_DeInit:000000000000001a .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\ccS978ue.s:43     .text.DMA_DeInit:000000000000001e .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\ccS978ue.s:44     .text.DMA_DeInit:000000000000001e .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\ccS978ue.s:48     .text.DMA_DeInit:0000000000000026 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\ccS978ue.s:50     .text.DMA_DeInit:0000000000000028 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\ccS978ue.s:53     .text.DMA_DeInit:000000000000002c .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\ccS978ue.s:56     .text.DMA_DeInit:000000000000002e .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\ccS978ue.s:59     .text.DMA_DeInit:0000000000000030 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\ccS978ue.s:60     .text.DMA_DeInit:0000000000000030 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\ccS978ue.s:64     .text.DMA_DeInit:0000000000000038 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\ccS978ue.s:66     .text.DMA_DeInit:000000000000003a .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\ccS978ue.s:70     .text.DMA_DeInit:0000000000000040 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\ccS978ue.s:71     .text.DMA_DeInit:0000000000000040 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\ccS978ue.s:75     .text.DMA_DeInit:0000000000000048 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\ccS978ue.s:77     .text.DMA_DeInit:000000000000004a .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\ccS978ue.s:79     .text.DMA_DeInit:000000000000004c .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\ccS978ue.s:83     .text.DMA_DeInit:0000000000000052 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\ccS978ue.s:84     .text.DMA_DeInit:0000000000000052 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\ccS978ue.s:88     .text.DMA_DeInit:000000000000005a .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\ccS978ue.s:90     .text.DMA_DeInit:000000000000005c .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\ccS978ue.s:94     .text.DMA_DeInit:0000000000000060 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\ccS978ue.s:95     .text.DMA_DeInit:0000000000000060 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\ccS978ue.s:99     .text.DMA_DeInit:0000000000000068 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\ccS978ue.s:101    .text.DMA_DeInit:000000000000006a .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\ccS978ue.s:104    .text.DMA_DeInit:000000000000006e .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\ccS978ue.s:108    .text.DMA_DeInit:0000000000000072 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\ccS978ue.s:109    .text.DMA_DeInit:0000000000000072 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\ccS978ue.s:113    .text.DMA_DeInit:000000000000007a .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\ccS978ue.s:115    .text.DMA_DeInit:000000000000007c .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\ccS978ue.s:119    .text.DMA_DeInit:0000000000000082 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\ccS978ue.s:120    .text.DMA_DeInit:0000000000000082 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\ccS978ue.s:124    .text.DMA_DeInit:000000000000008a .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\ccS978ue.s:126    .text.DMA_DeInit:000000000000008c .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\ccS978ue.s:130    .text.DMA_DeInit:0000000000000092 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\ccS978ue.s:131    .text.DMA_DeInit:0000000000000092 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\ccS978ue.s:134    .text.DMA_DeInit:000000000000009a .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\ccS978ue.s:135    .text.DMA_DeInit:000000000000009a .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\ccS978ue.s:139    .text.DMA_DeInit:00000000000000a0 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\ccS978ue.s:140    .text.DMA_DeInit:00000000000000a0 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\ccS978ue.s:143    .text.DMA_DeInit:00000000000000a8 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\ccS978ue.s:144    .text.DMA_DeInit:00000000000000a8 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\ccS978ue.s:148    .text.DMA_DeInit:00000000000000ae .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\ccS978ue.s:149    .text.DMA_DeInit:00000000000000ae .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\ccS978ue.s:152    .text.DMA_DeInit:00000000000000b6 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\ccS978ue.s:153    .text.DMA_DeInit:00000000000000b6 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\ccS978ue.s:158    .text.DMA_DeInit:00000000000000c0 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\ccS978ue.s:159    .text.DMA_DeInit:00000000000000c0 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\ccS978ue.s:163    .text.DMA_DeInit:00000000000000cc .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\ccS978ue.s:164    .text.DMA_DeInit:00000000000000cc .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\ccS978ue.s:168    .text.DMA_DeInit:00000000000000d2 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\ccS978ue.s:169    .text.DMA_DeInit:00000000000000d2 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\ccS978ue.s:172    .text.DMA_DeInit:00000000000000da .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\ccS978ue.s:173    .text.DMA_DeInit:00000000000000da .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\ccS978ue.s:177    .text.DMA_DeInit:00000000000000e0 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\ccS978ue.s:178    .text.DMA_DeInit:00000000000000e0 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\ccS978ue.s:181    .text.DMA_DeInit:00000000000000e8 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\ccS978ue.s:182    .text.DMA_DeInit:00000000000000e8 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\ccS978ue.s:186    .text.DMA_DeInit:00000000000000ee .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\ccS978ue.s:187    .text.DMA_DeInit:00000000000000ee .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\ccS978ue.s:190    .text.DMA_DeInit:00000000000000f6 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\ccS978ue.s:191    .text.DMA_DeInit:00000000000000f6 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\ccS978ue.s:195    .text.DMA_DeInit:00000000000000fc .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\ccS978ue.s:196    .text.DMA_DeInit:00000000000000fc .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\ccS978ue.s:199    .text.DMA_DeInit:0000000000000104 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\ccS978ue.s:200    .text.DMA_DeInit:0000000000000104 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\ccS978ue.s:204    .text.DMA_DeInit:000000000000010a .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\ccS978ue.s:205    .text.DMA_DeInit:000000000000010a .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\ccS978ue.s:208    .text.DMA_DeInit:0000000000000112 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\ccS978ue.s:209    .text.DMA_DeInit:0000000000000112 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\ccS978ue.s:213    .text.DMA_DeInit:0000000000000118 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\ccS978ue.s:214    .text.DMA_DeInit:0000000000000118 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\ccS978ue.s:217    .text.DMA_DeInit:0000000000000120 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\ccS978ue.s:218    .text.DMA_DeInit:0000000000000120 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\ccS978ue.s:222    .text.DMA_DeInit:0000000000000126 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\ccS978ue.s:223    .text.DMA_DeInit:0000000000000126 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\ccS978ue.s:226    .text.DMA_DeInit:000000000000012e .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\ccS978ue.s:227    .text.DMA_DeInit:000000000000012e .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\ccS978ue.s:229    .text.DMA_DeInit:0000000000000134 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\ccS978ue.s:236    .text.DMA_Init:0000000000000000 DMA_Init
+C:\Users\LOCALH~1\AppData\Local\Temp\ccS978ue.s:239    .text.DMA_Init:0000000000000000 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\ccS978ue.s:241    .text.DMA_Init:0000000000000000 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\ccS978ue.s:242    .text.DMA_Init:0000000000000000 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\ccS978ue.s:243    .text.DMA_Init:0000000000000000 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\ccS978ue.s:244    .text.DMA_Init:0000000000000000 $x
+C:\Users\LOCALH~1\AppData\Local\Temp\ccS978ue.s:244    .text.DMA_Init:0000000000000000 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\ccS978ue.s:247    .text.DMA_Init:0000000000000002 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\ccS978ue.s:248    .text.DMA_Init:0000000000000002 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\ccS978ue.s:251    .text.DMA_Init:0000000000000006 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\ccS978ue.s:253    .text.DMA_Init:0000000000000008 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\ccS978ue.s:256    .text.DMA_Init:000000000000000a .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\ccS978ue.s:257    .text.DMA_Init:000000000000000a .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\ccS978ue.s:260    .text.DMA_Init:000000000000000e .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\ccS978ue.s:263    .text.DMA_Init:0000000000000012 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\ccS978ue.s:266    .text.DMA_Init:0000000000000016 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\ccS978ue.s:269    .text.DMA_Init:000000000000001a .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\ccS978ue.s:272    .text.DMA_Init:000000000000001e .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\ccS978ue.s:275    .text.DMA_Init:0000000000000022 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\ccS978ue.s:278    .text.DMA_Init:0000000000000026 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\ccS978ue.s:281    .text.DMA_Init:0000000000000028 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\ccS978ue.s:282    .text.DMA_Init:0000000000000028 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\ccS978ue.s:284    .text.DMA_Init:000000000000002a .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\ccS978ue.s:285    .text.DMA_Init:000000000000002a .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\ccS978ue.s:288    .text.DMA_Init:000000000000002c .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\ccS978ue.s:291    .text.DMA_Init:000000000000002e .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\ccS978ue.s:292    .text.DMA_Init:000000000000002e .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\ccS978ue.s:294    .text.DMA_Init:0000000000000030 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\ccS978ue.s:296    .text.DMA_Init:0000000000000032 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\ccS978ue.s:297    .text.DMA_Init:0000000000000032 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\ccS978ue.s:299    .text.DMA_Init:0000000000000034 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\ccS978ue.s:301    .text.DMA_Init:0000000000000036 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\ccS978ue.s:302    .text.DMA_Init:0000000000000038 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\ccS978ue.s:309    .text.DMA_StructInit:0000000000000000 DMA_StructInit
+C:\Users\LOCALH~1\AppData\Local\Temp\ccS978ue.s:312    .text.DMA_StructInit:0000000000000000 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\ccS978ue.s:314    .text.DMA_StructInit:0000000000000000 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\ccS978ue.s:315    .text.DMA_StructInit:0000000000000000 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\ccS978ue.s:316    .text.DMA_StructInit:0000000000000000 $x
+C:\Users\LOCALH~1\AppData\Local\Temp\ccS978ue.s:316    .text.DMA_StructInit:0000000000000000 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\ccS978ue.s:318    .text.DMA_StructInit:0000000000000004 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\ccS978ue.s:319    .text.DMA_StructInit:0000000000000004 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\ccS978ue.s:321    .text.DMA_StructInit:0000000000000008 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\ccS978ue.s:322    .text.DMA_StructInit:0000000000000008 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\ccS978ue.s:324    .text.DMA_StructInit:000000000000000c .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\ccS978ue.s:325    .text.DMA_StructInit:000000000000000c .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\ccS978ue.s:327    .text.DMA_StructInit:0000000000000010 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\ccS978ue.s:328    .text.DMA_StructInit:0000000000000010 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\ccS978ue.s:330    .text.DMA_StructInit:0000000000000014 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\ccS978ue.s:331    .text.DMA_StructInit:0000000000000014 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\ccS978ue.s:333    .text.DMA_StructInit:0000000000000018 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\ccS978ue.s:334    .text.DMA_StructInit:0000000000000018 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\ccS978ue.s:336    .text.DMA_StructInit:000000000000001c .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\ccS978ue.s:337    .text.DMA_StructInit:000000000000001c .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\ccS978ue.s:339    .text.DMA_StructInit:0000000000000020 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\ccS978ue.s:340    .text.DMA_StructInit:0000000000000020 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\ccS978ue.s:342    .text.DMA_StructInit:0000000000000024 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\ccS978ue.s:343    .text.DMA_StructInit:0000000000000024 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\ccS978ue.s:345    .text.DMA_StructInit:0000000000000028 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\ccS978ue.s:346    .text.DMA_StructInit:0000000000000028 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\ccS978ue.s:348    .text.DMA_StructInit:000000000000002c .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\ccS978ue.s:349    .text.DMA_StructInit:000000000000002e .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\ccS978ue.s:356    .text.DMA_Cmd:0000000000000000 DMA_Cmd
+C:\Users\LOCALH~1\AppData\Local\Temp\ccS978ue.s:359    .text.DMA_Cmd:0000000000000000 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\ccS978ue.s:361    .text.DMA_Cmd:0000000000000000 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\ccS978ue.s:362    .text.DMA_Cmd:0000000000000000 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\ccS978ue.s:363    .text.DMA_Cmd:0000000000000000 $x
+C:\Users\LOCALH~1\AppData\Local\Temp\ccS978ue.s:363    .text.DMA_Cmd:0000000000000000 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\ccS978ue.s:365    .text.DMA_Cmd:0000000000000002 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\ccS978ue.s:367    .text.DMA_Cmd:0000000000000004 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\ccS978ue.s:368    .text.DMA_Cmd:0000000000000004 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\ccS978ue.s:371    .text.DMA_Cmd:0000000000000008 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\ccS978ue.s:373    .text.DMA_Cmd:000000000000000a .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\ccS978ue.s:376    .text.DMA_Cmd:000000000000000c .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\ccS978ue.s:377    .text.DMA_Cmd:000000000000000c .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\ccS978ue.s:381    .text.DMA_Cmd:0000000000000014 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\ccS978ue.s:388    .text.DMA_ITConfig:0000000000000000 DMA_ITConfig
+C:\Users\LOCALH~1\AppData\Local\Temp\ccS978ue.s:391    .text.DMA_ITConfig:0000000000000000 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\ccS978ue.s:393    .text.DMA_ITConfig:0000000000000000 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\ccS978ue.s:394    .text.DMA_ITConfig:0000000000000000 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\ccS978ue.s:395    .text.DMA_ITConfig:0000000000000000 $x
+C:\Users\LOCALH~1\AppData\Local\Temp\ccS978ue.s:395    .text.DMA_ITConfig:0000000000000000 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\ccS978ue.s:397    .text.DMA_ITConfig:0000000000000002 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\ccS978ue.s:399    .text.DMA_ITConfig:0000000000000004 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\ccS978ue.s:400    .text.DMA_ITConfig:0000000000000004 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\ccS978ue.s:405    .text.DMA_ITConfig:000000000000000a .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\ccS978ue.s:406    .text.DMA_ITConfig:000000000000000a .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\ccS978ue.s:409    .text.DMA_ITConfig:000000000000000e .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\ccS978ue.s:413    .text.DMA_ITConfig:0000000000000012 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\ccS978ue.s:414    .text.DMA_ITConfig:0000000000000014 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\ccS978ue.s:421    .text.DMA_SetCurrDataCounter:0000000000000000 DMA_SetCurrDataCounter
+C:\Users\LOCALH~1\AppData\Local\Temp\ccS978ue.s:424    .text.DMA_SetCurrDataCounter:0000000000000000 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\ccS978ue.s:426    .text.DMA_SetCurrDataCounter:0000000000000000 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\ccS978ue.s:427    .text.DMA_SetCurrDataCounter:0000000000000000 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\ccS978ue.s:428    .text.DMA_SetCurrDataCounter:0000000000000000 $x
+C:\Users\LOCALH~1\AppData\Local\Temp\ccS978ue.s:428    .text.DMA_SetCurrDataCounter:0000000000000000 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\ccS978ue.s:430    .text.DMA_SetCurrDataCounter:0000000000000002 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\ccS978ue.s:431    .text.DMA_SetCurrDataCounter:0000000000000004 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\ccS978ue.s:438    .text.DMA_GetCurrDataCounter:0000000000000000 DMA_GetCurrDataCounter
+C:\Users\LOCALH~1\AppData\Local\Temp\ccS978ue.s:441    .text.DMA_GetCurrDataCounter:0000000000000000 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\ccS978ue.s:443    .text.DMA_GetCurrDataCounter:0000000000000000 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\ccS978ue.s:444    .text.DMA_GetCurrDataCounter:0000000000000000 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\ccS978ue.s:445    .text.DMA_GetCurrDataCounter:0000000000000000 $x
+C:\Users\LOCALH~1\AppData\Local\Temp\ccS978ue.s:445    .text.DMA_GetCurrDataCounter:0000000000000000 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\ccS978ue.s:448    .text.DMA_GetCurrDataCounter:0000000000000002 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\ccS978ue.s:451    .text.DMA_GetCurrDataCounter:0000000000000008 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\ccS978ue.s:458    .text.DMA_GetFlagStatus:0000000000000000 DMA_GetFlagStatus
+C:\Users\LOCALH~1\AppData\Local\Temp\ccS978ue.s:461    .text.DMA_GetFlagStatus:0000000000000000 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\ccS978ue.s:463    .text.DMA_GetFlagStatus:0000000000000000 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\ccS978ue.s:464    .text.DMA_GetFlagStatus:0000000000000000 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\ccS978ue.s:465    .text.DMA_GetFlagStatus:0000000000000000 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\ccS978ue.s:466    .text.DMA_GetFlagStatus:0000000000000000 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\ccS978ue.s:467    .text.DMA_GetFlagStatus:0000000000000000 $x
+C:\Users\LOCALH~1\AppData\Local\Temp\ccS978ue.s:467    .text.DMA_GetFlagStatus:0000000000000000 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\ccS978ue.s:470    .text.DMA_GetFlagStatus:0000000000000006 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\ccS978ue.s:472    .text.DMA_GetFlagStatus:0000000000000008 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\ccS978ue.s:473    .text.DMA_GetFlagStatus:0000000000000008 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\ccS978ue.s:478    .text.DMA_GetFlagStatus:0000000000000010 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\ccS978ue.s:479    .text.DMA_GetFlagStatus:0000000000000010 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\ccS978ue.s:480    .text.DMA_GetFlagStatus:0000000000000010 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\ccS978ue.s:483    .text.DMA_GetFlagStatus:0000000000000012 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\ccS978ue.s:488    .text.DMA_GetFlagStatus:0000000000000018 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\ccS978ue.s:489    .text.DMA_GetFlagStatus:0000000000000018 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\ccS978ue.s:492    .text.DMA_GetFlagStatus:000000000000001e .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\ccS978ue.s:494    .text.DMA_GetFlagStatus:0000000000000020 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\ccS978ue.s:495    .text.DMA_GetFlagStatus:0000000000000020 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\ccS978ue.s:502    .text.DMA_GetFlagStatus:000000000000002a .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\ccS978ue.s:503    .text.DMA_GetFlagStatus:000000000000002a .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\ccS978ue.s:507    .text.DMA_GetFlagStatus:0000000000000032 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\ccS978ue.s:514    .text.DMA_ClearFlag:0000000000000000 DMA_ClearFlag
+C:\Users\LOCALH~1\AppData\Local\Temp\ccS978ue.s:517    .text.DMA_ClearFlag:0000000000000000 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\ccS978ue.s:519    .text.DMA_ClearFlag:0000000000000000 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\ccS978ue.s:520    .text.DMA_ClearFlag:0000000000000000 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\ccS978ue.s:521    .text.DMA_ClearFlag:0000000000000000 $x
+C:\Users\LOCALH~1\AppData\Local\Temp\ccS978ue.s:521    .text.DMA_ClearFlag:0000000000000000 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\ccS978ue.s:524    .text.DMA_ClearFlag:0000000000000006 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\ccS978ue.s:526    .text.DMA_ClearFlag:0000000000000008 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\ccS978ue.s:527    .text.DMA_ClearFlag:0000000000000008 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\ccS978ue.s:531    .text.DMA_ClearFlag:0000000000000010 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\ccS978ue.s:533    .text.DMA_ClearFlag:0000000000000012 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\ccS978ue.s:536    .text.DMA_ClearFlag:0000000000000014 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\ccS978ue.s:537    .text.DMA_ClearFlag:0000000000000014 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\ccS978ue.s:540    .text.DMA_ClearFlag:000000000000001a .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\ccS978ue.s:542    .text.DMA_ClearFlag:000000000000001c .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\ccS978ue.s:543    .text.DMA_ClearFlag:000000000000001c .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\ccS978ue.s:548    .text.DMA_ClearFlag:0000000000000026 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\ccS978ue.s:549    .text.DMA_ClearFlag:0000000000000026 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\ccS978ue.s:551    .text.DMA_ClearFlag:000000000000002c .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\ccS978ue.s:558    .text.DMA_GetITStatus:0000000000000000 DMA_GetITStatus
+C:\Users\LOCALH~1\AppData\Local\Temp\ccS978ue.s:560    .text.DMA_GetITStatus:0000000000000000 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\ccS978ue.s:562    .text.DMA_GetITStatus:0000000000000000 $x
+C:\Users\LOCALH~1\AppData\Local\Temp\ccS978ue.s:562    .text.DMA_GetITStatus:0000000000000000 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\ccS978ue.s:563    .text.DMA_GetITStatus:0000000000000008 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\ccS978ue.s:570    .text.DMA_ClearITPendingBit:0000000000000000 DMA_ClearITPendingBit
+C:\Users\LOCALH~1\AppData\Local\Temp\ccS978ue.s:572    .text.DMA_ClearITPendingBit:0000000000000000 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\ccS978ue.s:574    .text.DMA_ClearITPendingBit:0000000000000000 $x
+C:\Users\LOCALH~1\AppData\Local\Temp\ccS978ue.s:574    .text.DMA_ClearITPendingBit:0000000000000000 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\ccS978ue.s:575    .text.DMA_ClearITPendingBit:0000000000000008 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\ccS978ue.s:1981   .debug_line_str:0000000000000076 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\ccS978ue.s:1981   .debug_line_str:00000000000000cb .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\ccS978ue.s:1981   .debug_line_str:00000000000000dd .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\ccS978ue.s:1981   .debug_line_str:0000000000000139 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\ccS978ue.s:1981   .debug_line_str:0000000000000191 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\ccS978ue.s:1981   .debug_line_str:00000000000001e7 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\ccS978ue.s:1981   .debug_line_str:0000000000000247 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\ccS978ue.s:1981   .debug_line_str:0000000000000256 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\ccS978ue.s:1981   .debug_line_str:0000000000000265 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\ccS978ue.s:1981   .debug_line_str:0000000000000276 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\ccS978ue.s:1981   .debug_line_str:0000000000000280 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\ccS978ue.s:1981   .debug_line_str:000000000000028d .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\ccS978ue.s:1981   .debug_line_str:0000000000000298 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\ccS978ue.s:232    .text.DMA_DeInit:0000000000000134 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\ccS978ue.s:305    .text.DMA_Init:0000000000000038 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\ccS978ue.s:352    .text.DMA_StructInit:000000000000002e .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\ccS978ue.s:384    .text.DMA_Cmd:0000000000000014 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\ccS978ue.s:417    .text.DMA_ITConfig:0000000000000014 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\ccS978ue.s:434    .text.DMA_SetCurrDataCounter:0000000000000004 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\ccS978ue.s:454    .text.DMA_GetCurrDataCounter:0000000000000008 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\ccS978ue.s:510    .text.DMA_GetFlagStatus:0000000000000032 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\ccS978ue.s:554    .text.DMA_ClearFlag:000000000000002c .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\ccS978ue.s:566    .text.DMA_GetITStatus:0000000000000008 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\ccS978ue.s:578    .text.DMA_ClearITPendingBit:0000000000000008 .L0 
+                     .debug_frame:0000000000000000 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\ccS978ue.s:57     .text.DMA_DeInit:0000000000000030 .L2
+C:\Users\LOCALH~1\AppData\Local\Temp\ccS978ue.s:68     .text.DMA_DeInit:0000000000000040 .L4
+C:\Users\LOCALH~1\AppData\Local\Temp\ccS978ue.s:51     .text.DMA_DeInit:000000000000002c .L20
+C:\Users\LOCALH~1\AppData\Local\Temp\ccS978ue.s:81     .text.DMA_DeInit:0000000000000052 .L5
+C:\Users\LOCALH~1\AppData\Local\Temp\ccS978ue.s:102    .text.DMA_DeInit:000000000000006e .L21
+C:\Users\LOCALH~1\AppData\Local\Temp\ccS978ue.s:92     .text.DMA_DeInit:0000000000000060 .L6
+C:\Users\LOCALH~1\AppData\Local\Temp\ccS978ue.s:106    .text.DMA_DeInit:0000000000000072 .L7
+C:\Users\LOCALH~1\AppData\Local\Temp\ccS978ue.s:117    .text.DMA_DeInit:0000000000000082 .L8
+C:\Users\LOCALH~1\AppData\Local\Temp\ccS978ue.s:128    .text.DMA_DeInit:0000000000000092 .L9
+C:\Users\LOCALH~1\AppData\Local\Temp\ccS978ue.s:137    .text.DMA_DeInit:00000000000000a0 .L10
+C:\Users\LOCALH~1\AppData\Local\Temp\ccS978ue.s:46     .text.DMA_DeInit:0000000000000026 .L27
+C:\Users\LOCALH~1\AppData\Local\Temp\ccS978ue.s:146    .text.DMA_DeInit:00000000000000ae .L11
+C:\Users\LOCALH~1\AppData\Local\Temp\ccS978ue.s:62     .text.DMA_DeInit:0000000000000038 .L28
+C:\Users\LOCALH~1\AppData\Local\Temp\ccS978ue.s:156    .text.DMA_DeInit:00000000000000c0 .L12
+C:\Users\LOCALH~1\AppData\Local\Temp\ccS978ue.s:73     .text.DMA_DeInit:0000000000000048 .L23
+C:\Users\LOCALH~1\AppData\Local\Temp\ccS978ue.s:166    .text.DMA_DeInit:00000000000000d2 .L13
+C:\Users\LOCALH~1\AppData\Local\Temp\ccS978ue.s:86     .text.DMA_DeInit:000000000000005a .L22
+C:\Users\LOCALH~1\AppData\Local\Temp\ccS978ue.s:175    .text.DMA_DeInit:00000000000000e0 .L14
+C:\Users\LOCALH~1\AppData\Local\Temp\ccS978ue.s:97     .text.DMA_DeInit:0000000000000068 .L24
+C:\Users\LOCALH~1\AppData\Local\Temp\ccS978ue.s:184    .text.DMA_DeInit:00000000000000ee .L15
+C:\Users\LOCALH~1\AppData\Local\Temp\ccS978ue.s:111    .text.DMA_DeInit:000000000000007a .L25
+C:\Users\LOCALH~1\AppData\Local\Temp\ccS978ue.s:193    .text.DMA_DeInit:00000000000000fc .L16
+C:\Users\LOCALH~1\AppData\Local\Temp\ccS978ue.s:122    .text.DMA_DeInit:000000000000008a .L26
+C:\Users\LOCALH~1\AppData\Local\Temp\ccS978ue.s:202    .text.DMA_DeInit:000000000000010a .L17
+C:\Users\LOCALH~1\AppData\Local\Temp\ccS978ue.s:211    .text.DMA_DeInit:0000000000000118 .L18
+C:\Users\LOCALH~1\AppData\Local\Temp\ccS978ue.s:220    .text.DMA_DeInit:0000000000000126 .L19
+C:\Users\LOCALH~1\AppData\Local\Temp\ccS978ue.s:54     .text.DMA_DeInit:000000000000002e .L1
+C:\Users\LOCALH~1\AppData\Local\Temp\ccS978ue.s:374    .text.DMA_Cmd:000000000000000c .L32
+C:\Users\LOCALH~1\AppData\Local\Temp\ccS978ue.s:369    .text.DMA_Cmd:0000000000000008 .L34
+C:\Users\LOCALH~1\AppData\Local\Temp\ccS978ue.s:403    .text.DMA_ITConfig:000000000000000a .L36
+C:\Users\LOCALH~1\AppData\Local\Temp\ccS978ue.s:486    .text.DMA_GetFlagStatus:0000000000000018 .L41
+C:\Users\LOCALH~1\AppData\Local\Temp\ccS978ue.s:500    .text.DMA_GetFlagStatus:000000000000002a .L43
+C:\Users\LOCALH~1\AppData\Local\Temp\ccS978ue.s:476    .text.DMA_GetFlagStatus:0000000000000010 .L42
+C:\Users\LOCALH~1\AppData\Local\Temp\ccS978ue.s:534    .text.DMA_ClearFlag:0000000000000014 .L45
+C:\Users\LOCALH~1\AppData\Local\Temp\ccS978ue.s:546    .text.DMA_ClearFlag:0000000000000026 .L47
+C:\Users\LOCALH~1\AppData\Local\Temp\ccS978ue.s:529    .text.DMA_ClearFlag:0000000000000010 .L48
+C:\Users\LOCALH~1\AppData\Local\Temp\ccS978ue.s:1068   .debug_abbrev:0000000000000000 .Ldebug_abbrev0
+C:\Users\LOCALH~1\AppData\Local\Temp\ccS978ue.s:1954   .debug_str:000000000000027f .LASF60
+C:\Users\LOCALH~1\AppData\Local\Temp\ccS978ue.s:1979   .debug_line_str:0000000000000055 .LASF0
+C:\Users\LOCALH~1\AppData\Local\Temp\ccS978ue.s:1977   .debug_line_str:0000000000000000 .LASF1
+C:\Users\LOCALH~1\AppData\Local\Temp\ccS978ue.s:1813   .debug_rnglists:000000000000000c .LLRL6
+C:\Users\LOCALH~1\AppData\Local\Temp\ccS978ue.s:1850   .debug_line:0000000000000000 .Ldebug_line0
+C:\Users\LOCALH~1\AppData\Local\Temp\ccS978ue.s:1926   .debug_str:00000000000001bb .LASF2
+C:\Users\LOCALH~1\AppData\Local\Temp\ccS978ue.s:1918   .debug_str:0000000000000188 .LASF3
+C:\Users\LOCALH~1\AppData\Local\Temp\ccS978ue.s:1912   .debug_str:000000000000016e .LASF4
+C:\Users\LOCALH~1\AppData\Local\Temp\ccS978ue.s:1868   .debug_str:0000000000000061 .LASF5
+C:\Users\LOCALH~1\AppData\Local\Temp\ccS978ue.s:1862   .debug_str:000000000000003f .LASF8
+C:\Users\LOCALH~1\AppData\Local\Temp\ccS978ue.s:1934   .debug_str:00000000000001f0 .LASF6
+C:\Users\LOCALH~1\AppData\Local\Temp\ccS978ue.s:1894   .debug_str:00000000000000f3 .LASF7
+C:\Users\LOCALH~1\AppData\Local\Temp\ccS978ue.s:1864   .debug_str:000000000000004a .LASF9
+C:\Users\LOCALH~1\AppData\Local\Temp\ccS978ue.s:1946   .debug_str:0000000000000252 .LASF10
+C:\Users\LOCALH~1\AppData\Local\Temp\ccS978ue.s:1886   .debug_str:00000000000000bf .LASF11
+C:\Users\LOCALH~1\AppData\Local\Temp\ccS978ue.s:1920   .debug_str:0000000000000194 .LASF12
+C:\Users\LOCALH~1\AppData\Local\Temp\ccS978ue.s:1930   .debug_str:00000000000001d8 .LASF13
+C:\Users\LOCALH~1\AppData\Local\Temp\ccS978ue.s:1924   .debug_str:00000000000001b2 .LASF14
+C:\Users\LOCALH~1\AppData\Local\Temp\ccS978ue.s:1880   .debug_str:00000000000000a2 .LASF15
+C:\Users\LOCALH~1\AppData\Local\Temp\ccS978ue.s:1970   .debug_str:00000000000003d3 .LASF16
+C:\Users\LOCALH~1\AppData\Local\Temp\ccS978ue.s:1950   .debug_str:0000000000000269 .LASF17
+C:\Users\LOCALH~1\AppData\Local\Temp\ccS978ue.s:1958   .debug_str:000000000000038b .LASF18
+C:\Users\LOCALH~1\AppData\Local\Temp\ccS978ue.s:1968   .debug_str:00000000000003c8 .LASF19
+C:\Users\LOCALH~1\AppData\Local\Temp\ccS978ue.s:1892   .debug_str:00000000000000ea .LASF20
+C:\Users\LOCALH~1\AppData\Local\Temp\ccS978ue.s:1870   .debug_str:000000000000006b .LASF21
+C:\Users\LOCALH~1\AppData\Local\Temp\ccS978ue.s:1948   .debug_str:0000000000000264 .LASF22
+C:\Users\LOCALH~1\AppData\Local\Temp\ccS978ue.s:1952   .debug_str:0000000000000279 .LASF23
+C:\Users\LOCALH~1\AppData\Local\Temp\ccS978ue.s:1916   .debug_str:0000000000000182 .LASF24
+C:\Users\LOCALH~1\AppData\Local\Temp\ccS978ue.s:1936   .debug_str:0000000000000203 .LASF25
+C:\Users\LOCALH~1\AppData\Local\Temp\ccS978ue.s:1914   .debug_str:000000000000017c .LASF26
+C:\Users\LOCALH~1\AppData\Local\Temp\ccS978ue.s:1882   .debug_str:00000000000000aa .LASF27
+C:\Users\LOCALH~1\AppData\Local\Temp\ccS978ue.s:1866   .debug_str:0000000000000055 .LASF28
+C:\Users\LOCALH~1\AppData\Local\Temp\ccS978ue.s:1910   .debug_str:0000000000000162 .LASF29
+C:\Users\LOCALH~1\AppData\Local\Temp\ccS978ue.s:1938   .debug_str:0000000000000217 .LASF30
+C:\Users\LOCALH~1\AppData\Local\Temp\ccS978ue.s:1878   .debug_str:000000000000008b .LASF31
+C:\Users\LOCALH~1\AppData\Local\Temp\ccS978ue.s:1858   .debug_str:000000000000001d .LASF32
+C:\Users\LOCALH~1\AppData\Local\Temp\ccS978ue.s:1872   .debug_str:0000000000000070 .LASF33
+C:\Users\LOCALH~1\AppData\Local\Temp\ccS978ue.s:1960   .debug_str:0000000000000391 .LASF34
+C:\Users\LOCALH~1\AppData\Local\Temp\ccS978ue.s:1888   .debug_str:00000000000000cd .LASF35
+C:\Users\LOCALH~1\AppData\Local\Temp\ccS978ue.s:1884   .debug_str:00000000000000b1 .LASF36
+C:\Users\LOCALH~1\AppData\Local\Temp\ccS978ue.s:1906   .debug_str:000000000000013b .LASF37
+C:\Users\LOCALH~1\AppData\Local\Temp\ccS978ue.s:1974   .debug_str:00000000000003e7 .LASF38
+C:\Users\LOCALH~1\AppData\Local\Temp\ccS978ue.s:1964   .debug_str:00000000000003a8 .LASF39
+C:\Users\LOCALH~1\AppData\Local\Temp\ccS978ue.s:1856   .debug_str:0000000000000010 .LASF40
+C:\Users\LOCALH~1\AppData\Local\Temp\ccS978ue.s:1854   .debug_str:0000000000000008 .LASF41
+C:\Users\LOCALH~1\AppData\Local\Temp\ccS978ue.s:1908   .debug_str:0000000000000152 .LASF42
+C:\Users\LOCALH~1\AppData\Local\Temp\ccS978ue.s:1942   .debug_str:000000000000022a .LASF61
+C:\Users\LOCALH~1\AppData\Local\Temp\ccS978ue.s:1962   .debug_str:00000000000003a0 .LASF43
+C:\Users\LOCALH~1\AppData\Local\Temp\ccS978ue.s:1928   .debug_str:00000000000001c8 .LASF62
+C:\Users\LOCALH~1\AppData\Local\Temp\ccS978ue.s:1904   .debug_str:0000000000000131 .LASF44
+C:\Users\LOCALH~1\AppData\Local\Temp\ccS978ue.s:1902   .debug_str:000000000000012a .LASF45
+C:\Users\LOCALH~1\AppData\Local\Temp\ccS978ue.s:1898   .debug_str:0000000000000105 .LASF50
+C:\Users\LOCALH~1\AppData\Local\Temp\ccS978ue.s:515    .text.DMA_ClearFlag:0000000000000000 .LFB37
+C:\Users\LOCALH~1\AppData\Local\Temp\ccS978ue.s:552    .text.DMA_ClearFlag:000000000000002c .LFE37
+C:\Users\LOCALH~1\AppData\Local\Temp\ccS978ue.s:1874   .debug_str:0000000000000078 .LASF46
+C:\Users\LOCALH~1\AppData\Local\Temp\ccS978ue.s:1944   .debug_str:0000000000000240 .LASF47
+C:\Users\LOCALH~1\AppData\Local\Temp\ccS978ue.s:459    .text.DMA_GetFlagStatus:0000000000000000 .LFB36
+C:\Users\LOCALH~1\AppData\Local\Temp\ccS978ue.s:508    .text.DMA_GetFlagStatus:0000000000000032 .LFE36
+C:\Users\LOCALH~1\AppData\Local\Temp\ccS978ue.s:1572   .debug_loclists:000000000000000c .LLST3
+C:\Users\LOCALH~1\AppData\Local\Temp\ccS978ue.s:1592   .debug_loclists:0000000000000031 .LLST4
+C:\Users\LOCALH~1\AppData\Local\Temp\ccS978ue.s:1637   .debug_loclists:0000000000000075 .LLST5
+C:\Users\LOCALH~1\AppData\Local\Temp\ccS978ue.s:1966   .debug_str:00000000000003b1 .LASF48
+C:\Users\LOCALH~1\AppData\Local\Temp\ccS978ue.s:439    .text.DMA_GetCurrDataCounter:0000000000000000 .LFB35
+C:\Users\LOCALH~1\AppData\Local\Temp\ccS978ue.s:452    .text.DMA_GetCurrDataCounter:0000000000000008 .LFE35
+C:\Users\LOCALH~1\AppData\Local\Temp\ccS978ue.s:1940   .debug_str:000000000000021c .LASF49
+C:\Users\LOCALH~1\AppData\Local\Temp\ccS978ue.s:1672   .debug_loclists:00000000000000bb .LLST2
+C:\Users\LOCALH~1\AppData\Local\Temp\ccS978ue.s:1900   .debug_str:0000000000000113 .LASF51
+C:\Users\LOCALH~1\AppData\Local\Temp\ccS978ue.s:422    .text.DMA_SetCurrDataCounter:0000000000000000 .LFB34
+C:\Users\LOCALH~1\AppData\Local\Temp\ccS978ue.s:432    .text.DMA_SetCurrDataCounter:0000000000000004 .LFE34
+C:\Users\LOCALH~1\AppData\Local\Temp\ccS978ue.s:1890   .debug_str:00000000000000df .LASF52
+C:\Users\LOCALH~1\AppData\Local\Temp\ccS978ue.s:1972   .debug_str:00000000000003da .LASF53
+C:\Users\LOCALH~1\AppData\Local\Temp\ccS978ue.s:389    .text.DMA_ITConfig:0000000000000000 .LFB33
+C:\Users\LOCALH~1\AppData\Local\Temp\ccS978ue.s:415    .text.DMA_ITConfig:0000000000000014 .LFE33
+C:\Users\LOCALH~1\AppData\Local\Temp\ccS978ue.s:1922   .debug_str:00000000000001ab .LASF54
+C:\Users\LOCALH~1\AppData\Local\Temp\ccS978ue.s:1687   .debug_loclists:00000000000000d5 .LLST1
+C:\Users\LOCALH~1\AppData\Local\Temp\ccS978ue.s:1876   .debug_str:0000000000000082 .LASF55
+C:\Users\LOCALH~1\AppData\Local\Temp\ccS978ue.s:1852   .debug_str:0000000000000000 .LASF56
+C:\Users\LOCALH~1\AppData\Local\Temp\ccS978ue.s:357    .text.DMA_Cmd:0000000000000000 .LFB32
+C:\Users\LOCALH~1\AppData\Local\Temp\ccS978ue.s:382    .text.DMA_Cmd:0000000000000014 .LFE32
+C:\Users\LOCALH~1\AppData\Local\Temp\ccS978ue.s:1860   .debug_str:0000000000000030 .LASF57
+C:\Users\LOCALH~1\AppData\Local\Temp\ccS978ue.s:310    .text.DMA_StructInit:0000000000000000 .LFB31
+C:\Users\LOCALH~1\AppData\Local\Temp\ccS978ue.s:350    .text.DMA_StructInit:000000000000002e .LFE31
+C:\Users\LOCALH~1\AppData\Local\Temp\ccS978ue.s:1932   .debug_str:00000000000001e1 .LASF58
+C:\Users\LOCALH~1\AppData\Local\Temp\ccS978ue.s:1896   .debug_str:00000000000000fc .LASF59
+C:\Users\LOCALH~1\AppData\Local\Temp\ccS978ue.s:237    .text.DMA_Init:0000000000000000 .LFB30
+C:\Users\LOCALH~1\AppData\Local\Temp\ccS978ue.s:303    .text.DMA_Init:0000000000000038 .LFE30
+C:\Users\LOCALH~1\AppData\Local\Temp\ccS978ue.s:1710   .debug_loclists:00000000000000fd .LLST0
+C:\Users\LOCALH~1\AppData\Local\Temp\ccS978ue.s:1956   .debug_str:0000000000000380 .LASF63
+C:\Users\LOCALH~1\AppData\Local\Temp\ccS978ue.s:15     .text.DMA_DeInit:0000000000000000 .LFB29
+C:\Users\LOCALH~1\AppData\Local\Temp\ccS978ue.s:230    .text.DMA_DeInit:0000000000000134 .LFE29
+C:\Users\LOCALH~1\AppData\Local\Temp\ccS978ue.s:462    .text.DMA_GetFlagStatus:0000000000000000 .LVL15
+C:\Users\LOCALH~1\AppData\Local\Temp\ccS978ue.s:481    .text.DMA_GetFlagStatus:0000000000000012 .LVL17
+C:\Users\LOCALH~1\AppData\Local\Temp\ccS978ue.s:485    .text.DMA_GetFlagStatus:0000000000000018 .LVL18
+C:\Users\LOCALH~1\AppData\Local\Temp\ccS978ue.s:475    .text.DMA_GetFlagStatus:0000000000000010 .LVL16
+C:\Users\LOCALH~1\AppData\Local\Temp\ccS978ue.s:497    .text.DMA_GetFlagStatus:0000000000000028 .LVL19
+C:\Users\LOCALH~1\AppData\Local\Temp\ccS978ue.s:499    .text.DMA_GetFlagStatus:000000000000002a .LVL20
+C:\Users\LOCALH~1\AppData\Local\Temp\ccS978ue.s:505    .text.DMA_GetFlagStatus:0000000000000030 .LVL21
+C:\Users\LOCALH~1\AppData\Local\Temp\ccS978ue.s:442    .text.DMA_GetCurrDataCounter:0000000000000000 .LVL13
+C:\Users\LOCALH~1\AppData\Local\Temp\ccS978ue.s:446    .text.DMA_GetCurrDataCounter:0000000000000002 .LVL14
+C:\Users\LOCALH~1\AppData\Local\Temp\ccS978ue.s:392    .text.DMA_ITConfig:0000000000000000 .LVL9
+C:\Users\LOCALH~1\AppData\Local\Temp\ccS978ue.s:407    .text.DMA_ITConfig:000000000000000e .LVL10
+C:\Users\LOCALH~1\AppData\Local\Temp\ccS978ue.s:410    .text.DMA_ITConfig:0000000000000010 .LVL11
+C:\Users\LOCALH~1\AppData\Local\Temp\ccS978ue.s:240    .text.DMA_Init:0000000000000000 .LVL1
+C:\Users\LOCALH~1\AppData\Local\Temp\ccS978ue.s:245    .text.DMA_Init:0000000000000002 .LVL2
+C:\Users\LOCALH~1\AppData\Local\Temp\ccS978ue.s:279    .text.DMA_Init:0000000000000028 .LVL4
+C:\Users\LOCALH~1\AppData\Local\Temp\ccS978ue.s:286    .text.DMA_Init:000000000000002c .LVL5
+C:\Users\LOCALH~1\AppData\Local\Temp\ccS978ue.s:289    .text.DMA_Init:000000000000002e .LVL6
+C:\Users\LOCALH~1\AppData\Local\Temp\ccS978ue.s:586    .debug_info:0000000000000000 .Ldebug_info0
+C:\Users\LOCALH~1\AppData\Local\Temp\ccS978ue.s:559    .text.DMA_GetITStatus:0000000000000000 .LFB41
+C:\Users\LOCALH~1\AppData\Local\Temp\ccS978ue.s:564    .text.DMA_GetITStatus:0000000000000008 .LFE41
+C:\Users\LOCALH~1\AppData\Local\Temp\ccS978ue.s:571    .text.DMA_ClearITPendingBit:0000000000000000 .LFB43
+C:\Users\LOCALH~1\AppData\Local\Temp\ccS978ue.s:576    .text.DMA_ClearITPendingBit:0000000000000008 .LFE43
+
+NO UNDEFINED SYMBOLS

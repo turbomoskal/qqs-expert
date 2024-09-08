@@ -1,0 +1,1223 @@
+   1              		.file	"core_riscv.c"
+   2              		.option nopic
+   3              		.attribute arch, "rv32i2p0_m2p0_a2p0_f2p0_c2p0_xw"
+   4              		.attribute unaligned_access, 0
+   5              		.attribute stack_align, 16
+   6              		.text
+   7              	.Ltext0:
+   8              		.cfi_sections	.debug_frame
+   9              		.file 0 "C:\\Users\\localhost\\Documents\\turbomoskal-repo\\qqexpert\\firmware\\MasterController\\
+  10              		.section	.text.__get_FFLAGS,"ax",@progbits
+  11              		.align	1
+  12              		.globl	__get_FFLAGS
+  14              	__get_FFLAGS:
+  15              	.LFB0:
+  16              		.file 1 "../Core/core_riscv.c"
+   1:../Core/core_riscv.c **** /********************************** (C) COPYRIGHT  *******************************
+   2:../Core/core_riscv.c **** * File Name          : core_riscv.c
+   3:../Core/core_riscv.c **** * Author             : WCH
+   4:../Core/core_riscv.c **** * Version            : V1.0.1
+   5:../Core/core_riscv.c **** * Date               : 2023/11/11
+   6:../Core/core_riscv.c **** * Description        : RISC-V V4 Core Peripheral Access Layer Source File for CH32V30x
+   7:../Core/core_riscv.c **** *********************************************************************************
+   8:../Core/core_riscv.c **** * Copyright (c) 2021 Nanjing Qinheng Microelectronics Co., Ltd.
+   9:../Core/core_riscv.c **** * Attention: This software (modified or not) and binary are used for 
+  10:../Core/core_riscv.c **** * microcontroller manufactured by Nanjing Qinheng Microelectronics.
+  11:../Core/core_riscv.c **** *******************************************************************************/
+  12:../Core/core_riscv.c **** #include <stdint.h>
+  13:../Core/core_riscv.c **** 
+  14:../Core/core_riscv.c **** /* define compiler specific symbols */
+  15:../Core/core_riscv.c **** #if defined ( __CC_ARM   )
+  16:../Core/core_riscv.c ****   #define __ASM            __asm                                      /*!< asm keyword for ARM Comp
+  17:../Core/core_riscv.c ****   #define __INLINE         __inline                                   /*!< inline keyword for ARM C
+  18:../Core/core_riscv.c **** 
+  19:../Core/core_riscv.c **** #elif defined ( __ICCARM__ )
+  20:../Core/core_riscv.c ****   #define __ASM           __asm                                       /*!< asm keyword for IAR Comp
+  21:../Core/core_riscv.c ****   #define __INLINE        inline                                      /*!< inline keyword for IAR C
+  22:../Core/core_riscv.c **** 
+  23:../Core/core_riscv.c **** #elif defined   (  __GNUC__  )
+  24:../Core/core_riscv.c ****   #define __ASM            __asm                                      /*!< asm keyword for GNU Comp
+  25:../Core/core_riscv.c ****   #define __INLINE         inline                                     /*!< inline keyword for GNU C
+  26:../Core/core_riscv.c **** 
+  27:../Core/core_riscv.c **** #elif defined   (  __TASKING__  )
+  28:../Core/core_riscv.c ****   #define __ASM            __asm                                      /*!< asm keyword for TASKING 
+  29:../Core/core_riscv.c ****   #define __INLINE         inline                                     /*!< inline keyword for TASKI
+  30:../Core/core_riscv.c **** 
+  31:../Core/core_riscv.c **** #endif
+  32:../Core/core_riscv.c **** 
+  33:../Core/core_riscv.c **** 
+  34:../Core/core_riscv.c **** /*********************************************************************
+  35:../Core/core_riscv.c ****  * @fn      __get_FFLAGS
+  36:../Core/core_riscv.c ****  *
+  37:../Core/core_riscv.c ****  * @brief   Return the Floating-Point Accrued Exceptions
+  38:../Core/core_riscv.c ****  *
+  39:../Core/core_riscv.c ****  * @return  fflags value
+  40:../Core/core_riscv.c ****  */
+  41:../Core/core_riscv.c **** uint32_t __get_FFLAGS(void)
+  42:../Core/core_riscv.c **** {
+  17              		.loc 1 42 1
+  18              		.cfi_startproc
+  43:../Core/core_riscv.c ****   uint32_t result;
+  19              		.loc 1 43 3
+  44:../Core/core_riscv.c **** 
+  45:../Core/core_riscv.c ****   __ASM volatile ( "csrr %0," "fflags" : "=r" (result) );
+  20              		.loc 1 45 3
+  21              	 #APP
+  22              	# 45 "../Core/core_riscv.c" 1
+  46              	  return (result);
+  23              		csrr a0,fflags
+  24              	# 0 "" 2
+  25              	.LVL0:
+  26              		.loc 1 46 3
+  47:../Core/core_riscv.c **** }
+  27              		.loc 1 47 1 is_stmt 0
+  28              	 #NO_APP
+  29 0004 8280     		ret
+  30              		.cfi_endproc
+  31              	.LFE0:
+  33              		.section	.text.__set_FFLAGS,"ax",@progbits
+  34              		.align	1
+  35              		.globl	__set_FFLAGS
+  37              	__set_FFLAGS:
+  38              	.LFB1:
+  48:../Core/core_riscv.c **** 
+  49:../Core/core_riscv.c **** /*********************************************************************
+  50:../Core/core_riscv.c ****  * @fn      __set_FFLAGS
+  51:../Core/core_riscv.c ****  *
+  52:../Core/core_riscv.c ****  * @brief   Set the Floating-Point Accrued Exceptions
+  53:../Core/core_riscv.c ****  *
+  54:../Core/core_riscv.c ****  * @param   value  - set FFLAGS value
+  55:../Core/core_riscv.c ****  *
+  56:../Core/core_riscv.c ****  * @return  none
+  57:../Core/core_riscv.c ****  */
+  58:../Core/core_riscv.c **** void __set_FFLAGS(uint32_t value)
+  59:../Core/core_riscv.c **** {
+  39              		.loc 1 59 1 is_stmt 1
+  40              		.cfi_startproc
+  41              	.LVL1:
+  60:../Core/core_riscv.c ****   __ASM volatile ("csrw fflags, %0" : : "r" (value) );
+  42              		.loc 1 60 3
+  43              	 #APP
+  44              	# 60 "../Core/core_riscv.c" 1
+  61              	}
+  45              		csrw fflags, a0
+  46              	# 0 "" 2
+  47              		.loc 1 61 1 is_stmt 0
+  48              	 #NO_APP
+  49 0004 8280     		ret
+  50              		.cfi_endproc
+  51              	.LFE1:
+  53              		.section	.text.__get_FRM,"ax",@progbits
+  54              		.align	1
+  55              		.globl	__get_FRM
+  57              	__get_FRM:
+  58              	.LFB2:
+  62:../Core/core_riscv.c **** 
+  63:../Core/core_riscv.c **** /*********************************************************************
+  64:../Core/core_riscv.c ****  * @fn      __get_FRM
+  65:../Core/core_riscv.c ****  *
+  66:../Core/core_riscv.c ****  * @brief   Return the Floating-Point Dynamic Rounding Mode
+  67:../Core/core_riscv.c ****  *
+  68:../Core/core_riscv.c ****  * @return  frm value
+  69:../Core/core_riscv.c ****  */
+  70:../Core/core_riscv.c **** uint32_t __get_FRM(void)
+  71:../Core/core_riscv.c **** {
+  59              		.loc 1 71 1 is_stmt 1
+  60              		.cfi_startproc
+  72:../Core/core_riscv.c ****   uint32_t result;
+  61              		.loc 1 72 3
+  73:../Core/core_riscv.c **** 
+  74:../Core/core_riscv.c ****   __ASM volatile ( "csrr %0," "frm" : "=r" (result) );
+  62              		.loc 1 74 3
+  63              	 #APP
+  64              	# 74 "../Core/core_riscv.c" 1
+  75              	  return (result);
+  65              		csrr a0,frm
+  66              	# 0 "" 2
+  67              	.LVL2:
+  68              		.loc 1 75 3
+  76:../Core/core_riscv.c **** }
+  69              		.loc 1 76 1 is_stmt 0
+  70              	 #NO_APP
+  71 0004 8280     		ret
+  72              		.cfi_endproc
+  73              	.LFE2:
+  75              		.section	.text.__set_FRM,"ax",@progbits
+  76              		.align	1
+  77              		.globl	__set_FRM
+  79              	__set_FRM:
+  80              	.LFB3:
+  77:../Core/core_riscv.c **** 
+  78:../Core/core_riscv.c **** /*********************************************************************
+  79:../Core/core_riscv.c ****  * @fn      __set_FRM
+  80:../Core/core_riscv.c ****  *
+  81:../Core/core_riscv.c ****  * @brief   Set the Floating-Point Dynamic Rounding Mode
+  82:../Core/core_riscv.c ****  *
+  83:../Core/core_riscv.c ****  * @param   value  - set frm value
+  84:../Core/core_riscv.c ****  *
+  85:../Core/core_riscv.c ****  * @return  none
+  86:../Core/core_riscv.c ****  */
+  87:../Core/core_riscv.c **** void __set_FRM(uint32_t value)
+  88:../Core/core_riscv.c **** {
+  81              		.loc 1 88 1 is_stmt 1
+  82              		.cfi_startproc
+  83              	.LVL3:
+  89:../Core/core_riscv.c ****   __ASM volatile ("csrw frm, %0" : : "r" (value) );
+  84              		.loc 1 89 3
+  85              	 #APP
+  86              	# 89 "../Core/core_riscv.c" 1
+  90              	}
+  87              		csrw frm, a0
+  88              	# 0 "" 2
+  89              		.loc 1 90 1 is_stmt 0
+  90              	 #NO_APP
+  91 0004 8280     		ret
+  92              		.cfi_endproc
+  93              	.LFE3:
+  95              		.section	.text.__get_FCSR,"ax",@progbits
+  96              		.align	1
+  97              		.globl	__get_FCSR
+  99              	__get_FCSR:
+ 100              	.LFB4:
+  91:../Core/core_riscv.c **** 
+  92:../Core/core_riscv.c **** /*********************************************************************
+  93:../Core/core_riscv.c ****  * @fn      __get_FCSR
+  94:../Core/core_riscv.c ****  *
+  95:../Core/core_riscv.c ****  * @brief   Return the Floating-Point Control and Status Register
+  96:../Core/core_riscv.c ****  *
+  97:../Core/core_riscv.c ****  * @return  fcsr value
+  98:../Core/core_riscv.c ****  */
+  99:../Core/core_riscv.c **** uint32_t __get_FCSR(void)
+ 100:../Core/core_riscv.c **** {
+ 101              		.loc 1 100 1 is_stmt 1
+ 102              		.cfi_startproc
+ 101:../Core/core_riscv.c ****   uint32_t result;
+ 103              		.loc 1 101 3
+ 102:../Core/core_riscv.c **** 
+ 103:../Core/core_riscv.c ****   __ASM volatile ( "csrr %0," "fcsr" : "=r" (result) );
+ 104              		.loc 1 103 3
+ 105              	 #APP
+ 106              	# 103 "../Core/core_riscv.c" 1
+ 104              	  return (result);
+ 107              		csrr a0,fcsr
+ 108              	# 0 "" 2
+ 109              	.LVL4:
+ 110              		.loc 1 104 3
+ 105:../Core/core_riscv.c **** }
+ 111              		.loc 1 105 1 is_stmt 0
+ 112              	 #NO_APP
+ 113 0004 8280     		ret
+ 114              		.cfi_endproc
+ 115              	.LFE4:
+ 117              		.section	.text.__set_FCSR,"ax",@progbits
+ 118              		.align	1
+ 119              		.globl	__set_FCSR
+ 121              	__set_FCSR:
+ 122              	.LFB5:
+ 106:../Core/core_riscv.c **** 
+ 107:../Core/core_riscv.c **** /*********************************************************************
+ 108:../Core/core_riscv.c ****  * @fn      __set_FCSR
+ 109:../Core/core_riscv.c ****  *
+ 110:../Core/core_riscv.c ****  * @brief   Set the Floating-Point Dynamic Rounding Mode
+ 111:../Core/core_riscv.c ****  *
+ 112:../Core/core_riscv.c ****  * @param   value  - set fcsr value
+ 113:../Core/core_riscv.c ****  *
+ 114:../Core/core_riscv.c ****  * @return  none
+ 115:../Core/core_riscv.c ****  */
+ 116:../Core/core_riscv.c **** void __set_FCSR(uint32_t value)
+ 117:../Core/core_riscv.c **** {
+ 123              		.loc 1 117 1 is_stmt 1
+ 124              		.cfi_startproc
+ 125              	.LVL5:
+ 118:../Core/core_riscv.c ****   __ASM volatile ("csrw fcsr, %0" : : "r" (value) );
+ 126              		.loc 1 118 3
+ 127              	 #APP
+ 128              	# 118 "../Core/core_riscv.c" 1
+ 119              	}
+ 129              		csrw fcsr, a0
+ 130              	# 0 "" 2
+ 131              		.loc 1 119 1 is_stmt 0
+ 132              	 #NO_APP
+ 133 0004 8280     		ret
+ 134              		.cfi_endproc
+ 135              	.LFE5:
+ 137              		.section	.text.__get_MSTATUS,"ax",@progbits
+ 138              		.align	1
+ 139              		.globl	__get_MSTATUS
+ 141              	__get_MSTATUS:
+ 142              	.LFB6:
+ 120:../Core/core_riscv.c **** 
+ 121:../Core/core_riscv.c **** /*********************************************************************
+ 122:../Core/core_riscv.c ****  * @fn      __get_MSTATUS
+ 123:../Core/core_riscv.c ****  *
+ 124:../Core/core_riscv.c ****  * @brief   Return the Machine Status Register
+ 125:../Core/core_riscv.c ****  *
+ 126:../Core/core_riscv.c ****  * @return  mstatus value
+ 127:../Core/core_riscv.c ****  */
+ 128:../Core/core_riscv.c **** uint32_t __get_MSTATUS(void)
+ 129:../Core/core_riscv.c **** {
+ 143              		.loc 1 129 1 is_stmt 1
+ 144              		.cfi_startproc
+ 130:../Core/core_riscv.c ****   uint32_t result;
+ 145              		.loc 1 130 3
+ 131:../Core/core_riscv.c **** 
+ 132:../Core/core_riscv.c ****   __ASM volatile ( "csrr %0," "mstatus" : "=r" (result) );
+ 146              		.loc 1 132 3
+ 147              	 #APP
+ 148              	# 132 "../Core/core_riscv.c" 1
+ 133              	  return (result);
+ 149              		csrr a0,mstatus
+ 150              	# 0 "" 2
+ 151              	.LVL6:
+ 152              		.loc 1 133 3
+ 134:../Core/core_riscv.c **** }
+ 153              		.loc 1 134 1 is_stmt 0
+ 154              	 #NO_APP
+ 155 0004 8280     		ret
+ 156              		.cfi_endproc
+ 157              	.LFE6:
+ 159              		.section	.text.__set_MSTATUS,"ax",@progbits
+ 160              		.align	1
+ 161              		.globl	__set_MSTATUS
+ 163              	__set_MSTATUS:
+ 164              	.LFB7:
+ 135:../Core/core_riscv.c **** 
+ 136:../Core/core_riscv.c **** /*********************************************************************
+ 137:../Core/core_riscv.c ****  * @fn      __set_MSTATUS
+ 138:../Core/core_riscv.c ****  *
+ 139:../Core/core_riscv.c ****  * @brief   Set the Machine Status Register
+ 140:../Core/core_riscv.c ****  *
+ 141:../Core/core_riscv.c ****  * @param   value  - set mstatus value
+ 142:../Core/core_riscv.c ****  *
+ 143:../Core/core_riscv.c ****  * @return  none
+ 144:../Core/core_riscv.c ****  */
+ 145:../Core/core_riscv.c **** void __set_MSTATUS(uint32_t value)
+ 146:../Core/core_riscv.c **** {
+ 165              		.loc 1 146 1 is_stmt 1
+ 166              		.cfi_startproc
+ 167              	.LVL7:
+ 147:../Core/core_riscv.c ****   __ASM volatile ("csrw mstatus, %0" : : "r" (value) );
+ 168              		.loc 1 147 3
+ 169              	 #APP
+ 170              	# 147 "../Core/core_riscv.c" 1
+ 148              	}
+ 171              		csrw mstatus, a0
+ 172              	# 0 "" 2
+ 173              		.loc 1 148 1 is_stmt 0
+ 174              	 #NO_APP
+ 175 0004 8280     		ret
+ 176              		.cfi_endproc
+ 177              	.LFE7:
+ 179              		.section	.text.__get_MISA,"ax",@progbits
+ 180              		.align	1
+ 181              		.globl	__get_MISA
+ 183              	__get_MISA:
+ 184              	.LFB8:
+ 149:../Core/core_riscv.c **** 
+ 150:../Core/core_riscv.c **** /*********************************************************************
+ 151:../Core/core_riscv.c ****  * @fn      __get_MISA
+ 152:../Core/core_riscv.c ****  *
+ 153:../Core/core_riscv.c ****  * @brief   Return the Machine ISA Register
+ 154:../Core/core_riscv.c ****  *
+ 155:../Core/core_riscv.c ****  * @return  misa value
+ 156:../Core/core_riscv.c ****  */
+ 157:../Core/core_riscv.c **** uint32_t __get_MISA(void)
+ 158:../Core/core_riscv.c **** {
+ 185              		.loc 1 158 1 is_stmt 1
+ 186              		.cfi_startproc
+ 159:../Core/core_riscv.c ****   uint32_t result;
+ 187              		.loc 1 159 3
+ 160:../Core/core_riscv.c **** 
+ 161:../Core/core_riscv.c ****   __ASM volatile ( "csrr %0," "misa" : "=r" (result) );
+ 188              		.loc 1 161 3
+ 189              	 #APP
+ 190              	# 161 "../Core/core_riscv.c" 1
+ 162              	  return (result);
+ 191              		csrr a0,misa
+ 192              	# 0 "" 2
+ 193              	.LVL8:
+ 194              		.loc 1 162 3
+ 163:../Core/core_riscv.c **** }
+ 195              		.loc 1 163 1 is_stmt 0
+ 196              	 #NO_APP
+ 197 0004 8280     		ret
+ 198              		.cfi_endproc
+ 199              	.LFE8:
+ 201              		.section	.text.__set_MISA,"ax",@progbits
+ 202              		.align	1
+ 203              		.globl	__set_MISA
+ 205              	__set_MISA:
+ 206              	.LFB9:
+ 164:../Core/core_riscv.c **** 
+ 165:../Core/core_riscv.c **** /*********************************************************************
+ 166:../Core/core_riscv.c ****  * @fn      __set_MISA
+ 167:../Core/core_riscv.c ****  *
+ 168:../Core/core_riscv.c ****  * @brief   Set the Machine ISA Register
+ 169:../Core/core_riscv.c ****  *
+ 170:../Core/core_riscv.c ****  * @param   value  - set misa value
+ 171:../Core/core_riscv.c ****  *
+ 172:../Core/core_riscv.c ****  * @return  none
+ 173:../Core/core_riscv.c ****  */
+ 174:../Core/core_riscv.c **** void __set_MISA(uint32_t value)
+ 175:../Core/core_riscv.c **** {
+ 207              		.loc 1 175 1 is_stmt 1
+ 208              		.cfi_startproc
+ 209              	.LVL9:
+ 176:../Core/core_riscv.c ****   __ASM volatile ("csrw misa, %0" : : "r" (value) );
+ 210              		.loc 1 176 3
+ 211              	 #APP
+ 212              	# 176 "../Core/core_riscv.c" 1
+ 177              	}
+ 213              		csrw misa, a0
+ 214              	# 0 "" 2
+ 215              		.loc 1 177 1 is_stmt 0
+ 216              	 #NO_APP
+ 217 0004 8280     		ret
+ 218              		.cfi_endproc
+ 219              	.LFE9:
+ 221              		.section	.text.__get_MTVEC,"ax",@progbits
+ 222              		.align	1
+ 223              		.globl	__get_MTVEC
+ 225              	__get_MTVEC:
+ 226              	.LFB10:
+ 178:../Core/core_riscv.c **** 
+ 179:../Core/core_riscv.c **** /*********************************************************************
+ 180:../Core/core_riscv.c ****  * @fn      __get_MTVEC
+ 181:../Core/core_riscv.c ****  *
+ 182:../Core/core_riscv.c ****  * @brief   Return the Machine Trap-Vector Base-Address Register
+ 183:../Core/core_riscv.c ****  *
+ 184:../Core/core_riscv.c ****  * @return  mtvec value
+ 185:../Core/core_riscv.c ****  */
+ 186:../Core/core_riscv.c **** uint32_t __get_MTVEC(void)
+ 187:../Core/core_riscv.c **** {
+ 227              		.loc 1 187 1 is_stmt 1
+ 228              		.cfi_startproc
+ 188:../Core/core_riscv.c ****   uint32_t result;
+ 229              		.loc 1 188 3
+ 189:../Core/core_riscv.c **** 
+ 190:../Core/core_riscv.c ****   __ASM volatile ( "csrr %0," "mtvec" : "=r" (result) );
+ 230              		.loc 1 190 3
+ 231              	 #APP
+ 232              	# 190 "../Core/core_riscv.c" 1
+ 191              	  return (result);
+ 233              		csrr a0,mtvec
+ 234              	# 0 "" 2
+ 235              	.LVL10:
+ 236              		.loc 1 191 3
+ 192:../Core/core_riscv.c **** }
+ 237              		.loc 1 192 1 is_stmt 0
+ 238              	 #NO_APP
+ 239 0004 8280     		ret
+ 240              		.cfi_endproc
+ 241              	.LFE10:
+ 243              		.section	.text.__set_MTVEC,"ax",@progbits
+ 244              		.align	1
+ 245              		.globl	__set_MTVEC
+ 247              	__set_MTVEC:
+ 248              	.LFB11:
+ 193:../Core/core_riscv.c **** 
+ 194:../Core/core_riscv.c **** /*********************************************************************
+ 195:../Core/core_riscv.c ****  * @fn      __set_MTVEC
+ 196:../Core/core_riscv.c ****  *
+ 197:../Core/core_riscv.c ****  * @brief   Set the Machine Trap-Vector Base-Address Register
+ 198:../Core/core_riscv.c ****  *
+ 199:../Core/core_riscv.c ****  * @param   value  - set mtvec value
+ 200:../Core/core_riscv.c ****  *
+ 201:../Core/core_riscv.c ****  * @return  none
+ 202:../Core/core_riscv.c ****  */
+ 203:../Core/core_riscv.c **** void __set_MTVEC(uint32_t value)
+ 204:../Core/core_riscv.c **** {
+ 249              		.loc 1 204 1 is_stmt 1
+ 250              		.cfi_startproc
+ 251              	.LVL11:
+ 205:../Core/core_riscv.c ****   __ASM volatile ("csrw mtvec, %0" : : "r" (value) );
+ 252              		.loc 1 205 3
+ 253              	 #APP
+ 254              	# 205 "../Core/core_riscv.c" 1
+ 206              	}
+ 255              		csrw mtvec, a0
+ 256              	# 0 "" 2
+ 257              		.loc 1 206 1 is_stmt 0
+ 258              	 #NO_APP
+ 259 0004 8280     		ret
+ 260              		.cfi_endproc
+ 261              	.LFE11:
+ 263              		.section	.text.__get_MSCRATCH,"ax",@progbits
+ 264              		.align	1
+ 265              		.globl	__get_MSCRATCH
+ 267              	__get_MSCRATCH:
+ 268              	.LFB12:
+ 207:../Core/core_riscv.c **** 
+ 208:../Core/core_riscv.c **** /*********************************************************************
+ 209:../Core/core_riscv.c ****  * @fn      __get_MSCRATCH
+ 210:../Core/core_riscv.c ****  *
+ 211:../Core/core_riscv.c ****  * @brief   Return the Machine Seratch Register
+ 212:../Core/core_riscv.c ****  *
+ 213:../Core/core_riscv.c ****  * @return  mscratch value
+ 214:../Core/core_riscv.c ****  */
+ 215:../Core/core_riscv.c **** uint32_t __get_MSCRATCH(void)
+ 216:../Core/core_riscv.c **** {
+ 269              		.loc 1 216 1 is_stmt 1
+ 270              		.cfi_startproc
+ 217:../Core/core_riscv.c ****   uint32_t result;
+ 271              		.loc 1 217 3
+ 218:../Core/core_riscv.c **** 
+ 219:../Core/core_riscv.c ****   __ASM volatile ( "csrr %0," "mscratch" : "=r" (result) );
+ 272              		.loc 1 219 3
+ 273              	 #APP
+ 274              	# 219 "../Core/core_riscv.c" 1
+ 220              	  return (result);
+ 275              		csrr a0,mscratch
+ 276              	# 0 "" 2
+ 277              	.LVL12:
+ 278              		.loc 1 220 3
+ 221:../Core/core_riscv.c **** }
+ 279              		.loc 1 221 1 is_stmt 0
+ 280              	 #NO_APP
+ 281 0004 8280     		ret
+ 282              		.cfi_endproc
+ 283              	.LFE12:
+ 285              		.section	.text.__set_MSCRATCH,"ax",@progbits
+ 286              		.align	1
+ 287              		.globl	__set_MSCRATCH
+ 289              	__set_MSCRATCH:
+ 290              	.LFB13:
+ 222:../Core/core_riscv.c **** 
+ 223:../Core/core_riscv.c **** /*********************************************************************
+ 224:../Core/core_riscv.c ****  * @fn      __set_MSCRATCH
+ 225:../Core/core_riscv.c ****  *
+ 226:../Core/core_riscv.c ****  * @brief   Set the Machine Seratch Register
+ 227:../Core/core_riscv.c ****  *
+ 228:../Core/core_riscv.c ****  * @param   value  - set mscratch value
+ 229:../Core/core_riscv.c ****  *
+ 230:../Core/core_riscv.c ****  * @return  none
+ 231:../Core/core_riscv.c ****  */
+ 232:../Core/core_riscv.c **** void __set_MSCRATCH(uint32_t value)
+ 233:../Core/core_riscv.c **** {
+ 291              		.loc 1 233 1 is_stmt 1
+ 292              		.cfi_startproc
+ 293              	.LVL13:
+ 234:../Core/core_riscv.c ****   __ASM volatile ("csrw mscratch, %0" : : "r" (value) );
+ 294              		.loc 1 234 3
+ 295              	 #APP
+ 296              	# 234 "../Core/core_riscv.c" 1
+ 235              	}
+ 297              		csrw mscratch, a0
+ 298              	# 0 "" 2
+ 299              		.loc 1 235 1 is_stmt 0
+ 300              	 #NO_APP
+ 301 0004 8280     		ret
+ 302              		.cfi_endproc
+ 303              	.LFE13:
+ 305              		.section	.text.__get_MEPC,"ax",@progbits
+ 306              		.align	1
+ 307              		.globl	__get_MEPC
+ 309              	__get_MEPC:
+ 310              	.LFB14:
+ 236:../Core/core_riscv.c **** 
+ 237:../Core/core_riscv.c **** /*********************************************************************
+ 238:../Core/core_riscv.c ****  * @fn      __get_MEPC
+ 239:../Core/core_riscv.c ****  *
+ 240:../Core/core_riscv.c ****  * @brief   Return the Machine Exception Program Register
+ 241:../Core/core_riscv.c ****  *
+ 242:../Core/core_riscv.c ****  * @return  mepc value
+ 243:../Core/core_riscv.c ****  */
+ 244:../Core/core_riscv.c **** uint32_t __get_MEPC(void)
+ 245:../Core/core_riscv.c **** {
+ 311              		.loc 1 245 1 is_stmt 1
+ 312              		.cfi_startproc
+ 246:../Core/core_riscv.c ****   uint32_t result;
+ 313              		.loc 1 246 3
+ 247:../Core/core_riscv.c **** 
+ 248:../Core/core_riscv.c ****   __ASM volatile ( "csrr %0," "mepc" : "=r" (result) );
+ 314              		.loc 1 248 3
+ 315              	 #APP
+ 316              	# 248 "../Core/core_riscv.c" 1
+ 249              	  return (result);
+ 317              		csrr a0,mepc
+ 318              	# 0 "" 2
+ 319              	.LVL14:
+ 320              		.loc 1 249 3
+ 250:../Core/core_riscv.c **** }
+ 321              		.loc 1 250 1 is_stmt 0
+ 322              	 #NO_APP
+ 323 0004 8280     		ret
+ 324              		.cfi_endproc
+ 325              	.LFE14:
+ 327              		.section	.text.__set_MEPC,"ax",@progbits
+ 328              		.align	1
+ 329              		.globl	__set_MEPC
+ 331              	__set_MEPC:
+ 332              	.LFB15:
+ 251:../Core/core_riscv.c **** 
+ 252:../Core/core_riscv.c **** /*********************************************************************
+ 253:../Core/core_riscv.c ****  * @fn      __set_MEPC
+ 254:../Core/core_riscv.c ****  *
+ 255:../Core/core_riscv.c ****  * @brief   Set the Machine Exception Program Register
+ 256:../Core/core_riscv.c ****  *
+ 257:../Core/core_riscv.c ****  * @return  mepc value
+ 258:../Core/core_riscv.c ****  */
+ 259:../Core/core_riscv.c **** void __set_MEPC(uint32_t value)
+ 260:../Core/core_riscv.c **** {
+ 333              		.loc 1 260 1 is_stmt 1
+ 334              		.cfi_startproc
+ 335              	.LVL15:
+ 261:../Core/core_riscv.c ****   __ASM volatile ("csrw mepc, %0" : : "r" (value) );
+ 336              		.loc 1 261 3
+ 337              	 #APP
+ 338              	# 261 "../Core/core_riscv.c" 1
+ 262              	}
+ 339              		csrw mepc, a0
+ 340              	# 0 "" 2
+ 341              		.loc 1 262 1 is_stmt 0
+ 342              	 #NO_APP
+ 343 0004 8280     		ret
+ 344              		.cfi_endproc
+ 345              	.LFE15:
+ 347              		.section	.text.__get_MCAUSE,"ax",@progbits
+ 348              		.align	1
+ 349              		.globl	__get_MCAUSE
+ 351              	__get_MCAUSE:
+ 352              	.LFB16:
+ 263:../Core/core_riscv.c **** 
+ 264:../Core/core_riscv.c **** /*********************************************************************
+ 265:../Core/core_riscv.c ****  * @fn      __get_MCAUSE
+ 266:../Core/core_riscv.c ****  *
+ 267:../Core/core_riscv.c ****  * @brief   Return the Machine Cause Register
+ 268:../Core/core_riscv.c ****  *
+ 269:../Core/core_riscv.c ****  * @return  mcause value
+ 270:../Core/core_riscv.c ****  */
+ 271:../Core/core_riscv.c **** uint32_t __get_MCAUSE(void)
+ 272:../Core/core_riscv.c **** {
+ 353              		.loc 1 272 1 is_stmt 1
+ 354              		.cfi_startproc
+ 273:../Core/core_riscv.c ****   uint32_t result;
+ 355              		.loc 1 273 3
+ 274:../Core/core_riscv.c **** 
+ 275:../Core/core_riscv.c ****   __ASM volatile ( "csrr %0," "mcause" : "=r" (result) );
+ 356              		.loc 1 275 3
+ 357              	 #APP
+ 358              	# 275 "../Core/core_riscv.c" 1
+ 276              	  return (result);
+ 359              		csrr a0,mcause
+ 360              	# 0 "" 2
+ 361              	.LVL16:
+ 362              		.loc 1 276 3
+ 277:../Core/core_riscv.c **** }
+ 363              		.loc 1 277 1 is_stmt 0
+ 364              	 #NO_APP
+ 365 0004 8280     		ret
+ 366              		.cfi_endproc
+ 367              	.LFE16:
+ 369              		.section	.text.__set_MCAUSE,"ax",@progbits
+ 370              		.align	1
+ 371              		.globl	__set_MCAUSE
+ 373              	__set_MCAUSE:
+ 374              	.LFB17:
+ 278:../Core/core_riscv.c **** 
+ 279:../Core/core_riscv.c **** /*********************************************************************
+ 280:../Core/core_riscv.c ****  * @fn      __set_MEPC
+ 281:../Core/core_riscv.c ****  *
+ 282:../Core/core_riscv.c ****  * @brief   Set the Machine Cause Register
+ 283:../Core/core_riscv.c ****  *
+ 284:../Core/core_riscv.c ****  * @return  mcause value
+ 285:../Core/core_riscv.c ****  */
+ 286:../Core/core_riscv.c **** void __set_MCAUSE(uint32_t value)
+ 287:../Core/core_riscv.c **** {
+ 375              		.loc 1 287 1 is_stmt 1
+ 376              		.cfi_startproc
+ 377              	.LVL17:
+ 288:../Core/core_riscv.c ****   __ASM volatile ("csrw mcause, %0" : : "r" (value) );
+ 378              		.loc 1 288 3
+ 379              	 #APP
+ 380              	# 288 "../Core/core_riscv.c" 1
+ 289              	}
+ 381              		csrw mcause, a0
+ 382              	# 0 "" 2
+ 383              		.loc 1 289 1 is_stmt 0
+ 384              	 #NO_APP
+ 385 0004 8280     		ret
+ 386              		.cfi_endproc
+ 387              	.LFE17:
+ 389              		.section	.text.__get_MTVAL,"ax",@progbits
+ 390              		.align	1
+ 391              		.globl	__get_MTVAL
+ 393              	__get_MTVAL:
+ 394              	.LFB18:
+ 290:../Core/core_riscv.c **** 
+ 291:../Core/core_riscv.c **** /*********************************************************************
+ 292:../Core/core_riscv.c ****  * @fn      __get_MTVAL
+ 293:../Core/core_riscv.c ****  *
+ 294:../Core/core_riscv.c ****  * @brief   Return the Machine Trap Value Register
+ 295:../Core/core_riscv.c ****  *
+ 296:../Core/core_riscv.c ****  * @return  mtval value
+ 297:../Core/core_riscv.c ****  */
+ 298:../Core/core_riscv.c **** uint32_t __get_MTVAL(void)
+ 299:../Core/core_riscv.c **** {
+ 395              		.loc 1 299 1 is_stmt 1
+ 396              		.cfi_startproc
+ 300:../Core/core_riscv.c ****   uint32_t result;
+ 397              		.loc 1 300 3
+ 301:../Core/core_riscv.c **** 
+ 302:../Core/core_riscv.c ****   __ASM volatile ( "csrr %0," "mtval" : "=r" (result) );
+ 398              		.loc 1 302 3
+ 399              	 #APP
+ 400              	# 302 "../Core/core_riscv.c" 1
+ 303              	  return (result);
+ 401              		csrr a0,mtval
+ 402              	# 0 "" 2
+ 403              	.LVL18:
+ 404              		.loc 1 303 3
+ 304:../Core/core_riscv.c **** }
+ 405              		.loc 1 304 1 is_stmt 0
+ 406              	 #NO_APP
+ 407 0004 8280     		ret
+ 408              		.cfi_endproc
+ 409              	.LFE18:
+ 411              		.section	.text.__set_MTVAL,"ax",@progbits
+ 412              		.align	1
+ 413              		.globl	__set_MTVAL
+ 415              	__set_MTVAL:
+ 416              	.LFB19:
+ 305:../Core/core_riscv.c **** 
+ 306:../Core/core_riscv.c **** /*********************************************************************
+ 307:../Core/core_riscv.c ****  * @fn      __set_MTVAL
+ 308:../Core/core_riscv.c ****  *
+ 309:../Core/core_riscv.c ****  * @brief   Set the Machine Trap Value Register
+ 310:../Core/core_riscv.c ****  *
+ 311:../Core/core_riscv.c ****  * @return  mtval value
+ 312:../Core/core_riscv.c ****  */
+ 313:../Core/core_riscv.c **** void __set_MTVAL(uint32_t value)
+ 314:../Core/core_riscv.c **** {
+ 417              		.loc 1 314 1 is_stmt 1
+ 418              		.cfi_startproc
+ 419              	.LVL19:
+ 315:../Core/core_riscv.c ****   __ASM volatile ("csrw mtval, %0" : : "r" (value) );
+ 420              		.loc 1 315 3
+ 421              	 #APP
+ 422              	# 315 "../Core/core_riscv.c" 1
+ 316              	}
+ 423              		csrw mtval, a0
+ 424              	# 0 "" 2
+ 425              		.loc 1 316 1 is_stmt 0
+ 426              	 #NO_APP
+ 427 0004 8280     		ret
+ 428              		.cfi_endproc
+ 429              	.LFE19:
+ 431              		.section	.text.__get_MVENDORID,"ax",@progbits
+ 432              		.align	1
+ 433              		.globl	__get_MVENDORID
+ 435              	__get_MVENDORID:
+ 436              	.LFB20:
+ 317:../Core/core_riscv.c **** 
+ 318:../Core/core_riscv.c **** /*********************************************************************
+ 319:../Core/core_riscv.c ****  * @fn      __get_MVENDORID
+ 320:../Core/core_riscv.c ****  *
+ 321:../Core/core_riscv.c ****  * @brief   Return Vendor ID Register
+ 322:../Core/core_riscv.c ****  *
+ 323:../Core/core_riscv.c ****  * @return  mvendorid value
+ 324:../Core/core_riscv.c ****  */
+ 325:../Core/core_riscv.c **** uint32_t __get_MVENDORID(void)
+ 326:../Core/core_riscv.c **** {
+ 437              		.loc 1 326 1 is_stmt 1
+ 438              		.cfi_startproc
+ 327:../Core/core_riscv.c ****   uint32_t result;
+ 439              		.loc 1 327 3
+ 328:../Core/core_riscv.c **** 
+ 329:../Core/core_riscv.c ****   __ASM volatile ( "csrr %0," "mvendorid" : "=r" (result) );
+ 440              		.loc 1 329 3
+ 441              	 #APP
+ 442              	# 329 "../Core/core_riscv.c" 1
+ 330              	  return (result);
+ 443              		csrr a0,mvendorid
+ 444              	# 0 "" 2
+ 445              	.LVL20:
+ 446              		.loc 1 330 3
+ 331:../Core/core_riscv.c **** }
+ 447              		.loc 1 331 1 is_stmt 0
+ 448              	 #NO_APP
+ 449 0004 8280     		ret
+ 450              		.cfi_endproc
+ 451              	.LFE20:
+ 453              		.section	.text.__get_MARCHID,"ax",@progbits
+ 454              		.align	1
+ 455              		.globl	__get_MARCHID
+ 457              	__get_MARCHID:
+ 458              	.LFB21:
+ 332:../Core/core_riscv.c **** 
+ 333:../Core/core_riscv.c **** /*********************************************************************
+ 334:../Core/core_riscv.c ****  * @fn      __get_MARCHID
+ 335:../Core/core_riscv.c ****  *
+ 336:../Core/core_riscv.c ****  * @brief   Return Machine Architecture ID Register
+ 337:../Core/core_riscv.c ****  *
+ 338:../Core/core_riscv.c ****  * @return  marchid value
+ 339:../Core/core_riscv.c ****  */
+ 340:../Core/core_riscv.c **** uint32_t __get_MARCHID(void)
+ 341:../Core/core_riscv.c **** {
+ 459              		.loc 1 341 1 is_stmt 1
+ 460              		.cfi_startproc
+ 342:../Core/core_riscv.c ****   uint32_t result;
+ 461              		.loc 1 342 3
+ 343:../Core/core_riscv.c **** 
+ 344:../Core/core_riscv.c ****   __ASM volatile ( "csrr %0," "marchid" : "=r" (result) );
+ 462              		.loc 1 344 3
+ 463              	 #APP
+ 464              	# 344 "../Core/core_riscv.c" 1
+ 345              	  return (result);
+ 465              		csrr a0,marchid
+ 466              	# 0 "" 2
+ 467              	.LVL21:
+ 468              		.loc 1 345 3
+ 346:../Core/core_riscv.c **** }
+ 469              		.loc 1 346 1 is_stmt 0
+ 470              	 #NO_APP
+ 471 0004 8280     		ret
+ 472              		.cfi_endproc
+ 473              	.LFE21:
+ 475              		.section	.text.__get_MIMPID,"ax",@progbits
+ 476              		.align	1
+ 477              		.globl	__get_MIMPID
+ 479              	__get_MIMPID:
+ 480              	.LFB22:
+ 347:../Core/core_riscv.c **** 
+ 348:../Core/core_riscv.c **** /*********************************************************************
+ 349:../Core/core_riscv.c ****  * @fn      __get_MIMPID
+ 350:../Core/core_riscv.c ****  *
+ 351:../Core/core_riscv.c ****  * @brief   Return Machine Implementation ID Register
+ 352:../Core/core_riscv.c ****  *
+ 353:../Core/core_riscv.c ****  * @return  mimpid value
+ 354:../Core/core_riscv.c ****  */
+ 355:../Core/core_riscv.c **** uint32_t __get_MIMPID(void)
+ 356:../Core/core_riscv.c **** {
+ 481              		.loc 1 356 1 is_stmt 1
+ 482              		.cfi_startproc
+ 357:../Core/core_riscv.c ****   uint32_t result;
+ 483              		.loc 1 357 3
+ 358:../Core/core_riscv.c **** 
+ 359:../Core/core_riscv.c ****   __ASM volatile ( "csrr %0," "mimpid" : "=r" (result) );
+ 484              		.loc 1 359 3
+ 485              	 #APP
+ 486              	# 359 "../Core/core_riscv.c" 1
+ 360              	  return (result);
+ 487              		csrr a0,mimpid
+ 488              	# 0 "" 2
+ 489              	.LVL22:
+ 490              		.loc 1 360 3
+ 361:../Core/core_riscv.c **** }
+ 491              		.loc 1 361 1 is_stmt 0
+ 492              	 #NO_APP
+ 493 0004 8280     		ret
+ 494              		.cfi_endproc
+ 495              	.LFE22:
+ 497              		.section	.text.__get_MHARTID,"ax",@progbits
+ 498              		.align	1
+ 499              		.globl	__get_MHARTID
+ 501              	__get_MHARTID:
+ 502              	.LFB23:
+ 362:../Core/core_riscv.c **** 
+ 363:../Core/core_riscv.c **** /*********************************************************************
+ 364:../Core/core_riscv.c ****  * @fn      __get_MHARTID
+ 365:../Core/core_riscv.c ****  *
+ 366:../Core/core_riscv.c ****  * @brief   Return Hart ID Register
+ 367:../Core/core_riscv.c ****  *
+ 368:../Core/core_riscv.c ****  * @return  mhartid value
+ 369:../Core/core_riscv.c ****  */
+ 370:../Core/core_riscv.c **** uint32_t __get_MHARTID(void)
+ 371:../Core/core_riscv.c **** {
+ 503              		.loc 1 371 1 is_stmt 1
+ 504              		.cfi_startproc
+ 372:../Core/core_riscv.c ****   uint32_t result;
+ 505              		.loc 1 372 3
+ 373:../Core/core_riscv.c **** 
+ 374:../Core/core_riscv.c ****   __ASM volatile ( "csrr %0," "mhartid" : "=r" (result) );
+ 506              		.loc 1 374 3
+ 507              	 #APP
+ 508              	# 374 "../Core/core_riscv.c" 1
+ 375              	  return (result);
+ 509              		csrr a0,mhartid
+ 510              	# 0 "" 2
+ 511              	.LVL23:
+ 512              		.loc 1 375 3
+ 376:../Core/core_riscv.c **** }
+ 513              		.loc 1 376 1 is_stmt 0
+ 514              	 #NO_APP
+ 515 0004 8280     		ret
+ 516              		.cfi_endproc
+ 517              	.LFE23:
+ 519              		.section	.text.__get_SP,"ax",@progbits
+ 520              		.align	1
+ 521              		.globl	__get_SP
+ 523              	__get_SP:
+ 524              	.LFB24:
+ 377:../Core/core_riscv.c **** 
+ 378:../Core/core_riscv.c **** /*********************************************************************
+ 379:../Core/core_riscv.c ****  * @fn      __get_SP
+ 380:../Core/core_riscv.c ****  *
+ 381:../Core/core_riscv.c ****  * @brief   Return SP Register
+ 382:../Core/core_riscv.c ****  *
+ 383:../Core/core_riscv.c ****  * @return  SP value
+ 384:../Core/core_riscv.c ****  */
+ 385:../Core/core_riscv.c **** uint32_t __get_SP(void)
+ 386:../Core/core_riscv.c **** {
+ 525              		.loc 1 386 1 is_stmt 1
+ 526              		.cfi_startproc
+ 387:../Core/core_riscv.c ****   uint32_t result;
+ 527              		.loc 1 387 3
+ 388:../Core/core_riscv.c **** 
+ 389:../Core/core_riscv.c ****   __ASM volatile ( "mv %0," "sp" : "=r"(result) : );
+ 528              		.loc 1 389 3
+ 529              	 #APP
+ 530              	# 389 "../Core/core_riscv.c" 1
+ 390              	  return (result);
+ 531              		mv a0,sp
+ 532              	# 0 "" 2
+ 533              	.LVL24:
+ 534              		.loc 1 390 3
+ 391:../Core/core_riscv.c **** }
+ 535              		.loc 1 391 1 is_stmt 0
+ 536              	 #NO_APP
+ 537 0002 8280     		ret
+ 538              		.cfi_endproc
+ 539              	.LFE24:
+ 541              		.text
+ 542              	.Letext0:
+ 543              		.file 2 "d:\\software\\mounriver_studio\\toolchain\\risc-v embedded gcc12\\riscv-none-elf\\include
+ 544              		.file 3 "d:\\software\\mounriver_studio\\toolchain\\risc-v embedded gcc12\\riscv-none-elf\\include
+DEFINED SYMBOLS
+                            *ABS*:0000000000000000 core_riscv.c
+C:\Users\LOCALH~1\AppData\Local\Temp\cciMs2sh.s:14     .text.__get_FFLAGS:0000000000000000 __get_FFLAGS
+C:\Users\LOCALH~1\AppData\Local\Temp\cciMs2sh.s:18     .text.__get_FFLAGS:0000000000000000 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cciMs2sh.s:19     .text.__get_FFLAGS:0000000000000000 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cciMs2sh.s:20     .text.__get_FFLAGS:0000000000000000 .L0 
+../Core/core_riscv.c:45     .text.__get_FFLAGS:0000000000000000 $x
+../Core/core_riscv.c:45     .text.__get_FFLAGS:0000000000000000 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cciMs2sh.s:27     .text.__get_FFLAGS:0000000000000004 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cciMs2sh.s:29     .text.__get_FFLAGS:0000000000000004 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cciMs2sh.s:30     .text.__get_FFLAGS:0000000000000006 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cciMs2sh.s:37     .text.__set_FFLAGS:0000000000000000 __set_FFLAGS
+C:\Users\LOCALH~1\AppData\Local\Temp\cciMs2sh.s:40     .text.__set_FFLAGS:0000000000000000 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cciMs2sh.s:42     .text.__set_FFLAGS:0000000000000000 .L0 
+../Core/core_riscv.c:60     .text.__set_FFLAGS:0000000000000000 $x
+../Core/core_riscv.c:60     .text.__set_FFLAGS:0000000000000000 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cciMs2sh.s:49     .text.__set_FFLAGS:0000000000000004 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cciMs2sh.s:50     .text.__set_FFLAGS:0000000000000006 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cciMs2sh.s:57     .text.__get_FRM:0000000000000000 __get_FRM
+C:\Users\LOCALH~1\AppData\Local\Temp\cciMs2sh.s:60     .text.__get_FRM:0000000000000000 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cciMs2sh.s:61     .text.__get_FRM:0000000000000000 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cciMs2sh.s:62     .text.__get_FRM:0000000000000000 .L0 
+../Core/core_riscv.c:74     .text.__get_FRM:0000000000000000 $x
+../Core/core_riscv.c:74     .text.__get_FRM:0000000000000000 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cciMs2sh.s:69     .text.__get_FRM:0000000000000004 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cciMs2sh.s:71     .text.__get_FRM:0000000000000004 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cciMs2sh.s:72     .text.__get_FRM:0000000000000006 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cciMs2sh.s:79     .text.__set_FRM:0000000000000000 __set_FRM
+C:\Users\LOCALH~1\AppData\Local\Temp\cciMs2sh.s:82     .text.__set_FRM:0000000000000000 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cciMs2sh.s:84     .text.__set_FRM:0000000000000000 .L0 
+../Core/core_riscv.c:89     .text.__set_FRM:0000000000000000 $x
+../Core/core_riscv.c:89     .text.__set_FRM:0000000000000000 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cciMs2sh.s:91     .text.__set_FRM:0000000000000004 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cciMs2sh.s:92     .text.__set_FRM:0000000000000006 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cciMs2sh.s:99     .text.__get_FCSR:0000000000000000 __get_FCSR
+C:\Users\LOCALH~1\AppData\Local\Temp\cciMs2sh.s:102    .text.__get_FCSR:0000000000000000 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cciMs2sh.s:103    .text.__get_FCSR:0000000000000000 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cciMs2sh.s:104    .text.__get_FCSR:0000000000000000 .L0 
+../Core/core_riscv.c:103    .text.__get_FCSR:0000000000000000 $x
+../Core/core_riscv.c:103    .text.__get_FCSR:0000000000000000 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cciMs2sh.s:111    .text.__get_FCSR:0000000000000004 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cciMs2sh.s:113    .text.__get_FCSR:0000000000000004 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cciMs2sh.s:114    .text.__get_FCSR:0000000000000006 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cciMs2sh.s:121    .text.__set_FCSR:0000000000000000 __set_FCSR
+C:\Users\LOCALH~1\AppData\Local\Temp\cciMs2sh.s:124    .text.__set_FCSR:0000000000000000 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cciMs2sh.s:126    .text.__set_FCSR:0000000000000000 .L0 
+../Core/core_riscv.c:118    .text.__set_FCSR:0000000000000000 $x
+../Core/core_riscv.c:118    .text.__set_FCSR:0000000000000000 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cciMs2sh.s:133    .text.__set_FCSR:0000000000000004 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cciMs2sh.s:134    .text.__set_FCSR:0000000000000006 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cciMs2sh.s:141    .text.__get_MSTATUS:0000000000000000 __get_MSTATUS
+C:\Users\LOCALH~1\AppData\Local\Temp\cciMs2sh.s:144    .text.__get_MSTATUS:0000000000000000 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cciMs2sh.s:145    .text.__get_MSTATUS:0000000000000000 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cciMs2sh.s:146    .text.__get_MSTATUS:0000000000000000 .L0 
+../Core/core_riscv.c:132    .text.__get_MSTATUS:0000000000000000 $x
+../Core/core_riscv.c:132    .text.__get_MSTATUS:0000000000000000 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cciMs2sh.s:153    .text.__get_MSTATUS:0000000000000004 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cciMs2sh.s:155    .text.__get_MSTATUS:0000000000000004 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cciMs2sh.s:156    .text.__get_MSTATUS:0000000000000006 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cciMs2sh.s:163    .text.__set_MSTATUS:0000000000000000 __set_MSTATUS
+C:\Users\LOCALH~1\AppData\Local\Temp\cciMs2sh.s:166    .text.__set_MSTATUS:0000000000000000 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cciMs2sh.s:168    .text.__set_MSTATUS:0000000000000000 .L0 
+../Core/core_riscv.c:147    .text.__set_MSTATUS:0000000000000000 $x
+../Core/core_riscv.c:147    .text.__set_MSTATUS:0000000000000000 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cciMs2sh.s:175    .text.__set_MSTATUS:0000000000000004 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cciMs2sh.s:176    .text.__set_MSTATUS:0000000000000006 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cciMs2sh.s:183    .text.__get_MISA:0000000000000000 __get_MISA
+C:\Users\LOCALH~1\AppData\Local\Temp\cciMs2sh.s:186    .text.__get_MISA:0000000000000000 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cciMs2sh.s:187    .text.__get_MISA:0000000000000000 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cciMs2sh.s:188    .text.__get_MISA:0000000000000000 .L0 
+../Core/core_riscv.c:161    .text.__get_MISA:0000000000000000 $x
+../Core/core_riscv.c:161    .text.__get_MISA:0000000000000000 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cciMs2sh.s:195    .text.__get_MISA:0000000000000004 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cciMs2sh.s:197    .text.__get_MISA:0000000000000004 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cciMs2sh.s:198    .text.__get_MISA:0000000000000006 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cciMs2sh.s:205    .text.__set_MISA:0000000000000000 __set_MISA
+C:\Users\LOCALH~1\AppData\Local\Temp\cciMs2sh.s:208    .text.__set_MISA:0000000000000000 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cciMs2sh.s:210    .text.__set_MISA:0000000000000000 .L0 
+../Core/core_riscv.c:176    .text.__set_MISA:0000000000000000 $x
+../Core/core_riscv.c:176    .text.__set_MISA:0000000000000000 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cciMs2sh.s:217    .text.__set_MISA:0000000000000004 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cciMs2sh.s:218    .text.__set_MISA:0000000000000006 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cciMs2sh.s:225    .text.__get_MTVEC:0000000000000000 __get_MTVEC
+C:\Users\LOCALH~1\AppData\Local\Temp\cciMs2sh.s:228    .text.__get_MTVEC:0000000000000000 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cciMs2sh.s:229    .text.__get_MTVEC:0000000000000000 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cciMs2sh.s:230    .text.__get_MTVEC:0000000000000000 .L0 
+../Core/core_riscv.c:190    .text.__get_MTVEC:0000000000000000 $x
+../Core/core_riscv.c:190    .text.__get_MTVEC:0000000000000000 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cciMs2sh.s:237    .text.__get_MTVEC:0000000000000004 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cciMs2sh.s:239    .text.__get_MTVEC:0000000000000004 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cciMs2sh.s:240    .text.__get_MTVEC:0000000000000006 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cciMs2sh.s:247    .text.__set_MTVEC:0000000000000000 __set_MTVEC
+C:\Users\LOCALH~1\AppData\Local\Temp\cciMs2sh.s:250    .text.__set_MTVEC:0000000000000000 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cciMs2sh.s:252    .text.__set_MTVEC:0000000000000000 .L0 
+../Core/core_riscv.c:205    .text.__set_MTVEC:0000000000000000 $x
+../Core/core_riscv.c:205    .text.__set_MTVEC:0000000000000000 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cciMs2sh.s:259    .text.__set_MTVEC:0000000000000004 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cciMs2sh.s:260    .text.__set_MTVEC:0000000000000006 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cciMs2sh.s:267    .text.__get_MSCRATCH:0000000000000000 __get_MSCRATCH
+C:\Users\LOCALH~1\AppData\Local\Temp\cciMs2sh.s:270    .text.__get_MSCRATCH:0000000000000000 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cciMs2sh.s:271    .text.__get_MSCRATCH:0000000000000000 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cciMs2sh.s:272    .text.__get_MSCRATCH:0000000000000000 .L0 
+../Core/core_riscv.c:219    .text.__get_MSCRATCH:0000000000000000 $x
+../Core/core_riscv.c:219    .text.__get_MSCRATCH:0000000000000000 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cciMs2sh.s:279    .text.__get_MSCRATCH:0000000000000004 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cciMs2sh.s:281    .text.__get_MSCRATCH:0000000000000004 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cciMs2sh.s:282    .text.__get_MSCRATCH:0000000000000006 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cciMs2sh.s:289    .text.__set_MSCRATCH:0000000000000000 __set_MSCRATCH
+C:\Users\LOCALH~1\AppData\Local\Temp\cciMs2sh.s:292    .text.__set_MSCRATCH:0000000000000000 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cciMs2sh.s:294    .text.__set_MSCRATCH:0000000000000000 .L0 
+../Core/core_riscv.c:234    .text.__set_MSCRATCH:0000000000000000 $x
+../Core/core_riscv.c:234    .text.__set_MSCRATCH:0000000000000000 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cciMs2sh.s:301    .text.__set_MSCRATCH:0000000000000004 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cciMs2sh.s:302    .text.__set_MSCRATCH:0000000000000006 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cciMs2sh.s:309    .text.__get_MEPC:0000000000000000 __get_MEPC
+C:\Users\LOCALH~1\AppData\Local\Temp\cciMs2sh.s:312    .text.__get_MEPC:0000000000000000 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cciMs2sh.s:313    .text.__get_MEPC:0000000000000000 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cciMs2sh.s:314    .text.__get_MEPC:0000000000000000 .L0 
+../Core/core_riscv.c:248    .text.__get_MEPC:0000000000000000 $x
+../Core/core_riscv.c:248    .text.__get_MEPC:0000000000000000 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cciMs2sh.s:321    .text.__get_MEPC:0000000000000004 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cciMs2sh.s:323    .text.__get_MEPC:0000000000000004 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cciMs2sh.s:324    .text.__get_MEPC:0000000000000006 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cciMs2sh.s:331    .text.__set_MEPC:0000000000000000 __set_MEPC
+C:\Users\LOCALH~1\AppData\Local\Temp\cciMs2sh.s:334    .text.__set_MEPC:0000000000000000 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cciMs2sh.s:336    .text.__set_MEPC:0000000000000000 .L0 
+../Core/core_riscv.c:261    .text.__set_MEPC:0000000000000000 $x
+../Core/core_riscv.c:261    .text.__set_MEPC:0000000000000000 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cciMs2sh.s:343    .text.__set_MEPC:0000000000000004 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cciMs2sh.s:344    .text.__set_MEPC:0000000000000006 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cciMs2sh.s:351    .text.__get_MCAUSE:0000000000000000 __get_MCAUSE
+C:\Users\LOCALH~1\AppData\Local\Temp\cciMs2sh.s:354    .text.__get_MCAUSE:0000000000000000 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cciMs2sh.s:355    .text.__get_MCAUSE:0000000000000000 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cciMs2sh.s:356    .text.__get_MCAUSE:0000000000000000 .L0 
+../Core/core_riscv.c:275    .text.__get_MCAUSE:0000000000000000 $x
+../Core/core_riscv.c:275    .text.__get_MCAUSE:0000000000000000 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cciMs2sh.s:363    .text.__get_MCAUSE:0000000000000004 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cciMs2sh.s:365    .text.__get_MCAUSE:0000000000000004 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cciMs2sh.s:366    .text.__get_MCAUSE:0000000000000006 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cciMs2sh.s:373    .text.__set_MCAUSE:0000000000000000 __set_MCAUSE
+C:\Users\LOCALH~1\AppData\Local\Temp\cciMs2sh.s:376    .text.__set_MCAUSE:0000000000000000 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cciMs2sh.s:378    .text.__set_MCAUSE:0000000000000000 .L0 
+../Core/core_riscv.c:288    .text.__set_MCAUSE:0000000000000000 $x
+../Core/core_riscv.c:288    .text.__set_MCAUSE:0000000000000000 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cciMs2sh.s:385    .text.__set_MCAUSE:0000000000000004 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cciMs2sh.s:386    .text.__set_MCAUSE:0000000000000006 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cciMs2sh.s:393    .text.__get_MTVAL:0000000000000000 __get_MTVAL
+C:\Users\LOCALH~1\AppData\Local\Temp\cciMs2sh.s:396    .text.__get_MTVAL:0000000000000000 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cciMs2sh.s:397    .text.__get_MTVAL:0000000000000000 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cciMs2sh.s:398    .text.__get_MTVAL:0000000000000000 .L0 
+../Core/core_riscv.c:302    .text.__get_MTVAL:0000000000000000 $x
+../Core/core_riscv.c:302    .text.__get_MTVAL:0000000000000000 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cciMs2sh.s:405    .text.__get_MTVAL:0000000000000004 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cciMs2sh.s:407    .text.__get_MTVAL:0000000000000004 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cciMs2sh.s:408    .text.__get_MTVAL:0000000000000006 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cciMs2sh.s:415    .text.__set_MTVAL:0000000000000000 __set_MTVAL
+C:\Users\LOCALH~1\AppData\Local\Temp\cciMs2sh.s:418    .text.__set_MTVAL:0000000000000000 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cciMs2sh.s:420    .text.__set_MTVAL:0000000000000000 .L0 
+../Core/core_riscv.c:315    .text.__set_MTVAL:0000000000000000 $x
+../Core/core_riscv.c:315    .text.__set_MTVAL:0000000000000000 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cciMs2sh.s:427    .text.__set_MTVAL:0000000000000004 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cciMs2sh.s:428    .text.__set_MTVAL:0000000000000006 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cciMs2sh.s:435    .text.__get_MVENDORID:0000000000000000 __get_MVENDORID
+C:\Users\LOCALH~1\AppData\Local\Temp\cciMs2sh.s:438    .text.__get_MVENDORID:0000000000000000 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cciMs2sh.s:439    .text.__get_MVENDORID:0000000000000000 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cciMs2sh.s:440    .text.__get_MVENDORID:0000000000000000 .L0 
+../Core/core_riscv.c:329    .text.__get_MVENDORID:0000000000000000 $x
+../Core/core_riscv.c:329    .text.__get_MVENDORID:0000000000000000 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cciMs2sh.s:447    .text.__get_MVENDORID:0000000000000004 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cciMs2sh.s:449    .text.__get_MVENDORID:0000000000000004 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cciMs2sh.s:450    .text.__get_MVENDORID:0000000000000006 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cciMs2sh.s:457    .text.__get_MARCHID:0000000000000000 __get_MARCHID
+C:\Users\LOCALH~1\AppData\Local\Temp\cciMs2sh.s:460    .text.__get_MARCHID:0000000000000000 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cciMs2sh.s:461    .text.__get_MARCHID:0000000000000000 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cciMs2sh.s:462    .text.__get_MARCHID:0000000000000000 .L0 
+../Core/core_riscv.c:344    .text.__get_MARCHID:0000000000000000 $x
+../Core/core_riscv.c:344    .text.__get_MARCHID:0000000000000000 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cciMs2sh.s:469    .text.__get_MARCHID:0000000000000004 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cciMs2sh.s:471    .text.__get_MARCHID:0000000000000004 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cciMs2sh.s:472    .text.__get_MARCHID:0000000000000006 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cciMs2sh.s:479    .text.__get_MIMPID:0000000000000000 __get_MIMPID
+C:\Users\LOCALH~1\AppData\Local\Temp\cciMs2sh.s:482    .text.__get_MIMPID:0000000000000000 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cciMs2sh.s:483    .text.__get_MIMPID:0000000000000000 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cciMs2sh.s:484    .text.__get_MIMPID:0000000000000000 .L0 
+../Core/core_riscv.c:359    .text.__get_MIMPID:0000000000000000 $x
+../Core/core_riscv.c:359    .text.__get_MIMPID:0000000000000000 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cciMs2sh.s:491    .text.__get_MIMPID:0000000000000004 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cciMs2sh.s:493    .text.__get_MIMPID:0000000000000004 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cciMs2sh.s:494    .text.__get_MIMPID:0000000000000006 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cciMs2sh.s:501    .text.__get_MHARTID:0000000000000000 __get_MHARTID
+C:\Users\LOCALH~1\AppData\Local\Temp\cciMs2sh.s:504    .text.__get_MHARTID:0000000000000000 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cciMs2sh.s:505    .text.__get_MHARTID:0000000000000000 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cciMs2sh.s:506    .text.__get_MHARTID:0000000000000000 .L0 
+../Core/core_riscv.c:374    .text.__get_MHARTID:0000000000000000 $x
+../Core/core_riscv.c:374    .text.__get_MHARTID:0000000000000000 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cciMs2sh.s:513    .text.__get_MHARTID:0000000000000004 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cciMs2sh.s:515    .text.__get_MHARTID:0000000000000004 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cciMs2sh.s:516    .text.__get_MHARTID:0000000000000006 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cciMs2sh.s:523    .text.__get_SP:0000000000000000 __get_SP
+C:\Users\LOCALH~1\AppData\Local\Temp\cciMs2sh.s:526    .text.__get_SP:0000000000000000 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cciMs2sh.s:527    .text.__get_SP:0000000000000000 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cciMs2sh.s:528    .text.__get_SP:0000000000000000 .L0 
+../Core/core_riscv.c:389    .text.__get_SP:0000000000000000 $x
+../Core/core_riscv.c:389    .text.__get_SP:0000000000000000 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cciMs2sh.s:535    .text.__get_SP:0000000000000002 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cciMs2sh.s:537    .text.__get_SP:0000000000000002 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cciMs2sh.s:538    .text.__get_SP:0000000000000004 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cciMs2sh.s:1526   .debug_line_str:000000000000006a .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cciMs2sh.s:1526   .debug_line_str:00000000000000bf .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cciMs2sh.s:1526   .debug_line_str:00000000000000c7 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cciMs2sh.s:1526   .debug_line_str:0000000000000123 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cciMs2sh.s:1526   .debug_line_str:000000000000017b .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cciMs2sh.s:1526   .debug_line_str:0000000000000188 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cciMs2sh.s:1526   .debug_line_str:0000000000000195 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cciMs2sh.s:1526   .debug_line_str:00000000000001a6 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cciMs2sh.s:33     .text.__get_FFLAGS:0000000000000006 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cciMs2sh.s:53     .text.__set_FFLAGS:0000000000000006 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cciMs2sh.s:75     .text.__get_FRM:0000000000000006 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cciMs2sh.s:95     .text.__set_FRM:0000000000000006 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cciMs2sh.s:117    .text.__get_FCSR:0000000000000006 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cciMs2sh.s:137    .text.__set_FCSR:0000000000000006 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cciMs2sh.s:159    .text.__get_MSTATUS:0000000000000006 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cciMs2sh.s:179    .text.__set_MSTATUS:0000000000000006 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cciMs2sh.s:201    .text.__get_MISA:0000000000000006 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cciMs2sh.s:221    .text.__set_MISA:0000000000000006 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cciMs2sh.s:243    .text.__get_MTVEC:0000000000000006 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cciMs2sh.s:263    .text.__set_MTVEC:0000000000000006 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cciMs2sh.s:285    .text.__get_MSCRATCH:0000000000000006 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cciMs2sh.s:305    .text.__set_MSCRATCH:0000000000000006 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cciMs2sh.s:327    .text.__get_MEPC:0000000000000006 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cciMs2sh.s:347    .text.__set_MEPC:0000000000000006 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cciMs2sh.s:369    .text.__get_MCAUSE:0000000000000006 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cciMs2sh.s:389    .text.__set_MCAUSE:0000000000000006 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cciMs2sh.s:411    .text.__get_MTVAL:0000000000000006 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cciMs2sh.s:431    .text.__set_MTVAL:0000000000000006 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cciMs2sh.s:453    .text.__get_MVENDORID:0000000000000006 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cciMs2sh.s:475    .text.__get_MARCHID:0000000000000006 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cciMs2sh.s:497    .text.__get_MIMPID:0000000000000006 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cciMs2sh.s:519    .text.__get_MHARTID:0000000000000006 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cciMs2sh.s:541    .text.__get_SP:0000000000000004 .L0 
+                     .debug_frame:0000000000000000 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cciMs2sh.s:1015   .debug_abbrev:0000000000000000 .Ldebug_abbrev0
+C:\Users\LOCALH~1\AppData\Local\Temp\cciMs2sh.s:1503   .debug_str:000000000000017a .LASF40
+C:\Users\LOCALH~1\AppData\Local\Temp\cciMs2sh.s:1524   .debug_line_str:0000000000000055 .LASF0
+C:\Users\LOCALH~1\AppData\Local\Temp\cciMs2sh.s:1522   .debug_line_str:0000000000000000 .LASF1
+C:\Users\LOCALH~1\AppData\Local\Temp\cciMs2sh.s:1362   .debug_rnglists:000000000000000c .LLRL0
+C:\Users\LOCALH~1\AppData\Local\Temp\cciMs2sh.s:1441   .debug_line:0000000000000000 .Ldebug_line0
+C:\Users\LOCALH~1\AppData\Local\Temp\cciMs2sh.s:1511   .debug_str:000000000000029d .LASF2
+C:\Users\LOCALH~1\AppData\Local\Temp\cciMs2sh.s:1461   .debug_str:0000000000000060 .LASF3
+C:\Users\LOCALH~1\AppData\Local\Temp\cciMs2sh.s:1499   .debug_str:0000000000000164 .LASF4
+C:\Users\LOCALH~1\AppData\Local\Temp\cciMs2sh.s:1471   .debug_str:00000000000000a4 .LASF5
+C:\Users\LOCALH~1\AppData\Local\Temp\cciMs2sh.s:1505   .debug_str:000000000000027b .LASF6
+C:\Users\LOCALH~1\AppData\Local\Temp\cciMs2sh.s:1477   .debug_str:00000000000000ce .LASF11
+C:\Users\LOCALH~1\AppData\Local\Temp\cciMs2sh.s:1467   .debug_str:0000000000000083 .LASF7
+C:\Users\LOCALH~1\AppData\Local\Temp\cciMs2sh.s:1495   .debug_str:0000000000000146 .LASF8
+C:\Users\LOCALH~1\AppData\Local\Temp\cciMs2sh.s:1483   .debug_str:00000000000000f5 .LASF9
+C:\Users\LOCALH~1\AppData\Local\Temp\cciMs2sh.s:1479   .debug_str:00000000000000d9 .LASF10
+C:\Users\LOCALH~1\AppData\Local\Temp\cciMs2sh.s:1475   .debug_str:00000000000000c5 .LASF12
+C:\Users\LOCALH~1\AppData\Local\Temp\cciMs2sh.s:1447   .debug_str:0000000000000011 .LASF13
+C:\Users\LOCALH~1\AppData\Local\Temp\cciMs2sh.s:524    .text.__get_SP:0000000000000000 .LFB24
+C:\Users\LOCALH~1\AppData\Local\Temp\cciMs2sh.s:539    .text.__get_SP:0000000000000004 .LFE24
+C:\Users\LOCALH~1\AppData\Local\Temp\cciMs2sh.s:1485   .debug_str:000000000000010c .LASF15
+C:\Users\LOCALH~1\AppData\Local\Temp\cciMs2sh.s:1473   .debug_str:00000000000000b7 .LASF14
+C:\Users\LOCALH~1\AppData\Local\Temp\cciMs2sh.s:502    .text.__get_MHARTID:0000000000000000 .LFB23
+C:\Users\LOCALH~1\AppData\Local\Temp\cciMs2sh.s:517    .text.__get_MHARTID:0000000000000006 .LFE23
+C:\Users\LOCALH~1\AppData\Local\Temp\cciMs2sh.s:1489   .debug_str:0000000000000121 .LASF16
+C:\Users\LOCALH~1\AppData\Local\Temp\cciMs2sh.s:480    .text.__get_MIMPID:0000000000000000 .LFB22
+C:\Users\LOCALH~1\AppData\Local\Temp\cciMs2sh.s:495    .text.__get_MIMPID:0000000000000006 .LFE22
+C:\Users\LOCALH~1\AppData\Local\Temp\cciMs2sh.s:1513   .debug_str:00000000000002a9 .LASF17
+C:\Users\LOCALH~1\AppData\Local\Temp\cciMs2sh.s:458    .text.__get_MARCHID:0000000000000000 .LFB21
+C:\Users\LOCALH~1\AppData\Local\Temp\cciMs2sh.s:473    .text.__get_MARCHID:0000000000000006 .LFE21
+C:\Users\LOCALH~1\AppData\Local\Temp\cciMs2sh.s:1497   .debug_str:0000000000000154 .LASF18
+C:\Users\LOCALH~1\AppData\Local\Temp\cciMs2sh.s:436    .text.__get_MVENDORID:0000000000000000 .LFB20
+C:\Users\LOCALH~1\AppData\Local\Temp\cciMs2sh.s:451    .text.__get_MVENDORID:0000000000000006 .LFE20
+C:\Users\LOCALH~1\AppData\Local\Temp\cciMs2sh.s:1501   .debug_str:000000000000016e .LASF20
+C:\Users\LOCALH~1\AppData\Local\Temp\cciMs2sh.s:416    .text.__set_MTVAL:0000000000000000 .LFB19
+C:\Users\LOCALH~1\AppData\Local\Temp\cciMs2sh.s:429    .text.__set_MTVAL:0000000000000006 .LFE19
+C:\Users\LOCALH~1\AppData\Local\Temp\cciMs2sh.s:1445   .debug_str:000000000000000b .LASF22
+C:\Users\LOCALH~1\AppData\Local\Temp\cciMs2sh.s:1453   .debug_str:0000000000000033 .LASF19
+C:\Users\LOCALH~1\AppData\Local\Temp\cciMs2sh.s:394    .text.__get_MTVAL:0000000000000000 .LFB18
+C:\Users\LOCALH~1\AppData\Local\Temp\cciMs2sh.s:409    .text.__get_MTVAL:0000000000000006 .LFE18
+C:\Users\LOCALH~1\AppData\Local\Temp\cciMs2sh.s:1519   .debug_str:00000000000002cf .LASF21
+C:\Users\LOCALH~1\AppData\Local\Temp\cciMs2sh.s:374    .text.__set_MCAUSE:0000000000000000 .LFB17
+C:\Users\LOCALH~1\AppData\Local\Temp\cciMs2sh.s:387    .text.__set_MCAUSE:0000000000000006 .LFE17
+C:\Users\LOCALH~1\AppData\Local\Temp\cciMs2sh.s:1517   .debug_str:00000000000002c2 .LASF23
+C:\Users\LOCALH~1\AppData\Local\Temp\cciMs2sh.s:352    .text.__get_MCAUSE:0000000000000000 .LFB16
+C:\Users\LOCALH~1\AppData\Local\Temp\cciMs2sh.s:367    .text.__get_MCAUSE:0000000000000006 .LFE16
+C:\Users\LOCALH~1\AppData\Local\Temp\cciMs2sh.s:1515   .debug_str:00000000000002b7 .LASF24
+C:\Users\LOCALH~1\AppData\Local\Temp\cciMs2sh.s:332    .text.__set_MEPC:0000000000000000 .LFB15
+C:\Users\LOCALH~1\AppData\Local\Temp\cciMs2sh.s:345    .text.__set_MEPC:0000000000000006 .LFE15
+C:\Users\LOCALH~1\AppData\Local\Temp\cciMs2sh.s:1465   .debug_str:0000000000000078 .LASF25
+C:\Users\LOCALH~1\AppData\Local\Temp\cciMs2sh.s:310    .text.__get_MEPC:0000000000000000 .LFB14
+C:\Users\LOCALH~1\AppData\Local\Temp\cciMs2sh.s:325    .text.__get_MEPC:0000000000000006 .LFE14
+C:\Users\LOCALH~1\AppData\Local\Temp\cciMs2sh.s:1481   .debug_str:00000000000000e6 .LASF26
+C:\Users\LOCALH~1\AppData\Local\Temp\cciMs2sh.s:290    .text.__set_MSCRATCH:0000000000000000 .LFB13
+C:\Users\LOCALH~1\AppData\Local\Temp\cciMs2sh.s:303    .text.__set_MSCRATCH:0000000000000006 .LFE13
+C:\Users\LOCALH~1\AppData\Local\Temp\cciMs2sh.s:1469   .debug_str:0000000000000095 .LASF27
+C:\Users\LOCALH~1\AppData\Local\Temp\cciMs2sh.s:268    .text.__get_MSCRATCH:0000000000000000 .LFB12
+C:\Users\LOCALH~1\AppData\Local\Temp\cciMs2sh.s:283    .text.__get_MSCRATCH:0000000000000006 .LFE12
+C:\Users\LOCALH~1\AppData\Local\Temp\cciMs2sh.s:1509   .debug_str:0000000000000291 .LASF28
+C:\Users\LOCALH~1\AppData\Local\Temp\cciMs2sh.s:248    .text.__set_MTVEC:0000000000000000 .LFB11
+C:\Users\LOCALH~1\AppData\Local\Temp\cciMs2sh.s:261    .text.__set_MTVEC:0000000000000006 .LFE11
+C:\Users\LOCALH~1\AppData\Local\Temp\cciMs2sh.s:1457   .debug_str:0000000000000049 .LASF29
+C:\Users\LOCALH~1\AppData\Local\Temp\cciMs2sh.s:226    .text.__get_MTVEC:0000000000000000 .LFB10
+C:\Users\LOCALH~1\AppData\Local\Temp\cciMs2sh.s:241    .text.__get_MTVEC:0000000000000006 .LFE10
+C:\Users\LOCALH~1\AppData\Local\Temp\cciMs2sh.s:1443   .debug_str:0000000000000000 .LASF30
+C:\Users\LOCALH~1\AppData\Local\Temp\cciMs2sh.s:206    .text.__set_MISA:0000000000000000 .LFB9
+C:\Users\LOCALH~1\AppData\Local\Temp\cciMs2sh.s:219    .text.__set_MISA:0000000000000006 .LFE9
+C:\Users\LOCALH~1\AppData\Local\Temp\cciMs2sh.s:1459   .debug_str:0000000000000055 .LASF31
+C:\Users\LOCALH~1\AppData\Local\Temp\cciMs2sh.s:184    .text.__get_MISA:0000000000000000 .LFB8
+C:\Users\LOCALH~1\AppData\Local\Temp\cciMs2sh.s:199    .text.__get_MISA:0000000000000006 .LFE8
+C:\Users\LOCALH~1\AppData\Local\Temp\cciMs2sh.s:1487   .debug_str:0000000000000113 .LASF32
+C:\Users\LOCALH~1\AppData\Local\Temp\cciMs2sh.s:164    .text.__set_MSTATUS:0000000000000000 .LFB7
+C:\Users\LOCALH~1\AppData\Local\Temp\cciMs2sh.s:177    .text.__set_MSTATUS:0000000000000006 .LFE7
+C:\Users\LOCALH~1\AppData\Local\Temp\cciMs2sh.s:1451   .debug_str:0000000000000025 .LASF33
+C:\Users\LOCALH~1\AppData\Local\Temp\cciMs2sh.s:142    .text.__get_MSTATUS:0000000000000000 .LFB6
+C:\Users\LOCALH~1\AppData\Local\Temp\cciMs2sh.s:157    .text.__get_MSTATUS:0000000000000006 .LFE6
+C:\Users\LOCALH~1\AppData\Local\Temp\cciMs2sh.s:1491   .debug_str:000000000000012e .LASF34
+C:\Users\LOCALH~1\AppData\Local\Temp\cciMs2sh.s:122    .text.__set_FCSR:0000000000000000 .LFB5
+C:\Users\LOCALH~1\AppData\Local\Temp\cciMs2sh.s:135    .text.__set_FCSR:0000000000000006 .LFE5
+C:\Users\LOCALH~1\AppData\Local\Temp\cciMs2sh.s:1449   .debug_str:000000000000001a .LASF35
+C:\Users\LOCALH~1\AppData\Local\Temp\cciMs2sh.s:100    .text.__get_FCSR:0000000000000000 .LFB4
+C:\Users\LOCALH~1\AppData\Local\Temp\cciMs2sh.s:115    .text.__get_FCSR:0000000000000006 .LFE4
+C:\Users\LOCALH~1\AppData\Local\Temp\cciMs2sh.s:1455   .debug_str:000000000000003f .LASF36
+C:\Users\LOCALH~1\AppData\Local\Temp\cciMs2sh.s:80     .text.__set_FRM:0000000000000000 .LFB3
+C:\Users\LOCALH~1\AppData\Local\Temp\cciMs2sh.s:93     .text.__set_FRM:0000000000000006 .LFE3
+C:\Users\LOCALH~1\AppData\Local\Temp\cciMs2sh.s:1463   .debug_str:000000000000006e .LASF37
+C:\Users\LOCALH~1\AppData\Local\Temp\cciMs2sh.s:58     .text.__get_FRM:0000000000000000 .LFB2
+C:\Users\LOCALH~1\AppData\Local\Temp\cciMs2sh.s:73     .text.__get_FRM:0000000000000006 .LFE2
+C:\Users\LOCALH~1\AppData\Local\Temp\cciMs2sh.s:1493   .debug_str:0000000000000139 .LASF38
+C:\Users\LOCALH~1\AppData\Local\Temp\cciMs2sh.s:38     .text.__set_FFLAGS:0000000000000000 .LFB1
+C:\Users\LOCALH~1\AppData\Local\Temp\cciMs2sh.s:51     .text.__set_FFLAGS:0000000000000006 .LFE1
+C:\Users\LOCALH~1\AppData\Local\Temp\cciMs2sh.s:1507   .debug_str:0000000000000284 .LASF39
+C:\Users\LOCALH~1\AppData\Local\Temp\cciMs2sh.s:15     .text.__get_FFLAGS:0000000000000000 .LFB0
+C:\Users\LOCALH~1\AppData\Local\Temp\cciMs2sh.s:31     .text.__get_FFLAGS:0000000000000006 .LFE0
+C:\Users\LOCALH~1\AppData\Local\Temp\cciMs2sh.s:546    .debug_info:0000000000000000 .Ldebug_info0
+
+NO UNDEFINED SYMBOLS

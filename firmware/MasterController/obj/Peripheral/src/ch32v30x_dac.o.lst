@@ -1,0 +1,1168 @@
+   1              		.file	"ch32v30x_dac.c"
+   2              		.option nopic
+   3              		.attribute arch, "rv32i2p0_m2p0_a2p0_f2p0_c2p0_xw"
+   4              		.attribute unaligned_access, 0
+   5              		.attribute stack_align, 16
+   6              		.text
+   7              	.Ltext0:
+   8              		.cfi_sections	.debug_frame
+   9              		.file 0 "C:\\Users\\localhost\\Documents\\turbomoskal-repo\\qqexpert\\firmware\\MasterController\\
+  10              		.section	.text.DAC_DeInit,"ax",@progbits
+  11              		.align	1
+  12              		.globl	DAC_DeInit
+  14              	DAC_DeInit:
+  15              	.LFB29:
+  16              		.file 1 "../Peripheral/src/ch32v30x_dac.c"
+   1:../Peripheral/src/ch32v30x_dac.c **** /********************************** (C) COPYRIGHT  *******************************
+   2:../Peripheral/src/ch32v30x_dac.c **** * File Name          : ch32v30x_dac.c
+   3:../Peripheral/src/ch32v30x_dac.c **** * Author             : WCH
+   4:../Peripheral/src/ch32v30x_dac.c **** * Version            : V1.0.0
+   5:../Peripheral/src/ch32v30x_dac.c **** * Date               : 2021/06/06
+   6:../Peripheral/src/ch32v30x_dac.c **** * Description        : This file provides all the DAC firmware functions.
+   7:../Peripheral/src/ch32v30x_dac.c **** *********************************************************************************
+   8:../Peripheral/src/ch32v30x_dac.c **** * Copyright (c) 2021 Nanjing Qinheng Microelectronics Co., Ltd.
+   9:../Peripheral/src/ch32v30x_dac.c **** * Attention: This software (modified or not) and binary are used for 
+  10:../Peripheral/src/ch32v30x_dac.c **** * microcontroller manufactured by Nanjing Qinheng Microelectronics.
+  11:../Peripheral/src/ch32v30x_dac.c **** *******************************************************************************/
+  12:../Peripheral/src/ch32v30x_dac.c **** #include "ch32v30x_dac.h"
+  13:../Peripheral/src/ch32v30x_dac.c **** #include "ch32v30x_rcc.h"
+  14:../Peripheral/src/ch32v30x_dac.c **** 
+  15:../Peripheral/src/ch32v30x_dac.c **** /* CTLR register Mask */
+  16:../Peripheral/src/ch32v30x_dac.c **** #define CTLR_CLEAR_MASK    ((uint32_t)0x00000FFE)
+  17:../Peripheral/src/ch32v30x_dac.c **** 
+  18:../Peripheral/src/ch32v30x_dac.c **** /* DAC Dual Channels SWTR masks */
+  19:../Peripheral/src/ch32v30x_dac.c **** #define DUAL_SWTR_SET      ((uint32_t)0x00000003)
+  20:../Peripheral/src/ch32v30x_dac.c **** #define DUAL_SWTR_RESET    ((uint32_t)0xFFFFFFFC)
+  21:../Peripheral/src/ch32v30x_dac.c **** 
+  22:../Peripheral/src/ch32v30x_dac.c **** /* DHR registers offsets */
+  23:../Peripheral/src/ch32v30x_dac.c **** #define DHR12R1_OFFSET     ((uint32_t)0x00000008)
+  24:../Peripheral/src/ch32v30x_dac.c **** #define DHR12R2_OFFSET     ((uint32_t)0x00000014)
+  25:../Peripheral/src/ch32v30x_dac.c **** #define DHR12RD_OFFSET     ((uint32_t)0x00000020)
+  26:../Peripheral/src/ch32v30x_dac.c **** 
+  27:../Peripheral/src/ch32v30x_dac.c **** /* DOR register offset */
+  28:../Peripheral/src/ch32v30x_dac.c **** #define DOR_OFFSET         ((uint32_t)0x0000002C)
+  29:../Peripheral/src/ch32v30x_dac.c **** 
+  30:../Peripheral/src/ch32v30x_dac.c **** /*********************************************************************
+  31:../Peripheral/src/ch32v30x_dac.c ****  * @fn      DAC_DeInit
+  32:../Peripheral/src/ch32v30x_dac.c ****  *
+  33:../Peripheral/src/ch32v30x_dac.c ****  * @brief   Deinitializes the DAC peripheral registers to their default reset values.
+  34:../Peripheral/src/ch32v30x_dac.c ****  *
+  35:../Peripheral/src/ch32v30x_dac.c ****  * @return  none
+  36:../Peripheral/src/ch32v30x_dac.c ****  */
+  37:../Peripheral/src/ch32v30x_dac.c **** void DAC_DeInit(void)
+  38:../Peripheral/src/ch32v30x_dac.c **** {
+  17              		.loc 1 38 1
+  18              		.cfi_startproc
+  19 0000 17030000 		call	t0,__riscv_save_0
+  19      E7020300 
+  20              		.cfi_offset 1, -4
+  21              		.cfi_def_cfa_offset 16
+  39:../Peripheral/src/ch32v30x_dac.c ****     RCC_APB1PeriphResetCmd(RCC_APB1Periph_DAC, ENABLE);
+  22              		.loc 1 39 5
+  23 0008 8545     		li	a1,1
+  24 000a 37050020 		li	a0,536870912
+  25 000e 97000000 		call	RCC_APB1PeriphResetCmd
+  25      E7800000 
+  26              	.LVL0:
+  40:../Peripheral/src/ch32v30x_dac.c ****     RCC_APB1PeriphResetCmd(RCC_APB1Periph_DAC, DISABLE);
+  27              		.loc 1 40 5
+  28 0016 8145     		li	a1,0
+  29 0018 37050020 		li	a0,536870912
+  30 001c 97000000 		call	RCC_APB1PeriphResetCmd
+  30      E7800000 
+  31              	.LVL1:
+  41:../Peripheral/src/ch32v30x_dac.c **** }
+  32              		.loc 1 41 1 is_stmt 0
+  33 0024 17030000 		tail	__riscv_restore_0
+  33      67000300 
+  34              		.cfi_restore 1
+  35              		.cfi_def_cfa_offset 0
+  36              		.cfi_endproc
+  37              	.LFE29:
+  39              		.section	.text.DAC_Init,"ax",@progbits
+  40              		.align	1
+  41              		.globl	DAC_Init
+  43              	DAC_Init:
+  44              	.LFB30:
+  42:../Peripheral/src/ch32v30x_dac.c **** 
+  43:../Peripheral/src/ch32v30x_dac.c **** /*********************************************************************
+  44:../Peripheral/src/ch32v30x_dac.c ****  * @fn      DAC_Init
+  45:../Peripheral/src/ch32v30x_dac.c ****  *
+  46:../Peripheral/src/ch32v30x_dac.c ****  * @brief   Initializes the DAC peripheral according to the specified parameters in
+  47:../Peripheral/src/ch32v30x_dac.c ****  *        the DAC_InitStruct.
+  48:../Peripheral/src/ch32v30x_dac.c ****  *
+  49:../Peripheral/src/ch32v30x_dac.c ****  * @param   DAC_Channel - the selected DAC channel.
+  50:../Peripheral/src/ch32v30x_dac.c ****  *            DAC_Channel_1 - DAC Channel1 selected
+  51:../Peripheral/src/ch32v30x_dac.c ****  *            DAC_Channel_2 - DAC Channel2 selected
+  52:../Peripheral/src/ch32v30x_dac.c ****  *          DAC_InitStruct - pointer to a DAC_InitTypeDef structure.
+  53:../Peripheral/src/ch32v30x_dac.c ****  *
+  54:../Peripheral/src/ch32v30x_dac.c ****  * @return  none
+  55:../Peripheral/src/ch32v30x_dac.c ****  */
+  56:../Peripheral/src/ch32v30x_dac.c **** void DAC_Init(uint32_t DAC_Channel, DAC_InitTypeDef *DAC_InitStruct)
+  57:../Peripheral/src/ch32v30x_dac.c **** {
+  45              		.loc 1 57 1 is_stmt 1
+  46              		.cfi_startproc
+  47              	.LVL2:
+  58:../Peripheral/src/ch32v30x_dac.c ****     uint32_t tmpreg1 = 0, tmpreg2 = 0;
+  48              		.loc 1 58 5
+  59:../Peripheral/src/ch32v30x_dac.c **** 
+  60:../Peripheral/src/ch32v30x_dac.c ****     tmpreg1 = DAC->CTLR;
+  49              		.loc 1 60 5
+  50              		.loc 1 60 13 is_stmt 0
+  51 0000 B7760040 		li	a3,1073770496
+  52 0004 93860640 		addi	a3,a3,1024
+  61:../Peripheral/src/ch32v30x_dac.c ****     tmpreg1 &= ~(CTLR_CLEAR_MASK << DAC_Channel);
+  53              		.loc 1 61 34
+  54 0008 0567     		li	a4,4096
+  60:../Peripheral/src/ch32v30x_dac.c ****     tmpreg1 &= ~(CTLR_CLEAR_MASK << DAC_Channel);
+  55              		.loc 1 60 13
+  56 000a 9C42     		lw	a5,0(a3)
+  57              	.LVL3:
+  58              		.loc 1 61 5 is_stmt 1
+  59              		.loc 1 61 34 is_stmt 0
+  60 000c 7917     		addi	a4,a4,-2
+  61 000e 3317A700 		sll	a4,a4,a0
+  62              		.loc 1 61 16
+  63 0012 1347F7FF 		not	a4,a4
+  62:../Peripheral/src/ch32v30x_dac.c ****     tmpreg2 = (DAC_InitStruct->DAC_Trigger | DAC_InitStruct->DAC_WaveGeneration |
+  64              		.loc 1 62 44
+  65 0016 D041     		lw	a2,4(a1)
+  61:../Peripheral/src/ch32v30x_dac.c ****     tmpreg1 &= ~(CTLR_CLEAR_MASK << DAC_Channel);
+  66              		.loc 1 61 13
+  67 0018 7D8F     		and	a4,a4,a5
+  68              	.LVL4:
+  69              		.loc 1 62 5 is_stmt 1
+  63:../Peripheral/src/ch32v30x_dac.c ****                DAC_InitStruct->DAC_LFSRUnmask_TriangleAmplitude | DAC_InitStruct->DAC_OutputBuffer)
+  64:../Peripheral/src/ch32v30x_dac.c ****     tmpreg1 |= tmpreg2 << DAC_Channel;
+  70              		.loc 1 64 5
+  62:../Peripheral/src/ch32v30x_dac.c ****     tmpreg2 = (DAC_InitStruct->DAC_Trigger | DAC_InitStruct->DAC_WaveGeneration |
+  71              		.loc 1 62 44 is_stmt 0
+  72 001a 9C41     		lw	a5,0(a1)
+  73 001c D18F     		or	a5,a5,a2
+  62:../Peripheral/src/ch32v30x_dac.c ****     tmpreg2 = (DAC_InitStruct->DAC_Trigger | DAC_InitStruct->DAC_WaveGeneration |
+  74              		.loc 1 62 81
+  75 001e 9045     		lw	a2,8(a1)
+  76 0020 D18F     		or	a5,a5,a2
+  62:../Peripheral/src/ch32v30x_dac.c ****     tmpreg2 = (DAC_InitStruct->DAC_Trigger | DAC_InitStruct->DAC_WaveGeneration |
+  77              		.loc 1 62 13
+  78 0022 D045     		lw	a2,12(a1)
+  79 0024 D18F     		or	a5,a5,a2
+  80              		.loc 1 64 24
+  81 0026 3395A700 		sll	a0,a5,a0
+  82              	.LVL5:
+  83              		.loc 1 64 13
+  84 002a 598D     		or	a0,a0,a4
+  85              	.LVL6:
+  65:../Peripheral/src/ch32v30x_dac.c ****     DAC->CTLR = tmpreg1;
+  86              		.loc 1 65 5 is_stmt 1
+  87              		.loc 1 65 15 is_stmt 0
+  88 002c 88C2     		sw	a0,0(a3)
+  89              	.LVL7:
+  66:../Peripheral/src/ch32v30x_dac.c **** }
+  90              		.loc 1 66 1
+  91 002e 8280     		ret
+  92              		.cfi_endproc
+  93              	.LFE30:
+  95              		.section	.text.DAC_StructInit,"ax",@progbits
+  96              		.align	1
+  97              		.globl	DAC_StructInit
+  99              	DAC_StructInit:
+ 100              	.LFB31:
+  67:../Peripheral/src/ch32v30x_dac.c **** 
+  68:../Peripheral/src/ch32v30x_dac.c **** /*********************************************************************
+  69:../Peripheral/src/ch32v30x_dac.c ****  * @fn      DAC_StructInit
+  70:../Peripheral/src/ch32v30x_dac.c ****  *
+  71:../Peripheral/src/ch32v30x_dac.c ****  * @brief   Fills each DAC_InitStruct member with its default value.
+  72:../Peripheral/src/ch32v30x_dac.c ****  *
+  73:../Peripheral/src/ch32v30x_dac.c ****  * @param   DAC_InitStruct - pointer to a DAC_InitTypeDef structure which will be initialized.
+  74:../Peripheral/src/ch32v30x_dac.c ****  *
+  75:../Peripheral/src/ch32v30x_dac.c ****  * @return  none
+  76:../Peripheral/src/ch32v30x_dac.c ****  */
+  77:../Peripheral/src/ch32v30x_dac.c **** void DAC_StructInit(DAC_InitTypeDef *DAC_InitStruct)
+  78:../Peripheral/src/ch32v30x_dac.c **** {
+ 101              		.loc 1 78 1 is_stmt 1
+ 102              		.cfi_startproc
+ 103              	.LVL8:
+  79:../Peripheral/src/ch32v30x_dac.c ****     DAC_InitStruct->DAC_Trigger = DAC_Trigger_None;
+ 104              		.loc 1 79 5
+ 105              		.loc 1 79 33 is_stmt 0
+ 106 0000 23200500 		sw	zero,0(a0)
+  80:../Peripheral/src/ch32v30x_dac.c ****     DAC_InitStruct->DAC_WaveGeneration = DAC_WaveGeneration_None;
+ 107              		.loc 1 80 5 is_stmt 1
+ 108              		.loc 1 80 40 is_stmt 0
+ 109 0004 23220500 		sw	zero,4(a0)
+  81:../Peripheral/src/ch32v30x_dac.c ****     DAC_InitStruct->DAC_LFSRUnmask_TriangleAmplitude = DAC_LFSRUnmask_Bit0;
+ 110              		.loc 1 81 5 is_stmt 1
+ 111              		.loc 1 81 54 is_stmt 0
+ 112 0008 23240500 		sw	zero,8(a0)
+  82:../Peripheral/src/ch32v30x_dac.c ****     DAC_InitStruct->DAC_OutputBuffer = DAC_OutputBuffer_Enable;
+ 113              		.loc 1 82 5 is_stmt 1
+ 114              		.loc 1 82 38 is_stmt 0
+ 115 000c 23260500 		sw	zero,12(a0)
+  83:../Peripheral/src/ch32v30x_dac.c **** }
+ 116              		.loc 1 83 1
+ 117 0010 8280     		ret
+ 118              		.cfi_endproc
+ 119              	.LFE31:
+ 121              		.section	.text.DAC_Cmd,"ax",@progbits
+ 122              		.align	1
+ 123              		.globl	DAC_Cmd
+ 125              	DAC_Cmd:
+ 126              	.LFB32:
+  84:../Peripheral/src/ch32v30x_dac.c **** 
+  85:../Peripheral/src/ch32v30x_dac.c **** /*********************************************************************
+  86:../Peripheral/src/ch32v30x_dac.c ****  * @fn      DAC_Cmd
+  87:../Peripheral/src/ch32v30x_dac.c ****  *
+  88:../Peripheral/src/ch32v30x_dac.c ****  * @brief   Enables or disables the specified DAC channel.
+  89:../Peripheral/src/ch32v30x_dac.c ****  *
+  90:../Peripheral/src/ch32v30x_dac.c ****  * @param   DAC_Channel - the selected DAC channel.
+  91:../Peripheral/src/ch32v30x_dac.c ****  *            DAC_Channel_1 - DAC Channel1 selected
+  92:../Peripheral/src/ch32v30x_dac.c ****  *            DAC_Channel_2 - DAC Channel2 selected
+  93:../Peripheral/src/ch32v30x_dac.c ****  *          NewState - new state of the DAC channel(ENABLE or DISABLE).
+  94:../Peripheral/src/ch32v30x_dac.c ****  *
+  95:../Peripheral/src/ch32v30x_dac.c ****  * @return  none
+  96:../Peripheral/src/ch32v30x_dac.c ****  */
+  97:../Peripheral/src/ch32v30x_dac.c **** void DAC_Cmd(uint32_t DAC_Channel, FunctionalState NewState)
+  98:../Peripheral/src/ch32v30x_dac.c **** {
+ 127              		.loc 1 98 1 is_stmt 1
+ 128              		.cfi_startproc
+ 129              	.LVL9:
+  99:../Peripheral/src/ch32v30x_dac.c ****     if(NewState != DISABLE)
+ 130              		.loc 1 99 5
+ 100:../Peripheral/src/ch32v30x_dac.c ****     {
+ 101:../Peripheral/src/ch32v30x_dac.c ****         DAC->CTLR |= (DAC_EN1 << DAC_Channel);
+ 131              		.loc 1 101 31 is_stmt 0
+ 132 0000 8547     		li	a5,1
+ 133 0002 3395A700 		sll	a0,a5,a0
+ 134              	.LVL10:
+ 135 0006 B7770040 		li	a5,1073770496
+ 136 000a 93870740 		addi	a5,a5,1024
+ 137              		.loc 1 101 12
+ 138 000e 9843     		lw	a4,0(a5)
+  99:../Peripheral/src/ch32v30x_dac.c ****     if(NewState != DISABLE)
+ 139              		.loc 1 99 7
+ 140 0010 81C5     		beq	a1,zero,.L6
+ 141              		.loc 1 101 9 is_stmt 1
+ 142              		.loc 1 101 19 is_stmt 0
+ 143 0012 498F     		or	a4,a4,a0
+ 144 0014 98C3     		sw	a4,0(a5)
+ 145 0016 8280     		ret
+ 146              	.L6:
+ 102:../Peripheral/src/ch32v30x_dac.c ****     }
+ 103:../Peripheral/src/ch32v30x_dac.c ****     else
+ 104:../Peripheral/src/ch32v30x_dac.c ****     {
+ 105:../Peripheral/src/ch32v30x_dac.c ****         DAC->CTLR &= ~(DAC_EN1 << DAC_Channel);
+ 147              		.loc 1 105 9 is_stmt 1
+ 148              		.loc 1 105 22 is_stmt 0
+ 149 0018 1345F5FF 		not	a0,a0
+ 150              		.loc 1 105 19
+ 151 001c 798D     		and	a0,a0,a4
+ 152 001e 88C3     		sw	a0,0(a5)
+ 106:../Peripheral/src/ch32v30x_dac.c ****     }
+ 107:../Peripheral/src/ch32v30x_dac.c **** }
+ 153              		.loc 1 107 1
+ 154 0020 8280     		ret
+ 155              		.cfi_endproc
+ 156              	.LFE32:
+ 158              		.section	.text.DAC_DMACmd,"ax",@progbits
+ 159              		.align	1
+ 160              		.globl	DAC_DMACmd
+ 162              	DAC_DMACmd:
+ 163              	.LFB33:
+ 108:../Peripheral/src/ch32v30x_dac.c **** 
+ 109:../Peripheral/src/ch32v30x_dac.c **** /*********************************************************************
+ 110:../Peripheral/src/ch32v30x_dac.c ****  * @fn      DAC_DMACmd
+ 111:../Peripheral/src/ch32v30x_dac.c ****  *
+ 112:../Peripheral/src/ch32v30x_dac.c ****  * @brief   Enables or disables the specified DAC channel DMA request.
+ 113:../Peripheral/src/ch32v30x_dac.c ****  *
+ 114:../Peripheral/src/ch32v30x_dac.c ****  * @param   DAC_Channel - the selected DAC channel.
+ 115:../Peripheral/src/ch32v30x_dac.c ****  *            DAC_Channel_1 - DAC Channel1 selected
+ 116:../Peripheral/src/ch32v30x_dac.c ****  *            DAC_Channel_2 - DAC Channel2 selected
+ 117:../Peripheral/src/ch32v30x_dac.c ****  *          NewState - new state of the DAC channel(ENABLE or DISABLE).
+ 118:../Peripheral/src/ch32v30x_dac.c ****  *
+ 119:../Peripheral/src/ch32v30x_dac.c ****  * @return  none
+ 120:../Peripheral/src/ch32v30x_dac.c ****  */
+ 121:../Peripheral/src/ch32v30x_dac.c **** void DAC_DMACmd(uint32_t DAC_Channel, FunctionalState NewState)
+ 122:../Peripheral/src/ch32v30x_dac.c **** {
+ 164              		.loc 1 122 1 is_stmt 1
+ 165              		.cfi_startproc
+ 166              	.LVL11:
+ 123:../Peripheral/src/ch32v30x_dac.c ****     if(NewState != DISABLE)
+ 167              		.loc 1 123 5
+ 124:../Peripheral/src/ch32v30x_dac.c ****     {
+ 125:../Peripheral/src/ch32v30x_dac.c ****         DAC->CTLR |= (DAC_DMAEN1 << DAC_Channel);
+ 168              		.loc 1 125 34 is_stmt 0
+ 169 0000 8567     		li	a5,4096
+ 170 0002 3395A700 		sll	a0,a5,a0
+ 171              	.LVL12:
+ 172 0006 B7770040 		li	a5,1073770496
+ 173 000a 93870740 		addi	a5,a5,1024
+ 174              		.loc 1 125 12
+ 175 000e 9843     		lw	a4,0(a5)
+ 123:../Peripheral/src/ch32v30x_dac.c ****     if(NewState != DISABLE)
+ 176              		.loc 1 123 7
+ 177 0010 81C5     		beq	a1,zero,.L9
+ 178              		.loc 1 125 9 is_stmt 1
+ 179              		.loc 1 125 19 is_stmt 0
+ 180 0012 498F     		or	a4,a4,a0
+ 181 0014 98C3     		sw	a4,0(a5)
+ 182 0016 8280     		ret
+ 183              	.L9:
+ 126:../Peripheral/src/ch32v30x_dac.c ****     }
+ 127:../Peripheral/src/ch32v30x_dac.c ****     else
+ 128:../Peripheral/src/ch32v30x_dac.c ****     {
+ 129:../Peripheral/src/ch32v30x_dac.c ****         DAC->CTLR &= ~(DAC_DMAEN1 << DAC_Channel);
+ 184              		.loc 1 129 9 is_stmt 1
+ 185              		.loc 1 129 22 is_stmt 0
+ 186 0018 1345F5FF 		not	a0,a0
+ 187              		.loc 1 129 19
+ 188 001c 798D     		and	a0,a0,a4
+ 189 001e 88C3     		sw	a0,0(a5)
+ 130:../Peripheral/src/ch32v30x_dac.c ****     }
+ 131:../Peripheral/src/ch32v30x_dac.c **** }
+ 190              		.loc 1 131 1
+ 191 0020 8280     		ret
+ 192              		.cfi_endproc
+ 193              	.LFE33:
+ 195              		.section	.text.DAC_SoftwareTriggerCmd,"ax",@progbits
+ 196              		.align	1
+ 197              		.globl	DAC_SoftwareTriggerCmd
+ 199              	DAC_SoftwareTriggerCmd:
+ 200              	.LFB34:
+ 132:../Peripheral/src/ch32v30x_dac.c **** 
+ 133:../Peripheral/src/ch32v30x_dac.c **** /*********************************************************************
+ 134:../Peripheral/src/ch32v30x_dac.c ****  * @fn      DAC_SoftwareTriggerCmd
+ 135:../Peripheral/src/ch32v30x_dac.c ****  *
+ 136:../Peripheral/src/ch32v30x_dac.c ****  * @brief   Enables or disables the selected DAC channel software trigger.
+ 137:../Peripheral/src/ch32v30x_dac.c ****  *
+ 138:../Peripheral/src/ch32v30x_dac.c ****  * @param   DAC_Channel - the selected DAC channel.
+ 139:../Peripheral/src/ch32v30x_dac.c ****  *            DAC_Channel_1 - DAC Channel1 selected
+ 140:../Peripheral/src/ch32v30x_dac.c ****  *            DAC_Channel_2 - DAC Channel2 selected
+ 141:../Peripheral/src/ch32v30x_dac.c ****  *          NewState - new state of the DAC channel(ENABLE or DISABLE).
+ 142:../Peripheral/src/ch32v30x_dac.c ****  *
+ 143:../Peripheral/src/ch32v30x_dac.c ****  * @return  none
+ 144:../Peripheral/src/ch32v30x_dac.c ****  */
+ 145:../Peripheral/src/ch32v30x_dac.c **** void DAC_SoftwareTriggerCmd(uint32_t DAC_Channel, FunctionalState NewState)
+ 146:../Peripheral/src/ch32v30x_dac.c **** {
+ 201              		.loc 1 146 1 is_stmt 1
+ 202              		.cfi_startproc
+ 203              	.LVL13:
+ 147:../Peripheral/src/ch32v30x_dac.c ****     if(NewState != DISABLE)
+ 204              		.loc 1 147 5
+ 205 0000 37770040 		li	a4,1073770496
+ 206 0004 13070740 		addi	a4,a4,1024
+ 148:../Peripheral/src/ch32v30x_dac.c ****     {
+ 149:../Peripheral/src/ch32v30x_dac.c ****         DAC->SWTR |= (uint32_t)DAC_SWTRIG1 << (DAC_Channel >> 4);
+ 207              		.loc 1 149 12 is_stmt 0
+ 208 0008 5443     		lw	a3,4(a4)
+ 209              		.loc 1 149 60
+ 210 000a 1181     		srli	a0,a0,4
+ 211              	.LVL14:
+ 212              		.loc 1 149 44
+ 213 000c 8547     		li	a5,1
+ 214 000e B397A700 		sll	a5,a5,a0
+ 147:../Peripheral/src/ch32v30x_dac.c ****     if(NewState != DISABLE)
+ 215              		.loc 1 147 7
+ 216 0012 81C5     		beq	a1,zero,.L12
+ 217              		.loc 1 149 9 is_stmt 1
+ 218              		.loc 1 149 19 is_stmt 0
+ 219 0014 D58F     		or	a5,a3,a5
+ 220              	.L14:
+ 150:../Peripheral/src/ch32v30x_dac.c ****     }
+ 151:../Peripheral/src/ch32v30x_dac.c ****     else
+ 152:../Peripheral/src/ch32v30x_dac.c ****     {
+ 153:../Peripheral/src/ch32v30x_dac.c ****         DAC->SWTR &= ~((uint32_t)DAC_SWTRIG1 << (DAC_Channel >> 4));
+ 221              		.loc 1 153 19
+ 222 0016 5CC3     		sw	a5,4(a4)
+ 154:../Peripheral/src/ch32v30x_dac.c ****     }
+ 155:../Peripheral/src/ch32v30x_dac.c **** }
+ 223              		.loc 1 155 1
+ 224 0018 8280     		ret
+ 225              	.L12:
+ 153:../Peripheral/src/ch32v30x_dac.c ****     }
+ 226              		.loc 1 153 9 is_stmt 1
+ 153:../Peripheral/src/ch32v30x_dac.c ****     }
+ 227              		.loc 1 153 22 is_stmt 0
+ 228 001a 93C7F7FF 		not	a5,a5
+ 153:../Peripheral/src/ch32v30x_dac.c ****     }
+ 229              		.loc 1 153 19
+ 230 001e F58F     		and	a5,a5,a3
+ 231 0020 DDBF     		j	.L14
+ 232              		.cfi_endproc
+ 233              	.LFE34:
+ 235              		.section	.text.DAC_DualSoftwareTriggerCmd,"ax",@progbits
+ 236              		.align	1
+ 237              		.globl	DAC_DualSoftwareTriggerCmd
+ 239              	DAC_DualSoftwareTriggerCmd:
+ 240              	.LFB35:
+ 156:../Peripheral/src/ch32v30x_dac.c **** 
+ 157:../Peripheral/src/ch32v30x_dac.c **** /*********************************************************************
+ 158:../Peripheral/src/ch32v30x_dac.c ****  * @fn      DAC_DualSoftwareTriggerCmd
+ 159:../Peripheral/src/ch32v30x_dac.c ****  *
+ 160:../Peripheral/src/ch32v30x_dac.c ****  * @brief   Enables or disables the two DAC channel software trigger.
+ 161:../Peripheral/src/ch32v30x_dac.c ****  *
+ 162:../Peripheral/src/ch32v30x_dac.c ****  * @param   NewState - new state of the DAC channel(ENABLE or DISABLE).
+ 163:../Peripheral/src/ch32v30x_dac.c ****  *
+ 164:../Peripheral/src/ch32v30x_dac.c ****  * @return  none
+ 165:../Peripheral/src/ch32v30x_dac.c ****  */
+ 166:../Peripheral/src/ch32v30x_dac.c **** void DAC_DualSoftwareTriggerCmd(FunctionalState NewState)
+ 167:../Peripheral/src/ch32v30x_dac.c **** {
+ 241              		.loc 1 167 1 is_stmt 1
+ 242              		.cfi_startproc
+ 243              	.LVL15:
+ 168:../Peripheral/src/ch32v30x_dac.c ****     if(NewState != DISABLE)
+ 244              		.loc 1 168 5
+ 245 0000 B7770040 		li	a5,1073770496
+ 246 0004 93870740 		addi	a5,a5,1024
+ 169:../Peripheral/src/ch32v30x_dac.c ****     {
+ 170:../Peripheral/src/ch32v30x_dac.c ****         DAC->SWTR |= DUAL_SWTR_SET;
+ 247              		.loc 1 170 12 is_stmt 0
+ 248 0008 D843     		lw	a4,4(a5)
+ 168:../Peripheral/src/ch32v30x_dac.c ****     if(NewState != DISABLE)
+ 249              		.loc 1 168 7
+ 250 000a 09C5     		beq	a0,zero,.L16
+ 251              		.loc 1 170 9 is_stmt 1
+ 252              		.loc 1 170 19 is_stmt 0
+ 253 000c 13673700 		ori	a4,a4,3
+ 254              	.L18:
+ 171:../Peripheral/src/ch32v30x_dac.c ****     }
+ 172:../Peripheral/src/ch32v30x_dac.c ****     else
+ 173:../Peripheral/src/ch32v30x_dac.c ****     {
+ 174:../Peripheral/src/ch32v30x_dac.c ****         DAC->SWTR &= DUAL_SWTR_RESET;
+ 255              		.loc 1 174 19
+ 256 0010 D8C3     		sw	a4,4(a5)
+ 175:../Peripheral/src/ch32v30x_dac.c ****     }
+ 176:../Peripheral/src/ch32v30x_dac.c **** }
+ 257              		.loc 1 176 1
+ 258 0012 8280     		ret
+ 259              	.L16:
+ 174:../Peripheral/src/ch32v30x_dac.c ****     }
+ 260              		.loc 1 174 9 is_stmt 1
+ 174:../Peripheral/src/ch32v30x_dac.c ****     }
+ 261              		.loc 1 174 19 is_stmt 0
+ 262 0014 719B     		andi	a4,a4,-4
+ 263 0016 EDBF     		j	.L18
+ 264              		.cfi_endproc
+ 265              	.LFE35:
+ 267              		.section	.text.DAC_WaveGenerationCmd,"ax",@progbits
+ 268              		.align	1
+ 269              		.globl	DAC_WaveGenerationCmd
+ 271              	DAC_WaveGenerationCmd:
+ 272              	.LFB36:
+ 177:../Peripheral/src/ch32v30x_dac.c **** 
+ 178:../Peripheral/src/ch32v30x_dac.c **** /*********************************************************************
+ 179:../Peripheral/src/ch32v30x_dac.c ****  * @fn      DAC_WaveGenerationCmd
+ 180:../Peripheral/src/ch32v30x_dac.c ****  *
+ 181:../Peripheral/src/ch32v30x_dac.c ****  * @brief   Enables or disables the selected DAC channel wave generation.
+ 182:../Peripheral/src/ch32v30x_dac.c ****  *
+ 183:../Peripheral/src/ch32v30x_dac.c ****  * @param   DAC_Channel - the selected DAC channel.
+ 184:../Peripheral/src/ch32v30x_dac.c ****  *            DAC_Channel_1 - DAC Channel1 selected
+ 185:../Peripheral/src/ch32v30x_dac.c ****  *            DAC_Channel_2 - DAC Channel2 selected
+ 186:../Peripheral/src/ch32v30x_dac.c ****  *          DAC_Wave - Specifies the wave type to enable or disable.
+ 187:../Peripheral/src/ch32v30x_dac.c ****  *            DAC_Wave_Noise - noise wave generation
+ 188:../Peripheral/src/ch32v30x_dac.c ****  *            DAC_Wave_Triangle - triangle wave generation
+ 189:../Peripheral/src/ch32v30x_dac.c ****  *          NewState - new state of the DAC channel(ENABLE or DISABLE).
+ 190:../Peripheral/src/ch32v30x_dac.c ****  *
+ 191:../Peripheral/src/ch32v30x_dac.c ****  * @return  none
+ 192:../Peripheral/src/ch32v30x_dac.c ****  */
+ 193:../Peripheral/src/ch32v30x_dac.c **** void DAC_WaveGenerationCmd(uint32_t DAC_Channel, uint32_t DAC_Wave, FunctionalState NewState)
+ 194:../Peripheral/src/ch32v30x_dac.c **** {
+ 273              		.loc 1 194 1 is_stmt 1
+ 274              		.cfi_startproc
+ 275              	.LVL16:
+ 195:../Peripheral/src/ch32v30x_dac.c ****     if(NewState != DISABLE)
+ 276              		.loc 1 195 5
+ 277 0000 B7770040 		li	a5,1073770496
+ 278 0004 93870740 		addi	a5,a5,1024
+ 196:../Peripheral/src/ch32v30x_dac.c ****     {
+ 197:../Peripheral/src/ch32v30x_dac.c ****         DAC->CTLR |= DAC_Wave << DAC_Channel;
+ 279              		.loc 1 197 12 is_stmt 0
+ 280 0008 9843     		lw	a4,0(a5)
+ 281              		.loc 1 197 31
+ 282 000a B395A500 		sll	a1,a1,a0
+ 283              	.LVL17:
+ 195:../Peripheral/src/ch32v30x_dac.c ****     if(NewState != DISABLE)
+ 284              		.loc 1 195 7
+ 285 000e 01C6     		beq	a2,zero,.L20
+ 286              		.loc 1 197 9 is_stmt 1
+ 287              		.loc 1 197 19 is_stmt 0
+ 288 0010 4D8F     		or	a4,a4,a1
+ 289 0012 98C3     		sw	a4,0(a5)
+ 290 0014 8280     		ret
+ 291              	.L20:
+ 198:../Peripheral/src/ch32v30x_dac.c ****     }
+ 199:../Peripheral/src/ch32v30x_dac.c ****     else
+ 200:../Peripheral/src/ch32v30x_dac.c ****     {
+ 201:../Peripheral/src/ch32v30x_dac.c ****         DAC->CTLR &= ~(DAC_Wave << DAC_Channel);
+ 292              		.loc 1 201 9 is_stmt 1
+ 293              		.loc 1 201 22 is_stmt 0
+ 294 0016 93C5F5FF 		not	a1,a1
+ 295              		.loc 1 201 19
+ 296 001a F98D     		and	a1,a1,a4
+ 297 001c 8CC3     		sw	a1,0(a5)
+ 202:../Peripheral/src/ch32v30x_dac.c ****     }
+ 203:../Peripheral/src/ch32v30x_dac.c **** }
+ 298              		.loc 1 203 1
+ 299 001e 8280     		ret
+ 300              		.cfi_endproc
+ 301              	.LFE36:
+ 303              		.section	.text.DAC_SetChannel1Data,"ax",@progbits
+ 304              		.align	1
+ 305              		.globl	DAC_SetChannel1Data
+ 307              	DAC_SetChannel1Data:
+ 308              	.LFB37:
+ 204:../Peripheral/src/ch32v30x_dac.c **** 
+ 205:../Peripheral/src/ch32v30x_dac.c **** /*********************************************************************
+ 206:../Peripheral/src/ch32v30x_dac.c ****  * @fn      DAC_SetChannel1Data
+ 207:../Peripheral/src/ch32v30x_dac.c ****  *
+ 208:../Peripheral/src/ch32v30x_dac.c ****  * @brief   Set the specified data holding register value for DAC channel1.
+ 209:../Peripheral/src/ch32v30x_dac.c ****  *
+ 210:../Peripheral/src/ch32v30x_dac.c ****  * @param   DAC_Align - Specifies the data alignment for DAC channel1.
+ 211:../Peripheral/src/ch32v30x_dac.c ****  *            DAC_Align_8b_R - 8bit right data alignment selected
+ 212:../Peripheral/src/ch32v30x_dac.c ****  *            DAC_Align_12b_L - 12bit left data alignment selected
+ 213:../Peripheral/src/ch32v30x_dac.c ****  *            DAC_Align_12b_R - 12bit right data alignment selected
+ 214:../Peripheral/src/ch32v30x_dac.c ****  *          Data - Data to be loaded in the selected data holding register.
+ 215:../Peripheral/src/ch32v30x_dac.c ****  *
+ 216:../Peripheral/src/ch32v30x_dac.c ****  * @return  none
+ 217:../Peripheral/src/ch32v30x_dac.c ****  */
+ 218:../Peripheral/src/ch32v30x_dac.c **** void DAC_SetChannel1Data(uint32_t DAC_Align, uint16_t Data)
+ 219:../Peripheral/src/ch32v30x_dac.c **** {
+ 309              		.loc 1 219 1 is_stmt 1
+ 310              		.cfi_startproc
+ 311              	.LVL18:
+ 220:../Peripheral/src/ch32v30x_dac.c ****     __IO uint32_t tmp = 0;
+ 312              		.loc 1 220 5
+ 219:../Peripheral/src/ch32v30x_dac.c ****     __IO uint32_t tmp = 0;
+ 313              		.loc 1 219 1 is_stmt 0
+ 314 0000 4111     		addi	sp,sp,-16
+ 315              		.cfi_def_cfa_offset 16
+ 221:../Peripheral/src/ch32v30x_dac.c **** 
+ 222:../Peripheral/src/ch32v30x_dac.c ****     tmp = (uint32_t)DAC_BASE;
+ 316              		.loc 1 222 9
+ 317 0002 B7770040 		li	a5,1073770496
+ 220:../Peripheral/src/ch32v30x_dac.c **** 
+ 318              		.loc 1 220 19
+ 319 0006 02C6     		sw	zero,12(sp)
+ 320              		.loc 1 222 5 is_stmt 1
+ 321              		.loc 1 222 9 is_stmt 0
+ 322 0008 93870740 		addi	a5,a5,1024
+ 323 000c 3EC6     		sw	a5,12(sp)
+ 223:../Peripheral/src/ch32v30x_dac.c ****     tmp += DHR12R1_OFFSET + DAC_Align;
+ 324              		.loc 1 223 5 is_stmt 1
+ 325              		.loc 1 223 9 is_stmt 0
+ 326 000e B247     		lw	a5,12(sp)
+ 327 0010 A107     		addi	a5,a5,8
+ 328 0012 AA97     		add	a5,a5,a0
+ 329 0014 3EC6     		sw	a5,12(sp)
+ 224:../Peripheral/src/ch32v30x_dac.c **** 
+ 225:../Peripheral/src/ch32v30x_dac.c ****     *(__IO uint32_t *)tmp = Data;
+ 330              		.loc 1 225 5 is_stmt 1
+ 331              		.loc 1 225 6 is_stmt 0
+ 332 0016 B247     		lw	a5,12(sp)
+ 333              		.loc 1 225 27
+ 334 0018 8CC3     		sw	a1,0(a5)
+ 226:../Peripheral/src/ch32v30x_dac.c **** }
+ 335              		.loc 1 226 1
+ 336 001a 4101     		addi	sp,sp,16
+ 337              		.cfi_def_cfa_offset 0
+ 338 001c 8280     		jr	ra
+ 339              		.cfi_endproc
+ 340              	.LFE37:
+ 342              		.section	.text.DAC_SetChannel2Data,"ax",@progbits
+ 343              		.align	1
+ 344              		.globl	DAC_SetChannel2Data
+ 346              	DAC_SetChannel2Data:
+ 347              	.LFB38:
+ 227:../Peripheral/src/ch32v30x_dac.c **** 
+ 228:../Peripheral/src/ch32v30x_dac.c **** /*********************************************************************
+ 229:../Peripheral/src/ch32v30x_dac.c ****  * @fn      DAC_SetChannel2Data
+ 230:../Peripheral/src/ch32v30x_dac.c ****  *
+ 231:../Peripheral/src/ch32v30x_dac.c ****  * @brief   Set the specified data holding register value for DAC channel2.
+ 232:../Peripheral/src/ch32v30x_dac.c ****  *
+ 233:../Peripheral/src/ch32v30x_dac.c ****  * @param   DAC_Align - Specifies the data alignment for DAC channel1.
+ 234:../Peripheral/src/ch32v30x_dac.c ****  *            DAC_Align_8b_R - 8bit right data alignment selected
+ 235:../Peripheral/src/ch32v30x_dac.c ****  *            DAC_Align_12b_L - 12bit left data alignment selected
+ 236:../Peripheral/src/ch32v30x_dac.c ****  *            DAC_Align_12b_R - 12bit right data alignment selected
+ 237:../Peripheral/src/ch32v30x_dac.c ****  *            Data - Data to be loaded in the selected data holding register.
+ 238:../Peripheral/src/ch32v30x_dac.c ****  *
+ 239:../Peripheral/src/ch32v30x_dac.c ****  * @return  none
+ 240:../Peripheral/src/ch32v30x_dac.c ****  */
+ 241:../Peripheral/src/ch32v30x_dac.c **** void DAC_SetChannel2Data(uint32_t DAC_Align, uint16_t Data)
+ 242:../Peripheral/src/ch32v30x_dac.c **** {
+ 348              		.loc 1 242 1 is_stmt 1
+ 349              		.cfi_startproc
+ 350              	.LVL19:
+ 243:../Peripheral/src/ch32v30x_dac.c ****     __IO uint32_t tmp = 0;
+ 351              		.loc 1 243 5
+ 242:../Peripheral/src/ch32v30x_dac.c ****     __IO uint32_t tmp = 0;
+ 352              		.loc 1 242 1 is_stmt 0
+ 353 0000 4111     		addi	sp,sp,-16
+ 354              		.cfi_def_cfa_offset 16
+ 244:../Peripheral/src/ch32v30x_dac.c **** 
+ 245:../Peripheral/src/ch32v30x_dac.c ****     tmp = (uint32_t)DAC_BASE;
+ 355              		.loc 1 245 9
+ 356 0002 B7770040 		li	a5,1073770496
+ 243:../Peripheral/src/ch32v30x_dac.c **** 
+ 357              		.loc 1 243 19
+ 358 0006 02C6     		sw	zero,12(sp)
+ 359              		.loc 1 245 5 is_stmt 1
+ 360              		.loc 1 245 9 is_stmt 0
+ 361 0008 93870740 		addi	a5,a5,1024
+ 362 000c 3EC6     		sw	a5,12(sp)
+ 246:../Peripheral/src/ch32v30x_dac.c ****     tmp += DHR12R2_OFFSET + DAC_Align;
+ 363              		.loc 1 246 5 is_stmt 1
+ 364              		.loc 1 246 9 is_stmt 0
+ 365 000e B247     		lw	a5,12(sp)
+ 366 0010 D107     		addi	a5,a5,20
+ 367 0012 AA97     		add	a5,a5,a0
+ 368 0014 3EC6     		sw	a5,12(sp)
+ 247:../Peripheral/src/ch32v30x_dac.c **** 
+ 248:../Peripheral/src/ch32v30x_dac.c ****     *(__IO uint32_t *)tmp = Data;
+ 369              		.loc 1 248 5 is_stmt 1
+ 370              		.loc 1 248 6 is_stmt 0
+ 371 0016 B247     		lw	a5,12(sp)
+ 372              		.loc 1 248 27
+ 373 0018 8CC3     		sw	a1,0(a5)
+ 249:../Peripheral/src/ch32v30x_dac.c **** }
+ 374              		.loc 1 249 1
+ 375 001a 4101     		addi	sp,sp,16
+ 376              		.cfi_def_cfa_offset 0
+ 377 001c 8280     		jr	ra
+ 378              		.cfi_endproc
+ 379              	.LFE38:
+ 381              		.section	.text.DAC_SetDualChannelData,"ax",@progbits
+ 382              		.align	1
+ 383              		.globl	DAC_SetDualChannelData
+ 385              	DAC_SetDualChannelData:
+ 386              	.LFB39:
+ 250:../Peripheral/src/ch32v30x_dac.c **** 
+ 251:../Peripheral/src/ch32v30x_dac.c **** /*********************************************************************
+ 252:../Peripheral/src/ch32v30x_dac.c ****  * @fn      DAC_SetDualChannelData
+ 253:../Peripheral/src/ch32v30x_dac.c ****  *
+ 254:../Peripheral/src/ch32v30x_dac.c ****  * @brief   Set the specified data holding register value for two DAC.
+ 255:../Peripheral/src/ch32v30x_dac.c ****  *
+ 256:../Peripheral/src/ch32v30x_dac.c ****  * @param   DAC_Align - Specifies the data alignment for DAC channel1.
+ 257:../Peripheral/src/ch32v30x_dac.c ****  *            DAC_Align_8b_R - 8bit right data alignment selected
+ 258:../Peripheral/src/ch32v30x_dac.c ****  *            DAC_Align_12b_L - 12bit left data alignment selected
+ 259:../Peripheral/src/ch32v30x_dac.c ****  *            DAC_Align_12b_R - 12bit right data alignment selected
+ 260:../Peripheral/src/ch32v30x_dac.c ****  *            Data - Data to be loaded in the selected data holding register.
+ 261:../Peripheral/src/ch32v30x_dac.c ****  *          Data1 - Data for DAC Channel1.
+ 262:../Peripheral/src/ch32v30x_dac.c ****  *          Data2 - Data for DAC Channel2
+ 263:../Peripheral/src/ch32v30x_dac.c ****  *
+ 264:../Peripheral/src/ch32v30x_dac.c ****  * @return  none
+ 265:../Peripheral/src/ch32v30x_dac.c ****  */
+ 266:../Peripheral/src/ch32v30x_dac.c **** void DAC_SetDualChannelData(uint32_t DAC_Align, uint16_t Data2, uint16_t Data1)
+ 267:../Peripheral/src/ch32v30x_dac.c **** {
+ 387              		.loc 1 267 1 is_stmt 1
+ 388              		.cfi_startproc
+ 389              	.LVL20:
+ 268:../Peripheral/src/ch32v30x_dac.c ****     uint32_t data = 0, tmp = 0;
+ 390              		.loc 1 268 5
+ 269:../Peripheral/src/ch32v30x_dac.c **** 
+ 270:../Peripheral/src/ch32v30x_dac.c ****     if(DAC_Align == DAC_Align_8b_R)
+ 391              		.loc 1 270 5
+ 392              		.loc 1 270 7 is_stmt 0
+ 393 0000 A147     		li	a5,8
+ 394 0002 631BF500 		bne	a0,a5,.L27
+ 271:../Peripheral/src/ch32v30x_dac.c ****     {
+ 272:../Peripheral/src/ch32v30x_dac.c ****         data = ((uint32_t)Data2 << 8) | Data1;
+ 395              		.loc 1 272 9 is_stmt 1
+ 396              		.loc 1 272 33 is_stmt 0
+ 397 0006 A205     		slli	a1,a1,8
+ 398              	.LVL21:
+ 399              	.L29:
+ 273:../Peripheral/src/ch32v30x_dac.c ****     }
+ 274:../Peripheral/src/ch32v30x_dac.c ****     else
+ 275:../Peripheral/src/ch32v30x_dac.c ****     {
+ 276:../Peripheral/src/ch32v30x_dac.c ****         data = ((uint32_t)Data2 << 16) | Data1;
+ 277:../Peripheral/src/ch32v30x_dac.c ****     }
+ 278:../Peripheral/src/ch32v30x_dac.c **** 
+ 279:../Peripheral/src/ch32v30x_dac.c ****     tmp = (uint32_t)DAC_BASE;
+ 280:../Peripheral/src/ch32v30x_dac.c ****     tmp += DHR12RD_OFFSET + DAC_Align;
+ 400              		.loc 1 280 9
+ 401 0008 B7770040 		li	a5,1073770496
+ 402 000c 93870742 		addi	a5,a5,1056
+ 276:../Peripheral/src/ch32v30x_dac.c ****     }
+ 403              		.loc 1 276 14
+ 404 0010 4D8E     		or	a2,a1,a2
+ 405              	.LVL22:
+ 279:../Peripheral/src/ch32v30x_dac.c ****     tmp += DHR12RD_OFFSET + DAC_Align;
+ 406              		.loc 1 279 5 is_stmt 1
+ 407              		.loc 1 280 5
+ 281:../Peripheral/src/ch32v30x_dac.c **** 
+ 282:../Peripheral/src/ch32v30x_dac.c ****     *(__IO uint32_t *)tmp = data;
+ 408              		.loc 1 282 5
+ 280:../Peripheral/src/ch32v30x_dac.c **** 
+ 409              		.loc 1 280 9 is_stmt 0
+ 410 0012 3E95     		add	a0,a0,a5
+ 411              	.LVL23:
+ 412              		.loc 1 282 27
+ 413 0014 10C1     		sw	a2,0(a0)
+ 283:../Peripheral/src/ch32v30x_dac.c **** }
+ 414              		.loc 1 283 1
+ 415 0016 8280     		ret
+ 416              	.LVL24:
+ 417              	.L27:
+ 276:../Peripheral/src/ch32v30x_dac.c ****     }
+ 418              		.loc 1 276 9 is_stmt 1
+ 276:../Peripheral/src/ch32v30x_dac.c ****     }
+ 419              		.loc 1 276 33 is_stmt 0
+ 420 0018 C205     		slli	a1,a1,16
+ 421              	.LVL25:
+ 422 001a FDB7     		j	.L29
+ 423              		.cfi_endproc
+ 424              	.LFE39:
+ 426              		.section	.text.DAC_GetDataOutputValue,"ax",@progbits
+ 427              		.align	1
+ 428              		.globl	DAC_GetDataOutputValue
+ 430              	DAC_GetDataOutputValue:
+ 431              	.LFB40:
+ 284:../Peripheral/src/ch32v30x_dac.c **** 
+ 285:../Peripheral/src/ch32v30x_dac.c **** /*********************************************************************
+ 286:../Peripheral/src/ch32v30x_dac.c ****  * @fn      DAC_GetDataOutputValue
+ 287:../Peripheral/src/ch32v30x_dac.c ****  *
+ 288:../Peripheral/src/ch32v30x_dac.c ****  * @brief   Returns the last data output value of the selected DAC channel.
+ 289:../Peripheral/src/ch32v30x_dac.c ****  *
+ 290:../Peripheral/src/ch32v30x_dac.c ****  * @param   DAC_Channel - the selected DAC channel.
+ 291:../Peripheral/src/ch32v30x_dac.c ****  *            DAC_Channel_1 - DAC Channel1 selected
+ 292:../Peripheral/src/ch32v30x_dac.c ****  *            DAC_Channel_2 - DAC Channel2 selected
+ 293:../Peripheral/src/ch32v30x_dac.c ****  *
+ 294:../Peripheral/src/ch32v30x_dac.c ****  * @return  none
+ 295:../Peripheral/src/ch32v30x_dac.c ****  */
+ 296:../Peripheral/src/ch32v30x_dac.c **** uint16_t DAC_GetDataOutputValue(uint32_t DAC_Channel)
+ 297:../Peripheral/src/ch32v30x_dac.c **** {
+ 432              		.loc 1 297 1 is_stmt 1
+ 433              		.cfi_startproc
+ 434              	.LVL26:
+ 298:../Peripheral/src/ch32v30x_dac.c ****     __IO uint32_t tmp = 0;
+ 435              		.loc 1 298 5
+ 297:../Peripheral/src/ch32v30x_dac.c ****     __IO uint32_t tmp = 0;
+ 436              		.loc 1 297 1 is_stmt 0
+ 437 0000 4111     		addi	sp,sp,-16
+ 438              		.cfi_def_cfa_offset 16
+ 299:../Peripheral/src/ch32v30x_dac.c **** 
+ 300:../Peripheral/src/ch32v30x_dac.c ****     tmp = (uint32_t)DAC_BASE;
+ 439              		.loc 1 300 9
+ 440 0002 B7770040 		li	a5,1073770496
+ 298:../Peripheral/src/ch32v30x_dac.c **** 
+ 441              		.loc 1 298 19
+ 442 0006 02C6     		sw	zero,12(sp)
+ 443              		.loc 1 300 5 is_stmt 1
+ 444              		.loc 1 300 9 is_stmt 0
+ 445 0008 93870740 		addi	a5,a5,1024
+ 446 000c 3EC6     		sw	a5,12(sp)
+ 301:../Peripheral/src/ch32v30x_dac.c ****     tmp += DOR_OFFSET + ((uint32_t)DAC_Channel >> 2);
+ 447              		.loc 1 301 5 is_stmt 1
+ 448              		.loc 1 301 9 is_stmt 0
+ 449 000e B247     		lw	a5,12(sp)
+ 450              		.loc 1 301 48
+ 451 0010 0981     		srli	a0,a0,2
+ 452              	.LVL27:
+ 453              		.loc 1 301 9
+ 454 0012 9387C702 		addi	a5,a5,44
+ 455 0016 3E95     		add	a0,a0,a5
+ 456 0018 2AC6     		sw	a0,12(sp)
+ 302:../Peripheral/src/ch32v30x_dac.c **** 
+ 303:../Peripheral/src/ch32v30x_dac.c ****     return (uint16_t)(*(__IO uint32_t *)tmp);
+ 457              		.loc 1 303 5 is_stmt 1
+ 458              		.loc 1 303 24 is_stmt 0
+ 459 001a B247     		lw	a5,12(sp)
+ 460              		.loc 1 303 23
+ 461 001c 8843     		lw	a0,0(a5)
+ 304:../Peripheral/src/ch32v30x_dac.c **** }
+ 462              		.loc 1 304 1
+ 463 001e 4101     		addi	sp,sp,16
+ 464              		.cfi_def_cfa_offset 0
+ 465 0020 4205     		slli	a0,a0,16
+ 466 0022 4181     		srli	a0,a0,16
+ 467 0024 8280     		jr	ra
+ 468              		.cfi_endproc
+ 469              	.LFE40:
+ 471              		.text
+ 472              	.Letext0:
+ 473              		.file 2 "d:\\software\\mounriver_studio\\toolchain\\risc-v embedded gcc12\\riscv-none-elf\\include
+ 474              		.file 3 "d:\\software\\mounriver_studio\\toolchain\\risc-v embedded gcc12\\riscv-none-elf\\include
+ 475              		.file 4 "C:\\Users\\localhost\\Documents\\turbomoskal-repo\\qqexpert\\firmware\\MasterController\\
+ 476              		.file 5 "C:\\Users\\localhost\\Documents\\turbomoskal-repo\\qqexpert\\firmware\\MasterController\\
+ 477              		.file 6 "C:\\Users\\localhost\\Documents\\turbomoskal-repo\\qqexpert\\firmware\\MasterController\\
+ 478              		.file 7 "C:\\Users\\localhost\\Documents\\turbomoskal-repo\\qqexpert\\firmware\\MasterController\\
+DEFINED SYMBOLS
+                            *ABS*:0000000000000000 ch32v30x_dac.c
+C:\Users\LOCALH~1\AppData\Local\Temp\cc3Vzyp7.s:14     .text.DAC_DeInit:0000000000000000 DAC_DeInit
+C:\Users\LOCALH~1\AppData\Local\Temp\cc3Vzyp7.s:18     .text.DAC_DeInit:0000000000000000 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cc3Vzyp7.s:19     .text.DAC_DeInit:0000000000000000 $x
+C:\Users\LOCALH~1\AppData\Local\Temp\cc3Vzyp7.s:19     .text.DAC_DeInit:0000000000000000 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cc3Vzyp7.s:20     .text.DAC_DeInit:0000000000000008 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cc3Vzyp7.s:21     .text.DAC_DeInit:0000000000000008 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cc3Vzyp7.s:23     .text.DAC_DeInit:0000000000000008 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cc3Vzyp7.s:28     .text.DAC_DeInit:0000000000000016 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cc3Vzyp7.s:33     .text.DAC_DeInit:0000000000000024 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cc3Vzyp7.s:34     .text.DAC_DeInit:000000000000002c .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cc3Vzyp7.s:35     .text.DAC_DeInit:000000000000002c .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cc3Vzyp7.s:36     .text.DAC_DeInit:000000000000002c .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cc3Vzyp7.s:43     .text.DAC_Init:0000000000000000 DAC_Init
+C:\Users\LOCALH~1\AppData\Local\Temp\cc3Vzyp7.s:46     .text.DAC_Init:0000000000000000 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cc3Vzyp7.s:48     .text.DAC_Init:0000000000000000 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cc3Vzyp7.s:49     .text.DAC_Init:0000000000000000 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cc3Vzyp7.s:50     .text.DAC_Init:0000000000000000 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cc3Vzyp7.s:51     .text.DAC_Init:0000000000000000 $x
+C:\Users\LOCALH~1\AppData\Local\Temp\cc3Vzyp7.s:51     .text.DAC_Init:0000000000000000 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cc3Vzyp7.s:54     .text.DAC_Init:0000000000000008 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cc3Vzyp7.s:56     .text.DAC_Init:000000000000000a .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cc3Vzyp7.s:59     .text.DAC_Init:000000000000000c .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cc3Vzyp7.s:60     .text.DAC_Init:000000000000000c .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cc3Vzyp7.s:63     .text.DAC_Init:0000000000000012 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cc3Vzyp7.s:65     .text.DAC_Init:0000000000000016 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cc3Vzyp7.s:67     .text.DAC_Init:0000000000000018 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cc3Vzyp7.s:70     .text.DAC_Init:000000000000001a .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cc3Vzyp7.s:71     .text.DAC_Init:000000000000001a .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cc3Vzyp7.s:72     .text.DAC_Init:000000000000001a .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cc3Vzyp7.s:75     .text.DAC_Init:000000000000001e .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cc3Vzyp7.s:78     .text.DAC_Init:0000000000000022 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cc3Vzyp7.s:81     .text.DAC_Init:0000000000000026 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cc3Vzyp7.s:84     .text.DAC_Init:000000000000002a .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cc3Vzyp7.s:87     .text.DAC_Init:000000000000002c .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cc3Vzyp7.s:88     .text.DAC_Init:000000000000002c .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cc3Vzyp7.s:91     .text.DAC_Init:000000000000002e .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cc3Vzyp7.s:92     .text.DAC_Init:0000000000000030 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cc3Vzyp7.s:99     .text.DAC_StructInit:0000000000000000 DAC_StructInit
+C:\Users\LOCALH~1\AppData\Local\Temp\cc3Vzyp7.s:102    .text.DAC_StructInit:0000000000000000 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cc3Vzyp7.s:104    .text.DAC_StructInit:0000000000000000 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cc3Vzyp7.s:105    .text.DAC_StructInit:0000000000000000 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cc3Vzyp7.s:106    .text.DAC_StructInit:0000000000000000 $x
+C:\Users\LOCALH~1\AppData\Local\Temp\cc3Vzyp7.s:106    .text.DAC_StructInit:0000000000000000 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cc3Vzyp7.s:108    .text.DAC_StructInit:0000000000000004 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cc3Vzyp7.s:109    .text.DAC_StructInit:0000000000000004 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cc3Vzyp7.s:111    .text.DAC_StructInit:0000000000000008 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cc3Vzyp7.s:112    .text.DAC_StructInit:0000000000000008 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cc3Vzyp7.s:114    .text.DAC_StructInit:000000000000000c .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cc3Vzyp7.s:115    .text.DAC_StructInit:000000000000000c .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cc3Vzyp7.s:117    .text.DAC_StructInit:0000000000000010 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cc3Vzyp7.s:118    .text.DAC_StructInit:0000000000000012 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cc3Vzyp7.s:125    .text.DAC_Cmd:0000000000000000 DAC_Cmd
+C:\Users\LOCALH~1\AppData\Local\Temp\cc3Vzyp7.s:128    .text.DAC_Cmd:0000000000000000 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cc3Vzyp7.s:130    .text.DAC_Cmd:0000000000000000 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cc3Vzyp7.s:131    .text.DAC_Cmd:0000000000000000 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cc3Vzyp7.s:132    .text.DAC_Cmd:0000000000000000 $x
+C:\Users\LOCALH~1\AppData\Local\Temp\cc3Vzyp7.s:132    .text.DAC_Cmd:0000000000000000 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cc3Vzyp7.s:138    .text.DAC_Cmd:000000000000000e .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cc3Vzyp7.s:140    .text.DAC_Cmd:0000000000000010 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cc3Vzyp7.s:142    .text.DAC_Cmd:0000000000000012 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cc3Vzyp7.s:143    .text.DAC_Cmd:0000000000000012 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cc3Vzyp7.s:148    .text.DAC_Cmd:0000000000000018 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cc3Vzyp7.s:149    .text.DAC_Cmd:0000000000000018 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cc3Vzyp7.s:151    .text.DAC_Cmd:000000000000001c .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cc3Vzyp7.s:154    .text.DAC_Cmd:0000000000000020 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cc3Vzyp7.s:155    .text.DAC_Cmd:0000000000000022 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cc3Vzyp7.s:162    .text.DAC_DMACmd:0000000000000000 DAC_DMACmd
+C:\Users\LOCALH~1\AppData\Local\Temp\cc3Vzyp7.s:165    .text.DAC_DMACmd:0000000000000000 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cc3Vzyp7.s:167    .text.DAC_DMACmd:0000000000000000 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cc3Vzyp7.s:168    .text.DAC_DMACmd:0000000000000000 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cc3Vzyp7.s:169    .text.DAC_DMACmd:0000000000000000 $x
+C:\Users\LOCALH~1\AppData\Local\Temp\cc3Vzyp7.s:169    .text.DAC_DMACmd:0000000000000000 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cc3Vzyp7.s:175    .text.DAC_DMACmd:000000000000000e .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cc3Vzyp7.s:177    .text.DAC_DMACmd:0000000000000010 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cc3Vzyp7.s:179    .text.DAC_DMACmd:0000000000000012 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cc3Vzyp7.s:180    .text.DAC_DMACmd:0000000000000012 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cc3Vzyp7.s:185    .text.DAC_DMACmd:0000000000000018 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cc3Vzyp7.s:186    .text.DAC_DMACmd:0000000000000018 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cc3Vzyp7.s:188    .text.DAC_DMACmd:000000000000001c .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cc3Vzyp7.s:191    .text.DAC_DMACmd:0000000000000020 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cc3Vzyp7.s:192    .text.DAC_DMACmd:0000000000000022 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cc3Vzyp7.s:199    .text.DAC_SoftwareTriggerCmd:0000000000000000 DAC_SoftwareTriggerCmd
+C:\Users\LOCALH~1\AppData\Local\Temp\cc3Vzyp7.s:202    .text.DAC_SoftwareTriggerCmd:0000000000000000 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cc3Vzyp7.s:204    .text.DAC_SoftwareTriggerCmd:0000000000000000 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cc3Vzyp7.s:205    .text.DAC_SoftwareTriggerCmd:0000000000000000 $x
+C:\Users\LOCALH~1\AppData\Local\Temp\cc3Vzyp7.s:205    .text.DAC_SoftwareTriggerCmd:0000000000000000 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cc3Vzyp7.s:208    .text.DAC_SoftwareTriggerCmd:0000000000000008 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cc3Vzyp7.s:210    .text.DAC_SoftwareTriggerCmd:000000000000000a .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cc3Vzyp7.s:213    .text.DAC_SoftwareTriggerCmd:000000000000000c .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cc3Vzyp7.s:216    .text.DAC_SoftwareTriggerCmd:0000000000000012 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cc3Vzyp7.s:218    .text.DAC_SoftwareTriggerCmd:0000000000000014 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cc3Vzyp7.s:219    .text.DAC_SoftwareTriggerCmd:0000000000000014 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cc3Vzyp7.s:222    .text.DAC_SoftwareTriggerCmd:0000000000000016 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cc3Vzyp7.s:224    .text.DAC_SoftwareTriggerCmd:0000000000000018 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cc3Vzyp7.s:227    .text.DAC_SoftwareTriggerCmd:000000000000001a .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cc3Vzyp7.s:228    .text.DAC_SoftwareTriggerCmd:000000000000001a .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cc3Vzyp7.s:230    .text.DAC_SoftwareTriggerCmd:000000000000001e .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cc3Vzyp7.s:232    .text.DAC_SoftwareTriggerCmd:0000000000000022 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cc3Vzyp7.s:239    .text.DAC_DualSoftwareTriggerCmd:0000000000000000 DAC_DualSoftwareTriggerCmd
+C:\Users\LOCALH~1\AppData\Local\Temp\cc3Vzyp7.s:242    .text.DAC_DualSoftwareTriggerCmd:0000000000000000 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cc3Vzyp7.s:244    .text.DAC_DualSoftwareTriggerCmd:0000000000000000 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cc3Vzyp7.s:245    .text.DAC_DualSoftwareTriggerCmd:0000000000000000 $x
+C:\Users\LOCALH~1\AppData\Local\Temp\cc3Vzyp7.s:245    .text.DAC_DualSoftwareTriggerCmd:0000000000000000 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cc3Vzyp7.s:248    .text.DAC_DualSoftwareTriggerCmd:0000000000000008 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cc3Vzyp7.s:250    .text.DAC_DualSoftwareTriggerCmd:000000000000000a .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cc3Vzyp7.s:252    .text.DAC_DualSoftwareTriggerCmd:000000000000000c .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cc3Vzyp7.s:253    .text.DAC_DualSoftwareTriggerCmd:000000000000000c .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cc3Vzyp7.s:256    .text.DAC_DualSoftwareTriggerCmd:0000000000000010 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cc3Vzyp7.s:258    .text.DAC_DualSoftwareTriggerCmd:0000000000000012 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cc3Vzyp7.s:261    .text.DAC_DualSoftwareTriggerCmd:0000000000000014 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cc3Vzyp7.s:262    .text.DAC_DualSoftwareTriggerCmd:0000000000000014 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cc3Vzyp7.s:264    .text.DAC_DualSoftwareTriggerCmd:0000000000000018 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cc3Vzyp7.s:271    .text.DAC_WaveGenerationCmd:0000000000000000 DAC_WaveGenerationCmd
+C:\Users\LOCALH~1\AppData\Local\Temp\cc3Vzyp7.s:274    .text.DAC_WaveGenerationCmd:0000000000000000 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cc3Vzyp7.s:276    .text.DAC_WaveGenerationCmd:0000000000000000 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cc3Vzyp7.s:277    .text.DAC_WaveGenerationCmd:0000000000000000 $x
+C:\Users\LOCALH~1\AppData\Local\Temp\cc3Vzyp7.s:277    .text.DAC_WaveGenerationCmd:0000000000000000 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cc3Vzyp7.s:280    .text.DAC_WaveGenerationCmd:0000000000000008 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cc3Vzyp7.s:282    .text.DAC_WaveGenerationCmd:000000000000000a .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cc3Vzyp7.s:285    .text.DAC_WaveGenerationCmd:000000000000000e .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cc3Vzyp7.s:287    .text.DAC_WaveGenerationCmd:0000000000000010 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cc3Vzyp7.s:288    .text.DAC_WaveGenerationCmd:0000000000000010 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cc3Vzyp7.s:293    .text.DAC_WaveGenerationCmd:0000000000000016 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cc3Vzyp7.s:294    .text.DAC_WaveGenerationCmd:0000000000000016 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cc3Vzyp7.s:296    .text.DAC_WaveGenerationCmd:000000000000001a .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cc3Vzyp7.s:299    .text.DAC_WaveGenerationCmd:000000000000001e .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cc3Vzyp7.s:300    .text.DAC_WaveGenerationCmd:0000000000000020 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cc3Vzyp7.s:307    .text.DAC_SetChannel1Data:0000000000000000 DAC_SetChannel1Data
+C:\Users\LOCALH~1\AppData\Local\Temp\cc3Vzyp7.s:310    .text.DAC_SetChannel1Data:0000000000000000 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cc3Vzyp7.s:312    .text.DAC_SetChannel1Data:0000000000000000 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cc3Vzyp7.s:313    .text.DAC_SetChannel1Data:0000000000000000 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cc3Vzyp7.s:314    .text.DAC_SetChannel1Data:0000000000000000 $x
+C:\Users\LOCALH~1\AppData\Local\Temp\cc3Vzyp7.s:314    .text.DAC_SetChannel1Data:0000000000000000 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cc3Vzyp7.s:315    .text.DAC_SetChannel1Data:0000000000000002 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cc3Vzyp7.s:317    .text.DAC_SetChannel1Data:0000000000000002 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cc3Vzyp7.s:319    .text.DAC_SetChannel1Data:0000000000000006 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cc3Vzyp7.s:321    .text.DAC_SetChannel1Data:0000000000000008 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cc3Vzyp7.s:322    .text.DAC_SetChannel1Data:0000000000000008 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cc3Vzyp7.s:325    .text.DAC_SetChannel1Data:000000000000000e .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cc3Vzyp7.s:326    .text.DAC_SetChannel1Data:000000000000000e .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cc3Vzyp7.s:331    .text.DAC_SetChannel1Data:0000000000000016 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cc3Vzyp7.s:332    .text.DAC_SetChannel1Data:0000000000000016 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cc3Vzyp7.s:334    .text.DAC_SetChannel1Data:0000000000000018 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cc3Vzyp7.s:336    .text.DAC_SetChannel1Data:000000000000001a .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cc3Vzyp7.s:337    .text.DAC_SetChannel1Data:000000000000001c .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cc3Vzyp7.s:339    .text.DAC_SetChannel1Data:000000000000001e .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cc3Vzyp7.s:346    .text.DAC_SetChannel2Data:0000000000000000 DAC_SetChannel2Data
+C:\Users\LOCALH~1\AppData\Local\Temp\cc3Vzyp7.s:349    .text.DAC_SetChannel2Data:0000000000000000 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cc3Vzyp7.s:351    .text.DAC_SetChannel2Data:0000000000000000 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cc3Vzyp7.s:352    .text.DAC_SetChannel2Data:0000000000000000 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cc3Vzyp7.s:353    .text.DAC_SetChannel2Data:0000000000000000 $x
+C:\Users\LOCALH~1\AppData\Local\Temp\cc3Vzyp7.s:353    .text.DAC_SetChannel2Data:0000000000000000 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cc3Vzyp7.s:354    .text.DAC_SetChannel2Data:0000000000000002 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cc3Vzyp7.s:356    .text.DAC_SetChannel2Data:0000000000000002 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cc3Vzyp7.s:358    .text.DAC_SetChannel2Data:0000000000000006 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cc3Vzyp7.s:360    .text.DAC_SetChannel2Data:0000000000000008 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cc3Vzyp7.s:361    .text.DAC_SetChannel2Data:0000000000000008 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cc3Vzyp7.s:364    .text.DAC_SetChannel2Data:000000000000000e .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cc3Vzyp7.s:365    .text.DAC_SetChannel2Data:000000000000000e .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cc3Vzyp7.s:370    .text.DAC_SetChannel2Data:0000000000000016 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cc3Vzyp7.s:371    .text.DAC_SetChannel2Data:0000000000000016 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cc3Vzyp7.s:373    .text.DAC_SetChannel2Data:0000000000000018 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cc3Vzyp7.s:375    .text.DAC_SetChannel2Data:000000000000001a .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cc3Vzyp7.s:376    .text.DAC_SetChannel2Data:000000000000001c .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cc3Vzyp7.s:378    .text.DAC_SetChannel2Data:000000000000001e .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cc3Vzyp7.s:385    .text.DAC_SetDualChannelData:0000000000000000 DAC_SetDualChannelData
+C:\Users\LOCALH~1\AppData\Local\Temp\cc3Vzyp7.s:388    .text.DAC_SetDualChannelData:0000000000000000 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cc3Vzyp7.s:390    .text.DAC_SetDualChannelData:0000000000000000 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cc3Vzyp7.s:391    .text.DAC_SetDualChannelData:0000000000000000 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cc3Vzyp7.s:392    .text.DAC_SetDualChannelData:0000000000000000 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cc3Vzyp7.s:393    .text.DAC_SetDualChannelData:0000000000000000 $x
+C:\Users\LOCALH~1\AppData\Local\Temp\cc3Vzyp7.s:393    .text.DAC_SetDualChannelData:0000000000000000 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cc3Vzyp7.s:396    .text.DAC_SetDualChannelData:0000000000000006 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cc3Vzyp7.s:397    .text.DAC_SetDualChannelData:0000000000000006 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cc3Vzyp7.s:401    .text.DAC_SetDualChannelData:0000000000000008 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cc3Vzyp7.s:404    .text.DAC_SetDualChannelData:0000000000000010 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cc3Vzyp7.s:407    .text.DAC_SetDualChannelData:0000000000000012 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cc3Vzyp7.s:408    .text.DAC_SetDualChannelData:0000000000000012 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cc3Vzyp7.s:409    .text.DAC_SetDualChannelData:0000000000000012 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cc3Vzyp7.s:410    .text.DAC_SetDualChannelData:0000000000000012 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cc3Vzyp7.s:413    .text.DAC_SetDualChannelData:0000000000000014 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cc3Vzyp7.s:415    .text.DAC_SetDualChannelData:0000000000000016 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cc3Vzyp7.s:419    .text.DAC_SetDualChannelData:0000000000000018 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cc3Vzyp7.s:420    .text.DAC_SetDualChannelData:0000000000000018 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cc3Vzyp7.s:423    .text.DAC_SetDualChannelData:000000000000001c .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cc3Vzyp7.s:430    .text.DAC_GetDataOutputValue:0000000000000000 DAC_GetDataOutputValue
+C:\Users\LOCALH~1\AppData\Local\Temp\cc3Vzyp7.s:433    .text.DAC_GetDataOutputValue:0000000000000000 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cc3Vzyp7.s:435    .text.DAC_GetDataOutputValue:0000000000000000 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cc3Vzyp7.s:436    .text.DAC_GetDataOutputValue:0000000000000000 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cc3Vzyp7.s:437    .text.DAC_GetDataOutputValue:0000000000000000 $x
+C:\Users\LOCALH~1\AppData\Local\Temp\cc3Vzyp7.s:437    .text.DAC_GetDataOutputValue:0000000000000000 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cc3Vzyp7.s:438    .text.DAC_GetDataOutputValue:0000000000000002 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cc3Vzyp7.s:440    .text.DAC_GetDataOutputValue:0000000000000002 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cc3Vzyp7.s:442    .text.DAC_GetDataOutputValue:0000000000000006 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cc3Vzyp7.s:444    .text.DAC_GetDataOutputValue:0000000000000008 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cc3Vzyp7.s:445    .text.DAC_GetDataOutputValue:0000000000000008 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cc3Vzyp7.s:448    .text.DAC_GetDataOutputValue:000000000000000e .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cc3Vzyp7.s:449    .text.DAC_GetDataOutputValue:000000000000000e .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cc3Vzyp7.s:451    .text.DAC_GetDataOutputValue:0000000000000010 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cc3Vzyp7.s:454    .text.DAC_GetDataOutputValue:0000000000000012 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cc3Vzyp7.s:458    .text.DAC_GetDataOutputValue:000000000000001a .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cc3Vzyp7.s:459    .text.DAC_GetDataOutputValue:000000000000001a .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cc3Vzyp7.s:461    .text.DAC_GetDataOutputValue:000000000000001c .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cc3Vzyp7.s:463    .text.DAC_GetDataOutputValue:000000000000001e .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cc3Vzyp7.s:464    .text.DAC_GetDataOutputValue:0000000000000020 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cc3Vzyp7.s:468    .text.DAC_GetDataOutputValue:0000000000000026 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cc3Vzyp7.s:2034   .debug_line_str:0000000000000076 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cc3Vzyp7.s:2034   .debug_line_str:00000000000000cb .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cc3Vzyp7.s:2034   .debug_line_str:00000000000000dd .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cc3Vzyp7.s:2034   .debug_line_str:0000000000000139 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cc3Vzyp7.s:2034   .debug_line_str:0000000000000191 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cc3Vzyp7.s:2034   .debug_line_str:00000000000001e7 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cc3Vzyp7.s:2034   .debug_line_str:0000000000000247 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cc3Vzyp7.s:2034   .debug_line_str:0000000000000256 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cc3Vzyp7.s:2034   .debug_line_str:0000000000000265 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cc3Vzyp7.s:2034   .debug_line_str:0000000000000276 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cc3Vzyp7.s:2034   .debug_line_str:0000000000000280 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cc3Vzyp7.s:2034   .debug_line_str:000000000000028d .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cc3Vzyp7.s:2034   .debug_line_str:0000000000000298 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cc3Vzyp7.s:2034   .debug_line_str:00000000000002a7 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cc3Vzyp7.s:39     .text.DAC_DeInit:000000000000002c .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cc3Vzyp7.s:95     .text.DAC_Init:0000000000000030 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cc3Vzyp7.s:121    .text.DAC_StructInit:0000000000000012 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cc3Vzyp7.s:158    .text.DAC_Cmd:0000000000000022 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cc3Vzyp7.s:195    .text.DAC_DMACmd:0000000000000022 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cc3Vzyp7.s:235    .text.DAC_SoftwareTriggerCmd:0000000000000022 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cc3Vzyp7.s:267    .text.DAC_DualSoftwareTriggerCmd:0000000000000018 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cc3Vzyp7.s:303    .text.DAC_WaveGenerationCmd:0000000000000020 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cc3Vzyp7.s:342    .text.DAC_SetChannel1Data:000000000000001e .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cc3Vzyp7.s:381    .text.DAC_SetChannel2Data:000000000000001e .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cc3Vzyp7.s:426    .text.DAC_SetDualChannelData:000000000000001c .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cc3Vzyp7.s:471    .text.DAC_GetDataOutputValue:0000000000000026 .L0 
+                     .debug_frame:0000000000000000 .L0 
+C:\Users\LOCALH~1\AppData\Local\Temp\cc3Vzyp7.s:146    .text.DAC_Cmd:0000000000000018 .L6
+C:\Users\LOCALH~1\AppData\Local\Temp\cc3Vzyp7.s:183    .text.DAC_DMACmd:0000000000000018 .L9
+C:\Users\LOCALH~1\AppData\Local\Temp\cc3Vzyp7.s:225    .text.DAC_SoftwareTriggerCmd:000000000000001a .L12
+C:\Users\LOCALH~1\AppData\Local\Temp\cc3Vzyp7.s:220    .text.DAC_SoftwareTriggerCmd:0000000000000016 .L14
+C:\Users\LOCALH~1\AppData\Local\Temp\cc3Vzyp7.s:259    .text.DAC_DualSoftwareTriggerCmd:0000000000000014 .L16
+C:\Users\LOCALH~1\AppData\Local\Temp\cc3Vzyp7.s:254    .text.DAC_DualSoftwareTriggerCmd:0000000000000010 .L18
+C:\Users\LOCALH~1\AppData\Local\Temp\cc3Vzyp7.s:291    .text.DAC_WaveGenerationCmd:0000000000000016 .L20
+C:\Users\LOCALH~1\AppData\Local\Temp\cc3Vzyp7.s:417    .text.DAC_SetDualChannelData:0000000000000018 .L27
+C:\Users\LOCALH~1\AppData\Local\Temp\cc3Vzyp7.s:399    .text.DAC_SetDualChannelData:0000000000000008 .L29
+C:\Users\LOCALH~1\AppData\Local\Temp\cc3Vzyp7.s:1060   .debug_abbrev:0000000000000000 .Ldebug_abbrev0
+C:\Users\LOCALH~1\AppData\Local\Temp\cc3Vzyp7.s:2007   .debug_str:00000000000002a9 .LASF62
+C:\Users\LOCALH~1\AppData\Local\Temp\cc3Vzyp7.s:2032   .debug_line_str:0000000000000055 .LASF0
+C:\Users\LOCALH~1\AppData\Local\Temp\cc3Vzyp7.s:2030   .debug_line_str:0000000000000000 .LASF1
+C:\Users\LOCALH~1\AppData\Local\Temp\cc3Vzyp7.s:1859   .debug_rnglists:000000000000000c .LLRL13
+C:\Users\LOCALH~1\AppData\Local\Temp\cc3Vzyp7.s:1899   .debug_line:0000000000000000 .Ldebug_line0
+C:\Users\LOCALH~1\AppData\Local\Temp\cc3Vzyp7.s:2023   .debug_str:00000000000003df .LASF2
+C:\Users\LOCALH~1\AppData\Local\Temp\cc3Vzyp7.s:1959   .debug_str:000000000000016c .LASF3
+C:\Users\LOCALH~1\AppData\Local\Temp\cc3Vzyp7.s:1941   .debug_str:0000000000000101 .LASF6
+C:\Users\LOCALH~1\AppData\Local\Temp\cc3Vzyp7.s:1955   .debug_str:000000000000014f .LASF4
+C:\Users\LOCALH~1\AppData\Local\Temp\cc3Vzyp7.s:1911   .debug_str:0000000000000048 .LASF5
+C:\Users\LOCALH~1\AppData\Local\Temp\cc3Vzyp7.s:1921   .debug_str:000000000000008d .LASF7
+C:\Users\LOCALH~1\AppData\Local\Temp\cc3Vzyp7.s:1977   .debug_str:00000000000001d7 .LASF8
+C:\Users\LOCALH~1\AppData\Local\Temp\cc3Vzyp7.s:1935   .debug_str:00000000000000d8 .LASF9
+C:\Users\LOCALH~1\AppData\Local\Temp\cc3Vzyp7.s:1915   .debug_str:0000000000000068 .LASF10
+C:\Users\LOCALH~1\AppData\Local\Temp\cc3Vzyp7.s:2001   .debug_str:0000000000000273 .LASF11
+C:\Users\LOCALH~1\AppData\Local\Temp\cc3Vzyp7.s:1931   .debug_str:00000000000000b3 .LASF12
+C:\Users\LOCALH~1\AppData\Local\Temp\cc3Vzyp7.s:1961   .debug_str:0000000000000178 .LASF13
+C:\Users\LOCALH~1\AppData\Local\Temp\cc3Vzyp7.s:2011   .debug_str:00000000000003b2 .LASF14
+C:\Users\LOCALH~1\AppData\Local\Temp\cc3Vzyp7.s:1967   .debug_str:00000000000001a4 .LASF15
+C:\Users\LOCALH~1\AppData\Local\Temp\cc3Vzyp7.s:1963   .debug_str:000000000000018f .LASF16
+C:\Users\LOCALH~1\AppData\Local\Temp\cc3Vzyp7.s:1929   .debug_str:00000000000000ab .LASF17
+C:\Users\LOCALH~1\AppData\Local\Temp\cc3Vzyp7.s:2027   .debug_str:00000000000003ff .LASF18
+C:\Users\LOCALH~1\AppData\Local\Temp\cc3Vzyp7.s:2003   .debug_str:0000000000000285 .LASF19
+C:\Users\LOCALH~1\AppData\Local\Temp\cc3Vzyp7.s:2019   .debug_str:00000000000003ce .LASF20
+C:\Users\LOCALH~1\AppData\Local\Temp\cc3Vzyp7.s:2015   .debug_str:00000000000003c3 .LASF21
+C:\Users\LOCALH~1\AppData\Local\Temp\cc3Vzyp7.s:1983   .debug_str:000000000000020d .LASF22
+C:\Users\LOCALH~1\AppData\Local\Temp\cc3Vzyp7.s:1907   .debug_str:0000000000000036 .LASF23
+C:\Users\LOCALH~1\AppData\Local\Temp\cc3Vzyp7.s:1947   .debug_str:0000000000000124 .LASF24
+C:\Users\LOCALH~1\AppData\Local\Temp\cc3Vzyp7.s:1985   .debug_str:0000000000000216 .LASF25
+C:\Users\LOCALH~1\AppData\Local\Temp\cc3Vzyp7.s:1909   .debug_str:000000000000003f .LASF26
+C:\Users\LOCALH~1\AppData\Local\Temp\cc3Vzyp7.s:1949   .debug_str:000000000000012c .LASF27
+C:\Users\LOCALH~1\AppData\Local\Temp\cc3Vzyp7.s:1999   .debug_str:000000000000026a .LASF28
+C:\Users\LOCALH~1\AppData\Local\Temp\cc3Vzyp7.s:1919   .debug_str:0000000000000084 .LASF29
+C:\Users\LOCALH~1\AppData\Local\Temp\cc3Vzyp7.s:1973   .debug_str:00000000000001c4 .LASF30
+C:\Users\LOCALH~1\AppData\Local\Temp\cc3Vzyp7.s:1923   .debug_str:0000000000000098 .LASF31
+C:\Users\LOCALH~1\AppData\Local\Temp\cc3Vzyp7.s:1925   .debug_str:000000000000009d .LASF32
+C:\Users\LOCALH~1\AppData\Local\Temp\cc3Vzyp7.s:2021   .debug_str:00000000000003d3 .LASF33
+C:\Users\LOCALH~1\AppData\Local\Temp\cc3Vzyp7.s:1951   .debug_str:0000000000000134 .LASF34
+C:\Users\LOCALH~1\AppData\Local\Temp\cc3Vzyp7.s:1987   .debug_str:000000000000021f .LASF35
+C:\Users\LOCALH~1\AppData\Local\Temp\cc3Vzyp7.s:1965   .debug_str:0000000000000198 .LASF36
+C:\Users\LOCALH~1\AppData\Local\Temp\cc3Vzyp7.s:2025   .debug_str:00000000000003ec .LASF37
+C:\Users\LOCALH~1\AppData\Local\Temp\cc3Vzyp7.s:1989   .debug_str:0000000000000224 .LASF38
+C:\Users\LOCALH~1\AppData\Local\Temp\cc3Vzyp7.s:1917   .debug_str:0000000000000073 .LASF39
+C:\Users\LOCALH~1\AppData\Local\Temp\cc3Vzyp7.s:1993   .debug_str:000000000000024f .LASF40
+C:\Users\LOCALH~1\AppData\Local\Temp\cc3Vzyp7.s:1933   .debug_str:00000000000000c1 .LASF63
+C:\Users\LOCALH~1\AppData\Local\Temp\cc3Vzyp7.s:1903   .debug_str:0000000000000008 .LASF64
+C:\Users\LOCALH~1\AppData\Local\Temp\cc3Vzyp7.s:431    .text.DAC_GetDataOutputValue:0000000000000000 .LFB40
+C:\Users\LOCALH~1\AppData\Local\Temp\cc3Vzyp7.s:469    .text.DAC_GetDataOutputValue:0000000000000026 .LFE40
+C:\Users\LOCALH~1\AppData\Local\Temp\cc3Vzyp7.s:1971   .debug_str:00000000000001b8 .LASF41
+C:\Users\LOCALH~1\AppData\Local\Temp\cc3Vzyp7.s:1563   .debug_loclists:000000000000000c .LLST12
+C:\Users\LOCALH~1\AppData\Local\Temp\cc3Vzyp7.s:1937   .debug_str:00000000000000e1 .LASF46
+C:\Users\LOCALH~1\AppData\Local\Temp\cc3Vzyp7.s:386    .text.DAC_SetDualChannelData:0000000000000000 .LFB39
+C:\Users\LOCALH~1\AppData\Local\Temp\cc3Vzyp7.s:424    .text.DAC_SetDualChannelData:000000000000001c .LFE39
+C:\Users\LOCALH~1\AppData\Local\Temp\cc3Vzyp7.s:1991   .debug_str:0000000000000245 .LASF42
+C:\Users\LOCALH~1\AppData\Local\Temp\cc3Vzyp7.s:1578   .debug_loclists:0000000000000026 .LLST7
+C:\Users\LOCALH~1\AppData\Local\Temp\cc3Vzyp7.s:1995   .debug_str:000000000000025f .LASF43
+C:\Users\LOCALH~1\AppData\Local\Temp\cc3Vzyp7.s:1597   .debug_loclists:000000000000004e .LLST8
+C:\Users\LOCALH~1\AppData\Local\Temp\cc3Vzyp7.s:2017   .debug_str:00000000000003c8 .LASF44
+C:\Users\LOCALH~1\AppData\Local\Temp\cc3Vzyp7.s:1625   .debug_loclists:0000000000000081 .LLST9
+C:\Users\LOCALH~1\AppData\Local\Temp\cc3Vzyp7.s:1997   .debug_str:0000000000000265 .LASF45
+C:\Users\LOCALH~1\AppData\Local\Temp\cc3Vzyp7.s:1645   .debug_loclists:00000000000000a6 .LLST10
+C:\Users\LOCALH~1\AppData\Local\Temp\cc3Vzyp7.s:1664   .debug_loclists:00000000000000ca .LLST11
+C:\Users\LOCALH~1\AppData\Local\Temp\cc3Vzyp7.s:2005   .debug_str:0000000000000295 .LASF47
+C:\Users\LOCALH~1\AppData\Local\Temp\cc3Vzyp7.s:347    .text.DAC_SetChannel2Data:0000000000000000 .LFB38
+C:\Users\LOCALH~1\AppData\Local\Temp\cc3Vzyp7.s:379    .text.DAC_SetChannel2Data:000000000000001e .LFE38
+C:\Users\LOCALH~1\AppData\Local\Temp\cc3Vzyp7.s:1943   .debug_str:000000000000010b .LASF48
+C:\Users\LOCALH~1\AppData\Local\Temp\cc3Vzyp7.s:1945   .debug_str:0000000000000110 .LASF49
+C:\Users\LOCALH~1\AppData\Local\Temp\cc3Vzyp7.s:308    .text.DAC_SetChannel1Data:0000000000000000 .LFB37
+C:\Users\LOCALH~1\AppData\Local\Temp\cc3Vzyp7.s:340    .text.DAC_SetChannel1Data:000000000000001e .LFE37
+C:\Users\LOCALH~1\AppData\Local\Temp\cc3Vzyp7.s:1913   .debug_str:0000000000000052 .LASF50
+C:\Users\LOCALH~1\AppData\Local\Temp\cc3Vzyp7.s:272    .text.DAC_WaveGenerationCmd:0000000000000000 .LFB36
+C:\Users\LOCALH~1\AppData\Local\Temp\cc3Vzyp7.s:301    .text.DAC_WaveGenerationCmd:0000000000000020 .LFE36
+C:\Users\LOCALH~1\AppData\Local\Temp\cc3Vzyp7.s:1939   .debug_str:00000000000000f8 .LASF51
+C:\Users\LOCALH~1\AppData\Local\Temp\cc3Vzyp7.s:1690   .debug_loclists:00000000000000ff .LLST6
+C:\Users\LOCALH~1\AppData\Local\Temp\cc3Vzyp7.s:1927   .debug_str:00000000000000a2 .LASF52
+C:\Users\LOCALH~1\AppData\Local\Temp\cc3Vzyp7.s:1979   .debug_str:00000000000001ea .LASF53
+C:\Users\LOCALH~1\AppData\Local\Temp\cc3Vzyp7.s:240    .text.DAC_DualSoftwareTriggerCmd:0000000000000000 .LFB35
+C:\Users\LOCALH~1\AppData\Local\Temp\cc3Vzyp7.s:265    .text.DAC_DualSoftwareTriggerCmd:0000000000000018 .LFE35
+C:\Users\LOCALH~1\AppData\Local\Temp\cc3Vzyp7.s:1905   .debug_str:000000000000001f .LASF54
+C:\Users\LOCALH~1\AppData\Local\Temp\cc3Vzyp7.s:200    .text.DAC_SoftwareTriggerCmd:0000000000000000 .LFB34
+C:\Users\LOCALH~1\AppData\Local\Temp\cc3Vzyp7.s:233    .text.DAC_SoftwareTriggerCmd:0000000000000022 .LFE34
+C:\Users\LOCALH~1\AppData\Local\Temp\cc3Vzyp7.s:1705   .debug_loclists:0000000000000119 .LLST5
+C:\Users\LOCALH~1\AppData\Local\Temp\cc3Vzyp7.s:1969   .debug_str:00000000000001ad .LASF55
+C:\Users\LOCALH~1\AppData\Local\Temp\cc3Vzyp7.s:163    .text.DAC_DMACmd:0000000000000000 .LFB33
+C:\Users\LOCALH~1\AppData\Local\Temp\cc3Vzyp7.s:193    .text.DAC_DMACmd:0000000000000022 .LFE33
+C:\Users\LOCALH~1\AppData\Local\Temp\cc3Vzyp7.s:1720   .debug_loclists:0000000000000133 .LLST4
+C:\Users\LOCALH~1\AppData\Local\Temp\cc3Vzyp7.s:2009   .debug_str:00000000000003aa .LASF56
+C:\Users\LOCALH~1\AppData\Local\Temp\cc3Vzyp7.s:126    .text.DAC_Cmd:0000000000000000 .LFB32
+C:\Users\LOCALH~1\AppData\Local\Temp\cc3Vzyp7.s:156    .text.DAC_Cmd:0000000000000022 .LFE32
+C:\Users\LOCALH~1\AppData\Local\Temp\cc3Vzyp7.s:1735   .debug_loclists:000000000000014d .LLST3
+C:\Users\LOCALH~1\AppData\Local\Temp\cc3Vzyp7.s:1957   .debug_str:000000000000015d .LASF57
+C:\Users\LOCALH~1\AppData\Local\Temp\cc3Vzyp7.s:100    .text.DAC_StructInit:0000000000000000 .LFB31
+C:\Users\LOCALH~1\AppData\Local\Temp\cc3Vzyp7.s:119    .text.DAC_StructInit:0000000000000012 .LFE31
+C:\Users\LOCALH~1\AppData\Local\Temp\cc3Vzyp7.s:1953   .debug_str:0000000000000140 .LASF58
+C:\Users\LOCALH~1\AppData\Local\Temp\cc3Vzyp7.s:2013   .debug_str:00000000000003ba .LASF59
+C:\Users\LOCALH~1\AppData\Local\Temp\cc3Vzyp7.s:44     .text.DAC_Init:0000000000000000 .LFB30
+C:\Users\LOCALH~1\AppData\Local\Temp\cc3Vzyp7.s:93     .text.DAC_Init:0000000000000030 .LFE30
+C:\Users\LOCALH~1\AppData\Local\Temp\cc3Vzyp7.s:1750   .debug_loclists:0000000000000167 .LLST0
+C:\Users\LOCALH~1\AppData\Local\Temp\cc3Vzyp7.s:1901   .debug_str:0000000000000000 .LASF60
+C:\Users\LOCALH~1\AppData\Local\Temp\cc3Vzyp7.s:1765   .debug_loclists:0000000000000181 .LLST1
+C:\Users\LOCALH~1\AppData\Local\Temp\cc3Vzyp7.s:1981   .debug_str:0000000000000205 .LASF61
+C:\Users\LOCALH~1\AppData\Local\Temp\cc3Vzyp7.s:1788   .debug_loclists:00000000000001af .LLST2
+C:\Users\LOCALH~1\AppData\Local\Temp\cc3Vzyp7.s:1975   .debug_str:00000000000001cc .LASF65
+C:\Users\LOCALH~1\AppData\Local\Temp\cc3Vzyp7.s:15     .text.DAC_DeInit:0000000000000000 .LFB29
+C:\Users\LOCALH~1\AppData\Local\Temp\cc3Vzyp7.s:37     .text.DAC_DeInit:000000000000002c .LFE29
+C:\Users\LOCALH~1\AppData\Local\Temp\cc3Vzyp7.s:26     .text.DAC_DeInit:0000000000000016 .LVL0
+C:\Users\LOCALH~1\AppData\Local\Temp\cc3Vzyp7.s:31     .text.DAC_DeInit:0000000000000024 .LVL1
+C:\Users\LOCALH~1\AppData\Local\Temp\cc3Vzyp7.s:434    .text.DAC_GetDataOutputValue:0000000000000000 .LVL26
+C:\Users\LOCALH~1\AppData\Local\Temp\cc3Vzyp7.s:452    .text.DAC_GetDataOutputValue:0000000000000012 .LVL27
+C:\Users\LOCALH~1\AppData\Local\Temp\cc3Vzyp7.s:389    .text.DAC_SetDualChannelData:0000000000000000 .LVL20
+C:\Users\LOCALH~1\AppData\Local\Temp\cc3Vzyp7.s:411    .text.DAC_SetDualChannelData:0000000000000014 .LVL23
+C:\Users\LOCALH~1\AppData\Local\Temp\cc3Vzyp7.s:416    .text.DAC_SetDualChannelData:0000000000000018 .LVL24
+C:\Users\LOCALH~1\AppData\Local\Temp\cc3Vzyp7.s:398    .text.DAC_SetDualChannelData:0000000000000008 .LVL21
+C:\Users\LOCALH~1\AppData\Local\Temp\cc3Vzyp7.s:421    .text.DAC_SetDualChannelData:000000000000001a .LVL25
+C:\Users\LOCALH~1\AppData\Local\Temp\cc3Vzyp7.s:405    .text.DAC_SetDualChannelData:0000000000000012 .LVL22
+C:\Users\LOCALH~1\AppData\Local\Temp\cc3Vzyp7.s:275    .text.DAC_WaveGenerationCmd:0000000000000000 .LVL16
+C:\Users\LOCALH~1\AppData\Local\Temp\cc3Vzyp7.s:283    .text.DAC_WaveGenerationCmd:000000000000000e .LVL17
+C:\Users\LOCALH~1\AppData\Local\Temp\cc3Vzyp7.s:203    .text.DAC_SoftwareTriggerCmd:0000000000000000 .LVL13
+C:\Users\LOCALH~1\AppData\Local\Temp\cc3Vzyp7.s:211    .text.DAC_SoftwareTriggerCmd:000000000000000c .LVL14
+C:\Users\LOCALH~1\AppData\Local\Temp\cc3Vzyp7.s:166    .text.DAC_DMACmd:0000000000000000 .LVL11
+C:\Users\LOCALH~1\AppData\Local\Temp\cc3Vzyp7.s:171    .text.DAC_DMACmd:0000000000000006 .LVL12
+C:\Users\LOCALH~1\AppData\Local\Temp\cc3Vzyp7.s:129    .text.DAC_Cmd:0000000000000000 .LVL9
+C:\Users\LOCALH~1\AppData\Local\Temp\cc3Vzyp7.s:134    .text.DAC_Cmd:0000000000000006 .LVL10
+C:\Users\LOCALH~1\AppData\Local\Temp\cc3Vzyp7.s:47     .text.DAC_Init:0000000000000000 .LVL2
+C:\Users\LOCALH~1\AppData\Local\Temp\cc3Vzyp7.s:82     .text.DAC_Init:000000000000002a .LVL5
+C:\Users\LOCALH~1\AppData\Local\Temp\cc3Vzyp7.s:57     .text.DAC_Init:000000000000000c .LVL3
+C:\Users\LOCALH~1\AppData\Local\Temp\cc3Vzyp7.s:68     .text.DAC_Init:000000000000001a .LVL4
+C:\Users\LOCALH~1\AppData\Local\Temp\cc3Vzyp7.s:85     .text.DAC_Init:000000000000002c .LVL6
+C:\Users\LOCALH~1\AppData\Local\Temp\cc3Vzyp7.s:89     .text.DAC_Init:000000000000002e .LVL7
+C:\Users\LOCALH~1\AppData\Local\Temp\cc3Vzyp7.s:480    .debug_info:0000000000000000 .Ldebug_info0
+
+UNDEFINED SYMBOLS
+__riscv_save_0
+RCC_APB1PeriphResetCmd
+__riscv_restore_0
